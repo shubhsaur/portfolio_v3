@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from "react";
 
-interface RevealProps extends HTMLAttributes<HTMLDivElement> {
+interface RevealProps extends Omit<HTMLMotionProps<"div">, "children"> {
   children: ReactNode;
   delay?: number;
 }
@@ -31,4 +32,3 @@ export function Reveal({ children, delay = 0, ...rest }: RevealProps) {
     </motion.div>
   );
 }
-

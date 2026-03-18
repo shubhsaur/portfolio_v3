@@ -112,7 +112,7 @@ export function CodeCard() {
               <span className="text-zinc-400">();</span>
               {"\n"}
               <span className="text-zinc-500">
-                // Output: Dreams shipped.
+                {"// Output: Dreams shipped."}
               </span>
             </code>
           </pre>
@@ -121,4 +121,3 @@ export function CodeCard() {
     </motion.div>
   );
 }
-
