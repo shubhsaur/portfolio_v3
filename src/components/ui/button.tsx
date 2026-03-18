@@ -45,11 +45,15 @@ function isAnchorProps(props: ButtonProps): props is ButtonAsAnchorProps {
 }
 
 export function Button(props: ButtonProps) {
-  const { className, variant, size, asChild: _asChild } = props;
-  const classes = cn(buttonVariants({ variant, size }), className);
-
   if (isAnchorProps(props)) {
-    const { href, className: _className, variant: _variant, size: _size, asChild: _unusedAsChild, ...anchorProps } = props;
+    const { href, className, variant, size } = props;
+    const classes = cn(buttonVariants({ variant, size }), className);
+    const anchorProps = { ...props };
+    delete anchorProps.className;
+    delete anchorProps.variant;
+    delete anchorProps.size;
+    delete anchorProps.asChild;
+
     return (
       <a className={classes} href={href} {...anchorProps}>
         {anchorProps.children}
@@ -57,13 +61,13 @@ export function Button(props: ButtonProps) {
     );
   }
 
-  const {
-    className: _buttonClassName,
-    variant: _buttonVariant,
-    size: _buttonSize,
-    asChild: _buttonAsChild,
-    ...buttonProps
-  } = props;
+  const { className, variant, size } = props;
+  const classes = cn(buttonVariants({ variant, size }), className);
+  const buttonProps = { ...props };
+  delete buttonProps.className;
+  delete buttonProps.variant;
+  delete buttonProps.size;
+  delete buttonProps.asChild;
 
   return (
     <button
