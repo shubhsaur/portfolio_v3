@@ -40,21 +40,35 @@ type ButtonAsAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> &
 
 export type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
 
-export function Button({ className, variant, size, href, ...props }: ButtonProps) {
+function isAnchorProps(props: ButtonProps): props is ButtonAsAnchorProps {
+  return "href" in props && typeof props.href === "string";
+}
+
+export function Button(props: ButtonProps) {
+  const { className, variant, size, asChild: _asChild } = props;
   const classes = cn(buttonVariants({ variant, size }), className);
 
-  if (href) {
+  if (isAnchorProps(props)) {
+    const { href, className: _className, variant: _variant, size: _size, asChild: _unusedAsChild, ...anchorProps } = props;
     return (
-      <a className={classes} href={href} {...props}>
-        {props.children}
+      <a className={classes} href={href} {...anchorProps}>
+        {anchorProps.children}
       </a>
     );
   }
 
+  const {
+    className: _buttonClassName,
+    variant: _buttonVariant,
+    size: _buttonSize,
+    asChild: _buttonAsChild,
+    ...buttonProps
+  } = props;
+
   return (
     <button
       className={classes}
-      {...props}
+      {...buttonProps}
     />
   );
 }
