@@ -14,7 +14,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shubham Saurabh – Liquid Noir Portfolio",
+  title: "Shubham Saurabh – Portfolio",
   description:
     "I breathe frontend. A Liquid Noir-inspired single-page portfolio by Shubham Saurabh.",
 };
