@@ -3,13 +3,14 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Tag } from "@/components/ui/tag";
 import { Reveal } from "@/components/motion/Reveal";
 import { CodeCard } from "@/components/hero/CodeCard";
 import { RotatingIntro } from "@/components/hero/RotatingIntro";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
 import { getGithubMeta } from "@/lib/github";
+import Image from "next/image";
+import { ArrowUpRight, Github } from "lucide-react";
 
 export default async function Home() {
   const github = await getGithubMeta();
@@ -36,12 +37,18 @@ export default async function Home() {
       value: "Best Performer Q3 Award at RateGain",
     },
   ];
+  const codelensTech = [
+    "Next.js",
+    "Tailwind CSS",
+    "Supabase",
+    "Google Gemini",
+  ];
 
   return (
     <div className="relative min-h-screen text-sm text-zinc-100 sm:text-base">
       <Navbar />
       <ScrollToTopButton />
-      <main className="mx-auto flex max-w-5xl flex-col gap-32 px-4 pb-24 pt-28 sm:px-6 lg:px-8">
+      <main className="mx-auto flex max-w-6xl flex-col gap-32 px-4 pb-24 pt-28 sm:px-6 lg:px-8 xl:px-10">
         <section
           id="hero"
           className="scroll-mt-28"
@@ -261,52 +268,121 @@ export default async function Home() {
           className="scroll-mt-28 border-t border-white/5 pt-12"
           aria-labelledby="projects-heading"
         >
-          <Reveal className="space-y-6" delay={0.05}>
-            <div className="flex items-center justify-between gap-4">
-              <h2
-                id="projects-heading"
-                className="ln-mono text-xs uppercase tracking-[0.24em] text-zinc-500"
-              >
+          <Reveal className="space-y-10" delay={0.05}>
+            <div className="flex flex-col items-start gap-5 text-left md:items-center md:text-center">
+              <span className="ln-mono inline-flex rounded-full border border-[rgba(232,197,71,0.18)] bg-[rgba(232,197,71,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-gold)]">
                 Projects
-              </h2>
-            </div>
-            <Card className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-medium text-zinc-100">
-                  Liquid Noir Portfolio
-                </p>
-                <p className="mt-1 text-xs text-zinc-400">
-                  This site – a dark, tactile, motion-focused portfolio built
-                  with Next.js, Tailwind, and Framer Motion.
+              </span>
+              <div className="space-y-4">
+                <h2
+                  id="projects-heading"
+                  className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-zinc-50 sm:text-5xl"
+                >
+                  Featured work
+                </h2>
+                <p className="max-w-2xl text-base leading-8 text-zinc-400">
+                  Product-focused builds where interface clarity, developer
+                  experience, and ambitious ideas all meet in the same surface.
                 </p>
               </div>
-              <Button
-                asChild={false}
-                variant="outline"
-                className="whitespace-nowrap"
-              >
-                View case study
-              </Button>
+            </div>
+
+            <Card className="overflow-hidden rounded-[2.25rem] border-[rgba(232,197,71,0.16)] bg-[radial-gradient(circle_at_top_right,rgba(93,228,199,0.12),transparent_24%),radial-gradient(circle_at_top_left,rgba(232,197,71,0.08),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-0">
+              <div className="grid gap-0 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+                <div className="relative border-b border-white/6 p-5 sm:p-6 lg:border-b-0 lg:border-r">
+                  <div className="relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-[linear-gradient(180deg,#09111d_0%,#06060a_100%)] shadow-[0_24px_65px_rgba(0,0,0,0.4)]">
+                    <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_top_left,rgba(232,197,71,0.08),transparent_22%),radial-gradient(circle_at_top_right,rgba(93,228,199,0.1),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_20%)]" />
+                    <div className="relative aspect-[16/10] w-full">
+                      <Image
+                        src="/codelens.png"
+                        alt="Codelens project dashboard preview"
+                        fill
+                        className="object-contain object-center"
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-8">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex flex-wrap gap-3 text-[11px] font-medium uppercase tracking-[0.24em] text-zinc-500">
+                      <span>AI tooling</span>
+                      <span>Developer UX</span>
+                      <span>Search</span>
+                    </div>
+                    <span className="rounded-full border border-[rgba(232,197,71,0.18)] bg-[rgba(232,197,71,0.08)] px-3 py-1 text-[11px] font-medium text-[var(--ln-accent-gold)]">
+                      Featured
+                    </span>
+                  </div>
+
+                  <h3 className="mt-8 text-3xl font-semibold tracking-tight text-zinc-50 sm:text-4xl">
+                    Codelens
+                  </h3>
+                  <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
+                    AI-powered codebase explorer that indexes GitHub repos,
+                    builds searchable context, and answers repo questions with
+                    grounded citations, file preview, and syntax-highlighted
+                    code.
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {codelensTech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm text-zinc-200"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-10 flex flex-wrap gap-4">
+                    <Button
+                      href="https://shubhsaur-codelens.vercel.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="min-w-[180px]"
+                    >
+                      Open live app
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      href="https://github.com/shubhsaur/codelens"
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="outline"
+                      className="min-w-[180px]"
+                    >
+                      View GitHub repo
+                      <Github className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </Card>
-            <Tag className="mt-2 inline-flex items-center gap-2 bg-zinc-900/80 text-[11px]">
-              <span className="ln-mono text-[10px] text-zinc-500">GitHub</span>
+
+            <div className="flex justify-center pt-2">
               <a
                 href="https://github.com/shubhsaur"
                 target="_blank"
                 rel="noreferrer"
-                className="underline-offset-2 hover:underline"
+                className="group inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(232,197,71,0.2)] bg-[rgba(232,197,71,0.08)] px-7 py-3.5 text-sm font-medium text-[var(--ln-accent-gold)] shadow-[0_0_0_rgba(232,197,71,0)] transition duration-300 hover:border-[rgba(232,197,71,0.4)] hover:bg-[rgba(232,197,71,0.12)] hover:shadow-[0_0_30px_rgba(232,197,71,0.22)]"
               >
-                View all{" "}
-                {github.publicRepos != null ? (
-                  <span className="font-semibold">
-                    {github.publicRepos}+
-                  </span>
-                ) : (
-                  "my"
-                )}{" "}
-                repositories
+                <span>
+                  View all{" "}
+                  {github.publicRepos != null ? (
+                    <span className="font-semibold">
+                      {github.publicRepos}+
+                    </span>
+                  ) : (
+                    "my"
+                  )}{" "}
+                  repositories
+                </span>
+                <ArrowUpRight className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
-            </Tag>
+            </div>
           </Reveal>
         </section>
 

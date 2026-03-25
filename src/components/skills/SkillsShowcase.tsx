@@ -99,10 +99,12 @@ const toolChips = [
   "Git",
   "VS Code",
   "MySQL",
-  "PHP",
+  "Docker",
   "iOS",
   "REST APIs",
   "Webpack",
+  "Kubernetes",
+  "AWS",
 ];
 
 function SkillsCard({

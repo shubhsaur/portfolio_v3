@@ -52,7 +52,7 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6">
-      <div className="pointer-events-auto w-full max-w-5xl">
+      <div className="pointer-events-auto w-full max-w-6xl xl:px-4">
         <div className="flex items-center justify-between gap-4 rounded-full border border-white/5 bg-black/50 px-4 py-2.5 shadow-[0_18px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl backdrop-saturate-150">
           <div className="flex items-center gap-2">
             <div className="h-7 w-7 rounded-full bg-linear-to-tr from-yellow-400 via-rose-400 to-emerald-300 shadow-[0_0_0_1px_rgba(15,23,42,0.8)]" />
