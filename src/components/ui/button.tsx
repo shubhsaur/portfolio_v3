@@ -49,6 +49,7 @@ export function Button(props: ButtonProps) {
     const { href, className, variant, size } = props;
     const classes = cn(buttonVariants({ variant, size }), className);
     const anchorProps = { ...props };
+    delete anchorProps.href;
     delete anchorProps.className;
     delete anchorProps.variant;
     delete anchorProps.size;
