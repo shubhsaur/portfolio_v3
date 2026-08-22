@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/ThemeContext";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -14,9 +15,9 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shubham Saurabh – Portfolio",
+  title: "Shubham Saurabh – Frontend Engineer Portfolio",
   description:
-    "I breathe frontend. A Liquid Noir-inspired single-page portfolio by Shubham Saurabh.",
+    "Frontend Engineer with 5+ years of experience. SDE - I @ RateGain. A Liquid Noir portfolio by Shubham Saurabh.",
 };
 
 export default function RootLayout({
@@ -29,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${spaceMono.variable} ln-body antialiased`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

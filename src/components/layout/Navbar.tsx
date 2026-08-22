@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search, Command } from "lucide-react";
 import { sections, type SectionId } from "@/lib/sections";
+import { CommandMenu } from "@/components/ui/CommandMenu";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
 interface ActiveState {
   id: SectionId;
@@ -10,6 +13,19 @@ interface ActiveState {
 export function Navbar() {
   const [active, setActive] = useState<ActiveState>({ id: "hero" });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandMenuOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const sectionElements = sections
@@ -51,134 +67,172 @@ export function Navbar() {
   };
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6">
-      <div className="pointer-events-auto w-full max-w-6xl xl:px-4">
-        <div className="flex items-center justify-between gap-4 rounded-full border border-white/5 bg-black/50 px-4 py-2.5 shadow-[0_18px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl backdrop-saturate-150">
-          <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-full bg-linear-to-tr from-yellow-400 via-rose-400 to-emerald-300 shadow-[0_0_0_1px_rgba(15,23,42,0.8)]" />
-            <div className="flex flex-col leading-tight">
-              <span className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-400">
-                Shubham Saurabh
-              </span>
-              <span className="ln-mono text-[10px] text-zinc-500">
-                I breathe frontend.
-              </span>
+    <>
+      <CommandMenu
+        isOpen={isCommandMenuOpen}
+        onClose={() => setIsCommandMenuOpen(false)}
+      />
+      <header className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6">
+        <div className="pointer-events-auto w-full max-w-6xl xl:px-4">
+          <div className="flex items-center justify-between gap-4 rounded-full border border-white/5 bg-black/50 px-4 py-2.5 shadow-[0_18px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl backdrop-saturate-150">
+            <div className="flex items-center gap-2">
+              <div className="h-7 w-7 rounded-full bg-linear-to-tr from-yellow-400 via-rose-400 to-emerald-300 shadow-[0_0_0_1px_rgba(15,23,42,0.8)]" />
+              <div className="flex flex-col leading-tight">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-400">
+                  Shubham Saurabh
+                </span>
+                <span className="ln-mono text-[10px] text-zinc-500">
+                  I breathe frontend.
+                </span>
+              </div>
+            </div>
+
+            <div className="hidden items-center gap-2.5 sm:flex">
+              <nav className="flex items-center gap-1 rounded-full bg-zinc-900/40 px-1 py-0.5 text-[11px] font-medium text-zinc-400">
+                {sections.map((section) => {
+                  const isActive = active.id === section.id;
+                  return (
+                    <button
+                      key={section.id}
+                      type="button"
+                      onClick={() => handleClick(section.id)}
+                      className={[
+                        "group relative rounded-full px-3 py-1 transition-colors",
+                        "focus-visible:ln-ring-focus",
+                        isActive
+                          ? "bg-zinc-100 text-zinc-950 shadow-sm"
+                          : "hover:text-zinc-100",
+                      ].join(" ")}
+                    >
+                      <span className="relative z-10">{section.label}</span>
+                      <span
+                        aria-hidden="true"
+                        className={[
+                          "pointer-events-none absolute bottom-0 left-2 right-2 h-px rounded-full",
+                          "bg-[var(--ln-accent-gold)] shadow-[0_0_12px_rgba(232,197,71,0.7)]",
+                          "transition-transform duration-300 ease-out",
+                          isActive
+                            ? "scale-x-100"
+                            : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                        ].join(" ")}
+                      />
+                    </button>
+                  );
+                })}
+              </nav>
+
+              {/* Theme Palette Switcher */}
+              <ThemeSwitcher />
+
+              {/* Cmd + K palette trigger button */}
+              <button
+                type="button"
+                onClick={() => setIsCommandMenuOpen(true)}
+                className="group flex items-center gap-2 rounded-full border border-white/8 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-400 transition hover:border-[rgba(232,197,71,0.4)] hover:text-zinc-200 focus-visible:ln-ring-focus"
+                title="Search & Quick Actions (⌘K)"
+              >
+                <Search className="h-3.5 w-3.5 text-zinc-400 group-hover:text-[var(--ln-accent-gold)]" />
+                <span className="text-[11px]">Search</span>
+                <kbd className="ln-mono flex items-center gap-0.5 rounded border border-white/10 bg-white/[0.05] px-1.5 py-0.5 text-[9px] text-zinc-400 group-hover:border-[rgba(232,197,71,0.3)] group-hover:text-zinc-300">
+                  <Command className="h-2.5 w-2.5" />K
+                </kbd>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2 sm:hidden">
+              <ThemeSwitcher />
+
+              <button
+                type="button"
+                onClick={() => setIsCommandMenuOpen(true)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-zinc-900/40 text-zinc-300 transition hover:border-[rgba(232,197,71,0.3)] hover:text-[var(--ln-accent-gold)]"
+                aria-label="Open Command Menu"
+              >
+                <Search className="h-4 w-4" />
+              </button>
+
+              <button
+                type="button"
+                aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-nav-menu"
+                onClick={() => setIsMobileMenuOpen((open) => !open)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-zinc-900/40 text-zinc-200 transition hover:border-[rgba(232,197,71,0.3)] hover:text-[var(--ln-accent-gold)] focus-visible:ln-ring-focus"
+              >
+                <span className="relative h-4 w-5">
+                  <span
+                    className={[
+                      "absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition duration-300",
+                      isMobileMenuOpen ? "top-[7px] rotate-45" : "",
+                    ].join(" ")}
+                  />
+                  <span
+                    className={[
+                      "absolute left-0 top-[7px] h-0.5 w-5 rounded-full bg-current transition duration-200",
+                      isMobileMenuOpen ? "opacity-0" : "opacity-100",
+                    ].join(" ")}
+                  />
+                  <span
+                    className={[
+                      "absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current transition duration-300",
+                      isMobileMenuOpen ? "top-[7px] -rotate-45" : "",
+                    ].join(" ")}
+                  />
+                </span>
+              </button>
             </div>
           </div>
 
-          <nav className="hidden items-center gap-1 rounded-full bg-zinc-900/40 px-1 py-0.5 text-[11px] font-medium text-zinc-400 sm:flex">
-            {sections.map((section) => {
-              const isActive = active.id === section.id;
-              return (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => handleClick(section.id)}
-                  className={[
-                    "group relative rounded-full px-3 py-1 transition-colors",
-                    "focus-visible:ln-ring-focus",
-                    isActive
-                      ? "bg-zinc-100 text-zinc-950 shadow-sm"
-                      : "hover:text-zinc-100",
-                  ].join(" ")}
-                >
-                  <span className="relative z-10">{section.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className={[
-                      "pointer-events-none absolute bottom-0 left-2 right-2 h-px rounded-full",
-                      "bg-[var(--ln-accent-gold)] shadow-[0_0_12px_rgba(232,197,71,0.7)]",
-                      "transition-transform duration-300 ease-out",
-                      isActive
-                        ? "scale-x-100"
-                        : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
-                    ].join(" ")}
-                  />
-                </button>
-              );
-            })}
-          </nav>
-
-          <button
-            type="button"
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-nav-menu"
-            onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/8 bg-zinc-900/40 text-zinc-200 transition hover:border-[rgba(232,197,71,0.3)] hover:text-[var(--ln-accent-gold)] focus-visible:ln-ring-focus sm:hidden"
+          <div
+            id="mobile-nav-menu"
+            className={[
+              "overflow-hidden transition-all duration-300 ease-out sm:hidden",
+              isMobileMenuOpen
+                ? "pointer-events-auto mt-3 max-h-[420px] opacity-100"
+                : "pointer-events-none max-h-0 opacity-0",
+            ].join(" ")}
           >
-            <span className="relative h-4 w-5">
-              <span
-                className={[
-                  "absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition duration-300",
-                  isMobileMenuOpen ? "top-[7px] rotate-45" : "",
-                ].join(" ")}
-              />
-              <span
-                className={[
-                  "absolute left-0 top-[7px] h-0.5 w-5 rounded-full bg-current transition duration-200",
-                  isMobileMenuOpen ? "opacity-0" : "opacity-100",
-                ].join(" ")}
-              />
-              <span
-                className={[
-                  "absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current transition duration-300",
-                  isMobileMenuOpen ? "top-[7px] -rotate-45" : "",
-                ].join(" ")}
-              />
-            </span>
-          </button>
-        </div>
+            <div className="rounded-[1.75rem] border border-white/8 bg-black/70 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
+              <nav className="grid gap-2">
+                {sections.map((section) => {
+                  const isActive = active.id === section.id;
 
-        <div
-          id="mobile-nav-menu"
-          className={[
-            "overflow-hidden transition-all duration-300 ease-out sm:hidden",
-            isMobileMenuOpen
-              ? "pointer-events-auto mt-3 max-h-[420px] opacity-100"
-              : "pointer-events-none max-h-0 opacity-0",
-          ].join(" ")}
-        >
-          <div className="rounded-[1.75rem] border border-white/8 bg-black/70 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
-            <nav className="grid gap-2">
-              {sections.map((section) => {
-                const isActive = active.id === section.id;
-
-                return (
-                  <button
-                    key={section.id}
-                    type="button"
-                    onClick={() => handleClick(section.id)}
-                    className={[
-                      "group relative flex items-center justify-between rounded-2xl px-4 py-3 text-left text-sm transition-colors",
-                      "focus-visible:ln-ring-focus",
-                      isActive
-                        ? "bg-zinc-100 text-zinc-950"
-                        : "bg-white/[0.02] text-zinc-300 hover:bg-white/[0.04] hover:text-zinc-50",
-                    ].join(" ")}
-                  >
-                    <span>{section.label}</span>
-                    <span className="ln-mono text-[10px] uppercase tracking-[0.18em]">
-                      0{sections.findIndex((item) => item.id === section.id) + 1}
-                    </span>
-                    <span
-                      aria-hidden="true"
+                  return (
+                    <button
+                      key={section.id}
+                      type="button"
+                      onClick={() => handleClick(section.id)}
                       className={[
-                        "pointer-events-none absolute bottom-2 left-4 right-4 h-px rounded-full",
-                        "bg-[var(--ln-accent-gold)] shadow-[0_0_12px_rgba(232,197,71,0.7)]",
-                        "transition-transform duration-300 ease-out",
+                        "group relative flex items-center justify-between rounded-2xl px-4 py-3 text-left text-sm transition-colors",
+                        "focus-visible:ln-ring-focus",
                         isActive
-                          ? "scale-x-100"
-                          : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                          ? "bg-zinc-100 text-zinc-950"
+                          : "bg-white/[0.02] text-zinc-300 hover:bg-white/[0.04] hover:text-zinc-50",
                       ].join(" ")}
-                    />
-                  </button>
-                );
-              })}
-            </nav>
+                    >
+                      <span>{section.label}</span>
+                      <span className="ln-mono text-[10px] uppercase tracking-[0.18em]">
+                        0{sections.findIndex((item) => item.id === section.id) + 1}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className={[
+                          "pointer-events-none absolute bottom-2 left-4 right-4 h-px rounded-full",
+                          "bg-[var(--ln-accent-gold)] shadow-[0_0_12px_rgba(232,197,71,0.7)]",
+                          "transition-transform duration-300 ease-out",
+                          isActive
+                            ? "scale-x-100"
+                            : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                        ].join(" ")}
+                      />
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }

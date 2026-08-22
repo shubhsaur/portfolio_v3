@@ -1,9 +1,14 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import type { MouseEvent } from "react";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import { useState, type MouseEvent } from "react";
+import { Play, RotateCcw, Check, Sparkles } from "lucide-react";
 
 export function CodeCard() {
+  const [isRunning, setIsRunning] = useState(false);
+  const [hasRun, setHasRun] = useState(false);
+  const [showConsole, setShowConsole] = useState(false);
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -31,6 +36,21 @@ export function CodeCard() {
     y.set(0);
   };
 
+  const handleRunCode = () => {
+    if (isRunning) return;
+    setIsRunning(true);
+    setShowConsole(true);
+    setTimeout(() => {
+      setIsRunning(false);
+      setHasRun(true);
+    }, 600);
+  };
+
+  const handleReset = () => {
+    setShowConsole(false);
+    setHasRun(false);
+  };
+
   return (
     <motion.div
       className="group relative w-full max-w-md self-stretch sm:max-w-sm"
@@ -52,22 +72,51 @@ export function CodeCard() {
       />
 
       <div className="relative rounded-2xl border border-white/6 bg-linear-to-b from-[#0b1020] via-[#050816] to-[#020617] p-3 shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
-        <div className="flex items-center justify-between gap-3 rounded-xl bg-black/30 px-3 py-2">
+        {/* Editor Top Bar */}
+        <div className="flex items-center justify-between gap-3 rounded-xl bg-black/40 px-3 py-2 border border-white/6">
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <span className="ln-mono text-[10px] text-zinc-500">
-            aboutme.ts
+
+          <span className="ln-mono text-[10px] text-zinc-400 font-medium">
+            shubhamsaurabh.ts
           </span>
+
+          {/* Interactive Run Button */}
+          <div className="flex items-center gap-1.5">
+            {!showConsole ? (
+              <button
+                type="button"
+                onClick={handleRunCode}
+                disabled={isRunning}
+                className="inline-flex items-center gap-1 rounded-md border border-[rgba(232,197,71,0.3)] bg-[rgba(232,197,71,0.12)] px-2 py-0.5 text-[10px] font-medium text-[var(--ln-accent-gold)] transition hover:bg-[rgba(232,197,71,0.22)] active:scale-95"
+                title="Run shubhamsaurabh.ts"
+              >
+                <Play className="h-2.5 w-2.5 fill-current" />
+                <span>Run</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-zinc-400 transition hover:text-zinc-200 active:scale-95"
+                title="Reset code editor"
+              >
+                <RotateCcw className="h-2.5 w-2.5" />
+                <span>Reset</span>
+              </button>
+            )}
+          </div>
         </div>
 
-        <div className="mt-3 rounded-xl bg-linear-to-b from-[#0f172a] via-[#020617] to-[#020617] px-4 py-3">
+        {/* Code Content */}
+        <div className="mt-3 rounded-xl bg-linear-to-b from-[#0f172a] via-[#020617] to-[#020617] px-4 py-3 border border-white/6">
           <pre className="ln-mono whitespace-pre-wrap wrap-break-word text-[11px] leading-relaxed text-zinc-100">
             <code>
               <span className="text-sky-400">const</span>{" "}
-              <span className="text-emerald-300">frontendArtist</span>{" "}
+              <span className="text-emerald-300">engineer</span>{" "}
               <span className="text-zinc-400">=</span> {"{"}
               {"\n  "}
               <span className="text-sky-400">name</span>
@@ -76,47 +125,81 @@ export function CodeCard() {
                 &quot;Shubham Saurabh&quot;
               </span>
               {",\n  "}
-              <span className="text-sky-400">title</span>
+              <span className="text-sky-400">role</span>
               <span className="text-zinc-400">:</span>{" "}
               <span className="text-amber-200">
-                &quot;Frontend Engineer&quot;
+                &quot;SDE - I @ RateGain&quot;
               </span>
               {",\n  "}
-              <span className="text-sky-400">passion</span>
+              <span className="text-sky-400">experience</span>
               <span className="text-zinc-400">:</span>{" "}
               <span className="text-amber-200">
-                &quot;Building creative and inspiring interfaces&quot;
+                &quot;5+ Years (SaaS & Booking)&quot;
               </span>
               {",\n  "}
               <span className="text-sky-400">stack</span>
               <span className="text-zinc-400">:</span>{" "}
               <span className="text-amber-200">
-                [&quot;React&quot;, &quot;Next.js&quot;, &quot;TypeScript&quot;]
+                [&quot;React 19&quot;, &quot;Next.js&quot;, &quot;TypeScript&quot;, &quot;AWS&quot;]
               </span>
               {",\n  "}
-              <span className="text-sky-400">currently</span>
+              <span className="text-sky-400">focus</span>
               <span className="text-zinc-400">()</span> {"{"}
               {"\n    "}
               <span className="text-sky-400">return</span>{" "}
               <span className="text-amber-200">
-                &quot;Designing Liquid Noir experiences for the web.&quot;
+                &quot;Architecting enterprise booking engines & modern AI UX.&quot;
               </span>
               {";\n  "}
               {"},"}
               {"\n"};
-              {"\n"}
-              {"};\n"}
-              <span className="text-emerald-300">frontendArtist</span>
+              {"\n\n"}
+              <span className="text-emerald-300">engineer</span>
               <span className="text-zinc-400">.</span>
-              <span className="text-emerald-300">currently</span>
+              <span className="text-emerald-300">focus</span>
               <span className="text-zinc-400">();</span>
-              {"\n"}
-              <span className="text-zinc-500">
-                {"// Output: Dreams shipped."}
-              </span>
             </code>
           </pre>
         </div>
+
+        {/* Animated Console Drawer */}
+        <AnimatePresence>
+          {showConsole && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="mt-3 overflow-hidden rounded-xl border border-white/8 bg-[#04060d] p-3 text-[10px] font-mono text-zinc-300 shadow-inner"
+            >
+              <div className="flex items-center justify-between border-b border-white/6 pb-1.5 text-zinc-500">
+                <span className="flex items-center gap-1 text-[9px] uppercase tracking-wider text-[var(--ln-accent-gold)]">
+                  <Sparkles className="h-3 w-3" /> Console Output
+                </span>
+                <span>bun v1.2</span>
+              </div>
+
+              {isRunning ? (
+                <div className="py-2 text-zinc-400 animate-pulse">
+                  $ bun run shubhamsaurabh.ts ...
+                </div>
+              ) : (
+                <div className="space-y-1 pt-2">
+                  <div className="text-zinc-500">$ bun run shubhamsaurabh.ts</div>
+                  <div className="text-emerald-400 flex items-center gap-1">
+                    <Check className="h-3 w-3" /> Verified: SDE - I @ RateGain (Ex-Infosys)
+                  </div>
+                  <div className="text-sky-300 flex items-center gap-1">
+                    <Check className="h-3 w-3" /> 5+ YOE · 70+ Repos · Q3 Pinnacle Performer
+                  </div>
+                  <div className="text-amber-200 font-semibold pt-1">
+                    ↳ &quot;Architecting enterprise booking engines & modern AI UX.&quot;
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );

@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "predev": "node -e \"const fs=require('fs'); if(!fs.existsSync('./node_modules/@types/node/index.d.ts')&&fs.existsSync('./node_modules/@types/node/ts5.6/index.d.ts')){const c=fs.readFileSync('./node_modules/@types/node/ts5.6/index.d.ts','utf8').replace(/\\.\\.\\//g,'./').replace(/\\.\\/globals\\.typedarray\\.d\\.ts/g,'./ts5.6/globals.typedarray.d.ts').replace(/\\.\\/buffer\\.buffer\\.d\\.ts/g,'./ts5.6/buffer.buffer.d.ts');fs.writeFileSync('./node_modules/@types/node/index.d.ts',c);}\"",
+    "dev": "next dev --webpack",
+    "build": "npm run predev && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -20,7 +21,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "20.19.37",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
