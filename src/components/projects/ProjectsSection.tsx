@@ -129,6 +129,8 @@ const projects: ProjectItem[] = [
     icon: Coins,
     spotlightColor: "rgba(96, 165, 250, 0.45)",
     surfaceGlowColor: "rgba(96, 165, 250, 0.07)",
+    liveUrl: "https://cryptopedia-app.vercel.app",
+    githubUrl: "https://github.com/shubhsaur/cryptopedia",
     stats: [
       { label: "Data", value: "Real-time API" },
       { label: "Charts", value: "Interactive Trends" },

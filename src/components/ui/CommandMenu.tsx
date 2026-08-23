@@ -271,12 +271,12 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
     },
     {
       id: "proj-crypto",
-      title: "Cryptopedia",
+      title: "Cryptopedia (Live App)",
       category: "Featured Projects",
       description: "Cryptocurrency tracker with live prices & ChartJS trend analytics",
       icon: Coins,
-      perform: () => navigateToSection("projects"),
-      keywords: ["cryptopedia", "crypto", "charts", "chartjs", "finance"],
+      perform: () => openUrl("https://cryptopedia-app.vercel.app"),
+      keywords: ["cryptopedia", "crypto", "charts", "chartjs", "finance", "bitcoin"],
     },
     {
       id: "proj-codelens",
