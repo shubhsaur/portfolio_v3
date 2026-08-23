@@ -189,22 +189,22 @@ export function ExperienceSection() {
                     ? undefined
                     : { duration: 0.55, ease: [0.19, 1, 0.22, 1], delay: index * 0.1 }
                 }
-                className="relative pl-12 md:pl-20"
+                className="relative pl-7 sm:pl-12 md:pl-20"
               >
                 {/* Timeline Milestone Node */}
                 <div
                   className={[
-                    "absolute left-0 md:left-4 top-1.5 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full border shadow-lg transition-transform duration-300",
+                    "absolute left-0 md:left-4 top-1.5 flex h-7 w-7 sm:h-8 sm:w-8 -translate-x-1/2 items-center justify-center rounded-full border shadow-lg transition-transform duration-300",
                     exp.current
                       ? "border-[var(--ln-accent-gold)] bg-[rgba(232,197,71,0.15)] text-[var(--ln-accent-gold)] shadow-[0_0_20px_rgba(232,197,71,0.4)]"
                       : "border-white/15 bg-zinc-900 text-zinc-400",
                   ].join(" ")}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </div>
 
                 {/* Main Card */}
-                <Card className="group relative overflow-hidden rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 transition-all duration-300 hover:border-white/15 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] sm:p-8">
+                <Card className="group relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-4 sm:p-6 md:p-8 transition-all duration-300 hover:border-white/15 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
                   {/* Ambient Hover Glow */}
                   <div className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(232,197,71,0.06),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(93,228,199,0.06),transparent_50%)]" />

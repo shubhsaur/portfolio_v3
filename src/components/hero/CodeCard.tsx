@@ -53,7 +53,7 @@ export function CodeCard() {
 
   return (
     <motion.div
-      className="group relative w-full max-w-md self-stretch sm:max-w-sm"
+      className="group relative w-full max-w-full self-stretch sm:max-w-sm"
       style={{ rotateX, rotateY }}
       whileHover={{ scale: 1.01 }}
       transition={{ type: "spring", stiffness: 200, damping: 18, mass: 0.8 }}

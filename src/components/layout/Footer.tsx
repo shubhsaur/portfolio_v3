@@ -2,8 +2,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-white/5 pt-6 text-xs text-zinc-500">
-      <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+    <footer className="mt-20 border-t border-white/5 pt-6 pb-12 sm:pb-6 text-xs text-zinc-500">
+      <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
         <p className="ln-mono text-[10px] uppercase tracking-[0.18em]">
           © {year} Shubham Saurabh
         </p>

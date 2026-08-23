@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/contact/ContactSection";
 import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
 import { ExperienceSection } from "@/components/experience/ExperienceSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
+import { OpenSourceSection } from "@/components/opensource/OpenSourceSection";
 import { getGithubMeta } from "@/lib/github";
 import { ArrowUpRight } from "lucide-react";
 
@@ -78,37 +79,37 @@ export default async function Home() {
                 </p>
 
                 <div className="mt-6 flex flex-col gap-6 border-t border-white/10 pt-5 text-xs text-zinc-400 sm:text-sm">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-start sm:gap-10">
+                  <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 text-center sm:text-left">
                     <div>
-                      <p className="text-xl font-semibold text-zinc-50">
+                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
                         5+
                       </p>
-                      <p className="mt-1 tracking-[0.16em] text-zinc-500">
-                        YEARS EXPERIENCE
+                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
+                        Years Exp
                       </p>
                     </div>
                     <div className="hidden h-10 w-px bg-white/10 sm:block" />
                     <div>
-                      <p className="text-xl font-semibold text-zinc-50">
+                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
                         {github.publicRepos != null ? `${github.publicRepos}+` : "70+"}
                       </p>
-                      <p className="mt-1 tracking-[0.16em] text-zinc-500">
-                        GITHUB REPOS
+                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
+                        GitHub Repos
                       </p>
                     </div>
                     <div className="hidden h-10 w-px bg-white/10 sm:block" />
                     <div>
-                      <p className="text-xl font-semibold text-zinc-50">
+                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
                         2+
                       </p>
-                      <p className="mt-1 tracking-[0.16em] text-zinc-500">
-                        MAJOR AWARDS
+                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
+                        Major Awards
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Button href="#projects">
+                  <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                    <Button href="#projects" className="justify-center">
                       View my work
                       <span aria-hidden="true" className="ln-mono text-[10px]">
                         ↳
@@ -120,12 +121,14 @@ export default async function Home() {
                       rel="noopener noreferrer"
                       download="Shubham_Saurabh_Resume.pdf"
                       variant="outline"
+                      className="justify-center"
                     >
                       Download CV
                     </Button>
                     <Button
                       href="mailto:shubhamsaurabh@outlook.com"
                       variant="outline"
+                      className="justify-center"
                     >
                       Get in touch
                     </Button>
@@ -305,6 +308,17 @@ export default async function Home() {
                 <ArrowUpRight className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
+          </Reveal>
+        </section>
+
+        {/* OPEN SOURCE SECTION */}
+        <section
+          id="opensource"
+          className="scroll-mt-28 border-t border-white/5 pt-12"
+          aria-labelledby="opensource-heading"
+        >
+          <Reveal delay={0.05}>
+            <OpenSourceSection />
           </Reveal>
         </section>
 

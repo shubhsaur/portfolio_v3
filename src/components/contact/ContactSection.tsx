@@ -133,7 +133,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                   name="name"
                   placeholder="Your name"
                   required
-                  className="relative z-10 w-full bg-transparent text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
                 />
               </div>
             </label>
@@ -155,7 +155,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                   name="email"
                   placeholder="you@example.com"
                   required
-                  className="relative z-10 w-full bg-transparent text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
                 />
               </div>
             </label>
@@ -175,24 +175,24 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                   name="message"
                   placeholder="Tell me a bit about your project or say hello."
                   required
-                  rows={6}
-                  className="relative z-10 w-full rounded-[1.5rem] bg-transparent px-4 py-3 text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  rows={5}
+                  className="relative z-10 w-full rounded-[1.5rem] bg-transparent px-4 py-3 text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
                 />
               </div>
             </label>
 
             <div className="pt-2">
               <motion.div
-                className="inline-block rounded-full"
+                className="inline-block w-full sm:w-auto rounded-full"
                 whileHover={
                   prefersReducedMotion ? undefined : { y: -2, scale: 1.01 }
                 }
               >
-                <div className="rounded-full shadow-[0_0_0_rgba(232,197,71,0)] transition duration-300 hover:shadow-[0_0_30px_rgba(232,197,71,0.28)]">
+                <div className="w-full sm:w-auto rounded-full shadow-[0_0_0_rgba(232,197,71,0)] transition duration-300 hover:shadow-[0_0_30px_rgba(232,197,71,0.28)]">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="min-w-[170px] bg-[var(--ln-accent-gold)] text-zinc-950 hover:bg-[#f0d06c]"
+                    className="w-full sm:w-auto min-w-[170px] bg-[var(--ln-accent-gold)] text-zinc-950 hover:bg-[#f0d06c]"
                   >
                     {isSubmitting ? "Sending..." : "Send message"}
                   </Button>
@@ -207,7 +207,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
         <p className="text-center text-sm font-medium uppercase tracking-[0.24em] text-zinc-500">
           Connect here
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
           {contactLinks.map((link) => {
             const Icon = link.icon;
 
@@ -217,7 +217,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                 href={link.href}
                 target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                className="group inline-flex min-w-[180px] items-center justify-center gap-3 rounded-2xl border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] px-5 py-4 text-base font-medium text-zinc-200 transition hover:border-[rgba(232,197,71,0.22)] hover:text-[var(--ln-accent-gold)]"
+                className="group flex w-full items-center justify-center gap-2.5 rounded-2xl border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] px-4 py-3.5 text-sm sm:text-base font-medium text-zinc-200 transition hover:border-[rgba(232,197,71,0.22)] hover:text-[var(--ln-accent-gold)] sm:w-auto sm:min-w-[170px]"
               >
                 <Icon className="h-5 w-5 transition group-hover:scale-110" />
                 <span>{link.label}</span>

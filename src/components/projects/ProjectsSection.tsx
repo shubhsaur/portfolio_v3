@@ -60,6 +60,7 @@ const projects: ProjectItem[] = [
     icon: Hotel,
     spotlightColor: "rgba(232, 197, 71, 0.45)",
     surfaceGlowColor: "rgba(232, 197, 71, 0.07)",
+    liveUrl: "https://uno.rategain.com/hotel-booking-engine/",
     stats: [
       { label: "Gateways", value: "10+ Integrated" },
       { label: "Locales", value: "20+ Multi-language" },
@@ -97,6 +98,7 @@ const projects: ProjectItem[] = [
     icon: Bot,
     spotlightColor: "rgba(93, 228, 199, 0.45)",
     surfaceGlowColor: "rgba(93, 228, 199, 0.07)",
+    liveUrl: "https://rategain.com/hotel-content-management-system/",
     stats: [
       { label: "Performance", value: "+60% Boost" },
       { label: "Architecture", value: "React Final Form" },
@@ -226,7 +228,7 @@ export function ProjectsSection() {
       </div>
 
       {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-none px-1">
         {categories.map((cat) => {
           const isActive = activeCategory === cat;
           return (
@@ -235,7 +237,7 @@ export function ProjectsSection() {
               type="button"
               onClick={() => setActiveCategory(cat)}
               className={[
-                "group relative rounded-full px-5 py-2 text-xs font-medium transition-all duration-200 focus-visible:ln-ring-focus",
+                "group relative shrink-0 rounded-full px-4 sm:px-5 py-2 text-xs font-medium transition-all duration-200 focus-visible:ln-ring-focus",
                 isActive
                   ? "bg-zinc-100 text-zinc-950 shadow-md"
                   : "border border-white/8 bg-white/[0.02] text-zinc-400 hover:border-white/20 hover:text-zinc-200",
@@ -255,7 +257,7 @@ export function ProjectsSection() {
       </div>
 
       {/* Projects List */}
-      <motion.div layout className="grid gap-8">
+      <motion.div layout className="grid gap-6 sm:gap-8">
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project) => {
             const ProjectIcon = project.icon;
@@ -273,7 +275,7 @@ export function ProjectsSection() {
                 <Card
                   spotlightColor={project.spotlightColor}
                   surfaceGlowColor={project.surfaceGlowColor}
-                  className="overflow-hidden rounded-[2.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-8 transition-all duration-300 hover:border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                  className="overflow-hidden rounded-[1.75rem] sm:rounded-[2.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-4 sm:p-6 md:p-8 transition-all duration-300 hover:border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
                 >
                   <div className="space-y-6">
                     {/* Header Row */}

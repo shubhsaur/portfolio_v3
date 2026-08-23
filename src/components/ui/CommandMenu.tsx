@@ -22,6 +22,8 @@ import {
   Bot,
   Coins,
   Palette,
+  GitMerge,
+  GitPullRequest,
 } from "lucide-react";
 import { sections, type SectionId } from "@/lib/sections";
 import { Toast } from "@/components/ui/Toast";
@@ -165,6 +167,15 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       keywords: ["projects", "uno", "booking", "content ai", "cryptopedia", "codelens", "work"],
     },
     {
+      id: "nav-opensource",
+      title: "Go to Open Source",
+      category: "Navigation",
+      description: "PrimeReact core contributions & merged PRs",
+      icon: GitMerge,
+      perform: () => navigateToSection("opensource"),
+      keywords: ["opensource", "open source", "primereact", "pr", "github", "contributions"],
+    },
+    {
       id: "nav-content",
       title: "Go to Content & Insights",
       category: "Navigation",
@@ -221,25 +232,42 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       perform: scrollToTop,
       keywords: ["top", "scroll", "up"],
     },
+    {
+      id: "act-pr-6217",
+      title: "PrimeReact PR #6217 (Merged)",
+      category: "Actions",
+      description: "Calendar timeOnly & stepMinute state fix (v10.6.0)",
+      icon: GitPullRequest,
+      perform: () => openUrl("https://github.com/primefaces/primereact/pull/6217"),
+      keywords: ["primereact", "pr", "6217", "calendar", "open source"],
+    },
+    {
+      id: "act-pr-6214",
+      title: "PrimeReact PR #6214 (Merged)",
+      category: "Actions",
+      description: "Calendar AM/PM range validation deadlock fix (v10.6.0)",
+      icon: GitPullRequest,
+      perform: () => openUrl("https://github.com/primefaces/primereact/pull/6214"),
+      keywords: ["primereact", "pr", "6214", "calendar", "validation", "open source"],
+    },
 
-    // Featured Projects
     {
       id: "proj-uno",
-      title: "Uno Booking Engine",
+      title: "Uno Booking Engine (Live App)",
       category: "Featured Projects",
       description: "Enterprise hotel booking engine with 10+ payment gateways & 20+ locales",
       icon: Hotel,
-      perform: () => navigateToSection("projects"),
-      keywords: ["uno", "booking", "hotel", "nextjs", "payments", "multilingual"],
+      perform: () => openUrl("https://uno.rategain.com/hotel-booking-engine/"),
+      keywords: ["uno", "booking", "hotel", "nextjs", "payments", "multilingual", "rategain"],
     },
     {
       id: "proj-contentai",
-      title: "Content AI",
+      title: "Content AI (Live App)",
       category: "Featured Projects",
       description: "B2B Content Management Platform boosting UI performance by 60%",
       icon: Bot,
-      perform: () => navigateToSection("projects"),
-      keywords: ["content ai", "b2b", "forms", "react final form"],
+      perform: () => openUrl("https://rategain.com/hotel-content-management-system/"),
+      keywords: ["content ai", "b2b", "forms", "react final form", "rategain"],
     },
     {
       id: "proj-crypto",
