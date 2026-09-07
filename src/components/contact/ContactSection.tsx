@@ -1,41 +1,51 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { FormEvent, useState } from "react";
+import {
+  CheckCircle2,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+} from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { motion, useReducedMotion } from "framer-motion";
-import { Github, Linkedin, Mail, Send, User } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { Input, Textarea } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { PageGrid } from "@/components/layout/PageGrid";
+import { Reveal } from "@/components/motion/Reveal";
+import { site } from "@/lib/content/site";
 
-const contactLinks = [
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+const socialLinks = [
   {
     label: "GitHub",
-    href: "https://github.com/shubhsaur",
+    href: site.socials.github,
     icon: Github,
   },
   {
-    label: "X",
-    href: "https://x.com/shubhsaur",
-    icon: Send,
-  },
-  {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/shubhsaur",
+    href: site.socials.linkedin,
     icon: Linkedin,
   },
   {
-    label: "Email",
-    href: "mailto:shubhamsaurabh@outlook.com",
-    icon: Mail,
+    label: "X",
+    href: site.socials.x,
+    icon: XIcon,
   },
-];
+] as const;
 
 export function ContactSection({ endpoint }: { endpoint: string }) {
-  const prefersReducedMotion = useReducedMotion();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +55,6 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
 
     try {
       setIsSubmitting(true);
-      setStatus("idle");
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -60,174 +69,176 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
       }
 
       form.reset();
-      setStatus("success");
+      toast.success("Message sent successfully.", {
+        icon: <CheckCircle2 className="h-4 w-4 text-[var(--ln-success)]" />,
+      });
     } catch {
-      setStatus("error");
+      toast.error("Something went wrong. Please try again or email me directly.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="space-y-10">
-      <div className="flex flex-col items-start gap-5 text-left md:items-center md:text-center">
-        <span className="ln-mono inline-flex rounded-full border border-[rgba(232,197,71,0.18)] bg-[rgba(232,197,71,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-gold)]">
-          Contact
-        </span>
-        <div className="space-y-4">
-          <h2
-            id="contact-heading"
-            className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-zinc-50 sm:text-5xl"
-          >
-            Let&apos;s connect
-          </h2>
-          <p className="max-w-2xl text-base leading-8 text-zinc-400">
-            Whether you want to discuss a project, explore a frontend role, or
-            just say hello, I&apos;d love to hear from you.
-          </p>
-        </div>
-      </div>
+    <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
+      <PageGrid className="gap-y-12 sm:gap-y-16">
+        <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
+          <div className="max-w-2xl space-y-4">
+            <span className="ln-mono inline-flex rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)]">
+              Contact
+            </span>
+            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
+              Let&apos;s connect
+            </h1>
+            <p className="text-base leading-8 text-muted-foreground">
+              Whether you want to discuss a project, explore a frontend role, or
+              just say hello, I&apos;d love to hear from you.
+            </p>
+          </div>
+        </Reveal>
 
-      <Card className="overflow-visible rounded-[2rem] border-white/8 bg-[radial-gradient(circle_at_top,rgba(232,197,71,0.08),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-8">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.9fr)] lg:items-start">
-          <div>
-            <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-zinc-500">
+        {/* Form */}
+        <Reveal
+          delay={0.03}
+          className="col-span-4 sm:col-span-8 lg:col-span-7"
+        >
+          <Card className="border-border p-5 sm:p-7 md:p-8">
+            <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
               Send a message
             </p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-50">
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
               Start with a quick note.
-            </h3>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-zinc-400 sm:text-base">
+            </h2>
+            <p className="mt-3 max-w-lg text-sm leading-7 text-muted-foreground">
               Fill out the form and your message will be delivered to my inbox
               through Getform notifications.
             </p>
-            {status === "success" ? (
-              <p className="mt-4 rounded-2xl border border-emerald-400/15 bg-emerald-400/8 px-4 py-3 text-sm text-emerald-200">
-                Message sent successfully.
+
+            <form
+              action={endpoint}
+              method="POST"
+              className="mt-8 grid gap-5"
+              onSubmit={handleSubmit}
+            >
+              <div className="grid gap-2">
+                <Label htmlFor="contact-name">Name</Label>
+                <Input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  autoComplete="name"
+                  required
+                />
+              </div>
+
+              <div className="grid gap-2">
+                <Label htmlFor="contact-email">Email</Label>
+                <Input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
+              <div className="grid gap-2">
+                <Label htmlFor="contact-message">Message</Label>
+                <Textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder="Tell me a bit about your project or say hello."
+                  rows={6}
+                  required
+                />
+              </div>
+
+              <div className="pt-1">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="min-w-[170px]"
+                >
+                  {isSubmitting ? "Sending..." : "Send message"}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </Reveal>
+
+        {/* Socials + resume rail */}
+        <Reveal
+          delay={0.06}
+          className="col-span-4 sm:col-span-8 lg:col-span-4 lg:col-start-9"
+        >
+          <div className="space-y-6">
+            <Card className="border-border p-5 sm:p-6">
+              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                Elsewhere
               </p>
-            ) : null}
-            {status === "error" ? (
-              <p className="mt-4 rounded-2xl border border-rose-400/15 bg-rose-400/8 px-4 py-3 text-sm text-rose-200">
-                Something went wrong. Please try again.
-              </p>
-            ) : null}
-          </div>
+              <ul className="mt-4 space-y-2">
+                {socialLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-3 rounded-[1rem] border border-transparent px-3 py-2.5 text-sm font-medium text-foreground transition hover:border-border hover:bg-muted/30"
+                      >
+                        <Icon className="h-4 w-4 text-[var(--ln-accent)]" />
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Card>
 
-          <form
-            action={endpoint}
-            method="POST"
-            className="grid gap-4"
-            onSubmit={handleSubmit}
-          >
-            <Label className="grid gap-2">
-                <span className="text-sm font-medium text-zinc-200">Name</span>
-                <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
-                    style={{
-                      background:
-                        "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
-                    }}
-                  />
-                  <User className="h-4 w-4 text-zinc-500" />
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    required
-                    className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                  />
-                </div>
-              </Label>
-
-              <Label className="grid gap-2">
-                <span className="text-sm font-medium text-zinc-200">Email</span>
-                <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
-                    style={{
-                      background:
-                        "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
-                    }}
-                  />
-                  <Mail className="h-4 w-4 text-zinc-500" />
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    required
-                    className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                  />
-                </div>
-              </Label>
-
-              <Label className="grid gap-2">
-                <span className="text-sm font-medium text-zinc-200">Message</span>
-                <div className="group relative rounded-[1.5rem] border border-white/8 bg-black/20 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_28px_rgba(232,197,71,0.18)]">
-<span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
-                    style={{
-                      background: "radial-gradient(circle at top, rgba(var(--ln-accent-gold) / 0.16), transparent 70%)",
-                    }}
-                  />
-                  <Textarea
-                    name="message"
-                    placeholder="Tell me a bit about your project or say hello."
-                    required
-                    rows={5}
-                    className="relative z-10 w-full rounded-[1.5rem] bg-transparent px-4 py-3 text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                  />
-                </div>
-              </Label>
-
-            <div className="pt-2">
-              <motion.div
-                className="inline-block w-full sm:w-auto rounded-full"
-                whileHover={
-                  prefersReducedMotion ? undefined : { y: -2, scale: 1.01 }
-                }
-              >
-                <div className="w-full sm:w-auto rounded-full shadow-[0_0_0_rgba(232,197,71,0)] transition duration-300 hover:shadow-[0_0_30px_rgba(232,197,71,0.28)]">
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto min-w-[170px] bg-[var(--ln-accent-gold)] text-zinc-950 hover:bg-[#f0d06c]"
-                  >
-                    {isSubmitting ? "Sending..." : "Send message"}
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          </form>
-        </div>
-      </Card>
-
-      <div className="space-y-5">
-        <p className="text-center text-sm font-medium uppercase tracking-[0.24em] text-zinc-500">
-          Connect here
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
-          {contactLinks.map((link) => {
-            const Icon = link.icon;
-
-            return (
+            <Card className="border-border p-5 sm:p-6 space-y-4">
+              <div>
+                <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                  Resume
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Download a PDF overview of experience, projects, and stack.
+                </p>
+              </div>
               <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                className="group flex w-full items-center justify-center gap-2.5 rounded-2xl border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] px-4 py-3.5 text-sm sm:text-base font-medium text-zinc-200 transition hover:border-[rgba(232,197,71,0.22)] hover:text-[var(--ln-accent-gold)] sm:w-auto sm:min-w-[170px]"
+                href={site.resumePath}
+                download
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-input bg-transparent px-4 py-2 text-sm font-medium transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_25%,transparent)]"
               >
-                <Icon className="h-5 w-5 transition group-hover:scale-110" />
-                <span>{link.label}</span>
+                <Download className="h-4 w-4" />
+                Download resume
               </a>
-            );
-          })}
-        </div>
-      </div>
+            </Card>
+
+            <Card className="border-border p-5 sm:p-6 space-y-3">
+              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                Direct
+              </p>
+              <a
+                href={`mailto:${site.email}`}
+                className="flex items-center gap-3 text-sm font-medium text-foreground transition hover:text-[var(--ln-accent)]"
+              >
+                <Mail className="h-4 w-4 text-[var(--ln-accent)]" />
+                {site.email}
+              </a>
+              <p className="flex items-center gap-3 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 text-[var(--ln-accent)]" />
+                {site.location}
+              </p>
+              <p className="text-xs leading-5 text-muted-foreground">
+                Prefer email? Use the mailto fallback above if the form is unavailable.
+              </p>
+            </Card>
+          </div>
+        </Reveal>
+      </PageGrid>
     </div>
   );
 }
