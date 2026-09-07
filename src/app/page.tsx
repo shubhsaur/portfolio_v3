@@ -1,4 +1,4 @@
-import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
 import { CodeCard } from "@/components/hero/CodeCard";
 import { RotatingIntro } from "@/components/hero/RotatingIntro";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
