@@ -8,10 +8,17 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   asChild?: boolean;
   href?: string;
   variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "pill";
+  size?: "sm" | "md" | "lg";
 }
 
+const sizeClasses = {
+  sm: "text-xs px-3 py-1.5",
+  md: "text-sm px-4 py-2",
+  lg: "text-base px-6 py-3",
+};
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", asChild, href, ...props }, ref) => {
+  ({ className, variant = "default", asChild, href, size = "md", ...props }, ref) => {
     const Comp = asChild ? "span" : "button";
 
     return (
@@ -26,6 +33,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variant === "outline" && "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
           variant === "ghost" && "hover:bg-accent hover:text-accent-foreground",
           variant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          sizeClasses[size],
           className
         )}
         {...(href && { href })}
