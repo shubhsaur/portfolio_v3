@@ -1,35 +1,27 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva(
-  "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-medium transition-colors",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-muted text-muted-foreground",
-        outline: "border-border text-muted-foreground",
-        accent:
-          "border-[color-mix(in_srgb,var(--ln-accent)_25%,transparent)] bg-[color-mix(in_srgb,var(--ln-accent)_10%,transparent)] text-[var(--ln-accent)]",
-        success:
-          "border-[color-mix(in_srgb,var(--ln-success)_25%,transparent)] bg-[color-mix(in_srgb,var(--ln-success)_10%,transparent)] text-[var(--ln-success)]",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  },
-);
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "default" | "secondary" | "destructive" | "outline";
+}
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant = "default", ...props }: BadgeProps) {
   return (
-    <span className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div
+      className={cn(
+        "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors",
+        variant === "default" &&
+          "border-transparent bg-[var(--ln-accent)] text-background",
+        variant === "secondary" &&
+          "border-transparent bg-secondary text-secondary-foreground",
+        variant === "destructive" &&
+          "border-transparent bg-destructive text-destructive-foreground",
+        variant === "outline" && "text-foreground",
+        className
+      )}
+      {...props}
+    />
   );
 }
 
-export { Badge, badgeVariants };
+export { Badge };
