@@ -16,183 +16,19 @@ import {
   CheckCircle2,
   ExternalLink,
 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { Button } from "@/components/ui/button";
-
-type ProjectCategory = "All" | "Enterprise SaaS" | "AI & Tooling" | "Fintech & Data";
-
-interface ProjectItem {
-  id: string;
-  title: string;
-  category: "Enterprise SaaS" | "AI & Tooling" | "Fintech & Data";
-  badge: string;
-  description: string;
-  tech: string[];
-  icon: React.ComponentType<{ className?: string }>;
-  spotlightColor: string;
-  surfaceGlowColor: string;
-  stats: { label: string; value: string }[];
-  deepDive: {
-    overview: string;
-    highlights: string[];
-    architecture: string[];
-  };
-  liveUrl?: string;
-  githubUrl?: string;
-}
-
-const projects: ProjectItem[] = [
-  {
-    id: "uno-booking",
-    title: "Uno Booking Engine",
-    category: "Enterprise SaaS",
-    badge: "Flagship",
-    description:
-      "High-performance, scalable hotel booking engine (IBE) engineered for multiple international hotel brands. Features end-to-end room selection, dynamic pricing, promotions, 10+ payment gateway integrations, multilingual booking across 20+ locales with currency-aware pricing and RTL support.",
-    tech: [
-      "Next.js",
-      "React 19",
-      "TypeScript",
-      "Redux Toolkit",
-      "React Query",
-      "Tailwind CSS",
-    ],
-    icon: Hotel,
-    spotlightColor: "rgba(232, 197, 71, 0.45)",
-    surfaceGlowColor: "rgba(232, 197, 71, 0.07)",
-    liveUrl: "https://uno.rategain.com/hotel-booking-engine/",
-    stats: [
-      { label: "Gateways", value: "10+ Integrated" },
-      { label: "Locales", value: "20+ Multi-language" },
-      { label: "Pricing", value: "Tax-Aware & Currency" },
-    ],
-    deepDive: {
-      overview:
-        "Architected to support multi-tenant hospitality clients with high concurrency, instant price quote calculations, and seamless localized checkouts.",
-      highlights: [
-        "Integrated 10+ payment gateways with fallback routing, retry strategies, and strict security compliance.",
-        "Built itinerary persistence and resume-booking state to minimize checkout abandonment across user sessions.",
-        "Implemented currency-aware tax calculations, coupon promotion engines, and dynamic room inventory filters.",
-      ],
-      architecture: [
-        "Multi-Locale Internationalization with automated Right-to-Left (RTL) layout switching.",
-        "Redux Toolkit & React Query hybrid state for optimistic UI updates and instant cached room queries.",
-        "Component-driven design system engineered for high reusability across client brand skins.",
-      ],
-    },
-  },
-  {
-    id: "content-ai",
-    title: "Content AI",
-    category: "Enterprise SaaS",
-    badge: "B2B SaaS",
-    description:
-      "Robust B2B Content Management Platform designed to enhance content creation, curation, and distribution across demand partners. Architected frontend state and form validation workflows, boosting optimal rendering performance by 60%.",
-    tech: [
-      "React",
-      "React Context",
-      "Redux",
-      "Sass",
-      "React Final Form",
-    ],
-    icon: Bot,
-    spotlightColor: "rgba(93, 228, 199, 0.45)",
-    surfaceGlowColor: "rgba(93, 228, 199, 0.07)",
-    liveUrl: "https://rategain.com/hotel-content-management-system/",
-    stats: [
-      { label: "Performance", value: "+60% Boost" },
-      { label: "Architecture", value: "React Final Form" },
-      { label: "Domain", value: "B2B Distribution" },
-    ],
-    deepDive: {
-      overview:
-        "Designed to streamline large-scale content ingestion and partner syndication with complex multi-field validations and instant preview rendering.",
-      highlights: [
-        "Engineered reusable overlay components in React to reduce operational overhead and improve client efficiency.",
-        "Leveraged React Final Form for subscription-based form re-rendering, eliminating input lag across 50+ form fields.",
-        "Automated API testing pipelines with Mocha and Postman to ensure high reliability across publishing endpoints.",
-      ],
-      architecture: [
-        "Modular form schema architecture decoupling presentation from field validation logic.",
-        "Deep performance tuning cutting unnecessary DOM repaints and speeding up document rendering by 60%.",
-      ],
-    },
-  },
-  {
-    id: "cryptopedia",
-    title: "Cryptopedia",
-    category: "Fintech & Data",
-    badge: "Real-time Tracker",
-    description:
-      "Cryptocurrency price tracker application delivering real-time prices, market capitalization benchmarks, 24-hour volume changes, and interactive price trend visual charts using ChartJS.",
-    tech: ["React", "React Context API", "Material UI", "ChartJS", "REST API"],
-    icon: Coins,
-    spotlightColor: "rgba(96, 165, 250, 0.45)",
-    surfaceGlowColor: "rgba(96, 165, 250, 0.07)",
-    liveUrl: "https://cryptopedia-app.vercel.app",
-    githubUrl: "https://github.com/shubhsaur/cryptopedia",
-    stats: [
-      { label: "Data", value: "Real-time API" },
-      { label: "Charts", value: "Interactive Trends" },
-      { label: "UI", value: "Material UI" },
-    ],
-    deepDive: {
-      overview:
-        "A responsive financial data explorer providing live candlestick and line graphs with multi-currency comparisons.",
-      highlights: [
-        "Live price feed polling with automatic timestamp alignment and volatility indicators.",
-        "Interactive ChartJS canvas charts with custom tooltips, crosshairs, and time range toggles (24h, 7d, 30d, 1y).",
-        "Responsive financial summary cards with market cap ranks, 24-hour highs/lows, and circulating supply metrics.",
-      ],
-      architecture: [
-        "React Context API state management for seamless currency switching (USD, EUR, INR).",
-        "Material UI component customization with dark-mode financial contrast guidelines.",
-      ],
-    },
-  },
-  {
-    id: "codelens",
-    title: "Codelens",
-    category: "AI & Tooling",
-    badge: "AI Powered",
-    description:
-      "AI-powered codebase explorer that indexes GitHub repos, builds searchable context, and answers repo questions with grounded citations, file previews, and syntax-highlighted code.",
-    tech: ["Next.js", "Tailwind CSS", "Supabase", "Google Gemini"],
-    icon: Sparkles,
-    spotlightColor: "rgba(167, 139, 250, 0.45)",
-    surfaceGlowColor: "rgba(167, 139, 250, 0.07)",
-    liveUrl: "https://shubhsaur-codelens.vercel.app",
-    githubUrl: "https://github.com/shubhsaur/codelens",
-    stats: [
-      { label: "AI Engine", value: "Google Gemini" },
-      { label: "Database", value: "Supabase Vector" },
-      { label: "Context", value: "Repo Indexer" },
-    ],
-    deepDive: {
-      overview:
-        "Transforms complex GitHub repositories into interactive conversational workspaces with file-level citation grounding.",
-      highlights: [
-        "Generates semantic embeddings for code repositories to enable intelligent context retrieval.",
-        "Answers technical codebase queries with exact file links, line references, and syntax-highlighted snippets.",
-        "Integrated Supabase database for project state caching and fast vector similarity lookups.",
-      ],
-      architecture: [
-        "Next.js App Router streaming architecture for instant progressive token responses.",
-        "Google Gemini API integration paired with custom AST code chunking pipelines.",
-      ],
-    },
-  },
-];
+import { projects, type ProjectCategory } from "@/lib/content/projects";
+import type { ProjectRecord } from "@/lib/content/projects";
 
 const categories: ProjectCategory[] = [
-  "All",
   "Enterprise SaaS",
   "AI & Tooling",
   "Fintech & Data",
 ];
 
 export function ProjectsSection() {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "All">("All");
   const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
   const prefersReducedMotion = useReducedMotion();
 
@@ -231,13 +67,13 @@ export function ProjectsSection() {
 
       {/* Category Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-none px-1">
-        {categories.map((cat) => {
+        {["All", ...categories].map((cat) => {
           const isActive = activeCategory === cat;
           return (
             <button
               key={cat}
               type="button"
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => setActiveCategory(cat as ProjectCategory | "All")}
               className={[
                 "group relative shrink-0 rounded-full px-4 sm:px-5 py-2 text-xs font-medium transition-all duration-200 focus-visible:ln-ring-focus",
                 isActive
@@ -274,10 +110,10 @@ export function ProjectsSection() {
                 exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
-                <Card
+                <SpotlightCard
                   spotlightColor={project.spotlightColor}
                   surfaceGlowColor={project.surfaceGlowColor}
-                  className="overflow-hidden rounded-[1.75rem] sm:rounded-[2.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-4 sm:p-6 md:p-8 transition-all duration-300 hover:border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                  className="overflow-hidden rounded-[1.75rem] sm:rounded-[2.25rem] border-border p-4 sm:p-6 md:p-8 transition-all duration-300 hover:border-[var(--ln-accent)]"
                 >
                   <div className="space-y-6">
                     {/* Header Row */}
@@ -352,26 +188,19 @@ export function ProjectsSection() {
                         </button>
 
                         {project.liveUrl && (
-                          <Button
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-xs"
-                          >
-                            Live App
-                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          <Button asChild className="text-xs">
+                            <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                              Live App
+                              <ArrowUpRight className="h-3.5 w-3.5" />
+                            </a>
                           </Button>
                         )}
                         {project.githubUrl && (
-                          <Button
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            variant="outline"
-                            className="text-xs"
-                          >
-                            Repo
-                            <Github className="h-3.5 w-3.5" />
+                          <Button asChild variant="outline" className="text-xs">
+                            <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                              Repo
+                              <Github className="h-3.5 w-3.5" />
+                            </a>
                           </Button>
                         )}
                       </div>
@@ -431,7 +260,7 @@ export function ProjectsSection() {
                       )}
                     </AnimatePresence>
                   </div>
-                </Card>
+                </SpotlightCard>
               </motion.div>
             );
           })}

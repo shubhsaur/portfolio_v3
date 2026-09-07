@@ -1,6 +1,3 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/Reveal";
@@ -11,6 +8,7 @@ import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
 import { ExperienceSection } from "@/components/experience/ExperienceSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { OpenSourceSection } from "@/components/opensource/OpenSourceSection";
+import { aboutFacts } from "@/lib/content/about";
 import { getGithubMeta } from "@/lib/github";
 import { ArrowUpRight } from "lucide-react";
 
@@ -18,33 +16,8 @@ export default async function Home() {
   const github = await getGithubMeta();
   const getformEndpoint = "https://getform.io/f/f07994de-98f2-4f00-91b1-d2aec22d8ee8";
 
-  const aboutFacts = [
-    {
-      icon: "🎓",
-      label: "Education",
-      value: "B.Tech in Polymer Science & Chemical Tech (7.82 GPA), DTU (2020)",
-    },
-    {
-      icon: "🏢",
-      label: "Current Role",
-      value: "Software Development Engineer - I at RateGain",
-    },
-    {
-      icon: "📍",
-      label: "Location",
-      value: "Noida, India (Ex-Pune)",
-    },
-    {
-      icon: "🏆",
-      label: "Recognition",
-      value: "Pinnacle Performer of the Year (Q3 2024) & AWS Migration Award",
-    },
-  ];
-
   return (
     <div className="relative min-h-screen text-sm text-zinc-100 sm:text-base">
-      <Navbar />
-      <ScrollToTopButton />
       <main className="mx-auto flex max-w-6xl flex-col gap-32 px-4 pb-24 pt-28 sm:px-6 lg:px-8 xl:px-10">
         {/* HERO SECTION */}
         <section
@@ -109,28 +82,26 @@ export default async function Home() {
                   </div>
 
                   <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                    <Button href="#projects" className="justify-center">
-                      View my work
-                      <span aria-hidden="true" className="ln-mono text-[10px]">
-                        ↳
-                      </span>
+                    <Button asChild className="justify-center">
+                      <a href="#projects">
+                        View my work
+                        <span aria-hidden="true" className="ln-mono text-[10px]">
+                          ↳
+                        </span>
+                      </a>
                     </Button>
-                    <Button
-                      href="/Shubham_Saurabh_Resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download="Shubham_Saurabh_Resume.pdf"
-                      variant="outline"
-                      className="justify-center"
-                    >
-                      Download CV
+                    <Button asChild variant="outline" className="justify-center">
+                      <a
+                        href="/Shubham_Saurabh_Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download="Shubham_Saurabh_Resume.pdf"
+                      >
+                        Download CV
+                      </a>
                     </Button>
-                    <Button
-                      href="mailto:shubhamsaurabh@outlook.com"
-                      variant="outline"
-                      className="justify-center"
-                    >
-                      Get in touch
+                    <Button asChild variant="outline" className="justify-center">
+                      <a href="mailto:shubhamsaurabh@outlook.com">Get in touch</a>
                     </Button>
                   </div>
                 </div>
@@ -372,7 +343,6 @@ export default async function Home() {
             <ContactSection endpoint={getformEndpoint} />
           </Reveal>
         </section>
-        <Footer />
       </main>
     </div>
   );

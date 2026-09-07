@@ -1,5 +1,8 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { motion, useReducedMotion } from "framer-motion";
@@ -116,70 +119,69 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
             className="grid gap-4"
             onSubmit={handleSubmit}
           >
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-zinc-200">Name</span>
-              <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
-                  }}
-                />
-                <User className="h-4 w-4 text-zinc-500" />
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                  className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                />
-              </div>
-            </label>
+            <Label className="grid gap-2">
+                <span className="text-sm font-medium text-zinc-200">Name</span>
+                <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
+                    }}
+                  />
+                  <User className="h-4 w-4 text-zinc-500" />
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                    className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  />
+                </div>
+              </Label>
 
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-zinc-200">Email</span>
-              <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
-                  }}
-                />
-                <Mail className="h-4 w-4 text-zinc-500" />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  required
-                  className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                />
-              </div>
-            </label>
+              <Label className="grid gap-2">
+                <span className="text-sm font-medium text-zinc-200">Email</span>
+                <div className="group relative flex items-center gap-3 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_24px_rgba(232,197,71,0.18)]">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 70%)",
+                    }}
+                  />
+                  <Mail className="h-4 w-4 text-zinc-500" />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                    className="relative z-10 w-full bg-transparent text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  />
+                </div>
+              </Label>
 
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-zinc-200">Message</span>
-              <div className="group relative rounded-[1.5rem] border border-white/8 bg-black/20 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_28px_rgba(232,197,71,0.18)]">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-[1.5rem] opacity-0 transition duration-300 group-focus-within:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(circle at top, rgba(232,197,71,0.16), transparent 72%)",
-                  }}
-                />
-                <textarea
-                  name="message"
-                  placeholder="Tell me a bit about your project or say hello."
-                  required
-                  rows={5}
-                  className="relative z-10 w-full rounded-[1.5rem] bg-transparent px-4 py-3 text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
-                />
-              </div>
-            </label>
+              <Label className="grid gap-2">
+                <span className="text-sm font-medium text-zinc-200">Message</span>
+                <div className="group relative rounded-[1.5rem] border border-white/8 bg-black/20 transition duration-300 focus-within:border-[rgba(232,197,71,0.45)] focus-within:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_0_28px_rgba(232,197,71,0.18)]">
+<span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-focus-within:opacity-100"
+                    style={{
+                      background: "radial-gradient(circle at top, rgba(var(--ln-accent-gold) / 0.16), transparent 70%)",
+                    }}
+                  />
+                  <Textarea
+                    name="message"
+                    placeholder="Tell me a bit about your project or say hello."
+                    required
+                    rows={5}
+                    className="relative z-10 w-full rounded-[1.5rem] bg-transparent px-4 py-3 text-base sm:text-sm text-zinc-100 outline-none placeholder:text-zinc-500"
+                  />
+                </div>
+              </Label>
 
             <div className="pt-2">
               <motion.div

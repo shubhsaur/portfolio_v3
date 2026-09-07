@@ -13,67 +13,10 @@ import {
   Github,
   Sparkles,
 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { Button } from "@/components/ui/button";
-
-interface ContributionItem {
-  id: string;
-  issueNumber: number;
-  prNumber: number;
-  issueUrl: string;
-  prUrl: string;
-  title: string;
-  component: string;
-  componentIcon: React.ComponentType<{ className?: string }>;
-  milestone: string;
-  status: "Merged";
-  description: string;
-  impact: string[];
-  tags: string[];
-}
-
-const contributions: ContributionItem[] = [
-  {
-    id: "primereact-5998",
-    issueNumber: 5998,
-    prNumber: 6217,
-    issueUrl: "https://github.com/primefaces/primereact/issues/5998",
-    prUrl: "https://github.com/primefaces/primereact/pull/6217",
-    title: "Calendar: TimeOnly & StepMinute Desynchronization",
-    component: "Calendar / TimePicker Overlay",
-    componentIcon: Calendar,
-    milestone: "v10.6.0",
-    status: "Merged",
-    description:
-      "Identified and resolved a state desynchronization defect in PrimeReact Calendar where changing the hour via increment/decrement arrows in the overlay caused the minute input to desync from the configured step interval and fallback to local machine time.",
-    impact: [
-      "Fixed minute step alignment ensuring hours and minutes strictly adhere to stepMinute props.",
-      "Provided an isolated StackBlitz reproducer fork to expedite maintainer review and triage.",
-      "Merged cleanly into PrimeReact core milestone release v10.6.0.",
-    ],
-    tags: ["PrimeReact", "React", "State Synchronization", "Calendar", "TimePicker"],
-  },
-  {
-    id: "primereact-6151",
-    issueNumber: 6151,
-    prNumber: 6214,
-    issueUrl: "https://github.com/primefaces/primereact/issues/6151",
-    prUrl: "https://github.com/primefaces/primereact/pull/6214",
-    title: "Calendar: AM/PM Range Validation Deadlock",
-    component: "Calendar / Boundary Validation Engine",
-    componentIcon: Layers,
-    milestone: "v10.6.0",
-    status: "Merged",
-    description:
-      "Discovered and debugged a critical edge-case validation lock in PrimeReact Calendar when configuring date/time boundaries with minDate and maxDate in dual 'From-To' time inputs. Toggling between AM and PM in the 'From' field triggered a false-positive validation block preventing users from switching back to PM even when valid.",
-    impact: [
-      "Eliminated validation false-positives across time boundary checks (FROM < TO).",
-      "Ensured smooth AM/PM toggling in dual-input datepicker ranges without form submission lockouts.",
-      "Merged and shipped in PrimeReact milestone v10.6.0.",
-    ],
-    tags: ["PrimeReact", "React", "Validation Engine", "minDate / maxDate", "Edge Case"],
-  },
-];
+import { contributions } from "@/lib/content/opensource";
+import type { ContributionItem } from "@/lib/content/opensource";
 
 export function OpenSourceSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -148,10 +91,10 @@ export function OpenSourceSection() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.1 }}
             >
-              <Card
+              <SpotlightCard
                 spotlightColor="rgba(93, 228, 199, 0.45)"
                 surfaceGlowColor="rgba(93, 228, 199, 0.06)"
-                className="h-full flex flex-col justify-between rounded-[1.75rem] sm:rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-4 sm:p-6 md:p-7 shadow-[0_16px_45px_rgba(0,0,0,0.4)]"
+                className="flex h-full flex-col justify-between rounded-[1.75rem] sm:rounded-[2rem] p-4 sm:p-6 md:p-7"
               >
                 <div className="space-y-5">
                   {/* Top Badges */}
@@ -219,28 +162,21 @@ export function OpenSourceSection() {
 
                 {/* Footer Action Buttons */}
                 <div className="mt-6 flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 pt-4 border-t border-white/6">
-                  <Button
-                    href={contrib.prUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs justify-center"
-                  >
-                    View Merged PR
-                    <ExternalLink className="h-3.5 w-3.5" />
+                  <Button asChild className="justify-center text-xs">
+                    <a href={contrib.prUrl} target="_blank" rel="noreferrer">
+                      View Merged PR
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
                   </Button>
 
-                  <Button
-                    href={contrib.issueUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="outline"
-                    className="text-xs justify-center"
-                  >
-                    View Issue #{contrib.issueNumber}
-                    <Github className="h-3.5 w-3.5" />
+                  <Button asChild variant="outline" className="justify-center text-xs">
+                    <a href={contrib.issueUrl} target="_blank" rel="noreferrer">
+                      View Issue #{contrib.issueNumber}
+                      <Github className="h-3.5 w-3.5" />
+                    </a>
                   </Button>
                 </div>
-              </Card>
+              </SpotlightCard>
             </motion.div>
           );
         })}

@@ -1,43 +1,168 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Core Liquid Noir surfaces */
+  --ln-gold: #e8c547;
+  --ln-success: #5de4c7;
+  --ln-accent-cyan: var(--ln-success);
+
+  --ln-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ln-duration-micro: 180ms;
+  --ln-duration-page: 320ms;
+  --ln-scroll-mt: 7rem;
+  --ln-radius-card: 1.25rem;
+  --ln-radius-hero: 1.75rem;
+  --ln-radius: var(--ln-radius-card);
+
+  /* Dark Liquid Noir (default SSR) */
   --ln-bg: #06060a;
   --ln-bg-elevated: #0b0b12;
   --ln-bg-card: rgba(17, 17, 25, 0.96);
   --ln-bg-soft: rgba(11, 11, 18, 0.9);
-
-  /* Text */
   --ln-text-primary: #f0f0f5;
   --ln-text-muted: #8e8ea0;
   --ln-text-soft: #55556a;
+  --ln-border-subtle: rgba(255, 255, 255, 0.08);
+  --ln-border-strong: rgba(255, 255, 255, 0.14);
+  --ln-shadow-surface: 0 18px 55px rgba(0, 0, 0, 0.7);
+  --ln-glass: rgba(6, 6, 12, 0.8);
+  --ln-mesh-gold: rgba(232, 197, 71, 0.12);
+  --ln-mesh-cyan: rgba(93, 228, 199, 0.16);
 
-  /* Accents */
-  --ln-accent-gold: #e8c547;
-  --ln-accent-cyan: #5de4c7;
+  /* Accents (overwritten by data-accent + JS dual-write) */
+  --ln-accent: #e8c547;
+  --ln-accent-gold: var(--ln-accent);
+  --ln-accent-foreground: #1c1917;
   --ln-accent-coral: #f87171;
   --ln-accent-lavender: #a78bfa;
-
-  /* Borders */
-  --ln-border-subtle: rgba(255, 255, 255, 0.04);
-  --ln-border-strong: rgba(255, 255, 255, 0.1);
-
-  /* Gradients */
   --ln-gradient-primary: linear-gradient(
     135deg,
     #e8c547 0%,
     #f87171 40%,
     #5de4c7 100%
   );
+  --ln-ring: rgba(232, 197, 71, 0.7);
+  --ln-accent-wash: color-mix(in srgb, var(--ln-accent) 12%, transparent);
 
+  /* shadcn tokens */
+  --background: var(--ln-bg);
+  --foreground: var(--ln-text-primary);
+  --card: var(--ln-bg-card);
+  --card-foreground: var(--ln-text-primary);
+  --popover: var(--ln-bg-elevated);
+  --popover-foreground: var(--ln-text-primary);
+  --primary: var(--ln-accent);
+  --primary-foreground: var(--ln-accent-foreground);
+  --secondary: var(--ln-bg-elevated);
+  --secondary-foreground: var(--ln-text-primary);
+  --muted: var(--ln-bg-soft);
+  --muted-foreground: var(--ln-text-muted);
+  --accent: var(--ln-accent-wash);
+  --accent-foreground: var(--ln-text-primary);
+  --destructive: #f87171;
+  --border: var(--ln-border-subtle);
+  --input: var(--ln-border-strong);
+  --ring: var(--ln-ring);
+  --radius: var(--ln-radius-card);
+}
+
+html[data-color-mode="light"] {
+  color-scheme: light;
+  --ln-bg: #f6f1e8;
+  --ln-bg-elevated: #fffcf7;
+  --ln-bg-card: #fffcf7;
+  --ln-bg-soft: rgba(255, 252, 247, 0.92);
+  --ln-text-primary: #1c1917;
+  --ln-text-muted: #57534e;
+  --ln-text-soft: #78716c;
+  --ln-border-subtle: rgba(28, 25, 23, 0.08);
+  --ln-border-strong: rgba(28, 25, 23, 0.16);
+  --ln-shadow-surface: 0 12px 32px rgba(28, 25, 23, 0.08);
+  --ln-glass: rgba(255, 252, 247, 0.82);
+  --ln-mesh-gold: rgba(232, 197, 71, 0.18);
+  --ln-mesh-cyan: rgba(93, 228, 199, 0.12);
+  --destructive: #dc2626;
+}
+
+html[data-color-mode="dark"] {
+  color-scheme: dark;
+}
+
+html[data-accent="gold"] {
+  --ln-accent: #e8c547;
+  --ln-accent-foreground: #1c1917;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #e8c547 0%,
+    #f87171 40%,
+    #5de4c7 100%
+  );
   --ln-ring: rgba(232, 197, 71, 0.7);
 }
 
+html[data-accent="emerald"] {
+  --ln-accent: #10b981;
+  --ln-accent-foreground: #04110c;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #10b981 0%,
+    #06b6d4 50%,
+    #3b82f6 100%
+  );
+  --ln-ring: rgba(16, 185, 129, 0.7);
+}
+
+html[data-accent="violet"] {
+  --ln-accent: #a855f7;
+  --ln-accent-foreground: #fafafa;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #a855f7 0%,
+    #ec4899 50%,
+    #6366f1 100%
+  );
+  --ln-ring: rgba(168, 85, 247, 0.7);
+}
+
+html[data-accent="cyan"] {
+  --ln-accent: #06b6d4;
+  --ln-accent-foreground: #041014;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #06b6d4 0%,
+    #3b82f6 50%,
+    #8b5cf6 100%
+  );
+  --ln-ring: rgba(6, 182, 212, 0.7);
+}
+
 @theme inline {
-  --color-background: var(--ln-bg);
-  --color-foreground: var(--ln-text-primary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --font-sans: var(--font-outfit);
   --font-mono: var(--font-space-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 *,
@@ -46,24 +171,23 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+html,
+body {
+  max-width: 100vw;
 }
 
 body {
   margin: 0;
+  min-height: 100%;
   background-color: var(--ln-bg);
   color: var(--ln-text-primary);
   font-family: var(--font-outfit), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  overflow-x: hidden;
 }
 
 .scrollbar-none {
@@ -78,6 +202,10 @@ body {
   color-scheme: dark;
 }
 
+html[data-color-mode="light"].ln-root {
+  color-scheme: light;
+}
+
 .ln-body {
   min-height: 100vh;
   background:
@@ -85,25 +213,39 @@ body {
     radial-gradient(circle at 100% 0%, #111827 0, transparent 45%),
     radial-gradient(circle at 0% 100%, #0b1120 0, transparent 45%),
     radial-gradient(circle at 100% 100%, #1f2933 0, transparent 45%),
-    radial-gradient(circle at 50% 10%, rgba(232, 197, 71, 0.12), transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(93, 228, 199, 0.16), transparent 55%),
+    radial-gradient(circle at 50% 10%, var(--ln-mesh-gold), transparent 55%),
+    radial-gradient(circle at 80% 80%, var(--ln-mesh-cyan), transparent 55%),
     linear-gradient(145deg, #020617 0%, #02010a 40%, #020617 100%);
-  background-attachment: fixed;
+}
+
+html[data-color-mode="light"] .ln-body {
+  background:
+    radial-gradient(circle at 0% 0%, #fde68a 0, transparent 42%),
+    radial-gradient(circle at 100% 0%, #fed7aa 0, transparent 42%),
+    radial-gradient(circle at 0% 100%, #e7e5e4 0, transparent 45%),
+    radial-gradient(circle at 100% 100%, #d6d3d1 0, transparent 45%),
+    radial-gradient(circle at 50% 10%, var(--ln-mesh-gold), transparent 55%),
+    radial-gradient(circle at 80% 80%, var(--ln-mesh-cyan), transparent 55%),
+    linear-gradient(145deg, #f6f1e8 0%, #fffcf7 40%, #f5efe4 100%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-color-mode="dark"] .ln-body {
+    background-attachment: fixed;
+  }
 }
 
 .ln-surface {
   background-color: var(--ln-bg-card);
-  border-radius: 1.5rem;
+  border-radius: var(--ln-radius-card);
   border: 1px solid var(--ln-border-subtle);
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(248, 250, 252, 0.01);
+  box-shadow: var(--ln-shadow-surface);
 }
 
 .ln-glass {
-  background-color: rgba(6, 6, 12, 0.8);
+  background-color: var(--ln-glass);
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid var(--ln-border-strong);
   backdrop-filter: blur(22px) saturate(140%);
 }
 
@@ -125,7 +267,7 @@ body {
 
 .ln-ring-focus {
   outline: none;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8), 0 0 0 2px var(--ln-ring);
+  box-shadow: 0 0 0 1px var(--ln-bg), 0 0 0 3px var(--ln-ring);
 }
 
 .ln-cursor {
@@ -144,10 +286,13 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ln-reveal,
+  .ln-backdrop,
+  .ln-cursor {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
