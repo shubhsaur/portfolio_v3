@@ -1,3 +1,5 @@
+import { Briefcase, Building2 } from "lucide-react";
+
 export interface ExperienceRecord {
   id: string;
   role: string;
@@ -18,11 +20,24 @@ export interface ExperienceRecord {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-import {
-  Briefcase,
-  GraduationCap,
-  Building2,
-} from "lucide-react";
+/** Page-level metrics for `/experience` — exactly these three. */
+export const experienceKpis = [
+  {
+    value: "60%",
+    label: "Faster rendering",
+    detail: "Content AI UI performance",
+  },
+  {
+    value: "10+",
+    label: "Payment gateways",
+    detail: "Uno Booking Engine",
+  },
+  {
+    value: "10x",
+    label: "Deploy cycle",
+    detail: "Infosys self-service dashboard",
+  },
+] as const;
 
 export const experiences: ExperienceRecord[] = [
   {
@@ -35,7 +50,7 @@ export const experiences: ExperienceRecord[] = [
     current: true,
     type: "Full-Time",
     description:
-      "Developing enterprise SaaS platforms and large-scale booking systems, specializing in frontend architecture, state management, payment integrations, and performance optimization.",
+      "Developing enterprise SaaS platforms and large-scale booking systems across 20+ locales, specializing in frontend architecture, state management, payment integrations, and performance optimization.",
     achievements: [
       "Developed and optimized a Booking Engine (IBE) using Next.js, React, TypeScript, Redux Toolkit, and React Query for multiple international hotel brands.",
       "Implemented end-to-end hotel booking workflows including room selection, pricing, promotions, checkout, reservation management, and booking summaries with tax-aware pricing.",
@@ -59,7 +74,6 @@ export const experiences: ExperienceRecord[] = [
     metrics: [
       { label: "Performance Gain", value: "60% Faster" },
       { label: "Booking Integrations", value: "10+ Gateways" },
-      { label: "Locales Supported", value: "20+ Locales" },
     ],
     skills: [
       "Next.js",
@@ -105,29 +119,4 @@ export const experiences: ExperienceRecord[] = [
     ],
     icon: Building2,
   },
-  {
-    id: "dtu",
-    role: "B.Tech in Polymer Science & Chemical Technology",
-    company: "Delhi Technological University (DTU)",
-    period: "2016 — June 2020",
-    location: "Delhi, India",
-    type: "Degree",
-    description:
-      "Graduated with a 7.82 GPA from Delhi Technological University, building a strong foundation in computational logic and analytical problem solving.",
-    achievements: [
-      "Graduated with 7.82 GPA, developing rigorous systems thinking and structured engineering methodologies.",
-      "Self-directed transition into fullstack and frontend software engineering through data structures, algorithms, and production-ready web builds.",
-    ],
-    metrics: [
-      { label: "Academic GPA", value: "7.82 GPA" },
-      { label: "Graduation", value: "Class of 2020" },
-    ],
-    skills: [
-      "Systems Engineering",
-      "Data Structures",
-      "Algorithms",
-      "Web Technologies",
-    ],
-    icon: GraduationCap,
-  },
-] as const;
+];
