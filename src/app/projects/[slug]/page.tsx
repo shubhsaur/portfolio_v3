@@ -90,14 +90,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {/* Lede */}
             <section>
               <h2 className="text-xl font-semibold text-zinc-50 mb-3">Overview</h2>
-              <p className="text-base text-zinc-300 leading-relaxed">{project.deepDive.overview}</p>
+              <p className="text-base text-zinc-300 leading-relaxed">{project.caseStudy.lede}</p>
             </section>
 
             {/* Architecture */}
             <section>
               <h2 className="text-xl font-semibold text-zinc-50 mb-3">Architecture</h2>
               <ul className="space-y-2">
-                {project.deepDive.architecture.map((item, i) => (
+                {project.caseStudy.architecture.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-base text-zinc-300">
                     <Layers className="mt-1 h-5 w-5 shrink-0 text-[var(--ln-accent)]" />
                     <span>{item}</span>
@@ -105,11 +105,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 ))}
               </ul>
 
-              {project.deepDive.highlights.length > 0 && (
+              {project.caseStudy.highlights.length > 0 && (
                 <div className="mt-6">
                   <h3 className="text-lg font-medium text-zinc-50 mb-3">Key Engineering Feats</h3>
                   <ul className="space-y-2">
-                    {project.deepDive.highlights.map((item, i) => (
+                    {project.caseStudy.highlights.map((item, i) => (
                       <li key={i} className="flex items-start gap-3 text-base text-zinc-300">
                         <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[var(--ln-success)]" />
                         <span>{item}</span>
@@ -176,10 +176,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <div>
                   <p className="ln-mono text-xs uppercase tracking-[0.2em] text-zinc-400">Badge</p>
                   <p className="text-sm text-zinc-300 mt-1">{project.badge}</p>
-                </div>
-                <div>
-                  <p className="ln-mono text-xs uppercase tracking-[0.2em] text-zinc-400">Category</p>
-                  <p className="text-sm text-zinc-300 mt-1">{project.category}</p>
                 </div>
                 <div>
                   <p className="ln-mono text-xs uppercase tracking-[0.2em] text-zinc-400">Type</p>

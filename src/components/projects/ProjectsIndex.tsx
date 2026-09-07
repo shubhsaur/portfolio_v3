@@ -64,7 +64,6 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
     >
       <div className="space-y-3">
         <div className="flex items-center gap-2">
-          <project.icon className="h-5 w-5 text-[var(--ln-accent)]" />
           <span className="text-xs text-zinc-400">{project.group}</span>
         </div>
 
@@ -137,13 +136,13 @@ function OpenSourceBlock() {
             The leading open-source UI suite for React used by thousands of companies globally.
           </p>
           <div className="flex gap-2 flex-wrap">
-            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
+            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
               <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M16 3a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3h11zm0 2H5v12h11a1 1 0 001-1v-3h2a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h11a1 1 0 011 1v3a1 1 0 01-1 1zm4 4a1 1 0 10-2 0v4a1 1 0 002 0V9z" />
               </svg>
               8.3k+ GitHub Stars
             </span>
-            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs text-amber-300">
+            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
               <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M4 4v16h16V4H4zm12 12H6V6h10v10z" />
               </svg>
@@ -173,7 +172,7 @@ function OpenSourceBlock() {
               <CardContent className="flex-1 space-y-4 pt-5">
                 <div className="flex gap-2">
                   <span className="ln-mono text-xs text-zinc-400">#{contrib.prNumber}</span>
-                  <span className="ln-mono text-xs text-emerald-300">
+                  <span className="ln-mono text-xs text-[var(--ln-success)]">
                     Merged into {contrib.milestone}
                   </span>
                 </div>
