@@ -5,6 +5,7 @@ import { ArrowUpRight, Github, ArrowLeft, ArrowRight, ExternalLink, CheckCircle2
 import { projects, type ProjectRecord } from "@/lib/content/projects";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { buildPageMetadata, caseStudyMeta } from "@/lib/seo";
 
 const SLUG_ORDER = ["uno-booking", "content-ai", "cryptopedia", "codelens"] as const;
 
@@ -14,21 +15,18 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const meta = caseStudyMeta[slug];
   const project = projects.find((p) => p.slug === slug);
 
-  if (!project) {
+  if (!meta || !project) {
     return { title: "Project Not Found" };
   }
 
-  return {
-    title: `${project.title} — Shubham Saurabh`,
-    description: project.description,
-    openGraph: {
-      title: project.title,
-      description: project.description,
-      type: "article",
-    },
-  };
+  return buildPageMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: `/projects/${slug}`,
+  });
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {

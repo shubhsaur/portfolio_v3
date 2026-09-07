@@ -1,10 +1,7 @@
 import { AboutPage } from "@/components/about/AboutPage";
+import { buildPageMetadata, routeMeta } from "@/lib/seo";
 
-export const metadata = {
-  title: "About — Shubham Saurabh",
-  description:
-    "First-person bio: DTU B.Tech Polymer Science, Noida, 5+ years frontend.",
-};
+export const metadata = buildPageMetadata(routeMeta.about);
 
 export default function AboutRoute() {
   return <AboutPage />;

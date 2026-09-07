@@ -21,7 +21,7 @@ export function AboutTeaser() {
         </p>
         <Link
           href="/about"
-          className="inline-flex items-center gap-2 rounded-full border border-[rgba(232,197,71,0.18)] bg-[rgba(232,197,71,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-gold)] transition hover:border-[rgba(232,197,71,0.4)] hover:bg-[rgba(232,197,71,0.12)]"
+          className="inline-flex items-center gap-2 rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)] transition hover:border-[var(--ln-accent)]/40 hover:bg-[var(--ln-accent)]/15"
         >
           Read my story
         </Link>

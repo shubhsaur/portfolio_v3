@@ -1,10 +1,7 @@
 import { ExperiencePage } from "@/components/experience/ExperiencePage";
+import { buildPageMetadata, routeMeta } from "@/lib/seo";
 
-export const metadata = {
-  title: "Experience — Shubham Saurabh",
-  description:
-    "RateGain SDE-I and Infosys SSE. 60% faster UIs, 10+ gateways, 10x deploy cycle.",
-};
+export const metadata = buildPageMetadata(routeMeta.experience);
 
 export default function ExperienceRoute() {
   return <ExperiencePage />;

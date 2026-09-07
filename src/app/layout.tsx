@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/ThemeContext";
 import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-boot";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { SITE_URL, routeMeta } from "@/lib/seo";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -18,9 +19,20 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shubham Saurabh – Frontend Engineer Portfolio",
-  description:
-    "Frontend Engineer with 5+ years of experience. SDE - I @ RateGain. A Liquid Noir portfolio by Shubham Saurabh.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: routeMeta.home.title,
+    template: "%s · Shubham Saurabh",
+  },
+  description: routeMeta.home.description,
+  openGraph: {
+    type: "website",
+    siteName: "Shubham Saurabh",
+    images: [{ url: "/og/default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

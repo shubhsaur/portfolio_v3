@@ -6,7 +6,13 @@ import { SkillsStrip } from "@/components/home/SkillsStrip";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { Button } from "@/components/ui/button";
 import { getGithubMeta } from "@/lib/github";
+import { buildPageMetadata, routeMeta } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
+
+export const metadata = buildPageMetadata({
+  ...routeMeta.home,
+  absoluteTitle: true,
+});
 
 export default async function Home() {
   const github = await getGithubMeta();

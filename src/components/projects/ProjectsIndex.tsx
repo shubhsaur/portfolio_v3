@@ -1,130 +1,130 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Reveal } from "@/components/motion/Reveal";
 import { projects } from "@/lib/content/projects";
 import { contributions } from "@/lib/content/opensource";
 
 export function ProjectsIndex() {
-  const prefersReducedMotion = useReducedMotion();
-
   const workProjects = projects.filter((p) => p.group === "work");
   const personalProjects = projects.filter((p) => p.group === "personal");
 
   return (
     <div className="space-y-24">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-zinc-50 sm:text-4xl">Projects</h1>
-        <p className="text-base text-zinc-400 max-w-3xl mx-auto">
+      <div className="space-y-4 text-center">
+        <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Projects</h1>
+        <p className="mx-auto max-w-3xl text-base text-muted-foreground">
           Enterprise hotel booking engines, B2B content syndication suites, fintech price trackers,
           and AI developer tools built over 5+ years of frontend engineering.
         </p>
       </div>
 
-      {/* Work Projects */}
       <section>
-        <h2 className="mb-6 text-2xl font-semibold text-zinc-50">Work Projects</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-foreground">Work Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {workProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {workProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} delay={index * 0.03} />
           ))}
         </div>
       </section>
 
-      {/* Personal Projects */}
       <section>
-        <h2 className="mb-6 text-2xl font-semibold text-zinc-50">Personal Projects</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-foreground">Personal Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {personalProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {personalProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} delay={index * 0.03} />
           ))}
         </div>
       </section>
 
-      {/* Open Source Block */}
       <OpenSourceBlock />
     </div>
   );
 }
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
-  const prefersReducedMotion = useReducedMotion();
-
+function ProjectCard({
+  project,
+  delay,
+}: {
+  project: (typeof projects)[number];
+  delay: number;
+}) {
   return (
-    <motion.article
-      className="group overflow-hidden rounded-[1.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 transition-all duration-300 hover:border-[var(--ln-accent)]"
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-    >
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-400">{project.group}</span>
-        </div>
+    <Reveal delay={delay}>
+      <article className="group overflow-hidden rounded-[var(--ln-radius-card)] border border-border bg-card p-6 transition-colors hover:border-[var(--ln-accent)]/40">
+        <div className="space-y-3">
+          <span className="ln-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            {project.group}
+          </span>
 
-        <h3 className="text-xl font-semibold text-zinc-50">{project.title}</h3>
+          <h3 className="text-xl font-semibold text-foreground">{project.title}</h3>
 
-        <p className="text-sm text-zinc-300 leading-relaxed">{project.description}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
 
-        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/6">
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="inline-flex items-center rounded-full border border-white/6 bg-white/[0.03] px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-white/20 hover:text-zinc-100"
+          <div className="flex flex-wrap gap-1.5 border-t border-border pt-3">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="inline-flex items-center rounded-full border border-border bg-muted/20 px-2.5 py-1 text-xs text-muted-foreground"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <Link
+              href={`/projects/${project.slug}`}
+              className="text-xs font-medium text-[var(--ln-accent)] hover:underline"
             >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-4 flex gap-2">
-          <Link href={`/projects/${project.slug}`}>
-            <a className="text-xs text-[var(--ln-accent)] hover:underline">View details</a>
-          </Link>
-          {project.liveUrl && (
-            <Button asChild size="sm" className="text-xs">
-              <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                Live App
+              Case study
+            </Link>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
+                Live
               </a>
-            </Button>
-          )}
-          {project.githubUrl && (
-            <Button asChild variant="outline" size="sm" className="text-xs">
-              <a href={project.githubUrl} target="_blank" rel="noreferrer">
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
                 GitHub
               </a>
-            </Button>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </motion.article>
+      </article>
+    </Reveal>
   );
 }
 
 function OpenSourceBlock() {
-  const preferredMotion = useReducedMotion();
-
   return (
     <section className="space-y-12">
-      <div className="text-center space-y-4">
-        <h2 className="text-2xl font-semibold text-zinc-50">Open Source Impact</h2>
-        <p className="text-base text-zinc-400 max-w-2xl mx-auto">
+      <div className="space-y-4 text-center">
+        <h2 className="text-2xl font-semibold text-foreground">Open Source Impact</h2>
+        <p className="mx-auto max-w-2xl text-base text-muted-foreground">
           Contributing bug discoveries, isolations, and merged pull requests to premier
           open-source React component ecosystems.
         </p>
       </div>
 
-      {/* PrimeReact Banner */}
-      <Card>
+      <Card className="border-border">
         <CardHeader>
           <CardTitle className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#06b6d4]/10 text-[#06b6d4] shadow-sm">
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--ln-success)]/10 text-[var(--ln-success)]">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path d="M12 0L2 6v12l10 6 10-6V6L12 0z" />
               </svg>
             </div>
@@ -132,77 +132,59 @@ function OpenSourceBlock() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-zinc-300 mb-4">
+          <p className="mb-4 text-sm text-muted-foreground">
             The leading open-source UI suite for React used by thousands of companies globally.
           </p>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-wrap gap-2">
             <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
-              <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16 3a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3h11zm0 2H5v12h11a1 1 0 001-1v-3h2a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h11a1 1 0 011 1v3a1 1 0 01-1 1zm4 4a1 1 0 10-2 0v4a1 1 0 002 0V9z" />
-              </svg>
               8.3k+ GitHub Stars
             </span>
             <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
-              <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4 4v16h16V4H4zm12 12H6V6h10v10z" />
-              </svg>
               2 Merged PRs
             </span>
-            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[rgba(232,197,71,0.2)] bg-[rgba(232,197,71,0.08)] px-3 py-1 text-xs text-[var(--ln-accent-gold)]">
-              <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
+            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-3 py-1 text-xs text-[var(--ln-accent)]">
               v10.6.0 Shipped
             </span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Contribution Cards */}
       <div className="grid gap-6 md:grid-cols-2">
-        {contributions.map((contrib) => (
-          <motion.div
-            key={contrib.id}
-            initial={preferredMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={preferredMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45 }}
-          >
-            <Card className="h-full flex flex-col">
+        {contributions.map((contrib, index) => (
+          <Reveal key={contrib.id} delay={index * 0.03}>
+            <Card className="flex h-full flex-col border-border">
               <CardContent className="flex-1 space-y-4 pt-5">
                 <div className="flex gap-2">
-                  <span className="ln-mono text-xs text-zinc-400">#{contrib.prNumber}</span>
+                  <span className="ln-mono text-xs text-muted-foreground">
+                    #{contrib.prNumber}
+                  </span>
                   <span className="ln-mono text-xs text-[var(--ln-success)]">
                     Merged into {contrib.milestone}
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-zinc-50">{contrib.title}</h3>
-                <p className="text-xs text-zinc-300">{contrib.description}</p>
-                <div className="flex gap-1.5 flex-wrap">
-                  {contrib.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/6 bg-white/[0.02] px-2 py-0.5 text-[10px] text-zinc-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <div className="mt-4 flex gap-2">
-                <Button asChild size="sm" className="text-xs">
-                  <a href={contrib.prUrl} target="_blank" rel="noreferrer">
+                <h3 className="text-sm font-semibold text-foreground">{contrib.title}</h3>
+                <p className="text-xs text-muted-foreground">{contrib.description}</p>
+                <div className="flex flex-wrap gap-3 pt-1">
+                  <a
+                    href={contrib.prUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs font-medium text-[var(--ln-accent)] hover:underline"
+                  >
                     View PR
                   </a>
-                </Button>
-                <Button asChild variant="outline" size="sm" className="text-xs">
-                  <a href={contrib.issueUrl} target="_blank" rel="noreferrer">
+                  <a
+                    href={contrib.issueUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs text-muted-foreground hover:text-foreground"
+                  >
                     View Issue
                   </a>
-                </Button>
-              </div>
+                </div>
+              </CardContent>
             </Card>
-          </motion.div>
+          </Reveal>
         ))}
       </div>
     </section>

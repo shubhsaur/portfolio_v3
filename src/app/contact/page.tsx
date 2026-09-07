@@ -1,10 +1,8 @@
 import { ContactSection } from "@/components/contact/ContactSection";
 import { site } from "@/lib/content/site";
+import { buildPageMetadata, routeMeta } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contact — Shubham Saurabh",
-  description: "Getform message form, socials, resume.",
-};
+export const metadata = buildPageMetadata(routeMeta.contact);
 
 const DEFAULT_GETFORM = site.getformEndpoint;
 
