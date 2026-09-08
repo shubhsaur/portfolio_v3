@@ -1315,28 +1315,106 @@ Parallelism: 0d may overlap 0a/0b. After 0d, PR-3 / PR-4 / PR-5a are independent
 
 ## Implementation Progress
 
+**All phases complete.** Build green, 13 routes generated (including 4 case-study slugs + sitemap). Last updated 2026-09-08.
+
 ### ✅ Phase 0 — Foundation — COMPLETED (2026-09-07)
 
-**All Foundation requirements met:**
-
 - `/`, `/about`, `/projects`, `/experience`, `/contact` respond 200 ✓
-- `/projects/uno-booking` may 404 until Phase 2 — acceptable if unlinked ✓
-- `/blog` is **not** a route (404 is OK because nothing links to it) ✓
+- `/blog` is **not** a route ✓
 - Navbar active state follows `pathname` ✓
-- Command palette on stub routes reaches About/Home/Contact via `router.push` ✓
+- Command palette uses `router.push` ✓
 - 8 theme combinations persist across reload without FOUC ✓
-- Content grid helper (`PageGrid`) exists; nav inner aligns to `max-w-[1400px]` ✓
-- `layout.tsx` does not wrap children in `PageGrid` ✓
-- Skills/Open Source/Content commands removed; Blog command absent; Blog span not in tab order ✓
-- `src/lib/nav.ts` exists; Navbar/CommandMenu/Footer consume it ✓
-- `Reveal.tsx` contract unchanged ✓
+- `PageGrid` exists; `layout.tsx` does not wrap children in it ✓
+- Blog span not in tab order; Skills/Open Source/Content commands removed ✓
 - shadcn `Button` / `Card` / `Badge` / `Input` / `sonner` used by chrome ✓
 
-**Delivered PRs:**
-- PR-0a: shadcn init + chrome consumption ✓ (already in codebase)
-- PR-0b: routed nav + route stubs + SiteShell/Chrome + Footer + 404 ✓
-- PR-0c: command palette as router ✓
-- PR-0d: content extraction (planned next)
+**Commits:** PR-0a → PR-0b → PR-0c → PR-0d (`1630b79`)
+
+### ✅ Phase 1a — Home landing — COMPLETED (2026-09-08)
+
+- `/` renders FeaturedWork (Uno, Content AI, Codelens), SkillsStrip, AboutTeaser ✓
+- One-pager sections (Experience, Skills showcase, Open Source, Contact) removed from Home ✓
+- Static CSS mesh hero backdrop; LCP is text/fonts ✓
+- Reduced-motion: CodeCard tilt gated, RotatingIntro shows first phrase statically ✓
+
+**Commit:** `665d416`
+
+### ✅ Phase 1b — Liquid glass WebGL — COMPLETED (2026-09-08)
+
+- Raw WebGL2 in `LiquidGlassCanvas.tsx` — no `three` / R3F ✓
+- Lazy mount via `requestIdleCallback`, `ssr: false` ✓
+- Mobile / reduced-motion / WebGL-fail → static CSS mesh (fail open) ✓
+- DPR capped at 1.5; pauses when offscreen or `document.hidden` ✓
+- `NEXT_PUBLIC_ENABLE_LIQUID_GLASS` env kill switch ✓
+
+**Commit:** `795dd4d`
+
+### ✅ Phase 2a — Projects index — COMPLETED (2026-09-08)
+
+- Work / personal groups; no category filter pills ✓
+- Cards with reserved thumbnail area, skills, GitHub + Live links ✓
+- Cryptopedia included on `/projects` ✓
+
+**Commit:** `1c2d029`
+
+### ✅ Phase 2b — Open Source on Projects — COMPLETED (2026-09-08)
+
+- `OpenSourceBlock` rendered inside `ProjectsIndex.tsx` on `/projects` ✓
+- PrimeReact PR cards with `--ln-success` chips ✓
+
+### ✅ Phase 2c — Case study routes — COMPLETED (2026-09-08)
+
+- `generateStaticParams` for `uno-booking`, `content-ai`, `cryptopedia`, `codelens` ✓
+- `caseStudy` field replaces `deepDive` (`lede`, `architecture`, `highlights`) ✓
+- Prev/next navigation wraps at ends (Codelens → Uno) ✓
+- `generateMetadata` unique per slug; unknown slug → `notFound()` ✓
+- Home featured cards and command palette link to slugs ✓
+
+**Commit:** `549dcba`
+
+### ✅ Phase 3 — Experience — COMPLETED (2026-09-08)
+
+- Page-level KPIs: exactly 3 (60% faster, 10+ gateways, 10x deploy cycle) via `experienceKpis` ✓
+- DTU removed from `experience.ts`; only RateGain + Infosys rendered ✓
+- Left-spine timeline with `Reveal` per card ✓
+- Awards on RateGain card ✓
+
+**Commit:** `d7b8eea`
+
+### ✅ Phase 4 — About — COMPLETED (2026-09-08)
+
+- First-person long-form copy; DTU + Noida + 5+ years facts ✓
+- `PortraitCard` with reserved `aspect-[4/5]` ratio; `public/about/portrait.jpg` swaps in without layout shift ✓
+- Skills inventory with `id="skills"` anchor + `scroll-mt-[var(--ln-scroll-mt)]` ✓
+
+**Commit:** `25f4d34`
+
+### ✅ Phase 5a — Contact — COMPLETED (2026-09-08)
+
+- Two-column layout: form left, socials + resume right ✓
+- Getform endpoint via `NEXT_PUBLIC_GETFORM_ENDPOINT` env with fallback default ✓
+- shadcn `Label` / `Input` / `Textarea` / `Button`; success via `sonner` + `--ln-success` ✓
+- `mailto:shubhamsaurabh@outlook.com` fallback visible ✓
+
+**Commit:** `a797a1f`
+
+### ✅ Phase 5b — SEO, OG, sitemap, motion polish — COMPLETED (2026-09-08)
+
+- Per-route `metadata` via `buildPageMetadata` + `routeMeta` on all pages ✓
+- `generateMetadata` per case-study slug via `caseStudyMeta` ✓
+- `src/app/sitemap.ts` lists all routes (Blog omitted) ✓
+- `public/og/default.png` present ✓
+- No `template.tsx` route fade ✓
+
+**Commit:** `c830c33`
+
+### Remaining asset gaps (non-blocking)
+
+| Asset | Status | Note |
+| --- | --- | --- |
+| `public/Shubham_Saurabh_Resume.pdf` | Missing | Navbar, CommandMenu, Contact reference it; download actions will 404 until added |
+| `public/about/portrait.jpg` | Missing | Placeholder renders; swap in when ready |
+| `public/projects/*.jpg` | Missing | Reserved-ratio placeholders until thumbnails available |
 
 ---
 

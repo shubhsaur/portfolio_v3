@@ -39,9 +39,9 @@ export function FeaturedWork() {
       id="featured"
       className="pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-48 lg:pb-32"
     >
-      <h2 className="text-center text-3xl font-semibold tracking-tight text-zinc-50 mb-12 md:mb-20">
-        Featured Work
-      </h2>
+<h2 className="text-center text-6xl font-semibold tracking-tight text-zinc-50 mb-12 md:mb-20">
+         Featured Work
+       </h2>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project) => (

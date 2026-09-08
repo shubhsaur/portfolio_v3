@@ -32,17 +32,17 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={36}
-              height={36}
-              className="h-9 w-9 shrink-0 rounded-full"
+              width={32}
+              height={32}
+              className="h-8 w-8 shrink-0 rounded-full"
               priority
             />
-            <div className="flex flex-col justify-center leading-tight">
+            <div className="flex flex-col leading-tight">
               <span className="text-[13px] font-semibold uppercase tracking-[0.14em] text-foreground sm:tracking-[0.16em]">
                 Shubham
               </span>
-              <span className="text-[13px] font-semibold uppercase tracking-[0.14em] text-foreground sm:tracking-[0.16em]">
-                Saurabh
+              <span className="ln-mono hidden text-[10px] text-muted-foreground xs:inline">
+                I breathe frontend.
               </span>
             </div>
           </Link>
@@ -81,9 +81,9 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                         "pointer-events-none absolute bottom-0 left-2 right-2 h-px rounded-full",
                         "bg-[var(--ln-accent)]",
                         "transition-transform duration-300 ease-out",
-                      active
-                        ? "scale-x-0"
-                        : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
+                        active
+                          ? "scale-x-100"
+                          : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left",
                       )}
                     />
                   </Link>
@@ -96,11 +96,11 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             <button
               type="button"
               onClick={onOpenCommandMenu}
-              className="group flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-[var(--ln-accent)] hover:text-foreground focus-visible:ln-ring-focus"
+              className="group flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs text-muted-foreground transition hover:border-[var(--ln-accent)] hover:text-foreground focus-visible:ln-ring-focus"
               title="Search & Quick Actions (⌘K)"
             >
               <Search className="h-3.5 w-3.5 text-muted-foreground group-hover:text-[var(--ln-accent)]" />
-              <span className="text-xs">Search</span>
+              <span className="text-[11px]">Search</span>
               <kbd className="ln-mono flex items-center gap-0.5 rounded border border-border bg-background/50 px-1.5 py-0.5 text-[9px] text-muted-foreground group-hover:border-[var(--ln-accent)] group-hover:text-foreground">
                 <Command className="h-2.5 w-2.5" />K
               </kbd>
