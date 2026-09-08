@@ -16,7 +16,7 @@ export function SkillsStrip() {
 
   return (
     <section className="py-12 md:py-20">
-      <h3 className="text-center text-lg font-semibold tracking-tight text-zinc-200 mb-6">
+      <h3 className="text-center text-lg font-semibold tracking-tight text-foreground mb-6">
         Technologies
       </h3>
 
@@ -25,10 +25,10 @@ export function SkillsStrip() {
           <Link
             key={skill.slug}
             href="/about#skills"
-            className="group inline-flex items-center rounded-full border border-white/6 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-white/20 hover:text-zinc-100 focus-visible:ln-ring-focus"
+            className="group inline-flex items-center rounded-full border border-[var(--ln-card-border)] bg-[var(--ln-accent-wash)] px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[var(--ln-card-border-hover)] hover:text-foreground focus-visible:ln-ring-focus"
           >
             {skill.name}
-            <span className="ml-1 text-zinc-500 group-hover:text-zinc-300">→</span>
+            <span className="ml-1 text-muted-foreground/60 group-hover:text-muted-foreground">→</span>
           </Link>
         ))}
       </div>

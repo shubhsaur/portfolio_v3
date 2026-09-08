@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/ThemeContext";
 import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-boot";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { Loader } from "@/components/ui/Loader";
 import { SITE_URL, routeMeta } from "@/lib/seo";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${spaceMono.variable} ln-body bg-background text-foreground antialiased`}
       >
+        <Loader />
         <ThemeProvider>
           <SiteShell>{children}</SiteShell>
           <Toaster />

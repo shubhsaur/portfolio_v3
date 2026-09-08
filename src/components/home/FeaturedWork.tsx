@@ -1,92 +1,230 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
-import { skills, skillCategories } from "@/lib/content/skills";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
+import { useCallback, type MouseEvent } from "react";
+import { ArrowUpRight, Github } from "lucide-react";
+import { projects } from "@/lib/content/projects";
+import { cn } from "@/lib/cn";
 
-export function FeaturedWork() {
+/* ──────────────────────────────────────────────
+   Apple Liquid Glass — Featured Work Cards
+   ────────────────────────────────────────────── */
+
+const featured = projects.filter((p) => p.slug === "uno-booking" || p.slug === "content-ai" || p.slug === "codelens");
+
+const accentForSlug: Record<string, { glow: string; tint: string; border: string }> = {
+  "uno-booking":  { glow: "rgba(185,130,74,.30)",  tint: "rgba(185,130,74,.10)",  border: "rgba(185,130,74,.40)" },
+  "content-ai":   { glow: "rgba(75,154,165,.30)",   tint: "rgba(75,154,165,.10)",  border: "rgba(75,154,165,.40)" },
+  "codelens":     { glow: "rgba(128,103,161,.30)",  tint: "rgba(128,103,161,.10)", border: "rgba(128,103,161,.40)" },
+};
+
+/* ── Liquid Glass Card ── */
+
+function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
   const prefersReducedMotion = useReducedMotion();
+  const mouseX = useMotionValue(-1000);
+  const mouseY = useMotionValue(-1000);
+  const accent = accentForSlug[project.slug] ?? accentForSlug["codelens"];
 
-  const featuredProjects = [
-    {
-      slug: "uno-booking",
-      title: "Uno Booking Engine",
-      description: "High-performance hotel booking engine engineered for multiple international hotel brands.",
-      githubUrl: "https://github.com/shubhsaur",
-      liveUrl: "https://uno.rategain.com/hotel-booking-engine/",
-      tech: ["React 19", "Next.js", "TypeScript", "Redux Toolkit"],
+  const handleMouseMove = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      if (prefersReducedMotion) return;
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+      const { left, top } = e.currentTarget.getBoundingClientRect();
+      mouseX.set(e.clientX - left);
+      mouseY.set(e.clientY - top);
     },
-    {
-      slug: "content-ai",
-      title: "Content AI",
-      description: "B2B Content Management Platform boosting rendering performance by 60% via React Final Form.",
-      githubUrl: "https://github.com/shubhsaur",
-      liveUrl: "https://rategain.com/hotel-content-management-system/",
-      tech: ["React", "React Context", "Redux Final Form"],
-    },
-    {
-      slug: "codelens",
-      title: "Codelens",
-      description: "AI-powered codebase explorer that indexes GitHub repos and answers repo questions.",
-      githubUrl: "https://github.com/shubhsaur/codelens",
-      liveUrl: "https://shubhsaur-codelens.vercel.app/",
-      tech: ["Next.js", "Tailwind CSS", "Supabase", "Google Gemini"],
-    },
-  ];
+    [prefersReducedMotion, mouseX, mouseY],
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(-1000);
+    mouseY.set(-1000);
+  }, [mouseX, mouseY]);
+
+  // Cursor-following specular highlight
+  const specularBg = useMotionTemplate`radial-gradient(320px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,.12), transparent 70%)`;
+  // Cursor-following accent glow on border
+  const borderGlow = useMotionTemplate`radial-gradient(260px circle at ${mouseX}px ${mouseY}px, ${accent.border}, transparent 65%)`;
 
   return (
-    <section
-      id="featured"
-      className="pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-48 lg:pb-32"
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ y: -4, transition: { type: "spring", stiffness: 260, damping: 22 } }}
+      className={cn(
+        "lg-card group relative overflow-hidden rounded-[1.5rem]",
+        "border border-white/[0.08] border-t-white/[0.18]",
+        "bg-white/[0.03]",
+        "backdrop-blur-[60px] saturate-[2]",
+        "shadow-[0_8px_32px_rgba(0,0,0,.12),0_1px_4px_rgba(0,0,0,.08),inset_1px_1px_0_rgba(255,255,255,.12),inset_-1px_-1px_0_rgba(255,255,255,.04)]",
+        "hover:shadow-[0_16px_48px_rgba(0,0,0,.16),0_2px_8px_rgba(0,0,0,.10),inset_1px_1px_0_rgba(255,255,255,.18),inset_-1px_-1px_0_rgba(255,255,255,.06)]",
+        "hover:border-white/[0.14] hover:border-t-white/[0.28]",
+        "active:scale-[0.98] active:shadow-[0_4px_16px_rgba(0,0,0,.18),inset_0_0_24px_rgba(255,255,255,.08)]",
+        "transition-all duration-300",
+      )}
     >
-<h2 className="text-center text-6xl font-semibold tracking-tight text-zinc-50 mb-12 md:mb-20">
-         Featured Work
-       </h2>
+      {/* ── Prismatic top-edge highlight ── */}
+      <span
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,.45) 25%, rgba(255,255,255,.20) 50%, rgba(255,255,255,.35) 75%, transparent 95%)",
+        }}
+      />
+      {/* Left-edge refraction */}
+      <span
+        className="pointer-events-none absolute inset-y-0 left-0 w-px"
+        style={{
+          background: "linear-gradient(180deg, transparent 8%, rgba(255,255,255,.18) 30%, rgba(255,255,255,.06) 60%, transparent 92%)",
+        }}
+      />
+      {/* Right-edge subtle refraction */}
+      <span
+        className="pointer-events-none absolute inset-y-0 right-0 w-px"
+        style={{
+          background: "linear-gradient(180deg, transparent 40%, rgba(255,255,255,.08) 65%, transparent 90%)",
+        }}
+      />
+
+      {/* ── Ambient accent tint bleed ── */}
+      <span
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{ background: `radial-gradient(ellipse 80% 60% at 50% 100%, ${accent.tint}, transparent 70%)` }}
+      />
+
+      {/* ── Cursor-following specular highlight ── */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: specularBg }}
+      />
+
+      {/* ── Cursor-following border glow ── */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: borderGlow,
+          maskImage: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+          padding: "1px",
+        }}
+      />
+
+      {/* ── Glass depth layers ── */}
+      {/* Inner specular sheen — primary visual on transparent surface */}
+      <span
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{
+          background: "linear-gradient(165deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.04) 20%, transparent 45%, transparent 60%, rgba(255,255,255,.03) 100%)",
+        }}
+      />
+      {/* Bottom depth shadow (inside glass) */}
+      <span
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 rounded-b-[inherit]"
+        style={{
+          background: "linear-gradient(to top, rgba(0,0,0,.06), transparent)",
+        }}
+      />
+
+      {/* ── Content ── */}
+      <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[18rem]">
+        {/* Badge + links row */}
+        <div className="flex items-center justify-between mb-4">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.2em]"
+            style={{
+              borderColor: accent.border,
+              background: accent.tint,
+              color: "var(--ln-text-muted)",
+            }}
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: accent.glow, boxShadow: `0 0 8px ${accent.glow}` }}
+            />
+            {project.badge}
+          </span>
+
+          <div className="flex items-center gap-2">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lg-icon-btn"
+                aria-label={`${project.title} on GitHub`}
+              >
+                <Github className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lg-icon-btn"
+                aria-label={`${project.title} live demo`}
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mb-2">
+          {project.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-muted-foreground flex-1">
+          {project.description}
+        </p>
+
+        {/* Tech pills */}
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.tech.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className="lg-pill"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.tech.length > 4 && (
+            <span className="lg-pill text-[var(--ln-text-soft)]">+{project.tech.length - 4}</span>
+          )}
+        </div>
+
+        {/* Stats bar */}
+        <div className="mt-4 grid grid-cols-3 gap-3 border-t border-[var(--ln-glass-border)] pt-4">
+          {project.stats.slice(0, 3).map((stat) => (
+            <div key={stat.label}>
+              <p className="text-[0.6875rem] sm:text-xs font-semibold text-foreground">{stat.value}</p>
+              <p className="text-[0.5625rem] sm:text-[0.625rem] text-[var(--ln-text-soft)] uppercase tracking-wider">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Section ── */
+
+export function FeaturedWork() {
+  return (
+    <section id="featured" className="pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-48 lg:pb-32">
+      <h2 className="text-center text-6xl font-semibold tracking-tight text-foreground mb-12 md:mb-20">
+        Featured Work
+      </h2>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredProjects.map((project) => (
-          <div
-            key={project.slug}
-            className={cn(
-              "rounded-[1.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/5",
-              prefersReducedMotion ? "" : "hover:shadow-[0_8px_25px_rgba(0,0,0,0.3)]"
-            )}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span className="ln-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                {project.slug}
-              </span>
-            </div>
-
-            <h3 className="text-xl font-semibold tracking-tight text-zinc-100 mb-1">
-              {project.title}
-            </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">
-              {project.description}
-            </p>
-
-            <div className="mt-3 grid gap-1.5 grid-cols-2">
-              {project.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="inline-flex items-center rounded-full border border-white/6 bg-white/[0.03] px-2.5 py-1.5 text-xs text-zinc-300 transition-colors hover:border-white/20 hover:text-zinc-100"
-                >
-                  {tech === "React 19" && (
-                    <span className="h-2 w-2 rounded-full bg-emerald-500/60" />
-                  )}
-                  {tech === "Next.js" && (
-                    <span className="h-2 w-2 rounded-full bg-sky-500/60" />
-                  )}
-                  {tech === "TypeScript" && (
-                    <span className="h-2 w-2 rounded-full bg-slate-400/60" />
-                  )}
-                  {tech === "Redux Toolkit" && (
-                    <span className="h-2 w-2 rounded-full bg-amber-500/60" />
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
+        {featured.map((project) => (
+          <LiquidGlassCard key={project.slug} project={project} />
         ))}
       </div>
     </section>

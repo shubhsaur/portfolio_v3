@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Navbar } from "./Navbar";
-import { ScrollToTopButton } from "./ScrollToTopButton";
 import { CommandMenu } from "@/components/ui/CommandMenu";
 
 export function Chrome() {
@@ -27,7 +26,6 @@ export function Chrome() {
         onClose={() => setIsCommandMenuOpen(false)}
       />
       <Navbar onOpenCommandMenu={() => setIsCommandMenuOpen(true)} />
-      <ScrollToTopButton />
     </>
   );
 }

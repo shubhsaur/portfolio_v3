@@ -554,7 +554,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 </span>
               </div>
               <div className="flex items-center gap-1">
-                <span>Liquid Noir UI</span>
+                <span>{colorMode === "dark" ? "Liquid Noir UI" : "Ivory & Slate UI"}</span>
               </div>
             </div>
           </motion.div>
