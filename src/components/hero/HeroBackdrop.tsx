@@ -14,10 +14,6 @@ function isLiquidGlassEnabled() {
   return process.env.NEXT_PUBLIC_ENABLE_LIQUID_GLASS !== "false";
 }
 
-function isMobileOrCoarse() {
-  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
-}
-
 export function HeroBackdrop() {
   const prefersReducedMotion = useReducedMotion();
   const [mountCanvas, setMountCanvas] = useState(false);
@@ -25,40 +21,33 @@ export function HeroBackdrop() {
   useEffect(() => {
     if (!isLiquidGlassEnabled()) return;
     if (prefersReducedMotion) return;
-    if (isMobileOrCoarse()) return;
 
     let idleId: number | undefined;
     let timeoutId: number | undefined;
+    let cancelled = false;
 
-    const enable = () => setMountCanvas(true);
-
-    const ric = window.requestIdleCallback;
-    if (typeof ric === "function") {
-      idleId = ric(enable, { timeout: 2000 });
-      return () => {
-        window.cancelIdleCallback?.(idleId!);
-      };
-    }
-
-    const schedule = () => {
-      timeoutId = window.setTimeout(enable, 200);
+    const enable = () => {
+      if (!cancelled) setMountCanvas(true);
     };
 
-    if (document.readyState === "complete") {
-      schedule();
-    } else {
-      window.addEventListener("load", schedule, { once: true });
+    // Prefer idle time, but always fall back so mobile (busy main thread / loader)
+    // still gets the same liquid-glass backdrop as desktop.
+    const ric = window.requestIdleCallback;
+    if (typeof ric === "function") {
+      idleId = ric(enable, { timeout: 1200 });
     }
+    timeoutId = window.setTimeout(enable, 300);
 
     return () => {
-      if (timeoutId) window.clearTimeout(timeoutId);
-      window.removeEventListener("load", schedule);
+      cancelled = true;
+      if (idleId != null) window.cancelIdleCallback?.(idleId);
+      window.clearTimeout(timeoutId);
     };
   }, [prefersReducedMotion]);
 
   return (
     <div className="ln-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* Static CSS mesh — mobile / reduced-motion / fail-open end state */}
+      {/* Static CSS mesh — reduced-motion / fail-open end state */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-70"

@@ -7,7 +7,7 @@ export const THEME_BOOT_SCRIPT = `(function(){
     if (!accents[a]) a = "gold";
     var m = localStorage.getItem("ln_color_mode");
     if (m !== "light" && m !== "dark") {
-      m = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      m = "dark";
     }
     root.dataset.accent = a;
     root.dataset.colorMode = m;

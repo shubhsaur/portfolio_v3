@@ -10,7 +10,7 @@ export function ThemeSwitcher() {
   return (
     <div className="flex items-center gap-[0.25rem] md:gap-[0.375rem]">
       <div
-        className="hidden sm:flex items-center gap-[0.25rem] md:gap-[0.375rem] rounded-full border border-border bg-muted/70 p-[0.125rem] md:p-[0.25rem] backdrop-blur-md"
+        className="flex items-center gap-[0.25rem] md:gap-[0.375rem] rounded-full border border-border bg-muted/70 p-[0.125rem] md:p-[0.25rem] backdrop-blur-md"
         title="Customize Accent Palette"
       >
         {(Object.keys(themes) as AccentTheme[]).map((themeKey) => {
@@ -34,7 +34,7 @@ export function ThemeSwitcher() {
               )}
               <span
                 className="h-[0.5rem] w-[0.5rem] md:h-[0.75rem] md:w-[0.75rem] rounded-full transition-transform group-hover:scale-105"
-                style={{ backgroundColor: theme.dotColor }}
+                style={{ backgroundColor: theme[colorMode].dotColor }}
               />
             </button>
           );

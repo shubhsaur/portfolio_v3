@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Search, Command, Download, Mail } from "lucide-react";
 import { navItems, type NavItem } from "@/lib/nav";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
-import { themes, useTheme, type AccentTheme } from "@/components/theme/ThemeContext";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -17,7 +16,6 @@ interface NavbarProps {
 export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { activeTheme, setTheme } = useTheme();
 
   const isActive = (item: NavItem) => {
     if (item.disabled) return false;
@@ -238,30 +236,6 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                 <Mail className="h-[0.875rem] w-[0.875rem]" />
                 <span>Contact</span>
               </a>
-            </div>
-
-            {/* Accent palette (mobile-only) */}
-            <div className="mt-[0.75rem] border-t border-border pt-[0.75rem]">
-              <p className="px-[1rem] pb-[0.5rem] text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Accent</p>
-              <div className="flex items-center gap-[0.5rem] px-[1rem]">
-                {(Object.keys(themes) as AccentTheme[]).map((themeKey) => {
-                  const theme = themes[themeKey];
-                  return (
-                    <button
-                      key={themeKey}
-                      type="button"
-                      onClick={() => setTheme(themeKey)}
-                      className={`flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full transition-transform hover:scale-110 ${activeTheme === themeKey ? "ring-2 ring-foreground/40 ring-offset-1 ring-offset-popover" : ""}`}
-                      aria-label={`Switch theme to ${theme.name}`}
-                    >
-                      <span
-                        className="h-[1rem] w-[1rem] rounded-full"
-                        style={{ backgroundColor: theme.dotColor }}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
             </div>
           </div>
         </div>

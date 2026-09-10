@@ -2,7 +2,8 @@
  * FrontendUniverse.tsx
  *
  * Interactive engineering identity visual for a React / Next.js portfolio hero.
- * Tech nodes orbit the central core on individual dotted paths.
+ * Tech nodes travel on individual circular offset-paths (one ring per card),
+ * staying upright via offset-rotate while revolving around the core.
  * No overflow clipping — cards float into the page backdrop.
  */
 
@@ -27,14 +28,14 @@ interface FrontendUniverseProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const nodes: NodeItem[] = [
-  { id: "react", label: "REACT", detail: "Components · Systems", angle: -68, accent: "cyan", orbitOffset: -9, orbitDuration: 30, orbitReverse: false },
+  { id: "react", label: "REACT", detail: "Components · Systems", angle: -68, accent: "cyan", orbitOffset: -12, orbitDuration: 30, orbitReverse: false },
   { id: "next", label: "NEXT.JS", detail: "App architecture", angle: -22, accent: "yellow", orbitOffset: -6, orbitDuration: 24, orbitReverse: true },
-  { id: "typescript", label: "TYPESCRIPT", detail: "Safe · Scalable", angle: 23, accent: "pink", orbitOffset: -3, orbitDuration: 34, orbitReverse: false },
-  { id: "motion", label: "MOTION", detail: "Micro interactions", angle: 66, accent: "purple", orbitOffset: 0, orbitDuration: 22, orbitReverse: true },
-  { id: "ux", label: "UX / UI", detail: "Clarity · Detail", angle: 135, accent: "cyan", orbitOffset: 3, orbitDuration: 28, orbitReverse: false },
-  { id: "aws", label: "AWS", detail: "Deploy · Scale", angle: 184, accent: "yellow", orbitOffset: 6, orbitDuration: 26, orbitReverse: true },
-  { id: "testing", label: "QUALITY", detail: "Perf · Testing", angle: 224, accent: "pink", orbitOffset: 9, orbitDuration: 32, orbitReverse: false },
-  { id: "design", label: "DESIGN SYSTEM", detail: "Tokens · Patterns", angle: -135, accent: "purple", orbitOffset: 12, orbitDuration: 20, orbitReverse: true },
+  { id: "typescript", label: "TYPESCRIPT", detail: "Safe · Scalable", angle: 23, accent: "pink", orbitOffset: 0, orbitDuration: 34, orbitReverse: false },
+  { id: "motion", label: "MOTION", detail: "Micro interactions", angle: 66, accent: "purple", orbitOffset: 6, orbitDuration: 22, orbitReverse: true },
+  { id: "ux", label: "UX / UI", detail: "Clarity · Detail", angle: 135, accent: "cyan", orbitOffset: 12, orbitDuration: 28, orbitReverse: false },
+  { id: "aws", label: "AWS", detail: "Deploy · Scale", angle: 184, accent: "yellow", orbitOffset: 18, orbitDuration: 26, orbitReverse: true },
+  { id: "testing", label: "QUALITY", detail: "Perf · Testing", angle: 224, accent: "pink", orbitOffset: 24, orbitDuration: 32, orbitReverse: false },
+  { id: "design", label: "DESIGN SYSTEM", detail: "Tokens · Patterns", angle: -135, accent: "purple", orbitOffset: 30, orbitDuration: 20, orbitReverse: true },
 ];
 
 const accentMap = {
@@ -44,13 +45,13 @@ const accentMap = {
   cyan: { text: "#4B9AA5", glow: "rgba(75,154,165,.28)", border: "rgba(75,154,165,.22)" },
 };
 
-const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min, max), max);
+const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
 
 function distanceForWidth(w: number) {
-  if (w < 380) return 32;
-  if (w < 460) return 34;
-  if (w < 540) return 38;
-  return 42;
+  if (w < 380) return 26;
+  if (w < 460) return 28;
+  if (w < 540) return 30;
+  return 32;
 }
 
 function coreSizeForWidth(w: number) {
@@ -62,18 +63,23 @@ function coreSizeForWidth(w: number) {
 
 export default function FrontendUniverse({ interactive = true, className = "", ...props }: FrontendUniverseProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [distance, setDistance] = useState(32);
   const [coreSize, setCoreSize] = useState(90);
+  const [stageBox, setStageBox] = useState({ w: 320, h: 320 });
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
-    const el = containerRef.current;
+    const el = stageRef.current ?? containerRef.current;
     if (!el) return;
     const update = () => {
-      const w = el.clientWidth;
-      setDistance(distanceForWidth(w));
-      setCoreSize(coreSizeForWidth(w));
+      const w = el.clientWidth || 320;
+      const h = el.clientHeight || w;
+      const size = Math.min(w, h);
+      setStageBox({ w, h });
+      setDistance(distanceForWidth(size));
+      setCoreSize(coreSizeForWidth(size));
     };
     update();
     const ro = new ResizeObserver(update);
@@ -127,9 +133,10 @@ export default function FrontendUniverse({ interactive = true, className = "", .
         />
       </div>
 
-      {/* Universe stage */}
+      {/* Universe stage — keep square so orbit %/px geometry stays circular */}
       <div
-        className="relative aspect-square w-full min-h-[320px] sm:min-h-[380px] md:min-h-[420px] max-h-[560px] transition-transform duration-500 ease-out"
+        ref={stageRef}
+        className="relative mx-auto aspect-square w-full max-w-[560px] min-h-[280px] transition-transform duration-500 ease-out"
         style={{ transform: `perspective(1200px) rotateX(${pointer.y * -0.18}deg) rotateY(${pointer.x * 0.2}deg)` }}
       >
         {/* Central core — the "sun" with glow */}
@@ -161,7 +168,7 @@ export default function FrontendUniverse({ interactive = true, className = "", .
               height={150}
               className="h-full w-full object-cover rounded-full"
               priority
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: "cover" }}
             />
             <div className="absolute -bottom-2 h-20 w-40 rounded-full bg-[#8067A1]/10 blur-xl" />
           </div>
@@ -171,87 +178,69 @@ export default function FrontendUniverse({ interactive = true, className = "", .
           </div>
         </div>
 
-        {/* Orbiting tech nodes */}
+        {/* Orbiting tech nodes — offset-path keeps each card locked to its ring */}
         {nodes.map((node, index) => {
           const accent = accentMap[node.accent];
           const isActive = active === node.id;
-          const orbitRadius = distance + node.orbitOffset;
-          const orbitDiameter = orbitRadius * 2;
-          const startRotation = node.angle + 90;
-          const normalizedAngle = ((startRotation % 360) + 360) % 360;
-          const delay = -(normalizedAngle / 360) * node.orbitDuration;
-          const animName = node.orbitReverse ? "fu-orbit-reverse" : "fu-orbit";
-          const counterAnimName = node.orbitReverse ? "fu-orbit" : "fu-orbit-reverse";
+          const stageSize = Math.min(stageBox.w, stageBox.h) || 320;
+          const orbitRadiusPct = distance + node.orbitOffset;
+          const orbitRadiusPx = (orbitRadiusPct / 100) * stageSize;
+          const orbitDiameterPx = orbitRadiusPx * 2;
+          // Design angles are clockwise-from-top; CSS circle() paths start at 3 o'clock.
+          const startFromTop = ((node.angle + 90) % 360 + 360) % 360;
+          const startFromEast = (startFromTop + 270) % 360;
+          // With animation-direction: reverse, negative delay seeks the mirrored phase.
+          const phase = node.orbitReverse ? (360 - startFromEast) % 360 : startFromEast;
+          const delay = -(phase / 360) * node.orbitDuration;
 
           return (
             <div key={node.id}>
-              {/* Visible orbit path — dotted circle exactly matching the orbit */}
               <div
                 className="fu-orbit-path pointer-events-none absolute rounded-full border border-dashed"
                 style={{
-                  width: `${orbitDiameter}%`,
-                  height: `${orbitDiameter}%`,
-                  left: `calc(50% - ${orbitRadius}%)`,
-                  top: `calc(50% - ${orbitRadius}%)`,
+                  width: orbitDiameterPx,
+                  height: orbitDiameterPx,
+                  left: `calc(50% - ${orbitRadiusPx}px)`,
+                  top: `calc(50% - ${orbitRadiusPx}px)`,
                   borderWidth: "1.5px",
                   borderColor: `${accent.text}33`,
                 }}
               />
 
-              {/* Orbit centering layer — positions the rotation origin at container center */}
               <div
-                className="absolute"
+                className="fu-orbit-traveler pointer-events-none absolute left-0 top-0 h-0 w-0"
                 style={{
-                  width: `${orbitDiameter}%`,
-                  height: `${orbitDiameter}%`,
-                  left: `calc(50% - ${orbitRadius}%)`,
-                  top: `calc(50% - ${orbitRadius}%)`,
+                  offsetPath: `circle(${orbitRadiusPx}px at ${stageBox.w / 2}px ${stageBox.h / 2}px)`,
+                  offsetRotate: "0deg",
+                  offsetAnchor: "center",
+                  animation: `fu-orbit-travel ${node.orbitDuration}s linear infinite`,
+                  animationDelay: `${delay}s`,
+                  animationDirection: node.orbitReverse ? "reverse" : "normal",
                 }}
               >
-                {/* Orbit rotation layer — transform is free, only animation uses it */}
-                <div
-                  className="w-full h-full pointer-events-none"
+                <button
+                  type="button"
+                  aria-label={`${node.label}: ${node.detail}`}
+                  onPointerEnter={() => setActive(node.id)}
+                  onPointerLeave={() => setActive(null)}
+                  className={`hero-tech-node pointer-events-auto min-w-[80px] sm:min-w-[95px] md:min-w-[110px] max-w-[120px] sm:max-w-[134px] rounded-2xl border bg-[#0D0F15]/84 px-2 py-2 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-[transform,box-shadow,border-color] duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
                   style={{
-                    animation: `${animName} ${node.orbitDuration}s linear infinite`,
-                    animationDelay: `${delay}s`,
+                    transform: "translate(-50%, -50%)",
+                    width: "max(16%, 80px)",
+                    borderColor: isActive ? accent.border : "rgba(255,255,255,.09)",
+                    boxShadow: isActive ? `0 20px 60px rgba(0,0,0,.42), 0 0 30px ${accent.glow}` : "0 20px 50px rgba(0,0,0,.32)",
                   }}
                 >
-                  {/* Counter-rotation + centering for the node at top-center of orbit */}
-                  <div
-                    className="pointer-events-none"
-                    style={{
-                      position: "absolute",
-                      left: "50%",
-                      top: 0,
-                      animation: `${counterAnimName} ${node.orbitDuration}s linear infinite`,
-                      animationDelay: `${delay}s`,
-                    }}
-                  >
-                    <button
-                      type="button"
-                      aria-label={`${node.label}: ${node.detail}`}
-                      onPointerEnter={() => setActive(node.id)}
-                      onPointerLeave={() => setActive(null)}
-                      className={`hero-tech-node pointer-events-auto min-w-[80px] sm:min-w-[95px] md:min-w-[110px] max-w-[120px] sm:max-w-[134px] rounded-2xl border bg-[#0D0F15]/84 px-2 py-2 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-all duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
-                      style={{
-                        transform: "translate(-50%, -50%)",
-                        width: "max(16%, 80px)",
-                        borderColor: isActive ? accent.border : "rgba(255,255,255,.09)",
-                        boxShadow: isActive ? `0 20px 60px rgba(0,0,0,.42), 0 0 30px ${accent.glow}` : "0 20px 50px rgba(0,0,0,.32)",
-                      }}
-                    >
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1.5">
-                          <span className="h-1.5 w-1.5 rounded-full shadow-[0_0_11px_currentColor]" style={{ color: accent.text, background: "currentColor" }} />
-                          <span className="hero-label-bold text-[7px] sm:text-[8px] font-bold tracking-[0.23em] text-white/48">{node.label}</span>
-                        </div>
-                        <span className="hero-label-faint text-[7px] sm:text-[8px] text-white/20">{index + 1}</span>
-                      </div>
-                      <div className="hero-label-detail text-[9px] sm:text-[10px] font-medium text-white/74">{node.detail}</div>
-                      <div className={`mt-1.5 h-px w-full transition-all duration-500 ${isActive ? "opacity-70" : "opacity-15"}`} style={{ background: `linear-gradient(90deg, ${accent.text}, transparent)` }} />
-                    </button>
+                  <div className="mb-1.5 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full shadow-[0_0_11px_currentColor]" style={{ color: accent.text, background: "currentColor" }} />
+                      <span className="hero-label-bold text-[7px] sm:text-[8px] font-bold tracking-[0.23em] text-white/48">{node.label}</span>
+                    </div>
+                    <span className="hero-label-faint text-[7px] sm:text-[8px] text-white/20">{index + 1}</span>
                   </div>
-                </div>
+                  <div className="hero-label-detail text-[9px] sm:text-[10px] font-medium text-white/74">{node.detail}</div>
+                  <div className={`mt-1.5 h-px w-full transition-all duration-500 ${isActive ? "opacity-70" : "opacity-15"}`} style={{ background: `linear-gradient(90deg, ${accent.text}, transparent)` }} />
+                </button>
               </div>
             </div>
           );

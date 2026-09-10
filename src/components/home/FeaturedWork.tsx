@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
 import { useCallback, type MouseEvent } from "react";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Image as ImageIcon } from "lucide-react";
 import { projects } from "@/lib/content/projects";
 import { cn } from "@/lib/cn";
 
@@ -131,14 +131,38 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
 
       {/* ── Content ── */}
       <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[18rem]">
+        {/* ── Image placeholder (shine sweep on hover, mirrors /projects) ── */}
+        <div
+          className="thumbnail-shine relative mb-5 aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl border border-white/[0.08]"
+          style={{
+            background: `radial-gradient(ellipse 100% 80% at 50% 0%, ${accent.tint}, transparent 75%), linear-gradient(160deg, rgba(255,255,255,.05), rgba(0,0,0,.12))`,
+          }}
+        >
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+            <ImageIcon className="fw-thumb-icon h-6 w-6 text-white/25" strokeWidth={1.5} />
+            <span className="ln-mono select-none px-3 text-center text-[0.625rem] uppercase tracking-[0.3em] text-white/40">
+              {project.title}
+            </span>
+          </div>
+
+          {/* Shine sweep — slides left-to-right on hover (same as /projects) */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 -left-[200%] w-[200%] group-hover:animate-[shine-sweep_0.8s_ease-in-out]"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 30%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.30) 50%, rgba(255,255,255,.15) 58%, transparent 70%)",
+            }}
+          />
+        </div>
+
         {/* Badge + links row */}
         <div className="flex items-center justify-between mb-4">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.2em]"
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.2em] text-white/80"
             style={{
               borderColor: accent.border,
               background: accent.tint,
-              color: "var(--ln-text-muted)",
             }}
           >
             <span
@@ -175,12 +199,12 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mb-2">
+        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white mb-2">
           {project.title}
         </h3>
 
         {/* Description */}
-        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-muted-foreground flex-1">
+        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-white/75 flex-1">
           {project.description}
         </p>
 
@@ -195,7 +219,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
             </span>
           ))}
           {project.tech.length > 4 && (
-            <span className="lg-pill text-[var(--ln-text-soft)]">+{project.tech.length - 4}</span>
+            <span className="lg-pill text-white/55">+{project.tech.length - 4}</span>
           )}
         </div>
 
@@ -203,8 +227,8 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         <div className="mt-4 grid grid-cols-3 gap-3 border-t border-[var(--ln-glass-border)] pt-4">
           {project.stats.slice(0, 3).map((stat) => (
             <div key={stat.label}>
-              <p className="text-[0.6875rem] sm:text-xs font-semibold text-foreground">{stat.value}</p>
-              <p className="text-[0.5625rem] sm:text-[0.625rem] text-[var(--ln-text-soft)] uppercase tracking-wider">{stat.label}</p>
+              <p className="text-[0.6875rem] sm:text-xs font-semibold text-white">{stat.value}</p>
+              <p className="text-[0.5625rem] sm:text-[0.625rem] text-white/55 uppercase tracking-wider">{stat.label}</p>
             </div>
           ))}
         </div>

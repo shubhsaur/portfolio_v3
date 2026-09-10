@@ -12,16 +12,21 @@ export function ProjectsIndex() {
 
   return (
     <div className="space-y-24">
-      <div className="space-y-4 text-center">
-        <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Projects</h1>
-        <p className="mx-auto max-w-3xl text-base text-muted-foreground">
-          Enterprise hotel booking engines, B2B content syndication suites, fintech price trackers,
-          and AI developer tools built over 5+ years of frontend engineering.
+      <div className="space-y-4 text-left">
+        <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
+          Interfaces built with{" "}
+          <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+            intent
+          </span>
+          .
+        </h1>
+        <p className="max-w-3xl text-xl text-muted-foreground">
+          Frontend experiences across SaaS platforms, dashboards, mobile products and digital brands — turning complex requirements into clean, responsive and purposeful interfaces.
         </p>
       </div>
 
       <section>
-        <h2 className="mb-6 text-2xl font-semibold text-foreground">Work Projects</h2>
+        <h2 className="mb-6 text-3xl font-semibold text-foreground">Work Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {workProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} delay={index * 0.03} />
@@ -30,7 +35,7 @@ export function ProjectsIndex() {
       </section>
 
       <section>
-        <h2 className="mb-6 text-2xl font-semibold text-foreground">Personal Projects</h2>
+        <h2 className="mb-6 text-3xl font-semibold text-foreground">Personal Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {personalProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} delay={index * 0.03} />
@@ -52,15 +57,36 @@ function ProjectCard({
 }) {
   return (
     <Reveal delay={delay}>
-      <article className="group overflow-hidden rounded-[var(--ln-radius-card)] border border-border bg-card p-6 transition-colors hover:border-[var(--ln-accent)]/40">
-        <div className="space-y-3">
+      <article className="group flex h-full flex-col overflow-hidden rounded-[var(--ln-radius-card)] border border-border bg-card transition-colors hover:border-[var(--ln-accent)]/40">
+        {/* ── Thumbnail area ── */}
+        <div className="thumbnail-shine relative aspect-[16/10] shrink-0 overflow-hidden bg-muted/40">
+          {/* Placeholder until real thumbnails are provided */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="ln-mono text-[0.625rem] uppercase tracking-[0.3em] text-[var(--ln-text-soft)] select-none">
+              {project.title}
+            </span>
+          </div>
+
+          {/* Shine sweep — slides left-to-right on hover */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 -left-[200%] w-[200%] group-hover:animate-[shine-sweep_0.8s_ease-in-out]"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 30%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.30) 50%, rgba(255,255,255,.15) 58%, transparent 70%)",
+            }}
+          />
+        </div>
+
+        {/* ── Card body ── */}
+        <div className="flex flex-1 flex-col space-y-3 p-6">
           <span className="ln-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             {project.group}
           </span>
 
           <h3 className="text-xl font-semibold text-foreground">{project.title}</h3>
 
-          <p className="text-sm leading-relaxed text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
             {project.description}
           </p>
 
@@ -75,7 +101,7 @@ function ProjectCard({
             ))}
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center gap-3">
+          <div className="mt-auto flex flex-wrap items-center gap-3 pt-4">
             <Link
               href={`/projects/${project.slug}`}
               className="text-xs font-medium text-[var(--ln-accent)] hover:underline"

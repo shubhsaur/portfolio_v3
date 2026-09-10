@@ -114,11 +114,11 @@ html[data-color-mode="light"] {
   --ln-bg-soft: rgba(248, 244, 237, 0.85);
 
   /* === TYPOGRAPHY === */
-  --ln-text-primary: #1A1612;
-  --ln-text-secondary: #3D3229;
-  --ln-text-body: #5C4B3F;
-  --ln-text-muted: #7A6B5D;
-  --ln-text-soft: #9E8E80;
+  --ln-text-primary: #000000;
+  --ln-text-secondary: #000000;
+  --ln-text-body: #000000;
+  --ln-text-muted: #000000;
+  --ln-text-soft: #1A1A1A;
 
   /* === BORDERS === */
   --ln-border-subtle: rgba(139, 122, 107, 0.18);
@@ -229,9 +229,9 @@ html[data-color-mode="dark"][data-accent="cyan"] {
 }
 
 html[data-color-mode="light"][data-accent="gold"] {
-  --ln-accent: #e8c547;
-  --ln-accent-gold: #e8c547;
-  --ln-accent-foreground: #1c1917;
+  --ln-accent: #8A5A24;
+  --ln-accent-gold: #8A5A24;
+  --ln-accent-foreground: #FDFBF8;
   --ln-accent-terracotta: #C96E55;
   --ln-accent-rose: #C87886;
   --ln-accent-lavender: #8067A1;
@@ -239,17 +239,17 @@ html[data-color-mode="light"][data-accent="gold"] {
   --ln-accent-secondary: #B9824A;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #e8c547 0%,
-    #f87171 40%,
-    #5de4c7 100%
+    #8A5A24 0%,
+    #A85A42 50%,
+    #96525F 100%
   );
-  --ln-ring: rgba(232, 197, 71, 0.55);
+  --ln-ring: rgba(138, 90, 36, 0.5);
 }
 
 html[data-color-mode="light"][data-accent="emerald"] {
-  --ln-accent: #10b981;
-  --ln-accent-gold: #10b981;
-  --ln-accent-foreground: #04110c;
+  --ln-accent: #4C6B52;
+  --ln-accent-gold: #4C6B52;
+  --ln-accent-foreground: #FDFBF8;
   --ln-accent-terracotta: #C96E55;
   --ln-accent-rose: #C87886;
   --ln-accent-lavender: #8067A1;
@@ -257,17 +257,17 @@ html[data-color-mode="light"][data-accent="emerald"] {
   --ln-accent-secondary: #B9824A;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #10b981 0%,
-    #06b6d4 50%,
-    #3b82f6 100%
+    #4C6B52 0%,
+    #2E6A72 50%,
+    #8A5A24 100%
   );
-  --ln-ring: rgba(16, 185, 129, 0.55);
+  --ln-ring: rgba(76, 107, 82, 0.5);
 }
 
 html[data-color-mode="light"][data-accent="violet"] {
-  --ln-accent: #a855f7;
-  --ln-accent-gold: #a855f7;
-  --ln-accent-foreground: #fafafa;
+  --ln-accent: #5D4375;
+  --ln-accent-gold: #5D4375;
+  --ln-accent-foreground: #FDFBF8;
   --ln-accent-terracotta: #C96E55;
   --ln-accent-rose: #C87886;
   --ln-accent-lavender: #8067A1;
@@ -275,17 +275,17 @@ html[data-color-mode="light"][data-accent="violet"] {
   --ln-accent-secondary: #B9824A;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #a855f7 0%,
-    #ec4899 50%,
-    #6366f1 100%
+    #5D4375 0%,
+    #96525F 50%,
+    #A85A42 100%
   );
-  --ln-ring: rgba(168, 85, 247, 0.55);
+  --ln-ring: rgba(93, 67, 117, 0.5);
 }
 
 html[data-color-mode="light"][data-accent="cyan"] {
-  --ln-accent: #06b6d4;
-  --ln-accent-gold: #06b6d4;
-  --ln-accent-foreground: #041014;
+  --ln-accent: #2E6A72;
+  --ln-accent-gold: #2E6A72;
+  --ln-accent-foreground: #FDFBF8;
   --ln-accent-terracotta: #C96E55;
   --ln-accent-rose: #C87886;
   --ln-accent-lavender: #8067A1;
@@ -293,11 +293,11 @@ html[data-color-mode="light"][data-accent="cyan"] {
   --ln-accent-secondary: #B9824A;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #06b6d4 0%,
-    #3b82f6 50%,
-    #8b5cf6 100%
+    #2E6A72 0%,
+    #4C6B52 50%,
+    #5D4375 100%
   );
-  --ln-ring: rgba(6, 182, 212, 0.55);
+  --ln-ring: rgba(46, 106, 114, 0.5);
 }
 
 @theme inline {
@@ -471,21 +471,18 @@ html[data-color-mode="light"] .hero-helper {
 }
 
 /* --- Text label overrides --- */
-/* text-white/48 → dark brown for readability */
+/* Body/label text → black in light mode (headings get the accent separately) */
 html[data-color-mode="light"] .hero-label-bold {
-  color: #3D3229 !important;
+  color: #000000 !important;
 }
-/* text-white/74 → body text */
 html[data-color-mode="light"] .hero-label-detail {
-  color: #5C4B3F !important;
+  color: #000000 !important;
 }
-/* text-white/38, text-white/45 → muted */
 html[data-color-mode="light"] .hero-label-muted {
-  color: #7A6B5D !important;
+  color: #000000 !important;
 }
-/* text-white/20, text-white/22, text-white/23, text-white/24, text-white/25, text-white/32 → soft */
 html[data-color-mode="light"] .hero-label-faint {
-  color: #9E8E80 !important;
+  color: #1A1A1A !important;
 }
 
 /* --- Dividers: bg-white/10 → warm brown --- */
@@ -520,10 +517,10 @@ html[data-color-mode="light"] .code-editor-bar {
 html[data-color-mode="light"] .code-reset-btn {
   border-color: rgba(139, 122, 107, 0.20) !important;
   background: rgba(248, 244, 237, 0.6) !important;
-  color: #7A6B5D !important;
+  color: #000000 !important;
 }
 html[data-color-mode="light"] .code-reset-btn:hover {
-  color: #3D3229 !important;
+  color: #000000 !important;
 }
 
 html[data-color-mode="light"] .code-console {
@@ -635,6 +632,12 @@ html[data-color-mode="light"] .hero-social-link:hover {
   to { transform: rotate(-360deg); }
 }
 
+/* Motion-path travel for Frontend Universe cards (locked to each ring) */
+@keyframes fu-orbit-travel {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
 /* Loader conic-gradient rim spin */
 @keyframes ln-loader-spin {
   from { transform: rotate(0deg); }
@@ -676,14 +679,14 @@ html[data-color-mode="light"] .fu-orbit-path {
   border-radius: 9999px;
   border: 1px solid var(--ln-glass-border);
   background: rgba(255, 255, 255, 0.06);
-  color: var(--ln-text-muted);
+  color: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(8px);
   transition: all 200ms ease;
 }
 .lg-icon-btn:hover {
   border-color: var(--ln-glass-border-strong);
   background: rgba(255, 255, 255, 0.12);
-  color: var(--ln-text-primary);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Tech pill */
@@ -697,14 +700,14 @@ html[data-color-mode="light"] .fu-orbit-path {
   padding: 0.25rem 0.625rem;
   font-size: clamp(0.5625rem, 0.55rem + 0.1vw, 0.6875rem);
   font-weight: 500;
-  color: var(--ln-text-muted);
+  color: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(6px);
   transition: all 200ms ease;
 }
 .lg-pill:hover {
   border-color: var(--ln-glass-border-strong);
   background: rgba(255, 255, 255, 0.08);
-  color: var(--ln-text-primary);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* ── Liquid Glass light-mode overrides ── */
@@ -751,6 +754,44 @@ html[data-color-mode="light"] .lg-pill:hover {
   color: var(--ln-text-primary);
 }
 
+/* =============================================
+   LIGHT MODE TYPOGRAPHY
+   Body text → black; headings/titles → theme accent
+   ============================================= */
+
+/* Headings & big titles adopt the selected theme accent.
+   .ln-gradient-text is excluded so the hero name keeps its gradient. */
+html[data-color-mode="light"] :is(h1, h2, h3, h4):not(.ln-gradient-text) {
+  color: var(--ln-accent);
+}
+
+/* Featured Work glass cards — raw white utilities → black
+   (the h3 card title is excluded here and gets the accent above). */
+html[data-color-mode="light"] .lg-card :is(p, span):not(.lg-pill) {
+  color: #000000;
+}
+html[data-color-mode="light"] .lg-card .fw-thumb-icon {
+  color: #1A1A1A;
+}
+
+/* Footer — raw white utilities → black; links keep accent on hover;
+   the wordmark is a title, so it takes the accent. */
+html[data-color-mode="light"] .ln-footer :is(p, a, span) {
+  color: #000000;
+}
+html[data-color-mode="light"] .ln-footer a:hover {
+  color: var(--ln-accent);
+}
+html[data-color-mode="light"] .ln-footer .footer-brand {
+  color: var(--ln-accent);
+}
+
+/* ── Thumbnail shine sweep (left → right on hover) ── */
+@keyframes shine-sweep {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -765,7 +806,8 @@ html[data-color-mode="light"] .lg-pill:hover {
   }
 
   /* Freeze orbit animations */
-  [style*="fu-orbit"] {
+  [style*="fu-orbit"],
+  .fu-orbit-traveler {
     animation-play-state: paused !important;
   }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Space_Mono } from "next/font/google";
+import { Outfit, Space_Mono, Pacifico } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-boot";
 import { Toaster } from "@/components/ui/sonner";
@@ -17,6 +17,12 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
   variable: "--font-space-mono",
   weight: ["400", "700"],
+});
+
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  variable: "--font-pacifico",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -47,7 +53,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
       </head>
       <body
-        className={`${outfit.variable} ${spaceMono.variable} ln-body bg-background text-foreground antialiased`}
+        className={`${outfit.variable} ${spaceMono.variable} ${pacifico.variable} ln-body bg-background text-foreground antialiased`}
       >
         <Loader />
         <ThemeProvider>
