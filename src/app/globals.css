@@ -544,6 +544,12 @@ html[data-color-mode="light"] .hero-badge {
   color: var(--ln-accent) !important;
 }
 
+/* Rotating Intro text: text-amber-200 → dark jewel amber/accent in light mode */
+html[data-color-mode="light"] .hero-rotating-intro,
+html[data-color-mode="light"] .hero-rotating-intro .ln-cursor {
+  color: var(--ln-accent) !important;
+}
+
 /* Body text: text-zinc-300 → dark warm body */
 html[data-color-mode="light"] .hero-body-text {
   color: var(--ln-text-body) !important;

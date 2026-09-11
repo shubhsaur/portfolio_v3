@@ -50,7 +50,7 @@ export function RotatingIntro({ className }: { className?: string }) {
   }, [index, isDeleting]);
 
   return (
-    <p className={cn("ln-mono mt-2 flex items-center gap-1 text-xs text-amber-200 sm:text-sm", className)}>
+    <p className={cn("hero-rotating-intro ln-mono mt-2 flex items-center gap-1 text-xs text-amber-200 sm:text-sm", className)}>
       <span>{displayed}</span>
       <span className="ln-cursor text-amber-200">|</span>
     </p>
