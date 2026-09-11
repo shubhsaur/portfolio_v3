@@ -31,6 +31,7 @@ export const projects: ProjectRecord[] = [
     description:
       "High-performance, scalable hotel booking engine (IBE) engineered for multiple international hotel brands. Features end-to-end room selection, dynamic pricing, promotions, 10+ payment gateway integrations, multilingual booking across 20+ locales with currency-aware pricing and RTL support.",
     tech: ["Next.js", "React 19", "TypeScript", "Redux Toolkit", "React Query", "Tailwind CSS"],
+    thumbnail: "/projects/uno-booking.png",
     liveUrl: "https://uno.rategain.com/hotel-booking-engine/",
     stats: [
       { label: "Gateways", value: "10+ Integrated" },
@@ -61,6 +62,7 @@ export const projects: ProjectRecord[] = [
     description:
       "Robust B2B Content Management Platform designed to enhance content creation, curation, and distribution across demand partners. Architected frontend state and form validation workflows, boosting optimal rendering performance by 60%.",
     tech: ["React", "React Context", "Redux", "Sass", "React Final Form"],
+    thumbnail: "/projects/content-ai.png",
     liveUrl: "https://rategain.com/hotel-content-management-system/",
     stats: [
       { label: "Performance", value: "+60% Boost" },
@@ -90,6 +92,7 @@ export const projects: ProjectRecord[] = [
     description:
       "Cryptocurrency price tracker application delivering real-time prices, market capitalization benchmarks, 24-hour volume changes, and interactive price trend visual charts using ChartJS.",
     tech: ["React", "React Context API", "Material UI", "ChartJS", "REST API"],
+    thumbnail: "/projects/cryptopedia.png",
     liveUrl: "https://cryptopedia-app.vercel.app",
     githubUrl: "https://github.com/shubhsaur/cryptopedia",
     stats: [
@@ -120,6 +123,7 @@ export const projects: ProjectRecord[] = [
     description:
       "AI-powered codebase explorer that indexes GitHub repos, builds searchable context, and answers repo questions with grounded citations, file previews, and syntax-highlighted code.",
     tech: ["Next.js", "Tailwind CSS", "Supabase", "Google Gemini"],
+    thumbnail: "/projects/codelens.png",
     liveUrl: "https://shubhsaur-codelens.vercel.app",
     githubUrl: "https://github.com/shubhsaur/codelens",
     stats: [

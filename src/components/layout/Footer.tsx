@@ -34,9 +34,9 @@ export function Footer() {
       />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main footer grid */}
-        <div className="grid grid-cols-1 gap-10 pt-14 pb-12 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto] lg:gap-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 pt-14 pb-12 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[1fr_1fr_1fr_auto] lg:gap-16">
           {/* Col 1 — Identity */}
-          <div className="flex flex-col gap-4">
+          <div className="col-span-2 flex flex-col gap-4 sm:col-span-1 lg:col-span-1">
             <p className="footer-brand text-lg font-semibold tracking-tight text-white">
               Shubham Saurabh
             </p>
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
 
           {/* Col 2 — Navigation */}
-          <div className="flex flex-col gap-3">
+          <div className="col-span-1 flex flex-col gap-3">
             <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-white/50">
               Navigation
             </p>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
 
           {/* Col 3 — Connect */}
-          <div className="flex flex-col gap-3">
+          <div className="col-span-1 flex flex-col gap-3">
             <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-white/50">
               Connect
             </p>
@@ -99,9 +99,9 @@ export function Footer() {
           </div>
 
           {/* Col 4 — Logo */}
-          <div className="hidden lg:flex items-center justify-center">
+          <div className="col-span-2 flex items-center justify-center sm:col-span-1 lg:col-span-1">
             <div
-              className="relative rounded-full"
+              className="relative flex items-center justify-center rounded-full"
               style={{
                 boxShadow:
                   "0 0 120px 35px color-mix(in srgb, var(--ln-accent) 40%, transparent), 0 0 60px 15px color-mix(in srgb, var(--ln-accent) 20%, transparent), 0 0 200px 60px color-mix(in srgb, var(--ln-accent) 10%, transparent)",
@@ -112,7 +112,7 @@ export function Footer() {
                 alt="Shubham Saurabh logo"
                 width={160}
                 height={160}
-                className="rounded-full"
+                className="h-32 w-32 rounded-full object-cover sm:h-36 sm:w-36 lg:h-40 lg:w-40"
                 priority
               />
             </div>

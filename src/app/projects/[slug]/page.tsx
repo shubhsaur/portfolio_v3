@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Github, ArrowLeft, ArrowRight, ExternalLink, CheckCircle2, Layers, Sparkles } from "lucide-react";
 import { projects, type ProjectRecord } from "@/lib/content/projects";
 import { Button } from "@/components/ui/button";
@@ -80,6 +81,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </Button>
           )}
         </div>
+
+        {project.thumbnail && (
+          <div className="group relative mb-12 aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden rounded-[var(--ln-radius-card)] border border-border bg-card">
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              priority
+              sizes="(max-width: 1440px) 100vw, 1440px"
+            />
+            <span aria-hidden="true" className="thumbnail-shine-sweep" />
+          </div>
+        )}
 
         {/* Content Grid */}
         <div className="grid gap-8 lg:grid-cols-4">

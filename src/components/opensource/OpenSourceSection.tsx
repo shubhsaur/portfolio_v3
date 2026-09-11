@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import {
   GitPullRequest,
   GitMerge,
@@ -43,37 +44,50 @@ export function OpenSourceSection() {
       </div>
 
       {/* PrimeReact Repo Context Banner */}
-      <div className="relative overflow-hidden rounded-3xl border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-7 shadow-[0_16px_45px_rgba(0,0,0,0.5)]">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(93,228,199,0.12)] text-[var(--ln-accent-cyan)] shadow-sm">
-              <Github className="h-6 w-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-lg font-semibold text-zinc-50">
-                  primefaces / primereact
-                </h3>
-                <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 text-xs text-amber-300">
-                  <Star className="h-3 w-3 fill-current text-amber-400" />
-                  8.3k+
-                </span>
+      <div className="group relative overflow-hidden rounded-3xl border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] shadow-[0_16px_45px_rgba(0,0,0,0.5)]">
+        <div className="flex flex-col md:flex-row md:items-stretch justify-between">
+          <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(93,228,199,0.12)] text-[var(--ln-accent-cyan)] shadow-sm">
+                <Github className="h-6 w-6" />
               </div>
-              <p className="text-xs text-zinc-400 mt-1">
-                The leading open-source UI suite for React used by thousands of companies globally.
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-zinc-50">
+                    primefaces / primereact
+                  </h3>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 text-xs text-amber-300">
+                    <Star className="h-3 w-3 fill-current text-amber-400" />
+                    8.3k+
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 mt-1">
+                  The leading open-source UI suite for React used by thousands of companies globally.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5 pt-4">
+              <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
+                <GitMerge className="h-3.5 w-3.5" />
+                2 Merged PRs
+              </span>
+              <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[rgba(232,197,71,0.2)] bg-[rgba(232,197,71,0.08)] px-3 py-1 text-xs text-[var(--ln-accent-gold)]">
+                <Sparkles className="h-3.5 w-3.5" />
+                v10.6.0 Shipped
+              </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
-            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
-              <GitMerge className="h-3.5 w-3.5" />
-              2 Merged PRs
-            </span>
-            <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[rgba(232,197,71,0.2)] bg-[rgba(232,197,71,0.08)] px-3 py-1 text-xs text-[var(--ln-accent-gold)]">
-              <Sparkles className="h-3.5 w-3.5" />
-              v10.6.0 Shipped
-            </span>
+          <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden md:w-[280px] lg:w-[340px]">
+            <Image
+              src="/primereact.png"
+              alt="PrimeReact"
+              fill
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 340px"
+            />
+            <span aria-hidden="true" className="thumbnail-shine-sweep" />
           </div>
         </div>
       </div>

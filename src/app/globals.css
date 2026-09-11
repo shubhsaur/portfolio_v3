@@ -787,10 +787,98 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
   color: var(--ln-accent);
 }
 
-/* ── Thumbnail shine sweep (left → right on hover) ── */
+/* ── Thumbnail shine sweep (desktop hover & mobile auto-sweep) ── */
 @keyframes shine-sweep {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shine-sweep-mobile {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  16% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.thumbnail-shine-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 65%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+  transform: translateX(-160%) skewX(-20deg);
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 15%,
+    rgba(255, 255, 255, 0.45) 38%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.45) 62%,
+    rgba(255, 255, 255, 0.08) 85%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+}
+
+/* Desktop: trigger on card hover or direct thumbnail hover */
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .thumbnail-shine-sweep,
+  .thumbnail-shine:hover .thumbnail-shine-sweep {
+    animation: shine-sweep 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Mobile & touch devices: periodic automatic sweep + tap active */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  .thumbnail-shine-sweep {
+    animation: shine-sweep-mobile 8s ease-in-out infinite;
+  }
+
+  /* Stagger across consecutive cards so they shine in sequence */
+  .grid > *:nth-child(1) .thumbnail-shine-sweep {
+    animation-delay: 1.2s;
+  }
+  .grid > *:nth-child(2) .thumbnail-shine-sweep {
+    animation-delay: 3.8s;
+  }
+  .grid > *:nth-child(3) .thumbnail-shine-sweep {
+    animation-delay: 6.4s;
+  }
+
+  .group:active .thumbnail-shine-sweep,
+  .thumbnail-shine:active .thumbnail-shine-sweep {
+    animation: shine-sweep 0.85s ease-out;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

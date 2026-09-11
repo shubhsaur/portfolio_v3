@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
 import { useCallback, type MouseEvent } from "react";
 import { ArrowUpRight, Github, Image as ImageIcon } from "lucide-react";
@@ -131,30 +132,34 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
 
       {/* ── Content ── */}
       <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[18rem]">
-        {/* ── Image placeholder (shine sweep on hover, mirrors /projects) ── */}
-        <div
-          className="thumbnail-shine relative mb-5 aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl border border-white/[0.08]"
+        {/* ── Image thumbnail (shine sweep on hover, mirrors /projects) ── */}
+        <Link
+          href={`/projects/${project.slug}`}
+          className="thumbnail-shine relative mb-5 block aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl border border-white/[0.08]"
           style={{
             background: `radial-gradient(ellipse 100% 80% at 50% 0%, ${accent.tint}, transparent 75%), linear-gradient(160deg, rgba(255,255,255,.05), rgba(0,0,0,.12))`,
           }}
         >
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-            <ImageIcon className="fw-thumb-icon h-6 w-6 text-white/25" strokeWidth={1.5} />
-            <span className="ln-mono select-none px-3 text-center text-[0.625rem] uppercase tracking-[0.3em] text-white/40">
-              {project.title}
-            </span>
-          </div>
+          {project.thumbnail ? (
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+              <ImageIcon className="fw-thumb-icon h-6 w-6 text-white/25" strokeWidth={1.5} />
+              <span className="ln-mono select-none px-3 text-center text-[0.625rem] uppercase tracking-[0.3em] text-white/40">
+                {project.title}
+              </span>
+            </div>
+          )}
 
-          {/* Shine sweep — slides left-to-right on hover (same as /projects) */}
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 -left-[200%] w-[200%] group-hover:animate-[shine-sweep_0.8s_ease-in-out]"
-            style={{
-              background:
-                "linear-gradient(105deg, transparent 30%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.30) 50%, rgba(255,255,255,.15) 58%, transparent 70%)",
-            }}
-          />
-        </div>
+          {/* Shine sweep — slides left-to-right on hover */}
+          <span aria-hidden="true" className="thumbnail-shine-sweep" />
+        </Link>
 
         {/* Badge + links row */}
         <div className="flex items-center justify-between mb-4">
@@ -231,6 +236,28 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               <p className="text-[0.5625rem] sm:text-[0.625rem] text-white/55 uppercase tracking-wider">{stat.label}</p>
             </div>
           ))}
+        </div>
+
+        {/* Action buttons */}
+        <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
+          <Link
+            href={`/projects/${project.slug}`}
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--ln-accent)] px-3.5 py-1.5 text-xs font-medium text-background transition-all duration-200 hover:bg-[var(--ln-accent)]/90 active:scale-95"
+          >
+            <span>Case Study</span>
+            <span aria-hidden="true" className="text-[10px]">↳</span>
+          </Link>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white transition-all duration-200 hover:border-white/30 hover:bg-white/20 active:scale-95"
+            >
+              <span>Live</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-white/70" />
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
