@@ -33,8 +33,8 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={36}
-              height={36}
+              width={56}
+              height={56}
               className="shrink-0 rounded-full"
               style={{ width: "var(--nav-logo-size)", height: "var(--nav-logo-size)" }}
               priority

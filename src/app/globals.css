@@ -50,10 +50,10 @@
   /* Navbar fluid sizing (375px → 1536px) */
   --nav-top: clamp(0.5rem, 0.35rem + 0.4vw, 1rem);
   --nav-px: clamp(0.75rem, 0.6rem + 0.4vw, 1.25rem);
-  --nav-py: clamp(0.5rem, 0.42rem + 0.2vw, 0.75rem);
-  --nav-logo-size: clamp(1.875rem, 1.5rem + 0.35vw, 2.25rem);
-  --nav-logo-text: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
-  --nav-logo-tracking: clamp(0.14em, 0.13em + 0.01em, 0.16em);
+  --nav-py: clamp(0.45rem, 0.38rem + 0.2vw, 0.65rem);
+  --nav-logo-size: clamp(2.375rem, 2rem + 0.5vw, 2.875rem);
+  --nav-logo-text: clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);
+  --nav-logo-tracking: clamp(0.12em, 0.11em + 0.01em, 0.15em);
   --nav-gap: clamp(0.375rem, 0.3rem + 0.2vw, 0.625rem);
   --nav-mobile-gap: clamp(0.375rem, 0.2rem + 0.13vw, 0.5rem);
   --nav-mobile-btn: clamp(2.375rem, 2.2rem + 0.6vw, 2.75rem);
