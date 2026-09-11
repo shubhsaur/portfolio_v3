@@ -29,14 +29,14 @@ export function OpenSourceSection() {
         <span className="ln-mono inline-flex rounded-full border border-[rgba(93,228,199,0.25)] bg-[rgba(93,228,199,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-cyan)]">
           Open Source Impact
         </span>
-        <div className="space-y-4 text-left">
+        <div className="space-y-2 text-left">
           <h2
             id="opensource-heading"
-            className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-zinc-50 sm:text-5xl"
+            className="text-3xl font-semibold text-foreground"
           >
             Core UI Contributions
           </h2>
-          <p className="max-w-2xl text-base leading-8 text-zinc-400">
+          <p className="max-w-2xl text-base text-muted-foreground">
             Contributing bug discoveries, isolations, and merged pull requests to
             premier open-source React component ecosystems.
           </p>
