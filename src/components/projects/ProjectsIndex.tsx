@@ -157,92 +157,97 @@ function OpenSourceBlock() {
         </p>
       </div>
 
-      <Card className="group overflow-hidden border-border bg-card">
-        <div className="flex flex-col md:flex-row md:items-stretch">
-          {/* Left: Content */}
-          <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
-            <div>
-              <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--ln-success)]/10 text-[var(--ln-success)]">
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path d="M12 0L2 6v12l10 6 10-6V6L12 0z" />
-                  </svg>
+      {/* Wrapper card for PrimeReact open-source project */}
+      <div className="rounded-3xl border border-border bg-muted/20 p-4 sm:p-6 md:p-8 space-y-6 shadow-xs">
+        {/* Main PrimeReact Header Card */}
+        <Card className="group overflow-hidden border-border bg-card">
+          <div className="flex flex-col md:flex-row md:items-stretch">
+            {/* Left: Content */}
+            <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+              <div>
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--ln-success)]/10 text-[var(--ln-success)]">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M12 0L2 6v12l10 6 10-6V6L12 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-xl font-semibold text-foreground">PrimeReact</span>
+                    <span className="ln-mono ml-2.5 text-xs text-muted-foreground">primefaces / primereact</span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xl font-semibold text-foreground">PrimeReact</span>
-                  <span className="ln-mono ml-2.5 text-xs text-muted-foreground">primefaces / primereact</span>
-                </div>
+
+                <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  The leading open-source UI suite for React used by thousands of companies globally.
+                </p>
               </div>
 
-              <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                The leading open-source UI suite for React used by thousands of companies globally.
-              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
+                  8.3k+ GitHub Stars
+                </span>
+                <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
+                  2 Merged PRs
+                </span>
+                <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-3 py-1 text-xs text-[var(--ln-accent)]">
+                  v10.6.0 Shipped
+                </span>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
-                8.3k+ GitHub Stars
-              </span>
-              <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-success)]/20 bg-[var(--ln-success)]/10 px-3 py-1 text-xs text-[var(--ln-success)]">
-                2 Merged PRs
-              </span>
-              <span className="ln-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-3 py-1 text-xs text-[var(--ln-accent)]">
-                v10.6.0 Shipped
-              </span>
+            {/* Right: PrimeReact Image */}
+            <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden md:w-[320px] lg:w-[380px]">
+              <Image
+                src="/primereact.png"
+                alt="PrimeReact"
+                fill
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 380px"
+              />
+              <span aria-hidden="true" className="thumbnail-shine-sweep" />
             </div>
           </div>
+        </Card>
 
-          {/* Right: PrimeReact Image */}
-          <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden md:w-[320px] lg:w-[380px]">
-            <Image
-              src="/primereact.png"
-              alt="PrimeReact"
-              fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 380px"
-            />
-            <span aria-hidden="true" className="thumbnail-shine-sweep" />
-          </div>
+        {/* PRs and Issues Cards Grid */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {contributions.map((contrib, index) => (
+            <Reveal key={contrib.id} delay={index * 0.03}>
+              <Card className="flex h-full flex-col border-border bg-card">
+                <CardContent className="flex-1 space-y-4 pt-5">
+                  <div className="flex gap-2">
+                    <span className="ln-mono text-xs text-muted-foreground">
+                      #{contrib.prNumber}
+                    </span>
+                    <span className="ln-mono text-xs text-[var(--ln-success)]">
+                      Merged into {contrib.milestone}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-semibold text-foreground">{contrib.title}</h3>
+                  <p className="text-xs text-muted-foreground">{contrib.description}</p>
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    <a
+                      href={contrib.prUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-medium text-[var(--ln-accent)] hover:underline"
+                    >
+                      View PR
+                    </a>
+                    <a
+                      href={contrib.issueUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-muted-foreground hover:text-foreground"
+                    >
+                      View Issue
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            </Reveal>
+          ))}
         </div>
-      </Card>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        {contributions.map((contrib, index) => (
-          <Reveal key={contrib.id} delay={index * 0.03}>
-            <Card className="flex h-full flex-col border-border">
-              <CardContent className="flex-1 space-y-4 pt-5">
-                <div className="flex gap-2">
-                  <span className="ln-mono text-xs text-muted-foreground">
-                    #{contrib.prNumber}
-                  </span>
-                  <span className="ln-mono text-xs text-[var(--ln-success)]">
-                    Merged into {contrib.milestone}
-                  </span>
-                </div>
-                <h3 className="text-sm font-semibold text-foreground">{contrib.title}</h3>
-                <p className="text-xs text-muted-foreground">{contrib.description}</p>
-                <div className="flex flex-wrap gap-3 pt-1">
-                  <a
-                    href={contrib.prUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs font-medium text-[var(--ln-accent)] hover:underline"
-                  >
-                    View PR
-                  </a>
-                  <a
-                    href={contrib.issueUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs text-muted-foreground hover:text-foreground"
-                  >
-                    View Issue
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          </Reveal>
-        ))}
       </div>
     </section>
   );
