@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import { Search, Command, Download, Mail } from "lucide-react";
 import { navItems, type NavItem } from "@/lib/nav";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
@@ -15,6 +16,7 @@ interface NavbarProps {
 
 export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   const pathname = usePathname();
+  const prefersReducedMotion = useReducedMotion();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (item: NavItem) => {
@@ -77,14 +79,25 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "group relative rounded-full transition-colors",
+                      "group relative rounded-full transition-colors duration-200",
                       "focus-visible:ln-ring-focus",
                       active
-                        ? "bg-foreground text-background shadow-sm"
+                        ? "text-background"
                         : "hover:text-foreground",
                     )}
                     style={{ padding: "var(--nav-item-py) var(--nav-item-px)" }}
                   >
+                    {active && (
+                      <motion.span
+                        layoutId="active-nav-pill"
+                        className="absolute inset-0 rounded-full bg-foreground shadow-sm"
+                        transition={
+                          prefersReducedMotion
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 420, damping: 32 }
+                        }
+                      />
+                    )}
                     <span className="relative z-10">{item.label}</span>
                     <span
                       aria-hidden="true"
@@ -202,12 +215,23 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                       "group relative flex items-center justify-between rounded-xl px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium transition-colors",
                       "focus-visible:ln-ring-focus active:scale-[0.99]",
                       active
-                        ? "bg-foreground text-background font-semibold shadow-sm"
+                        ? "text-background font-semibold"
                         : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
-                    <span>{item.label}</span>
-                    <span className="ln-mono text-[9px] uppercase tracking-[0.18em] opacity-60">
+                    {active && (
+                      <motion.span
+                        layoutId="active-mobile-nav-pill"
+                        className="absolute inset-0 rounded-xl bg-foreground shadow-sm"
+                        transition={
+                          prefersReducedMotion
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 420, damping: 32 }
+                        }
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="relative z-10 ln-mono text-[9px] uppercase tracking-[0.18em] opacity-60">
                       0{index + 1}
                     </span>
                   </Link>
