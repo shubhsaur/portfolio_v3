@@ -51,19 +51,19 @@
   --nav-top: clamp(0.5rem, 0.35rem + 0.4vw, 1rem);
   --nav-px: clamp(0.75rem, 0.6rem + 0.4vw, 1.25rem);
   --nav-py: clamp(0.5rem, 0.42rem + 0.2vw, 0.75rem);
-  --nav-logo-size: clamp(1.625rem, 1.5rem + 0.35vw, 2.25rem);
+  --nav-logo-size: clamp(1.875rem, 1.5rem + 0.35vw, 2.25rem);
   --nav-logo-text: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
   --nav-logo-tracking: clamp(0.14em, 0.13em + 0.01em, 0.16em);
   --nav-gap: clamp(0.375rem, 0.3rem + 0.2vw, 0.625rem);
-  --nav-mobile-gap: clamp(0.25rem, 0.2rem + 0.13vw, 0.375rem);
-  --nav-mobile-btn: clamp(1.75rem, 1.5rem + 0.07vw, 2rem);
+  --nav-mobile-gap: clamp(0.375rem, 0.2rem + 0.13vw, 0.5rem);
+  --nav-mobile-btn: clamp(2.375rem, 2.2rem + 0.6vw, 2.75rem);
   --nav-item-px: clamp(0.75rem, 0.65rem + 0.1vw, 0.875rem);
   --nav-item-py: clamp(0.3125rem, 0.28rem + 0.05vw, 0.375rem);
-  --nav-icon: clamp(0.75rem, 0.7rem + 0.07vw, 0.875rem);
+  --nav-icon: clamp(0.9375rem, 0.7rem + 0.07vw, 1rem);
   --nav-search-px: clamp(0.625rem, 0.5rem + 0.13vw, 0.75rem);
   --nav-search-py: clamp(0.3125rem, 0.28rem + 0.05vw, 0.375rem);
   --nav-dropdown-px: clamp(0.625rem, 0.5rem + 0.2vw, 0.75rem);
-  --nav-dropdown-py: clamp(0.5rem, 0.44rem + 0.16vw, 0.625rem);
+  --nav-dropdown-py: clamp(0.875rem, 0.44rem + 0.16vw, 1rem);
 
   /* Accents (overwritten by data-accent + JS dual-write) */
   --ln-accent: #e8c547;
@@ -335,6 +335,7 @@ html[data-color-mode="light"][data-accent="cyan"] {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -809,5 +810,15 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
   [style*="fu-orbit"],
   .fu-orbit-traveler {
     animation-play-state: paused !important;
+  }
+}
+
+/* Mobile: shrink the hero orb so its orbiting cards and ambient glow
+   don't overflow the viewport horizontally. */
+@media (max-width: 768px) {
+  .fu-root {
+    overflow: hidden;
+    transform: scale(0.75);
+    transform-origin: top center;
   }
 }

@@ -142,23 +142,23 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
               className="flex items-center justify-center rounded-full border border-border bg-muted/60 text-foreground transition hover:border-[var(--ln-accent)] hover:text-[var(--ln-accent)] focus-visible:ln-ring-focus active:scale-95"
               style={{ width: "var(--nav-mobile-btn)", height: "var(--nav-mobile-btn)" }}
             >
-              <span className="relative h-[0.75rem] w-[1rem]">
+              <span className="relative h-[1rem] w-[1.25rem]">
                 <span
                   className={cn(
                     "absolute left-0 top-0 h-[0.125rem] w-full rounded-full bg-current transition duration-300",
-                    isMobileMenuOpen ? "top-[0.3125rem] rotate-45" : "",
+                    isMobileMenuOpen ? "top-[0.4375rem] rotate-45" : "",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[0.3125rem] h-[0.125rem] w-full rounded-full bg-current transition duration-200",
+                    "absolute left-0 top-[0.4375rem] h-[0.125rem] w-full rounded-full bg-current transition duration-200",
                     isMobileMenuOpen ? "opacity-0" : "opacity-100",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[0.625rem] h-[0.125rem] w-full rounded-full bg-current transition duration-300",
-                    isMobileMenuOpen ? "top-[0.3125rem] -rotate-45" : "",
+                    "absolute left-0 top-[0.875rem] h-[0.125rem] w-full rounded-full bg-current transition duration-300",
+                    isMobileMenuOpen ? "top-[0.4375rem] -rotate-45" : "",
                   )}
                 />
               </span>

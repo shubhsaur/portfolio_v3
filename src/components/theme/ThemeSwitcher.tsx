@@ -8,9 +8,9 @@ export function ThemeSwitcher() {
   const { activeTheme, setTheme, colorMode, toggleColorMode } = useTheme();
 
   return (
-    <div className="flex items-center gap-[0.25rem] md:gap-[0.375rem]">
+    <div className="flex items-center gap-[0.375rem] md:gap-[0.375rem]">
       <div
-        className="flex items-center gap-[0.25rem] md:gap-[0.375rem] rounded-full border border-border bg-muted/70 p-[0.125rem] md:p-[0.25rem] backdrop-blur-md"
+        className="flex items-center gap-[0.375rem] md:gap-[0.375rem] rounded-full border border-border bg-muted/70 p-[0.25rem] md:p-[0.25rem] backdrop-blur-md"
         title="Customize Accent Palette"
       >
         {(Object.keys(themes) as AccentTheme[]).map((themeKey) => {
@@ -23,7 +23,7 @@ export function ThemeSwitcher() {
               type="button"
               onClick={() => setTheme(themeKey)}
               aria-label={`Switch theme to ${theme.name}`}
-              className="group relative flex h-[1rem] w-[1rem] md:h-[1.25rem] md:w-[1.25rem] items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:ln-ring-focus"
+              className="group relative flex h-[1.625rem] w-[1.625rem] md:h-[1.25rem] md:w-[1.25rem] items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:ln-ring-focus"
             >
               {isActive && (
                 <motion.span
@@ -33,7 +33,7 @@ export function ThemeSwitcher() {
                 />
               )}
               <span
-                className="h-[0.5rem] w-[0.5rem] md:h-[0.75rem] md:w-[0.75rem] rounded-full transition-transform group-hover:scale-105"
+                className="h-[0.75rem] w-[0.75rem] md:h-[0.75rem] md:w-[0.75rem] rounded-full transition-transform group-hover:scale-105"
                 style={{ backgroundColor: theme[colorMode].dotColor }}
               />
             </button>
@@ -45,12 +45,12 @@ export function ThemeSwitcher() {
         type="button"
         onClick={toggleColorMode}
         aria-label={colorMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-        className="flex h-[1.5rem] w-[1.5rem] md:h-[1.75rem] md:w-[1.75rem] items-center justify-center rounded-full border border-border bg-muted/70 text-muted-foreground transition hover:text-foreground focus-visible:ln-ring-focus"
+        className="flex h-[2.25rem] w-[2.25rem] md:h-[1.75rem] md:w-[1.75rem] items-center justify-center rounded-full border border-border bg-muted/70 text-muted-foreground transition hover:text-foreground focus-visible:ln-ring-focus"
       >
         {colorMode === "dark" ? (
-          <Sun className="h-[0.75rem] w-[0.75rem] md:h-[0.875rem] md:w-[0.875rem]" />
+          <Sun className="h-[1rem] w-[1rem] md:h-[0.875rem] md:w-[0.875rem]" />
         ) : (
-          <Moon className="h-[0.75rem] w-[0.75rem] md:h-[0.875rem] md:w-[0.875rem]" />
+          <Moon className="h-[1rem] w-[1rem] md:h-[0.875rem] md:w-[0.875rem]" />
         )}
       </button>
     </div>
