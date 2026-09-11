@@ -148,10 +148,10 @@ function ProjectCard({
 
 function OpenSourceBlock() {
   return (
-    <section className="space-y-12">
-      <div className="space-y-4 text-center">
-        <h2 className="text-2xl font-semibold text-foreground">Open Source Impact</h2>
-        <p className="mx-auto max-w-2xl text-base text-muted-foreground">
+    <section className="space-y-6">
+      <div className="space-y-2 text-left">
+        <h2 className="text-3xl font-semibold text-foreground">Open Source Impact</h2>
+        <p className="max-w-2xl text-base text-muted-foreground">
           Contributing bug discoveries, isolations, and merged pull requests to premier
           open-source React component ecosystems.
         </p>

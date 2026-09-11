@@ -25,11 +25,11 @@ export function OpenSourceSection() {
   return (
     <div className="space-y-12">
       {/* Section Header */}
-      <div className="flex flex-col items-start gap-5 text-left md:items-center md:text-center">
+      <div className="flex flex-col items-start gap-5 text-left">
         <span className="ln-mono inline-flex rounded-full border border-[rgba(93,228,199,0.25)] bg-[rgba(93,228,199,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-cyan)]">
           Open Source Impact
         </span>
-        <div className="space-y-4">
+        <div className="space-y-4 text-left">
           <h2
             id="opensource-heading"
             className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-zinc-50 sm:text-5xl"
