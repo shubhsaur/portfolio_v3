@@ -164,7 +164,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         {/* Badge + links row */}
         <div className="flex items-center justify-between mb-4">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.2em] text-white/80"
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.2em] text-[var(--ln-text-secondary)]"
             style={{
               borderColor: accent.border,
               background: accent.tint,
@@ -204,12 +204,12 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white mb-2">
+        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-[var(--ln-text-primary)] mb-2 group-hover:text-[var(--ln-accent)] transition-colors duration-200">
           {project.title}
         </h3>
 
         {/* Description */}
-        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-white/75 flex-1">
+        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-[var(--ln-text-body)] flex-1">
           {project.description}
         </p>
 
@@ -224,7 +224,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
             </span>
           ))}
           {project.tech.length > 4 && (
-            <span className="lg-pill text-white/55">+{project.tech.length - 4}</span>
+            <span className="lg-pill text-[var(--ln-text-muted)]">+{project.tech.length - 4}</span>
           )}
         </div>
 
@@ -232,8 +232,8 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         <div className="mt-4 grid grid-cols-3 gap-3 border-t border-[var(--ln-glass-border)] pt-4">
           {project.stats.slice(0, 3).map((stat) => (
             <div key={stat.label}>
-              <p className="text-[0.6875rem] sm:text-xs font-semibold text-white">{stat.value}</p>
-              <p className="text-[0.5625rem] sm:text-[0.625rem] text-white/55 uppercase tracking-wider">{stat.label}</p>
+              <p className="text-[0.6875rem] sm:text-xs font-semibold text-[var(--ln-text-primary)]">{stat.value}</p>
+              <p className="text-[0.5625rem] sm:text-[0.625rem] text-[var(--ln-text-muted)] uppercase tracking-wider">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -242,7 +242,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--ln-accent)] px-3.5 py-1.5 text-xs font-medium text-background transition-all duration-200 hover:bg-[var(--ln-accent)]/90 active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--ln-accent)] px-3.5 py-1.5 text-xs font-medium text-[var(--ln-accent-foreground)] transition-all duration-200 hover:opacity-90 active:scale-95"
           >
             <span>Case Study</span>
             <span aria-hidden="true" className="text-[10px]">↳</span>
@@ -252,10 +252,10 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white transition-all duration-200 hover:border-white/30 hover:bg-white/20 active:scale-95"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[var(--ln-border-subtle)] bg-[var(--ln-glass)] px-3.5 py-1.5 text-xs font-medium text-[var(--ln-text-primary)] transition-all duration-200 hover:border-[var(--ln-border-strong)] hover:text-[var(--ln-accent)] active:scale-95"
             >
               <span>Live</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-white/70" />
+              <ArrowUpRight className="h-3.5 w-3.5 text-current opacity-80" />
             </a>
           )}
         </div>

@@ -110,63 +110,63 @@ html[data-color-mode="light"] {
   --ln-bg: #F8F4ED;
   --ln-bg-secondary: #EDE6DA;
   --ln-bg-elevated: #FFFFFF;
-  --ln-bg-card: rgba(255, 255, 255, 0.92);
+  --ln-bg-card: rgba(255, 255, 255, 0.94);
   --ln-bg-soft: rgba(248, 244, 237, 0.85);
 
-  /* === TYPOGRAPHY === */
-  --ln-text-primary: #000000;
-  --ln-text-secondary: #000000;
-  --ln-text-body: #000000;
-  --ln-text-muted: #000000;
-  --ln-text-soft: #1A1A1A;
+  /* === TYPOGRAPHY (Warm obsidian-to-slate hierarchy) === */
+  --ln-text-primary: #12111A;     /* Obsidian Ink — 17.09:1 (AAA) */
+  --ln-text-secondary: #2A2634;   /* Smoked Slate — 13.44:1 (AAA) */
+  --ln-text-body: #4D4757;        /* Warm Graphite — 8.14:1 (AAA) */
+  --ln-text-muted: #6B6577;       /* Muted Steel — 5.10:1 (AA) */
+  --ln-text-soft: #8D8699;        /* Soft Slate — 3.19:1 */
 
   /* === BORDERS === */
-  --ln-border-subtle: rgba(139, 122, 107, 0.18);
-  --ln-border-strong: rgba(139, 122, 107, 0.30);
-  --ln-shadow-surface: 0 8px 32px rgba(26, 23, 17, 0.12);
+  --ln-border-subtle: rgba(42, 38, 52, 0.10);
+  --ln-border-strong: rgba(42, 38, 52, 0.22);
+  --ln-shadow-surface: 0 8px 32px rgba(18, 17, 26, 0.08);
 
   /* === GLASS === */
-  --ln-glass: rgba(255, 255, 255, 0.72);
-  --ln-glass-border: rgba(139, 122, 107, 0.18);
-  --ln-glass-border-strong: rgba(139, 122, 107, 0.30);
-  --ln-glass-shadow: 0 8px 32px rgba(26, 23, 17, 0.08);
+  --ln-glass: rgba(255, 255, 255, 0.82);
+  --ln-glass-border: rgba(42, 38, 52, 0.10);
+  --ln-glass-border-strong: rgba(42, 38, 52, 0.20);
+  --ln-glass-shadow: 0 8px 32px rgba(18, 17, 26, 0.06);
 
   /* === MESH (hero backdrop gradient hints) === */
-  --ln-mesh-gold: rgba(185, 130, 74, 0.10);
-  --ln-mesh-cyan: rgba(113, 138, 116, 0.07);
+  --ln-mesh-gold: rgba(142, 85, 19, 0.10);
+  --ln-mesh-cyan: rgba(9, 115, 138, 0.08);
 
-  /* === ACCENTS === */
-  --ln-accent: #5C3A22;
-  --ln-accent-hover: #4A2E1A;
-  --ln-accent-active: #3D2516;
-  --ln-accent-gold: #B9824A;
-  --ln-accent-terracotta: #C96E55;
-  --ln-accent-rose: #C87886;
-  --ln-accent-lavender: #8067A1;
-  --ln-accent-sage: #718A74;
-  --ln-accent-secondary: #B9824A;
-  --ln-accent-foreground: #FDFBF8;
+  /* === ACCENTS (Default: Imperial Amber) === */
+  --ln-accent: #8E5513;
+  --ln-accent-hover: #75440C;
+  --ln-accent-active: #603608;
+  --ln-accent-gold: #8E5513;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #A85A1D;
+  --ln-accent-foreground: #FFFFFF;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #B9824A 0%,
-    #C96E55 40%,
-    #C87886 100%
+    #8E5513 0%,
+    #A83E28 50%,
+    #8C2F5E 100%
   );
-  --ln-ring: rgba(92, 58, 34, 0.45);
-  --ln-accent-wash: color-mix(in srgb, var(--ln-accent) 14%, transparent);
+  --ln-ring: rgba(142, 85, 19, 0.45);
+  --ln-accent-wash: color-mix(in srgb, var(--ln-accent) 12%, transparent);
 
   /* === CARDS === */
-  --ln-card-bg: #FFFFFF;
-  --ln-card-border: rgba(139, 122, 107, 0.18);
-  --ln-card-border-hover: rgba(139, 122, 107, 0.30);
-  --ln-card-shadow: 0 4px 16px rgba(26, 23, 17, 0.06);
-  --ln-card-shadow-hover: 0 8px 32px rgba(26, 23, 17, 0.10);
+  --ln-card-bg: rgba(255, 255, 255, 0.94);
+  --ln-card-border: rgba(42, 38, 52, 0.10);
+  --ln-card-border-hover: rgba(42, 38, 52, 0.22);
+  --ln-card-shadow: 0 4px 20px rgba(18, 17, 26, 0.06);
+  --ln-card-shadow-hover: 0 10px 30px rgba(18, 17, 26, 0.12);
 
   /* === FOG (decorative overlays) === */
   --ln-fog-highlight: #FFFFFF;
   --ln-fog-body: #F0E9DD;
   --ln-fog-shadow: #DDD5C8;
-  --ln-fog-tint: #B9824A;
+  --ln-fog-tint: #8E5513;
 
   /* === DESTRUCTIVE === */
   --destructive: #DC2626;
@@ -229,75 +229,83 @@ html[data-color-mode="dark"][data-accent="cyan"] {
 }
 
 html[data-color-mode="light"][data-accent="gold"] {
-  --ln-accent: #8A5A24;
-  --ln-accent-gold: #8A5A24;
-  --ln-accent-foreground: #FDFBF8;
-  --ln-accent-terracotta: #C96E55;
-  --ln-accent-rose: #C87886;
-  --ln-accent-lavender: #8067A1;
-  --ln-accent-sage: #718A74;
-  --ln-accent-secondary: #B9824A;
+  --ln-accent: #8E5513;
+  --ln-accent-hover: #75440C;
+  --ln-accent-active: #603608;
+  --ln-accent-gold: #8E5513;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #A85A1D;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #8A5A24 0%,
-    #A85A42 50%,
-    #96525F 100%
+    #8E5513 0%,
+    #A83E28 50%,
+    #8C2F5E 100%
   );
-  --ln-ring: rgba(138, 90, 36, 0.5);
+  --ln-ring: rgba(142, 85, 19, 0.45);
 }
 
 html[data-color-mode="light"][data-accent="emerald"] {
-  --ln-accent: #4C6B52;
-  --ln-accent-gold: #4C6B52;
-  --ln-accent-foreground: #FDFBF8;
-  --ln-accent-terracotta: #C96E55;
-  --ln-accent-rose: #C87886;
-  --ln-accent-lavender: #8067A1;
-  --ln-accent-sage: #718A74;
-  --ln-accent-secondary: #B9824A;
+  --ln-accent: #0E7656;
+  --ln-accent-hover: #0B5C43;
+  --ln-accent-active: #084833;
+  --ln-accent-gold: #0E7656;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #158C68;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #4C6B52 0%,
-    #2E6A72 50%,
-    #8A5A24 100%
+    #0E7656 0%,
+    #0D6E7A 50%,
+    #6E38A8 100%
   );
-  --ln-ring: rgba(76, 107, 82, 0.5);
+  --ln-ring: rgba(14, 118, 86, 0.45);
 }
 
 html[data-color-mode="light"][data-accent="violet"] {
-  --ln-accent: #5D4375;
-  --ln-accent-gold: #5D4375;
-  --ln-accent-foreground: #FDFBF8;
-  --ln-accent-terracotta: #C96E55;
-  --ln-accent-rose: #C87886;
-  --ln-accent-lavender: #8067A1;
-  --ln-accent-sage: #718A74;
-  --ln-accent-secondary: #B9824A;
+  --ln-accent: #6E38A8;
+  --ln-accent-hover: #5A2D8B;
+  --ln-accent-active: #47236E;
+  --ln-accent-gold: #6E38A8;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #8547C8;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #5D4375 0%,
-    #96525F 50%,
-    #A85A42 100%
+    #6E38A8 0%,
+    #9B2C78 50%,
+    #B84332 100%
   );
-  --ln-ring: rgba(93, 67, 117, 0.5);
+  --ln-ring: rgba(110, 56, 168, 0.45);
 }
 
 html[data-color-mode="light"][data-accent="cyan"] {
-  --ln-accent: #2E6A72;
-  --ln-accent-gold: #2E6A72;
-  --ln-accent-foreground: #FDFBF8;
-  --ln-accent-terracotta: #C96E55;
-  --ln-accent-rose: #C87886;
-  --ln-accent-lavender: #8067A1;
-  --ln-accent-sage: #718A74;
-  --ln-accent-secondary: #B9824A;
+  --ln-accent: #09738A;
+  --ln-accent-hover: #075C6E;
+  --ln-accent-active: #054857;
+  --ln-accent-gold: #09738A;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #0B89A4;
   --ln-gradient-primary: linear-gradient(
     135deg,
-    #2E6A72 0%,
-    #4C6B52 50%,
-    #5D4375 100%
+    #09738A 0%,
+    #0E7656 50%,
+    #6E38A8 100%
   );
-  --ln-ring: rgba(46, 106, 114, 0.5);
+  --ln-ring: rgba(9, 115, 138, 0.45);
 }
 
 @theme inline {
@@ -413,82 +421,81 @@ html[data-color-mode="light"] .ln-glass-card:hover {
 
 /* --- FrontendUniverse + InteractiveSOrb shared --- */
 
-/* Orbit rings: border-white/XX is invisible on light bg → warm brown borders */
+/* Orbit rings: border-white/XX is invisible on light bg → refined slate borders */
 html[data-color-mode="light"] .hero-orbit-ring {
-  border-color: rgba(139, 122, 107, 0.15) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
 }
 html[data-color-mode="light"] .hero-orbit-ring[class*="border-dashed"] {
-  border-color: rgba(139, 122, 107, 0.12) !important;
+  border-color: rgba(42, 38, 52, 0.09) !important;
 }
 
-/* Glass halo/frame: transparent white → translucent white with warm border */
+/* Glass halo/frame: transparent white → translucent white with clean border */
 html[data-color-mode="light"] .hero-glass-halo {
-  background: rgba(255, 255, 255, 0.45) !important;
-  border-color: rgba(139, 122, 107, 0.18) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 20px 60px rgba(26, 23, 17, 0.08) !important;
+  background: rgba(255, 255, 255, 0.60) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 60px rgba(18, 17, 26, 0.06) !important;
 }
 
-/* Central core / orb: dark opaque → translucent warm white + warm glow */
+/* Central core / orb: translucent warm white + refined glow */
 html[data-color-mode="light"] .hero-core,
 html[data-color-mode="light"] .hero-orb {
-  background: rgba(248, 244, 237, 0.82) !important;
-  border-color: rgba(139, 122, 107, 0.22) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(42, 38, 52, 0.14) !important;
   box-shadow:
-    0 0 60px 10px rgba(185,130,74,.12),
-    0 0 120px 30px rgba(128,103,161,.08),
-    0 20px 60px rgba(26, 23, 17, 0.10) !important;
+    0 0 60px 10px color-mix(in srgb, var(--ln-accent) 14%, transparent),
+    0 0 120px 30px color-mix(in srgb, var(--ln-accent-secondary) 8%, transparent),
+    0 20px 60px rgba(18, 17, 26, 0.08) !important;
 }
 
-/* Tech nodes: dark opaque cards → light glass cards */
+/* Tech nodes: light glass cards with subtle elevation */
 html[data-color-mode="light"] .hero-tech-node {
-  background: rgba(255, 255, 255, 0.72) !important;
-  border-color: rgba(139, 122, 107, 0.18) !important;
-  box-shadow: 0 8px 24px rgba(26, 23, 17, 0.07) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(18, 17, 26, 0.06) !important;
 }
 html[data-color-mode="light"] .hero-tech-node:hover {
-  border-color: rgba(139, 122, 107, 0.30) !important;
-  box-shadow: 0 12px 32px rgba(26, 23, 17, 0.10) !important;
+  border-color: rgba(42, 38, 52, 0.22) !important;
+  box-shadow: 0 12px 32px rgba(18, 17, 26, 0.09) !important;
 }
 
 /* Status badges inside orbs */
 html[data-color-mode="light"] .hero-status-badge {
-  background: rgba(248, 244, 237, 0.6) !important;
-  border-color: rgba(139, 122, 107, 0.15) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
 }
 
-/* Orbit pill labels: dark glass → light glass */
+/* Orbit pill labels: light glass */
 html[data-color-mode="light"] .hero-orb-label {
-  background: rgba(255, 255, 255, 0.60) !important;
-  border-color: rgba(139, 122, 107, 0.18) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
 }
 html[data-color-mode="light"] .hero-orb-label:hover {
-  background: rgba(255, 255, 255, 0.80) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 
-/* Hover helper: dark glass → light glass */
+/* Hover helper: light glass */
 html[data-color-mode="light"] .hero-helper {
-  background: rgba(255, 255, 255, 0.68) !important;
-  border-color: rgba(139, 122, 107, 0.15) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
 }
 
-/* --- Text label overrides --- */
-/* Body/label text → black in light mode (headings get the accent separately) */
+/* --- Text label overrides (warm hierarchy) --- */
 html[data-color-mode="light"] .hero-label-bold {
-  color: #000000 !important;
+  color: var(--ln-text-primary) !important;
 }
 html[data-color-mode="light"] .hero-label-detail {
-  color: #000000 !important;
+  color: var(--ln-text-secondary) !important;
 }
 html[data-color-mode="light"] .hero-label-muted {
-  color: #000000 !important;
+  color: var(--ln-text-muted) !important;
 }
 html[data-color-mode="light"] .hero-label-faint {
-  color: #1A1A1A !important;
+  color: var(--ln-text-soft) !important;
 }
 
-/* --- Dividers: bg-white/10 → warm brown --- */
+/* --- Dividers: subtle slate rule --- */
 html[data-color-mode="light"] .hero-divider {
-  background-color: rgba(139, 122, 107, 0.18) !important;
+  background-color: rgba(42, 38, 52, 0.10) !important;
 }
 
 /* --- Stars / particles: stronger saturation + darker cores for light bg --- */
@@ -507,25 +514,25 @@ html[data-color-mode="light"] .fu-ambient {
    ============================================= */
 
 html[data-color-mode="light"] .code-card {
-  border-color: rgba(139, 122, 107, 0.20) !important;
-  box-shadow: 0 12px 40px rgba(26, 23, 17, 0.12) !important;
+  border-color: rgba(42, 38, 52, 0.15) !important;
+  box-shadow: 0 12px 40px rgba(18, 17, 26, 0.08) !important;
 }
 
 html[data-color-mode="light"] .code-editor-bar {
-  border-color: rgba(139, 122, 107, 0.12) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
 }
 
 html[data-color-mode="light"] .code-reset-btn {
-  border-color: rgba(139, 122, 107, 0.20) !important;
-  background: rgba(248, 244, 237, 0.6) !important;
-  color: #000000 !important;
+  border-color: rgba(42, 38, 52, 0.15) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+  color: var(--ln-text-primary) !important;
 }
 html[data-color-mode="light"] .code-reset-btn:hover {
-  color: #000000 !important;
+  color: var(--ln-accent) !important;
 }
 
 html[data-color-mode="light"] .code-console {
-  border-color: rgba(139, 122, 107, 0.12) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
 }
 
 /* =============================================
@@ -554,8 +561,8 @@ html[data-color-mode="light"] .hero-stat-label {
 
 /* Social icon buttons: dark glass → light glass */
 html[data-color-mode="light"] .hero-social-link {
-  background: rgba(255, 255, 255, 0.72) !important;
-  border-color: rgba(139, 122, 107, 0.18) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
   color: var(--ln-text-muted) !important;
 }
 html[data-color-mode="light"] .hero-social-link:hover {
@@ -713,72 +720,83 @@ html[data-color-mode="light"] .fu-orbit-path {
 
 /* ── Liquid Glass light-mode overrides ── */
 html[data-color-mode="light"] .lg-card {
-  background: rgba(255, 255, 255, 0.30) !important;
-  border-color: rgba(139, 122, 107, 0.14) !important;
-  border-top-color: rgba(255, 255, 255, 0.50) !important;
-  backdrop-filter: blur(60px) saturate(2) !important;
+  background: rgba(255, 255, 255, 0.70) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
+  border-top-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(40px) saturate(1.8) !important;
   box-shadow:
-    0 8px 32px rgba(26, 23, 17, 0.06),
-    0 1px 4px rgba(26, 23, 17, 0.03),
-    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.50),
-    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.35) !important;
+    0 8px 32px rgba(18, 17, 26, 0.05),
+    0 1px 4px rgba(18, 17, 26, 0.02),
+    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.80),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.40) !important;
 }
 html[data-color-mode="light"] .lg-card:hover {
-  border-color: rgba(139, 122, 107, 0.22) !important;
-  border-top-color: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(42, 38, 52, 0.20) !important;
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
   box-shadow:
-    0 16px 48px rgba(26, 23, 17, 0.08),
-    0 2px 8px rgba(26, 23, 17, 0.04),
-    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.55),
-    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.40) !important;
+    0 16px 48px rgba(18, 17, 26, 0.09),
+    0 2px 8px rgba(18, 17, 26, 0.03),
+    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.90),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.50) !important;
 }
 
 html[data-color-mode="light"] .lg-icon-btn {
-  background: rgba(255, 255, 255, 0.35);
-  border-color: rgba(139, 122, 107, 0.14);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(42, 38, 52, 0.10);
   color: var(--ln-text-muted);
 }
 html[data-color-mode="light"] .lg-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.55);
-  border-color: rgba(139, 122, 107, 0.25);
-  color: var(--ln-text-primary);
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(42, 38, 52, 0.20);
+  color: var(--ln-accent);
 }
 
 html[data-color-mode="light"] .lg-pill {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(139, 122, 107, 0.12);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(42, 38, 52, 0.10);
   color: var(--ln-text-muted);
 }
 html[data-color-mode="light"] .lg-pill:hover {
-  background: rgba(255, 255, 255, 0.45);
-  border-color: rgba(139, 122, 107, 0.22);
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(42, 38, 52, 0.20);
   color: var(--ln-text-primary);
 }
 
 /* =============================================
-   LIGHT MODE TYPOGRAPHY
-   Body text → black; headings/titles → theme accent
+   LIGHT MODE TYPOGRAPHY & HIERARCHY
+   Warm obsidian headings, rich slate body, jewel accents
    ============================================= */
 
-/* Headings & big titles adopt the selected theme accent.
-   .ln-gradient-text is excluded so the hero name keeps its gradient. */
-html[data-color-mode="light"] :is(h1, h2, h3, h4):not(.ln-gradient-text) {
+/* Headings & section titles — crisp Obsidian Ink */
+html[data-color-mode="light"] :is(h1, h2):not(.ln-gradient-text) {
+  color: var(--ln-text-primary);
+}
+
+/* Card titles use Smoked Slate by default; illuminate with theme accent on card hover */
+html[data-color-mode="light"] :is(h3, h4):not(.ln-gradient-text) {
+  color: var(--ln-text-secondary);
+}
+html[data-color-mode="light"] .group:hover :is(h3, h4):not(.ln-gradient-text) {
   color: var(--ln-accent);
 }
 
-/* Featured Work glass cards — raw white utilities → black
-   (the h3 card title is excluded here and gets the accent above). */
-html[data-color-mode="light"] .lg-card :is(p, span):not(.lg-pill) {
-  color: #000000;
+/* Featured Work glass cards — map text to warm typography tiers */
+html[data-color-mode="light"] .lg-card p {
+  color: var(--ln-text-body);
 }
 html[data-color-mode="light"] .lg-card .fw-thumb-icon {
-  color: #1A1A1A;
+  color: var(--ln-text-soft);
 }
 
-/* Footer — raw white utilities → black; links keep accent on hover;
-   the wordmark is a title, so it takes the accent. */
-html[data-color-mode="light"] .ln-footer :is(p, a, span) {
-  color: #000000;
+/* Footer hierarchy */
+html[data-color-mode="light"] .ln-footer {
+  color: var(--ln-text-body);
+}
+html[data-color-mode="light"] .ln-footer p {
+  color: var(--ln-text-body);
+}
+html[data-color-mode="light"] .ln-footer a {
+  color: var(--ln-text-muted);
 }
 html[data-color-mode="light"] .ln-footer a:hover {
   color: var(--ln-accent);
