@@ -45,7 +45,7 @@ export default async function Home() {
                 enterprise SaaS platforms, large-scale booking engines, and motion-rich interfaces.
               </p>
 
-              <div className="mt-6 sm:mt-7 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left">
+              <div className="mt-6 sm:mt-7 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left max-w-[34rem]">
                 <div>
                   <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">5+</p>
                   <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Exp</p>
@@ -65,7 +65,7 @@ export default async function Home() {
               </div>
 
               {/* CTA */}
-              <div className="mt-5 sm:mt-6 md:mt-8 flex w-full gap-3">
+              <div className="mt-5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-3">
                 <Button asChild size="sm" className="min-w-0 flex-1 sm:h-auto sm:px-4 sm:py-2">
                   <a href={site.resumePath} download>
                     Download Resume
