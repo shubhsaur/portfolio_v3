@@ -25,8 +25,8 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   };
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 z-40 flex justify-center px-[var(--nav-px)]" style={{ top: "var(--nav-top)" }}>
-      <div className="pointer-events-auto w-full max-w-[87.5rem] lg:px-[1rem]">
+    <header className="pointer-events-none fixed inset-x-0 z-40 flex justify-center" style={{ top: "var(--nav-top)" }}>
+      <div className="pointer-events-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between rounded-full border border-border bg-background/70 px-[var(--nav-px)] py-[var(--nav-py)] shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl backdrop-saturate-150">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-[0.5rem]">

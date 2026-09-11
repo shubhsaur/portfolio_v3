@@ -32,7 +32,7 @@ export function Footer() {
             "linear-gradient(to top, color-mix(in srgb, var(--ln-accent) 30%, transparent) 0%, color-mix(in srgb, var(--ln-accent) 14%, transparent) 20%, color-mix(in srgb, var(--ln-accent) 4%, transparent) 50%, transparent 100%)",
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         {/* Main footer grid */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 pt-14 pb-12 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[1fr_1fr_1fr_auto] lg:gap-16">
           {/* Col 1 — Identity */}
@@ -122,7 +122,7 @@ export function Footer() {
 
       {/* Bottom bar — full-width to match top border */}
       <div className="border-t border-[var(--ln-accent)]/20">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 py-6 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[87.5rem] flex-col items-center gap-3 px-4 py-6 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
           <p className="ln-mono flex items-center gap-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--ln-text-muted)]">
             <Copyright className="h-3 w-3" />{year} | All Rights Reserved
           </p>

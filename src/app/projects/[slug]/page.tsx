@@ -46,7 +46,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <main className="relative min-h-screen pt-28 pb-24 sm:pt-40 sm:pb-32">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-12">
           <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 mb-6">

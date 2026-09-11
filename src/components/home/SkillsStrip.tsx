@@ -16,21 +16,23 @@ export function SkillsStrip() {
 
   return (
     <section className="py-12 md:py-20">
-      <h3 className="text-center text-lg font-semibold tracking-tight text-foreground mb-6">
-        Technologies
-      </h3>
+      <div className="mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
+        <h3 className="text-center text-lg font-semibold tracking-tight text-foreground mb-6">
+          Technologies
+        </h3>
 
-      <div className="flex flex-wrap justify-center gap-2">
-        {skillList.map((skill) => (
-          <Link
-            key={skill.slug}
-            href="/about#skills"
-            className="group inline-flex items-center rounded-full border border-[var(--ln-card-border)] bg-[var(--ln-accent-wash)] px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[var(--ln-card-border-hover)] hover:text-foreground focus-visible:ln-ring-focus"
-          >
-            {skill.name}
-            <span className="ml-1 text-muted-foreground/60 group-hover:text-muted-foreground">→</span>
-          </Link>
-        ))}
+        <div className="flex flex-wrap justify-center gap-2">
+          {skillList.map((skill) => (
+            <Link
+              key={skill.slug}
+              href="/about#skills"
+              className="group inline-flex items-center rounded-full border border-[var(--ln-card-border)] bg-[var(--ln-accent-wash)] px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[var(--ln-card-border-hover)] hover:text-foreground focus-visible:ln-ring-focus"
+            >
+              {skill.name}
+              <span className="ml-1 text-muted-foreground/60 group-hover:text-muted-foreground">→</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ export default async function Home() {
     <main className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
       {/* HERO SECTION */}
       <section id="hero" className="scroll-mt-28">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex flex-col md:flex-row gap-8 md:items-start">
             {/* IDENTITY CLUSTER */}
             <div className="flex flex-col md:w-[60%]">
@@ -95,7 +95,7 @@ export default async function Home() {
       <AboutTeaser />
 
       {/* CTA BAND */}
-      <div className="mt-24 md:mt-32 text-center">
+      <div className="mt-24 md:mt-32 mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8 text-center">
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-center">
           <Button asChild>
             <a href="/projects">

@@ -10,7 +10,7 @@ export default async function ProjectsPage() {
 
   return (
     <main className="relative min-h-screen pt-28 pb-24 sm:pt-40 sm:pb-32">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         <ProjectsIndex />
 
         <div className="mt-16 flex justify-center">
