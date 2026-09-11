@@ -1,4 +1,4 @@
-import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
+import { ScrollIndicator } from "@/components/hero/ScrollIndicator";
 import { RotatingIntro } from "@/components/hero/RotatingIntro";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
 import HeroDesign from "@/components/hero/HeroDesign";
@@ -20,8 +20,11 @@ export default async function Home() {
   return (
     <main className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
       {/* HERO SECTION */}
-      <section id="hero" className="scroll-mt-28">
-        <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="hero"
+        className="relative scroll-mt-28 min-h-[calc(100svh-5rem)] sm:min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-8.75rem)] flex flex-col justify-between"
+      >
+        <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
           <div className="relative flex flex-col md:flex-row gap-8 md:items-start">
             {/* IDENTITY CLUSTER */}
             <div className="flex flex-col md:w-[60%]">
@@ -82,6 +85,11 @@ export default async function Home() {
 
             <HeroDesign />
           </div>
+        </div>
+
+        {/* Viewport Bottom Center Scroll Animation */}
+        <div className="relative z-10 pt-6 pb-2 sm:pb-4 flex justify-center w-full">
+          <ScrollIndicator targetId="featured" />
         </div>
       </section>
 
