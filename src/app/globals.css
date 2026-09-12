@@ -19,7 +19,7 @@
   --ln-btn-h: 2.5rem;
   --ln-btn-h-desktop: 2.75rem;
 
-  /* Dark Liquid Noir (default SSR) */
+  /* Dark theme (default SSR) */
   --ln-bg: #06060a;
   --ln-bg-elevated: #0b0b12;
   --ln-bg-card: rgba(17, 17, 25, 0.96);

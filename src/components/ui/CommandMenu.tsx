@@ -169,7 +169,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       id: "act-toggle-color",
       title: colorMode === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode",
       category: "Actions",
-      description: colorMode === "dark" ? "Switch to Ivory/Slate theme" : "Switch to Liquid Noir theme",
+      description: colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme",
       icon: colorMode === "dark" ? Sun : Moon,
       perform: () => {
         toggleColorMode();
@@ -461,7 +461,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command, project, or page name..."
-                className="w-full bg-transparent px-3 py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                className="w-full bg-transparent px-3 py-4 text-[16px] sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
               {query && (
                 <button
@@ -574,7 +574,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 </span>
               </div>
               <div className="flex items-center gap-1">
-                <span>{colorMode === "dark" ? "Liquid Noir UI" : "Ivory & Slate UI"}</span>
+                <span>{colorMode === "dark" ? "Dark Mode" : "Light Mode"}</span>
               </div>
             </div>
           </motion.div>

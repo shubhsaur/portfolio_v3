@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ──────────────────────────────────────────────
-   Liquid Noir Loader
+   Portfolio Loader
    - Logo with spinning conic-gradient rim
    - Three orbiting dashed rings
    - Accent-colour particles
