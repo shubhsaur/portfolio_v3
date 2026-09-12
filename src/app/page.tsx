@@ -5,6 +5,7 @@ import HeroDesign from "@/components/hero/HeroDesign";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { ConnectCallout } from "@/components/home/ConnectCallout";
 import { Button } from "@/components/ui/button";
+import { GithubCalendarSection } from "@/components/about/GithubCalendarSection";
 
 import { buildPageMetadata, routeMeta } from "@/lib/seo";
 import { site } from "@/lib/content/site";
@@ -96,6 +97,11 @@ export default function Home() {
 
       {/* FEATURED WORK */}
       <FeaturedWork />
+
+      {/* GITHUB ACTIVITY */}
+      <section className="max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+        <GithubCalendarSection />
+      </section>
 
       {/* ABOUT TEASER */}
       <AboutTeaser />
