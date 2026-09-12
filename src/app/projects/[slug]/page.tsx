@@ -45,7 +45,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const nextProject = projects.find((p) => p.slug === nextSlug);
 
   return (
-    <main className="relative min-h-screen pt-28 pb-24 sm:pt-40 sm:pb-32">
+    <div className="relative min-h-screen pt-28 pb-24 sm:pt-40 sm:pb-32">
       <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-12">
@@ -220,6 +220,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </aside>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

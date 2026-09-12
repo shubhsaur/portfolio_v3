@@ -16,7 +16,7 @@ import {
 
 export function ExperiencePage() {
   return (
-    <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
+    <div className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-14 sm:gap-y-16">
         {/* Header */}
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">

@@ -11,7 +11,7 @@ import {
 
 export function AboutPage() {
   return (
-    <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
+    <div className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-16 sm:gap-y-20">
         {/* Header */}
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">

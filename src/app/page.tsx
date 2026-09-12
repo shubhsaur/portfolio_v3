@@ -18,7 +18,7 @@ export default async function Home() {
   const github = await getGithubMeta();
 
   return (
-    <main className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
+    <div className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
       {/* HERO SECTION */}
       <section
         id="hero"
@@ -119,6 +119,6 @@ export default async function Home() {
           </Button>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

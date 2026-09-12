@@ -7,7 +7,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <>
       <HeroBackdrop />
       <Chrome />
-      <main className="min-h-screen">{children}</main>
+      <main className="relative z-10 min-h-screen">{children}</main>
       <Footer />
     </>
   );

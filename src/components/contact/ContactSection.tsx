@@ -80,7 +80,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
   };
 
   return (
-    <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
+    <div className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-12 sm:gap-y-16">
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">
           <div className="space-y-4 text-left">

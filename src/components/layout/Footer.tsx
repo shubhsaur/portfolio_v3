@@ -23,7 +23,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="ln-footer relative mt-20 overflow-hidden border-t border-[var(--ln-accent)]/20">
+    <footer className="ln-footer relative z-10 mt-20 overflow-hidden border-t border-[var(--ln-accent)]/20">
       {/* Accent glow radiating upward from bottom */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%]"
