@@ -5,6 +5,7 @@ import HeroDesign from "@/components/hero/HeroDesign";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { ConnectCallout } from "@/components/home/ConnectCallout";
 import { Button } from "@/components/ui/button";
+import { GithubCalendarSection } from "@/components/about/GithubCalendarSection";
 
 import { buildPageMetadata, routeMeta } from "@/lib/seo";
 import { site } from "@/lib/content/site";
@@ -34,7 +35,7 @@ export default function Home() {
               </span>
 
               <h1 className="mt-4 sm:mt-7 md:mt-9 text-balance text-[1.75rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
-                <span className="block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
+                <span className="hero-greeting block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-black dark:text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
                 <span className="ln-gradient-text whitespace-nowrap">Shubham&nbsp;Saurabh</span>
               </h1>
 
@@ -96,6 +97,11 @@ export default function Home() {
 
       {/* FEATURED WORK */}
       <FeaturedWork />
+
+      {/* GITHUB ACTIVITY */}
+      <section className="max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+        <GithubCalendarSection />
+      </section>
 
       {/* ABOUT TEASER */}
       <AboutTeaser />

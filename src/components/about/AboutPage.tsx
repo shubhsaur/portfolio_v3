@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PageHero } from "@/components/motion/PageHero";
 import { PortraitCard } from "@/components/about/PortraitCard";
 import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
+import { GithubCalendarSection } from "@/components/about/GithubCalendarSection";
 import {
   aboutBio,
   aboutEducation,
@@ -115,6 +116,9 @@ export function AboutPage() {
             </Link>
             .
           </p>
+
+          {/* GitHub contribution calendar */}
+          <GithubCalendarSection />
         </Reveal>
 
         {/* Skills inventory */}

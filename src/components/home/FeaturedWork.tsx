@@ -14,7 +14,7 @@ import { Reveal } from "@/components/motion/Reveal";
    Apple Liquid Glass — Featured Work Cards
    ────────────────────────────────────────────── */
 
-const FEATURED_SLUGS = ["uno-booking", "dealopoly", "codelens"] as const;
+const FEATURED_SLUGS = ["uno-booking", "dealopoly"] as const;
 
 const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
   (p): p is (typeof projects)[number] => Boolean(p)
@@ -23,7 +23,6 @@ const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === sl
 const accentForSlug: Record<string, { glow: string; tint: string; border: string }> = {
   "uno-booking": { glow: "rgba(185,130,74,.30)", tint: "rgba(185,130,74,.10)", border: "rgba(185,130,74,.40)" },
   "dealopoly":   { glow: "rgba(225,112,85,.30)",  tint: "rgba(225,112,85,.10)", border: "rgba(225,112,85,.40)" },
-  "codelens":    { glow: "rgba(128,103,161,.30)", tint: "rgba(128,103,161,.10)", border: "rgba(128,103,161,.40)" },
 };
 
 /* ── Liquid Glass Card ── */
@@ -290,7 +289,7 @@ export function FeaturedWork() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+        <div className="grid gap-6 sm:grid-cols-2 items-stretch">
           {featured.map((project, index) => (
             <Reveal
               key={project.slug}
@@ -302,6 +301,16 @@ export function FeaturedWork() {
             </Reveal>
           ))}
         </div>
+
+        {/* CTA */}
+        <Reveal delay={0.18} direction="up" className="mt-10 flex justify-center">
+          <Button asChild size="lg" variant="outline" className="gap-2 px-8">
+            <Link href="/projects">
+              Show All Projects
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </Reveal>
       </div>
     </section>
   );
