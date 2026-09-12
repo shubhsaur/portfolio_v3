@@ -4,6 +4,7 @@ import { FeaturedWork } from "@/components/home/FeaturedWork";
 import HeroDesign from "@/components/hero/HeroDesign";
 import { SkillsStrip } from "@/components/home/SkillsStrip";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
+import { ConnectCallout } from "@/components/home/ConnectCallout";
 import { Button } from "@/components/ui/button";
 import { getGithubMeta } from "@/lib/github";
 import { buildPageMetadata, routeMeta } from "@/lib/seo";
@@ -102,25 +103,8 @@ export default async function Home() {
       {/* ABOUT TEASER */}
       <AboutTeaser />
 
-      {/* CTA BAND */}
-      <div className="mt-24 md:mt-32 mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8 text-center">
-        <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-center">
-          <Button asChild>
-            <a href="/projects">
-              <span>View my work</span>
-              <span aria-hidden="true" className="ln-mono text-[10px]">
-                ↳
-              </span>
-            </a>
-          </Button>
-
-          <Button asChild variant="outline">
-            <a href="mailto:shubhamsaurabh@outlook.com">
-              <span>Get in touch</span>
-            </a>
-          </Button>
-        </div>
-      </div>
+      {/* COLLABORATION & CONTACT CALLOUT */}
+      <ConnectCallout />
     </div>
   );
 }

@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 export function AboutTeaser() {
   return (
-    <section className="py-12 md:py-20">
-      <div className="max-w-3xl mx-auto text-center">
+    <section className="pt-12 md:pt-20 pb-6 md:pb-10">
+      <div className="max-w-3xl mx-auto text-center px-4 sm:px-6">
         <p className="hero-body-text text-base md:text-lg leading-8 text-zinc-300 mb-6">
           I&apos;m <span className="hero-stat-value font-semibold text-zinc-50">Shubham Saurabh</span>,
           a Frontend Engineer with <span className="hero-stat-value font-semibold text-zinc-50">5+ years of experience</span> building
