@@ -661,6 +661,29 @@ html[data-color-mode="light"] .hero-social-link:hover {
   to { transform: rotate(360deg); }
 }
 
+/* Slow continuous logo rotation */
+@keyframes ln-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: ln-spin-slow 24s linear infinite;
+  will-change: transform;
+}
+
+/* Navbar logo hover spin */
+.nav-logo-spin {
+  animation: ln-spin-slow 10s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.group:hover .nav-logo-spin,
+.nav-logo-spin:hover {
+  animation-play-state: running;
+}
+
 /* ── Loader light mode ── */
 html[data-color-mode="light"] .ln-loader-root {
   --loader-ring-1: rgba(139, 122, 107, 0.18);
@@ -1237,10 +1260,12 @@ html[data-color-mode="light"] .ln-btn-outline:hover * {
     transition-duration: 0.01ms !important;
   }
 
-  /* Freeze orbit animations */
+  /* Freeze orbit and logo spin animations */
   [style*="fu-orbit"],
-  .fu-orbit-traveler {
-    animation-play-state: paused !important;
+  .fu-orbit-traveler,
+  .animate-spin-slow,
+  .nav-logo-spin {
+    animation: none !important;
   }
 }
 

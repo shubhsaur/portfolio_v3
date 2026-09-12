@@ -166,7 +166,7 @@ export default function FrontendUniverse({ interactive = true, className = "", .
               alt="Logo"
               width={150}
               height={150}
-              className="h-full w-full object-cover rounded-full"
+              className="h-full w-full object-cover rounded-full animate-spin-slow"
               priority
               style={{ objectFit: "cover" }}
             />
