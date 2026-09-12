@@ -1,24 +1,55 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/Reveal";
 import { projects } from "@/lib/content/projects";
 import { contributions } from "@/lib/content/opensource";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const filterCategories = [
+  "All",
+  "SaaS",
+  "Mobile",
+  "Web",
+  "Branding",
+  "AI",
+  "Admin Panel",
+  "Open Source",
+] as const;
+
+type FilterCategory = (typeof filterCategories)[number];
 
 export function ProjectsIndex() {
-  const workProjects = projects.filter((p) => p.group === "work");
-  const personalProjects = projects.filter((p) => p.group === "personal");
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
+
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.categories?.includes(activeCategory));
+
+  const workProjects = filteredProjects.filter((p) => p.group === "work");
+  const personalProjects = filteredProjects.filter((p) => p.group === "personal");
+
+  const showOpenSource =
+    activeCategory === "All" ||
+    activeCategory === "Web" ||
+    activeCategory === "Open Source";
+
+  const showProjectGrids = activeCategory !== "Open Source";
 
   return (
-    <div className="space-y-24">
+    <div className="space-y-16 sm:space-y-20">
+      {/* Title & Description */}
       <div className="space-y-4 text-left">
         <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
           Interfaces built with{" "}
-          <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+          <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)] font-normal transition-colors duration-500">
             intent
           </span>
           .
@@ -28,25 +59,76 @@ export function ProjectsIndex() {
         </p>
       </div>
 
-      <section>
-        <h2 className="mb-6 text-3xl font-semibold text-foreground">Work Projects</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {workProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} delay={index * 0.03} />
-          ))}
+      {/* Apple-style Capsule Filter Bar */}
+      <div className="flex justify-start sm:justify-center overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/80 border-t-white/20 bg-card/75 dark:bg-white/[0.04] p-1.5 shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl">
+          {filterCategories.map((category) => {
+            const isActive = activeCategory === category;
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                className={cn(
+                  "relative rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap cursor-pointer select-none",
+                  isActive
+                    ? "text-[var(--ln-accent-foreground)] font-semibold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                )}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="projectFilterActivePill"
+                    className="absolute inset-0 rounded-full bg-[var(--ln-accent)] shadow-sm"
+                    transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">{category}</span>
+              </button>
+            );
+          })}
         </div>
-      </section>
+      </div>
 
-      <section>
-        <h2 className="mb-6 text-3xl font-semibold text-foreground">Personal Projects</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {personalProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} delay={index * 0.03} />
-          ))}
+      {/* Project Grids */}
+      {showProjectGrids && (
+        <div className="space-y-16 sm:space-y-20">
+          {workProjects.length > 0 && (
+            <section>
+              <h2 className="mb-6 text-3xl font-semibold text-foreground flex items-center gap-3">
+                <span>Work Projects</span>
+                <span className="ln-mono text-xs font-normal text-muted-foreground border border-border/60 rounded-full px-2.5 py-0.5">
+                  {workProjects.length}
+                </span>
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {workProjects.map((project, index) => (
+                  <ProjectCard key={project.id} project={project} delay={index * 0.03} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {personalProjects.length > 0 && (
+            <section>
+              <h2 className="mb-6 text-3xl font-semibold text-foreground flex items-center gap-3">
+                <span>Personal Projects</span>
+                <span className="ln-mono text-xs font-normal text-muted-foreground border border-border/60 rounded-full px-2.5 py-0.5">
+                  {personalProjects.length}
+                </span>
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {personalProjects.map((project, index) => (
+                  <ProjectCard key={project.id} project={project} delay={index * 0.03} />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
-      </section>
+      )}
 
-      <OpenSourceBlock />
+      {/* Open Source Block */}
+      {showOpenSource && <OpenSourceBlock />}
     </div>
   );
 }

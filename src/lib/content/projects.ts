@@ -5,6 +5,7 @@ export interface ProjectRecord {
   slug: string;
   title: string;
   group: ProjectGroup;
+  categories: string[];
   badge: string;
   description: string;
   tech: string[];
@@ -27,6 +28,7 @@ export const projects: ProjectRecord[] = [
     slug: "uno-booking",
     title: "Uno Booking Engine",
     group: "work",
+    categories: ["SaaS", "Mobile", "Web", "Branding"],
     badge: "Flagship",
     description:
       "High-performance, scalable hotel booking engine (IBE) engineered for multiple international hotel brands. Features end-to-end room selection, dynamic pricing, promotions, 10+ payment gateway integrations, multilingual booking across 20+ locales with currency-aware pricing and RTL support.",
@@ -58,6 +60,7 @@ export const projects: ProjectRecord[] = [
     slug: "content-ai",
     title: "Content AI",
     group: "work",
+    categories: ["SaaS", "Admin Panel", "Web"],
     badge: "B2B SaaS",
     description:
       "Robust B2B Content Management Platform designed to enhance content creation, curation, and distribution across demand partners. Architected frontend state and form validation workflows, boosting optimal rendering performance by 60%.",
@@ -88,6 +91,7 @@ export const projects: ProjectRecord[] = [
     slug: "cryptopedia",
     title: "Cryptopedia",
     group: "personal",
+    categories: ["Web"],
     badge: "Real-time Tracker",
     description:
       "Cryptocurrency price tracker application delivering real-time prices, market capitalization benchmarks, 24-hour volume changes, and interactive price trend visual charts using ChartJS.",
@@ -119,6 +123,7 @@ export const projects: ProjectRecord[] = [
     slug: "codelens",
     title: "Codelens",
     group: "personal",
+    categories: ["AI", "Web"],
     badge: "AI Powered",
     description:
       "AI-powered codebase explorer that indexes GitHub repos, builds searchable context, and answers repo questions with grounded citations, file previews, and syntax-highlighted code.",
