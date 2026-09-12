@@ -271,9 +271,17 @@ export function FeaturedWork() {
   return (
     <section id="featured" className="scroll-mt-24 md:scroll-mt-28 pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-48 lg:pb-32">
       <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-6xl font-semibold tracking-tight text-foreground mb-12 md:mb-20">
-          Featured Work
-        </h2>
+        <div className="space-y-4 text-left mb-12 md:mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground">
+            Featured{" "}
+            <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)] font-normal transition-colors duration-500">
+              Work
+            </span>
+          </h2>
+          <p className="max-w-3xl text-lg sm:text-xl text-muted-foreground">
+            A curated selection of enterprise SaaS platforms, high-concurrency booking engines, and intelligent web applications built for scale.
+          </p>
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((project) => (
