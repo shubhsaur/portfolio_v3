@@ -246,7 +246,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                 rel="noopener noreferrer"
                 download="Shubham_Saurabh_Resume.pdf"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-[0.375rem] rounded-full border border-border bg-muted/40 py-[var(--nav-dropdown-py)] text-xs font-medium text-foreground transition hover:bg-muted"
+                className="flex h-10 items-center justify-center gap-[0.375rem] rounded-full border border-border bg-muted/40 px-4 text-xs font-medium text-foreground transition hover:bg-muted"
               >
                 <Download className="h-[0.875rem] w-[0.875rem] text-[var(--ln-accent)]" />
                 <span>Resume</span>
@@ -255,7 +255,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
               <a
                 href="mailto:shubhamsaurabh@outlook.com"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-[0.375rem] rounded-full border border-[var(--ln-accent)]/25 bg-[var(--ln-accent)]/10 py-[var(--nav-dropdown-py)] text-xs font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/18"
+                className="flex h-10 items-center justify-center gap-[0.375rem] rounded-full border border-[var(--ln-accent)]/25 bg-[var(--ln-accent)]/10 px-4 text-xs font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/18"
               >
                 <Mail className="h-[0.875rem] w-[0.875rem]" />
                 <span>Contact</span>

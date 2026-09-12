@@ -178,14 +178,14 @@ export function OpenSourceSection() {
 
                   {/* Footer Action Buttons */}
                   <div className="mt-6 flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 pt-4 border-t border-white/6">
-                    <Button asChild className="justify-center text-xs">
+                    <Button asChild className="justify-center">
                       <a href={contrib.prUrl} target="_blank" rel="noreferrer">
                         View Merged PR
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
 
-                    <Button asChild variant="outline" className="justify-center text-xs">
+                    <Button asChild variant="outline" className="justify-center">
                       <a href={contrib.issueUrl} target="_blank" rel="noreferrer">
                         View Issue #{contrib.issueNumber}
                         <Github className="h-3.5 w-3.5" />

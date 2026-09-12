@@ -16,6 +16,8 @@
   --ln-radius-hero: 1.75rem;
   --ln-radius-pill: 9999px;
   --ln-radius: var(--ln-radius-card);
+  --ln-btn-h: 2.5rem;
+  --ln-btn-h-desktop: 2.75rem;
 
   /* Dark Liquid Noir (default SSR) */
   --ln-bg: #06060a;

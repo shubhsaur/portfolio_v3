@@ -207,14 +207,12 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                   Download a PDF overview of experience, projects, and stack.
                 </p>
               </div>
-              <a
-                href={site.resumePath}
-                download
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-input bg-transparent px-4 py-2 text-sm font-medium transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_25%,transparent)]"
-              >
-                <Download className="h-4 w-4" />
-                Download resume
-              </a>
+              <Button asChild variant="outline" className="w-full">
+                <a href={site.resumePath} download>
+                  <Download className="h-4 w-4" />
+                  <span>Download resume</span>
+                </a>
+              </Button>
             </Card>
 
             <Card className="border-border p-5 sm:p-6 space-y-3">

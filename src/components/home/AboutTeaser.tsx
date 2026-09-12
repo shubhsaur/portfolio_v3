@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export function AboutTeaser() {
   return (
@@ -19,12 +20,12 @@ export function AboutTeaser() {
           That background in analytical modeling and systems thinking continues to shape my approach
           to building resilient frontend architectures.
         </p>
-        <Link
-          href="/about"
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)] transition hover:border-[var(--ln-accent)]/40 hover:bg-[var(--ln-accent)]/15"
-        >
-          Read my story
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/about">
+            <span>Read my story</span>
+            <span aria-hidden="true" className="ln-mono text-[10px]">↳</span>
+          </Link>
+        </Button>
       </div>
     </section>
   );

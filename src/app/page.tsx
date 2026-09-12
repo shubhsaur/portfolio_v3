@@ -69,12 +69,12 @@ export default async function Home() {
 
               {/* CTA */}
               <div className="mt-5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-3">
-                <Button asChild size="sm" className="min-w-0 flex-1 sm:h-auto sm:px-4 sm:py-2">
+                <Button asChild className="min-w-0 flex-1 sm:flex-initial">
                   <a href={site.resumePath} download>
                     Download Resume
                   </a>
                 </Button>
-                <Button asChild variant="outline" size="sm" className="min-w-0 flex-1 sm:h-auto sm:px-4 sm:py-2">
+                <Button asChild variant="outline" className="min-w-0 flex-1 sm:flex-initial">
                   <a href="/projects">
                     See my Work
                   </a>

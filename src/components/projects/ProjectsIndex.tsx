@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/Reveal";
 import { projects } from "@/lib/content/projects";
 import { contributions } from "@/lib/content/opensource";
+import { Button } from "@/components/ui/button";
 
 export function ProjectsIndex() {
   const workProjects = projects.filter((p) => p.group === "work");
@@ -110,34 +111,35 @@ function ProjectCard({
           </div>
 
           <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-border pt-4">
-            <Link
-              href={`/projects/${project.slug}`}
-              className="ln-btn-base ln-btn-default inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
-            >
-              <span>Case Study</span>
-              <span aria-hidden="true" className="text-[10px]">↳</span>
-            </Link>
+            <Button asChild size="sm">
+              <Link href={`/projects/${project.slug}`}>
+                <span>Case Study</span>
+                <span aria-hidden="true" className="text-[10px]">↳</span>
+              </Link>
+            </Button>
             {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
-              >
-                <span>Live</span>
-                <ExternalLink className="h-3 w-3" />
-              </a>
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>Live</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </Button>
             )}
             {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
-              >
-                <Github className="h-3 w-3" />
-                <span>GitHub</span>
-              </a>
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Github className="h-3 w-3" />
+                  <span>GitHub</span>
+                </a>
+              </Button>
             )}
           </div>
         </div>

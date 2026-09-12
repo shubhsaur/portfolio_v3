@@ -67,16 +67,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           {project.liveUrl && (
             <Button asChild>
               <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                Live App
+                <ExternalLink className="h-4 w-4" />
+                <span>Live App</span>
               </a>
             </Button>
           )}
           {project.githubUrl && (
             <Button asChild variant="outline">
               <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                GitHub
+                <Github className="h-4 w-4" />
+                <span>GitHub</span>
               </a>
             </Button>
           )}

@@ -7,6 +7,7 @@ import { useCallback, type MouseEvent } from "react";
 import { ArrowUpRight, Github, Image as ImageIcon } from "lucide-react";
 import { projects } from "@/lib/content/projects";
 import { cn } from "@/lib/cn";
+import { Button } from "@/components/ui/button";
 
 /* ──────────────────────────────────────────────
    Apple Liquid Glass — Featured Work Cards
@@ -240,23 +241,23 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
 
         {/* Action buttons */}
         <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-          <Link
-            href={`/projects/${project.slug}`}
-            className="ln-btn-base ln-btn-default inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
-          >
-            <span>Case Study</span>
-            <span aria-hidden="true" className="text-[10px]">↳</span>
-          </Link>
+          <Button asChild size="sm">
+            <Link href={`/projects/${project.slug}`}>
+              <span>Case Study</span>
+              <span aria-hidden="true" className="text-[10px]">↳</span>
+            </Link>
+          </Button>
           {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
-            >
-              <span>Live</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-current opacity-80" />
-            </a>
+            <Button asChild variant="outline" size="sm">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Live</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </Button>
           )}
         </div>
       </div>
