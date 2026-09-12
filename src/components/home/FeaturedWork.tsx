@@ -14,12 +14,16 @@ import { Reveal } from "@/components/motion/Reveal";
    Apple Liquid Glass — Featured Work Cards
    ────────────────────────────────────────────── */
 
-const featured = projects.filter((p) => p.slug === "uno-booking" || p.slug === "content-ai" || p.slug === "codelens");
+const FEATURED_SLUGS = ["uno-booking", "dealopoly", "codelens"] as const;
+
+const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
+  (p): p is (typeof projects)[number] => Boolean(p)
+);
 
 const accentForSlug: Record<string, { glow: string; tint: string; border: string }> = {
-  "uno-booking":  { glow: "rgba(185,130,74,.30)",  tint: "rgba(185,130,74,.10)",  border: "rgba(185,130,74,.40)" },
-  "content-ai":   { glow: "rgba(75,154,165,.30)",   tint: "rgba(75,154,165,.10)",  border: "rgba(75,154,165,.40)" },
-  "codelens":     { glow: "rgba(128,103,161,.30)",  tint: "rgba(128,103,161,.10)", border: "rgba(128,103,161,.40)" },
+  "uno-booking": { glow: "rgba(185,130,74,.30)", tint: "rgba(185,130,74,.10)", border: "rgba(185,130,74,.40)" },
+  "dealopoly":   { glow: "rgba(225,112,85,.30)",  tint: "rgba(225,112,85,.10)", border: "rgba(225,112,85,.40)" },
+  "codelens":    { glow: "rgba(128,103,161,.30)", tint: "rgba(128,103,161,.10)", border: "rgba(128,103,161,.40)" },
 };
 
 /* ── Liquid Glass Card ── */
@@ -57,7 +61,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
       onMouseLeave={handleMouseLeave}
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 260, damping: 22 } }}
       className={cn(
-        "lg-card group relative overflow-hidden rounded-[1.5rem]",
+        "lg-card group relative flex flex-col h-full overflow-hidden rounded-[1.5rem]",
         "border border-white/[0.08] border-t-white/[0.18]",
         "bg-white/[0.03]",
         "backdrop-blur-[60px] saturate-[2]",
@@ -133,7 +137,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[18rem]">
+      <div className="relative z-10 p-6 sm:p-8 flex flex-col flex-1">
         {/* ── Image thumbnail (shine sweep on hover, mirrors /projects) ── */}
         <Link
           href={`/projects/${project.slug}`}
@@ -147,6 +151,8 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               src={project.thumbnail}
               alt={project.title}
               fill
+              unoptimized
+              quality={100}
               className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
@@ -211,12 +217,12 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         </h3>
 
         {/* Description */}
-        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-[var(--ln-text-body)] flex-1">
+        <p className="text-[0.8125rem] sm:text-sm leading-relaxed text-[var(--ln-text-body)] line-clamp-3 mb-4">
           {project.description}
         </p>
 
         {/* Tech pills */}
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
           {project.tech.slice(0, 4).map((tech) => (
             <span
               key={tech}
@@ -284,13 +290,13 @@ export function FeaturedWork() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {featured.map((project, index) => (
             <Reveal
               key={project.slug}
               direction={index % 2 === 0 ? "left" : "right"}
               delay={index * 0.08}
-              className="h-full"
+              className="h-full flex flex-col"
             >
               <LiquidGlassCard project={project} />
             </Reveal>
