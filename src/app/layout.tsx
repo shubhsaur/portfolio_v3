@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Space_Mono, Pacifico } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-boot";
@@ -40,6 +40,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

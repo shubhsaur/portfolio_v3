@@ -461,7 +461,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command, project, or page name..."
-                className="w-full bg-transparent px-3 py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                className="w-full bg-transparent px-3 py-4 text-[16px] sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
               {query && (
                 <button
