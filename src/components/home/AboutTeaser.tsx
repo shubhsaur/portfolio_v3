@@ -68,11 +68,11 @@ export function AboutTeaser() {
             </div>
             <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3.5 py-1 text-xs text-foreground/80 backdrop-blur-sm">
               <GraduationCap className="h-3 w-3 text-[var(--ln-accent)]" />
-              <span>DTU &apos;20 · B.Tech (7.82 GPA)</span>
+              <span>DTU &apos;20 · B.Tech</span>
             </div>
             <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3.5 py-1 text-xs text-foreground/80 backdrop-blur-sm">
               <Award className="h-3 w-3 text-[var(--ln-accent)]" />
-              <span>Pinnacle Performer &apos;24</span>
+              <span>Pinnacle Performer</span>
             </div>
           </div>
 
