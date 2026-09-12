@@ -58,7 +58,7 @@ export function Footer() {
 
           {/* Col 2 — Navigation */}
           <div className="col-span-1 flex flex-col gap-3">
-            <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-[var(--ln-text-muted)]">
+            <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-zinc-900 dark:text-zinc-50">
               Navigation
             </p>
             <nav className="grid gap-2">
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Col 3 — Connect */}
           <div className="col-span-1 flex flex-col gap-3">
-            <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-[var(--ln-text-muted)]">
+            <p className="ln-mono text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-zinc-900 dark:text-zinc-50">
               Connect
             </p>
             <div className="flex items-center gap-3">
@@ -123,10 +123,10 @@ export function Footer() {
       {/* Bottom bar — full-width to match top border */}
       <div className="border-t border-[var(--ln-accent)]/20">
         <div className="mx-auto flex max-w-[87.5rem] flex-col items-center gap-3 px-4 py-6 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
-          <p className="ln-mono flex items-center gap-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--ln-text-muted)]">
+          <p className="ln-mono flex items-center gap-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-zinc-900 dark:text-zinc-50">
             <Copyright className="h-3 w-3" />{year} | All Rights Reserved
           </p>
-          <p className="font-[family-name:var(--font-pacifico)] text-sm text-[var(--ln-text-body)]">
+          <p className="font-[family-name:var(--font-pacifico)] text-sm text-zinc-900 dark:text-zinc-50">
             Designed by Shubham
           </p>
         </div>

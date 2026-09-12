@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/Reveal";
+import { PageHero } from "@/components/motion/PageHero";
 import { projects } from "@/lib/content/projects";
 import { contributions } from "@/lib/content/opensource";
 import { Button } from "@/components/ui/button";
@@ -46,18 +47,18 @@ export function ProjectsIndex() {
   return (
     <div className="space-y-16 sm:space-y-20">
       {/* Title & Description */}
-      <div className="space-y-4 text-left">
-        <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
-          Interfaces built with{" "}
-          <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)] font-normal transition-colors duration-500">
-            intent
-          </span>
-          .
-        </h1>
-        <p className="max-w-3xl text-xl text-muted-foreground">
-          Frontend experiences across SaaS platforms, dashboards, mobile products and digital brands — turning complex requirements into clean, responsive and purposeful interfaces.
-        </p>
-      </div>
+      <PageHero
+        title={
+          <>
+            Interfaces built with{" "}
+            <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)] font-normal transition-colors duration-500">
+              intent
+            </span>
+            .
+          </>
+        }
+        description="Frontend experiences across SaaS platforms, dashboards, mobile products and digital brands — turning complex requirements into clean, responsive and purposeful interfaces."
+      />
 
       {/* Apple-style Capsule Filter Bar */}
       <div className="flex justify-start overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">

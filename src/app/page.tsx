@@ -5,7 +5,7 @@ import HeroDesign from "@/components/hero/HeroDesign";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { ConnectCallout } from "@/components/home/ConnectCallout";
 import { Button } from "@/components/ui/button";
-import { getGithubMeta } from "@/lib/github";
+
 import { buildPageMetadata, routeMeta } from "@/lib/seo";
 import { site } from "@/lib/content/site";
 
@@ -14,9 +14,7 @@ export const metadata = buildPageMetadata({
   absoluteTitle: true,
 });
 
-export default async function Home() {
-  const github = await getGithubMeta();
-
+export default function Home() {
   return (
     <div className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
       {/* HERO SECTION */}
@@ -35,9 +33,9 @@ export default async function Home() {
                 SDE @ RateGain · Available for collaborations
               </span>
 
-              <h1 className="mt-6 sm:mt-7 md:mt-9 text-balance text-[2rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-none tracking-tighter">
-                Hi, I'm{" "}
-                <span className="ln-gradient-text">Shubham&nbsp;Saurabh</span>
+              <h1 className="mt-6 sm:mt-7 md:mt-9 text-balance text-[2rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
+                <span className="block text-[1.25rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
+                <span className="ln-gradient-text">Shubham Saurabh</span>
               </h1>
 
               <RotatingIntro className="mt-2.5 sm:mt-3.5" />
@@ -51,19 +49,17 @@ export default async function Home() {
               <div className="mt-6 sm:mt-7 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left max-w-[34rem]">
                 <div>
                   <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">5+</p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Exp</p>
+                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Building</p>
                 </div>
                 <div className="hidden h-10 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
                 <div>
-                  <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">
-                    {github.publicRepos != null ? `${github.publicRepos}+` : "70+"}
-                  </p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">GitHub Repos</p>
+                  <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">10+</p>
+                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Projects Delivered</p>
                 </div>
                 <div className="hidden h-10 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
                 <div>
                   <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">2+</p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Major Awards</p>
+                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Open Source Impacts</p>
                 </div>
               </div>
 

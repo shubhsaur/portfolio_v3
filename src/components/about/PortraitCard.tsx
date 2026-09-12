@@ -16,7 +16,7 @@ export function PortraitCard() {
             src={PORTRAIT_PUBLIC_PATH}
             alt="Shubham Saurabh"
             fill
-            className="object-cover"
+            className="object-cover object-[center_20%]"
             sizes="(max-width: 1024px) 100vw, 33vw"
             priority
           />

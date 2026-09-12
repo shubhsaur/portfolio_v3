@@ -16,6 +16,7 @@ import { Input, Textarea } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PageGrid } from "@/components/layout/PageGrid";
 import { Reveal } from "@/components/motion/Reveal";
+import { PageHero } from "@/components/motion/PageHero";
 import { site } from "@/lib/content/site";
 
 function XIcon({ className }: { className?: string }) {
@@ -83,18 +84,18 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
     <div className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-12 sm:gap-y-16">
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="space-y-4 text-left">
-            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
-              Have something worth{" "}
-              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
-                building
-              </span>
-              ?
-            </h1>
-            <p className="max-w-3xl text-xl text-muted-foreground">
-              Whether it&apos;s a product idea, a challenging interface, or simply a conversation about the web — I&apos;m always open to interesting problems and meaningful collaborations.
-            </p>
-          </div>
+          <PageHero
+            title={
+              <>
+                Have something worth{" "}
+                <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                  building
+                </span>
+                ?
+              </>
+            }
+            description="Whether it&apos;s a product idea, a challenging interface, or simply a conversation about the web — I'm always open to interesting problems and meaningful collaborations."
+          />
         </div>
 
         {/* Form */}
@@ -103,7 +104,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
           className="col-span-4 sm:col-span-8 lg:col-span-7"
         >
           <Card className="border-border p-5 sm:p-7 md:p-8">
-            <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+            <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-[var(--ln-accent)]">
               Send a message
             </p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
@@ -175,7 +176,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
         >
           <div className="space-y-6">
             <Card className="border-border p-5 sm:p-6">
-              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-[var(--ln-accent)]">
                 Elsewhere
               </p>
               <ul className="mt-4 space-y-2">
@@ -200,7 +201,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
 
             <Card className="border-border p-5 sm:p-6 space-y-4">
               <div>
-                <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-[var(--ln-accent)]">
                   Resume
                 </p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -216,7 +217,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
             </Card>
 
             <Card className="border-border p-5 sm:p-6 space-y-3">
-              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+              <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-[var(--ln-accent)]">
                 Direct
               </p>
               <a

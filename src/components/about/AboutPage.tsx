@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageGrid } from "@/components/layout/PageGrid";
 import { Reveal } from "@/components/motion/Reveal";
+import { PageHero } from "@/components/motion/PageHero";
 import { PortraitCard } from "@/components/about/PortraitCard";
 import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
 import {
@@ -15,18 +16,18 @@ export function AboutPage() {
       <PageGrid className="gap-y-16 sm:gap-y-20">
         {/* Header */}
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="space-y-4 text-left">
-            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
-              Curious by{" "}
-              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
-                nature
-              </span>
-              .
-            </h1>
-            <p className="max-w-3xl text-xl text-muted-foreground">
-              I&apos;m a frontend engineer who cares deeply about how things work, feel and look — blending engineering, design and a healthy obsession with details to create digital experiences that are both purposeful and enjoyable.
-            </p>
-          </div>
+          <PageHero
+            title={
+              <>
+                Curious by{" "}
+                <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                  nature
+                </span>
+                .
+              </>
+            }
+            description="I'm a frontend engineer who cares deeply about how things work, feel and look — blending engineering, design and a healthy obsession with details to create digital experiences that are both purposeful and enjoyable."
+          />
         </div>
 
         {/* Prose + facts */}
@@ -38,7 +39,7 @@ export function AboutPage() {
             {aboutBio.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 32)}
-                className="text-xl leading-relaxed text-muted-foreground"
+                className="text-xl leading-relaxed text-zinc-900 dark:text-zinc-50"
               >
                 {paragraph}
               </p>
@@ -51,13 +52,13 @@ export function AboutPage() {
                 key={fact.label}
                 className="rounded-[var(--ln-radius-card)] border border-border bg-card p-4"
               >
-                <p className="ln-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                <p className="ln-mono text-[10px] uppercase tracking-[0.22em] text-zinc-900 dark:text-zinc-50">
                   <span className="mr-1.5" aria-hidden>
                     {fact.icon}
                   </span>
                   {fact.label}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-foreground">
+                <p className="mt-2 text-sm leading-6 text-zinc-900 dark:text-zinc-50">
                   {fact.value}
                 </p>
               </div>
@@ -68,19 +69,19 @@ export function AboutPage() {
             <p className="ln-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ln-accent)]">
               Education
             </p>
-            <h2 className="mt-2 text-lg font-semibold text-foreground">
+            <h2 className="mt-2 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
               {aboutEducation.degree}
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-zinc-900 dark:text-zinc-50">
               {aboutEducation.school} · {aboutEducation.gpa} ·{" "}
               {aboutEducation.years}
             </p>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+            <p className="mt-3 text-sm leading-7 text-zinc-900 dark:text-zinc-50">
               {aboutEducation.summary}
             </p>
           </div>
 
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-zinc-900 dark:text-zinc-50">
             Prefer the career timeline?{" "}
             <Link
               href="/experience"

@@ -6,6 +6,8 @@ import {
   CheckCircle2,
   MapPin,
 } from "lucide-react";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { PageGrid } from "@/components/layout/PageGrid";
 import { Reveal } from "@/components/motion/Reveal";
@@ -14,24 +16,39 @@ import {
   experiences,
 } from "@/lib/content/experience";
 
+import { PageHero } from "@/components/motion/PageHero";
+
 export function ExperiencePage() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 60%"],
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 20,
+    restDelta: 0.001,
+  });
+
   return (
     <div className="relative z-10 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-14 sm:gap-y-16">
         {/* Header */}
         <div className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="space-y-4 text-left">
-            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
-              Experience shaped by{" "}
-              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
-                impact
-              </span>
-              .
-            </h1>
-            <p className="max-w-3xl text-xl text-muted-foreground">
-              Frontend engineering across products, platforms and teams — building scalable interfaces, solving complex problems, and turning ideas into experiences that work beautifully in the real world.
-            </p>
-          </div>
+          <PageHero
+            title={
+              <>
+                Experience shaped by{" "}
+                <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                  impact
+                </span>
+                .
+              </>
+            }
+            description="Frontend engineering across products, platforms and teams — building scalable interfaces, solving complex problems, and turning ideas into experiences that work beautifully in the real world."
+          />
         </div>
 
         {/* Page-level KPIs */}
@@ -57,9 +74,18 @@ export function ExperiencePage() {
         </Reveal>
 
         {/* Timeline: spine left, roles right */}
-        <div className="relative col-span-4 sm:col-span-8 lg:col-span-12">
+        <div ref={timelineRef} className="relative col-span-4 sm:col-span-8 lg:col-span-12">
+
+          {/* Static track (faded background rail) */}
           <div
             aria-hidden="true"
+            className="absolute bottom-8 left-4 top-4 w-px bg-border/40 md:left-8"
+          />
+
+          {/* Animated spine that grows as you scroll */}
+          <motion.div
+            aria-hidden="true"
+            style={{ scaleY, originY: 0 }}
             className="absolute bottom-8 left-4 top-4 w-px bg-gradient-to-b from-[var(--ln-accent)] via-[var(--ln-success)] to-transparent md:left-8"
           />
 
@@ -72,9 +98,9 @@ export function ExperiencePage() {
                   key={exp.id}
                   delay={0.06 + index * 0.03}
                   className="relative pl-12 sm:pl-16 md:pl-20"
-                  // Tall cards: margin preload, not numeric `amount` (design forbid).
                   viewport={{ once: true, margin: "120px 0px" }}
                 >
+                  {/* Timeline dot */}
                   <div
                     className={[
                       "absolute left-4 top-1.5 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full border shadow-sm md:left-8",
@@ -86,7 +112,13 @@ export function ExperiencePage() {
                     <Icon className="h-4 w-4" />
                   </div>
 
-                  <Card className="overflow-hidden border-border p-5 sm:p-6 md:p-8">
+                  {/* Date label beside the dot */}
+                  <span className="ln-mono absolute left-12 top-2.5 text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:left-16 md:left-20">
+                    {exp.period}
+                  </span>
+
+                  {/* Card — push down to clear the date label */}
+                  <Card className="mt-8 overflow-hidden border-border p-5 sm:p-6 md:p-8">
                     <div className="space-y-6">
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>

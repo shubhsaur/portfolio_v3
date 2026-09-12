@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const phrases = [
-  "I love React",
-  "I breathe JavaScript",
-  "I build web experiences",
-  "I am a developer",
+  "I build things that move",
+  "I make the web feel alive",
+  "I ship fast, refactor faster",
+  "I obsess over interactions",
+  "I debug at 2am and enjoy it",
 ] as const;
 
 export function RotatingIntro({ className }: { className?: string }) {
