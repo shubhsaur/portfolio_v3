@@ -2,7 +2,6 @@ import { ScrollIndicator } from "@/components/hero/ScrollIndicator";
 import { RotatingIntro } from "@/components/hero/RotatingIntro";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
 import HeroDesign from "@/components/hero/HeroDesign";
-import { SkillsStrip } from "@/components/home/SkillsStrip";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { ConnectCallout } from "@/components/home/ConnectCallout";
 import { Button } from "@/components/ui/button";
@@ -96,9 +95,6 @@ export default async function Home() {
 
       {/* FEATURED WORK */}
       <FeaturedWork />
-
-      {/* COMPACT SKILLS STRIP */}
-      <SkillsStrip />
 
       {/* ABOUT TEASER */}
       <AboutTeaser />
