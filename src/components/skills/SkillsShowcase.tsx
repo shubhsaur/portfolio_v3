@@ -8,9 +8,17 @@ import {
   type SkillCardData,
 } from "@/lib/content/skills";
 
-function SkillCard({ skill, delay }: { skill: SkillCardData; delay: number }) {
+function SkillCard({
+  skill,
+  delay,
+  direction,
+}: {
+  skill: SkillCardData;
+  delay: number;
+  direction?: "left" | "right";
+}) {
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} direction={direction}>
       <Card className="flex h-full flex-col border-border p-6 sm:p-7">
         <div
           className={[
@@ -54,7 +62,12 @@ export function SkillsShowcase() {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {skills.map((skill, index) => (
-          <SkillCard key={skill.name} skill={skill} delay={index * 0.03} />
+          <SkillCard
+            key={skill.name}
+            skill={skill}
+            delay={index * 0.03}
+            direction={index % 2 === 0 ? "left" : "right"}
+          />
         ))}
       </div>
 
@@ -72,7 +85,11 @@ export function SkillsShowcase() {
           {skillCategories.map((category, index) => {
             const CatIcon = category.icon;
             return (
-              <Reveal key={category.title} delay={0.03 + index * 0.03}>
+              <Reveal
+                key={category.title}
+                delay={0.03 + index * 0.03}
+                direction={index % 2 === 0 ? "left" : "right"}
+              >
                 <Card className="h-full border-border p-5">
                   <div className="flex items-center gap-2.5 border-b border-border pb-3">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--ln-accent)]/10 text-[var(--ln-accent)]">

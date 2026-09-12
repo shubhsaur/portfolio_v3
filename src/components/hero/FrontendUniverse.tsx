@@ -47,26 +47,10 @@ const accentMap = {
 
 const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
 
-function distanceForWidth(w: number) {
-  if (w < 380) return 26;
-  if (w < 460) return 28;
-  if (w < 540) return 30;
-  return 32;
-}
-
-function coreSizeForWidth(w: number) {
-  if (w < 380) return 90;
-  if (w < 460) return 110;
-  if (w < 540) return 130;
-  return 150;
-}
-
 export default function FrontendUniverse({ interactive = true, className = "", ...props }: FrontendUniverseProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const [distance, setDistance] = useState(32);
-  const [coreSize, setCoreSize] = useState(90);
-  const [stageBox, setStageBox] = useState({ w: 320, h: 320 });
+  const [stageBox, setStageBox] = useState({ w: 340, h: 340 });
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState<string | null>(null);
 
@@ -74,12 +58,9 @@ export default function FrontendUniverse({ interactive = true, className = "", .
     const el = stageRef.current ?? containerRef.current;
     if (!el) return;
     const update = () => {
-      const w = el.clientWidth || 320;
+      const w = el.clientWidth || 340;
       const h = el.clientHeight || w;
-      const size = Math.min(w, h);
       setStageBox({ w, h });
-      setDistance(distanceForWidth(size));
-      setCoreSize(coreSizeForWidth(size));
     };
     update();
     const ro = new ResizeObserver(update);
@@ -100,6 +81,18 @@ export default function FrontendUniverse({ interactive = true, className = "", .
     setActive(null);
   }, []);
 
+  const stageSize = Math.min(stageBox.w, stageBox.h) || 340;
+  const isSmallMobile = stageSize < 380;
+  const isMobile = stageSize < 500;
+  const isTablet = stageSize < 640;
+
+  const coreSize = isSmallMobile ? 68 : isMobile ? 78 : isTablet ? 110 : 140;
+
+  // Safe inner radius clearing the central core
+  const minRadius = (coreSize / 2) + (isMobile ? 36 : 52);
+  // Safe outer radius strictly staying within bounds so no card exceeds the viewport
+  const maxRadius = (stageSize / 2) - (isMobile ? 40 : 20);
+
   return (
     <div
       {...props}
@@ -108,24 +101,24 @@ export default function FrontendUniverse({ interactive = true, className = "", .
       onPointerMove={handlePointerMove}
       onPointerLeave={handleLeave}
     >
-      {/* Ambient lighting — extends into backdrop */}
-      <div className="pointer-events-none absolute -inset-20">
+      {/* Ambient lighting — softly contained on mobile to prevent document horizontal scroll */}
+      <div className="pointer-events-none absolute inset-0 md:-inset-20 overflow-hidden md:overflow-visible">
         <div
-          className="fu-ambient absolute left-[18%] top-[22%] h-64 w-64 rounded-full blur-[100px] transition-transform duration-500"
+          className="fu-ambient absolute left-[18%] top-[22%] h-48 w-48 sm:h-64 sm:w-64 rounded-full blur-[70px] sm:blur-[100px] transition-transform duration-500"
           style={{
             background: "radial-gradient(circle, rgba(185,130,74,.18), rgba(200,120,134,.04) 48%, transparent 72%)",
             transform: `translate3d(${pointer.x * 0.35}px, ${pointer.y * 0.3}px, 0)`,
           }}
         />
         <div
-          className="fu-ambient absolute bottom-[18%] right-[11%] h-72 w-72 rounded-full blur-[110px] transition-transform duration-500"
+          className="fu-ambient absolute bottom-[18%] right-[11%] h-56 w-56 sm:h-72 sm:w-72 rounded-full blur-[80px] sm:blur-[110px] transition-transform duration-500"
           style={{
             background: "radial-gradient(circle, rgba(128,103,161,.16), rgba(75,154,165,.06) 45%, transparent 72%)",
             transform: `translate3d(${pointer.x * -0.28}px, ${pointer.y * -0.25}px, 0)`,
           }}
         />
         <div
-          className="fu-ambient absolute left-[50%] top-[50%] h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px] transition-transform duration-500"
+          className="fu-ambient absolute left-[50%] top-[50%] h-64 w-64 sm:h-96 sm:w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px] sm:blur-[120px] transition-transform duration-500"
           style={{
             background: "radial-gradient(circle, rgba(128,103,161,.08), rgba(75,154,165,.04) 40%, transparent 65%)",
             transform: `translate(calc(-50% + ${pointer.x * 0.15}px), calc(-50% + ${pointer.y * 0.15}px))`,
@@ -146,12 +139,18 @@ export default function FrontendUniverse({ interactive = true, className = "", .
             width: coreSize,
             height: coreSize,
             transform: `translate(-50%, -50%) translate(${pointer.x * 0.42}px, ${pointer.y * 0.42}px)`,
-            boxShadow: `
-              0 0 60px 10px rgba(185,130,74,.25),
-              0 0 120px 30px rgba(128,103,161,.18),
-              0 0 200px 60px rgba(75,154,165,.08),
-              0 20px 70px rgba(0,0,0,.5)
-            `,
+            boxShadow: isMobile
+              ? `
+                0 0 30px 6px rgba(185,130,74,.22),
+                0 0 60px 15px rgba(128,103,161,.14),
+                0 10px 40px rgba(0,0,0,.4)
+              `
+              : `
+                0 0 60px 10px rgba(185,130,74,.25),
+                0 0 120px 30px rgba(128,103,161,.18),
+                0 0 200px 60px rgba(75,154,165,.08),
+                0 20px 70px rgba(0,0,0,.5)
+              `,
           }}
         >
           <div
@@ -160,7 +159,7 @@ export default function FrontendUniverse({ interactive = true, className = "", .
               background: "radial-gradient(circle, rgba(185,130,74,.15), rgba(128,103,161,.08) 40%, transparent 70%)",
             }}
           />
-          <div className="relative grid place-items-center">
+          <div className="relative grid place-items-center w-full h-full p-2 sm:p-3">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -170,11 +169,13 @@ export default function FrontendUniverse({ interactive = true, className = "", .
               priority
               style={{ objectFit: "cover" }}
             />
-            <div className="absolute -bottom-2 h-20 w-40 rounded-full bg-[#8067A1]/10 blur-xl" />
+            <div className="absolute -bottom-2 h-10 sm:h-20 w-24 sm:w-40 rounded-full bg-[#8067A1]/10 blur-xl" />
           </div>
-          <div className="hero-status-badge absolute bottom-[11%] flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#4B9AA5] shadow-[0_0_12px_#4B9AA5]" />
-            <span className="hero-label-muted text-[7px] font-semibold tracking-[0.22em] text-white/45">ONLINE · BUILDING</span>
+          <div className={`hero-status-badge absolute flex items-center gap-1 sm:gap-1.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md ${isMobile ? "bottom-[6%] px-1.5 py-0.5" : "bottom-[11%] px-2.5 py-1"}`}>
+            <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 animate-pulse rounded-full bg-[#4B9AA5] shadow-[0_0_12px_#4B9AA5]" />
+            <span className="hero-label-muted text-[6px] sm:text-[7px] font-semibold tracking-[0.16em] sm:tracking-[0.22em] text-white/45">
+              {isSmallMobile ? "ONLINE" : "ONLINE · BUILDING"}
+            </span>
           </div>
         </div>
 
@@ -182,10 +183,12 @@ export default function FrontendUniverse({ interactive = true, className = "", .
         {nodes.map((node, index) => {
           const accent = accentMap[node.accent];
           const isActive = active === node.id;
-          const stageSize = Math.min(stageBox.w, stageBox.h) || 320;
-          const orbitRadiusPct = distance + node.orbitOffset;
-          const orbitRadiusPx = (orbitRadiusPct / 100) * stageSize;
+          
+          // Map node's orbitOffset (min: -12, max: 30, range: 42) to [minRadius, maxRadius]
+          const t = (node.orbitOffset + 12) / 42;
+          const orbitRadiusPx = minRadius + t * Math.max(0, maxRadius - minRadius);
           const orbitDiameterPx = orbitRadiusPx * 2;
+
           // Design angles are clockwise-from-top; CSS circle() paths start at 3 o'clock.
           const startFromTop = ((node.angle + 90) % 360 + 360) % 360;
           const startFromEast = (startFromTop + 270) % 360;
@@ -223,23 +226,23 @@ export default function FrontendUniverse({ interactive = true, className = "", .
                   aria-label={`${node.label}: ${node.detail}`}
                   onPointerEnter={() => setActive(node.id)}
                   onPointerLeave={() => setActive(null)}
-                  className={`hero-tech-node pointer-events-auto min-w-[80px] sm:min-w-[95px] md:min-w-[110px] max-w-[120px] sm:max-w-[134px] rounded-2xl border bg-[#0D0F15]/84 px-2 py-2 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-[transform,box-shadow,border-color] duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
+                  className={`hero-tech-node pointer-events-auto min-w-[74px] sm:min-w-[95px] md:min-w-[110px] max-w-[105px] sm:max-w-[134px] rounded-xl sm:rounded-2xl border bg-[#0D0F15]/84 px-1.5 py-1.5 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-[transform,box-shadow,border-color] duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
                   style={{
                     transform: "translate(-50%, -50%)",
-                    width: "max(16%, 80px)",
+                    width: "max(15%, 74px)",
                     borderColor: isActive ? accent.border : "rgba(255,255,255,.09)",
                     boxShadow: isActive ? `0 20px 60px rgba(0,0,0,.42), 0 0 30px ${accent.glow}` : "0 20px 50px rgba(0,0,0,.32)",
                   }}
                 >
-                  <div className="mb-1.5 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5">
+                  <div className="mb-1 sm:mb-1.5 flex items-center justify-between gap-1 sm:gap-2">
+                    <div className="flex items-center gap-1 sm:gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full shadow-[0_0_11px_currentColor]" style={{ color: accent.text, background: "currentColor" }} />
-                      <span className="hero-label-bold text-[7px] sm:text-[8px] font-bold tracking-[0.23em] text-white/48">{node.label}</span>
+                      <span className="hero-label-bold text-[6.5px] sm:text-[8px] font-bold tracking-[0.2em] sm:tracking-[0.23em] text-white/48">{node.label}</span>
                     </div>
-                    <span className="hero-label-faint text-[7px] sm:text-[8px] text-white/20">{index + 1}</span>
+                    <span className="hero-label-faint text-[6.5px] sm:text-[8px] text-white/20">{index + 1}</span>
                   </div>
-                  <div className="hero-label-detail text-[9px] sm:text-[10px] font-medium text-white/74">{node.detail}</div>
-                  <div className={`mt-1.5 h-px w-full transition-all duration-500 ${isActive ? "opacity-70" : "opacity-15"}`} style={{ background: `linear-gradient(90deg, ${accent.text}, transparent)` }} />
+                  <div className="hero-label-detail text-[8px] sm:text-[10px] font-medium text-white/74 leading-tight">{node.detail}</div>
+                  <div className={`mt-1 sm:mt-1.5 h-px w-full transition-all duration-500 ${isActive ? "opacity-70" : "opacity-15"}`} style={{ background: `linear-gradient(90deg, ${accent.text}, transparent)` }} />
                 </button>
               </div>
             </div>
@@ -269,14 +272,7 @@ export default function FrontendUniverse({ interactive = true, className = "", .
         ))}
       </div>
 
-      <div className="hero-caption absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-center">
-        <div className="mb-1 flex items-center justify-center gap-2">
-          <span className="hero-divider h-px w-6 bg-white/10" />
-          <span className="hero-label-faint text-[8px] font-semibold tracking-[0.3em] text-white/25">FRONTEND UNIVERSE</span>
-          <span className="hero-divider h-px w-6 bg-white/10" />
-        </div>
-        <p className="hero-label-faint text-[10px] text-white/24">systems · interfaces · experiences</p>
-      </div>
     </div>
   );
 }
+

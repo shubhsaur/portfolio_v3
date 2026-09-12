@@ -24,8 +24,10 @@ import {
   Moon,
   GitMerge,
   GitPullRequest,
+  Gamepad2,
 } from "lucide-react";
 import { navItems } from "@/lib/nav";
+import { site } from "@/lib/content/site";
 import { toast } from "sonner";
 import { useTheme } from "@/components/theme/ThemeContext";
 
@@ -90,7 +92,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   const downloadResume = useCallback(() => {
     onClose();
     const link = document.createElement("a");
-    link.href = "/Shubham_Saurabh_Resume.pdf";
+    link.href = site.resumePath;
     link.download = "Shubham_Saurabh_Resume.pdf";
     link.target = "_blank";
     link.rel = "noopener noreferrer";
@@ -213,6 +215,24 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       icon: Palette,
       perform: () => go("/projects/codelens"),
       keywords: ["codelens", "gemini", "ai", "github", "search"],
+    },
+    {
+      id: "case-portfolio-v3",
+      title: "Personal Portfolio",
+      category: "Case Studies",
+      description: "Interactive portfolio with orbital hero, theme switcher & command palette",
+      icon: FolderGit2,
+      perform: () => go("/projects/portfolio-v3"),
+      keywords: ["portfolio", "personal", "react", "nextjs", "framer motion"],
+    },
+    {
+      id: "case-dealopoly",
+      title: "Dealopoly Arcade",
+      category: "Case Studies",
+      description: "Real-time multiplayer card gaming arcade with WebSockets & heuristic AI",
+      icon: Gamepad2,
+      perform: () => go("/projects/dealopoly"),
+      keywords: ["dealopoly", "arcade", "game", "monopoly", "cards", "multiplayer", "websockets"],
     },
 
     // Open Source

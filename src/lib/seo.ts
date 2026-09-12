@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-/** Placeholder production origin until the live domain is confirmed. */
-export const SITE_URL = "https://shubhamsaurabh.dev";
+/** Production origin. */
+export const SITE_URL = "https://shubhamsaurabh.vercel.app";
 
 const DEFAULT_OG = {
   url: "/og/default.png",
@@ -20,7 +20,7 @@ export const routeMeta = {
   projects: {
     title: "Projects",
     description:
-      "Work and personal builds: Uno Booking Engine, Content AI, Cryptopedia, Codelens, plus PrimeReact open-source.",
+      "Work and personal builds: Uno Booking Engine, Content AI, Cryptopedia, Codelens, Personal Portfolio, plus PrimeReact open-source.",
     path: "/projects",
   },
   experience: {
@@ -32,7 +32,7 @@ export const routeMeta = {
   about: {
     title: "About",
     description:
-      "First-person bio: DTU B.Tech Polymer Science, Noida, 5+ years frontend.",
+      "Frontend engineer based in Noida, India. Component architecture, design systems, open source.",
     path: "/about",
   },
   contact: {
@@ -67,6 +67,14 @@ export const caseStudyMeta: Record<
   codelens: {
     title: "Codelens",
     description: "AI GitHub repo explorer (Gemini, Supabase).",
+  },
+  "portfolio-v3": {
+    title: "Personal Portfolio",
+    description: "Interactive personal portfolio with orbital hero, theme switcher, and command palette.",
+  },
+  dealopoly: {
+    title: "Dealopoly Arcade",
+    description: "Real-time multiplayer card gaming arcade with Fastify WebSockets and heuristic AI bots.",
   },
 };
 

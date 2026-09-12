@@ -8,6 +8,7 @@ import { Search, Command, Download, Mail } from "lucide-react";
 import { navItems, type NavItem } from "@/lib/nav";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 import { cn } from "@/lib/utils";
+import { site } from "@/lib/content/site";
 import { useState } from "react";
 
 interface NavbarProps {
@@ -241,7 +242,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
 
             <div className="mt-[0.75rem] grid grid-cols-2 gap-[0.5rem] border-t border-border pt-[0.75rem]">
               <a
-                href="/Shubham_Saurabh_Resume.pdf"
+                href={site.resumePath}
                 target="_blank"
                 rel="noopener noreferrer"
                 download="Shubham_Saurabh_Resume.pdf"

@@ -101,6 +101,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
         {/* Form */}
         <Reveal
           delay={0.03}
+          direction="left"
           className="col-span-4 sm:col-span-8 lg:col-span-7"
         >
           <Card className="border-border p-5 sm:p-7 md:p-8">
@@ -172,6 +173,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
         {/* Socials + resume rail */}
         <Reveal
           delay={0.06}
+          direction="right"
           className="col-span-4 sm:col-span-8 lg:col-span-4 lg:col-start-9"
         >
           <div className="space-y-6">

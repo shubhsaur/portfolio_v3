@@ -8,6 +8,7 @@ import { ArrowUpRight, Github, Image as ImageIcon } from "lucide-react";
 import { projects } from "@/lib/content/projects";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/motion/Reveal";
 
 /* ──────────────────────────────────────────────
    Apple Liquid Glass — Featured Work Cards
@@ -146,7 +147,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               src={project.thumbnail}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
@@ -269,7 +270,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
 
 export function FeaturedWork() {
   return (
-    <section id="featured" className="scroll-mt-24 md:scroll-mt-28 pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-48 lg:pb-32">
+    <section id="featured" className="scroll-mt-24 md:scroll-mt-28 pt-0 pb-12 md:pb-20 lg:pb-32">
       <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         <div className="space-y-4 text-left mb-12 md:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground">
@@ -278,14 +279,21 @@ export function FeaturedWork() {
               Work
             </span>
           </h2>
-          <p className="max-w-3xl text-lg sm:text-xl text-muted-foreground">
+          <p className="max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
             A curated selection of enterprise SaaS platforms, high-concurrency booking engines, and intelligent web applications built for scale.
           </p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((project) => (
-            <LiquidGlassCard key={project.slug} project={project} />
+          {featured.map((project, index) => (
+            <Reveal
+              key={project.slug}
+              direction={index % 2 === 0 ? "left" : "right"}
+              delay={index * 0.08}
+              className="h-full"
+            >
+              <LiquidGlassCard project={project} />
+            </Reveal>
           ))}
         </div>
       </div>

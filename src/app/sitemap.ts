@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects/content-ai",
     "/projects/cryptopedia",
     "/projects/codelens",
+    "/projects/portfolio-v3",
+    "/projects/dealopoly",
   ] as const;
 
   return [...staticRoutes, ...caseStudies].map((path) => ({

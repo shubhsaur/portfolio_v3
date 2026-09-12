@@ -6,6 +6,7 @@ import { ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/content/site";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function ConnectCallout() {
   const [copied, setCopied] = useState(false);
@@ -28,7 +29,8 @@ export function ConnectCallout() {
       aria-labelledby="connect-callout-heading"
       className="relative mt-8 sm:mt-12 md:mt-16 mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8"
     >
-      <div className="group relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border/70 border-t-white/15 bg-card/60 backdrop-blur-2xl shadow-[var(--ln-shadow-surface)] transition-all duration-500 hover:border-border hover:shadow-2xl">
+      <Reveal direction="right">
+        <div className="group relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border/70 border-t-white/15 bg-card/60 backdrop-blur-2xl shadow-[var(--ln-shadow-surface)] transition-all duration-500 hover:border-border hover:shadow-2xl">
         {/* Theme-reactive ambient radial glows */}
         <div
           aria-hidden="true"
@@ -111,6 +113,7 @@ export function ConnectCallout() {
           </div>
         </div>
       </div>
-    </section>
+    </Reveal>
+  </section>
   );
 }

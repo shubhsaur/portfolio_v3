@@ -16,61 +16,61 @@ export const metadata = buildPageMetadata({
 
 export default function Home() {
   return (
-    <div className="relative pt-20 pb-24 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
+    <div className="relative pt-20 pb-20 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
       {/* HERO SECTION */}
       <section
         id="hero"
         className="relative scroll-mt-28 min-h-[calc(100svh-5rem)] sm:min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-8.75rem)] flex flex-col justify-between"
       >
         <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="relative flex flex-col md:flex-row gap-8 md:items-start">
+          <div className="relative flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 md:items-start">
             {/* IDENTITY CLUSTER */}
             <div className="flex flex-col md:w-[60%]">
               <span
-                className="hero-badge inline-flex items-center gap-2 rounded-full bg-[var(--ln-accent-wash)] w-fit px-3.5 py-1.5 sm:px-5 sm:py-2 text-[0.75rem] sm:text-[0.8125rem] font-medium text-amber-200 ring-1 ring-[var(--ln-accent)]/15"
+                className="hero-badge inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-[var(--ln-accent-wash)] w-fit px-2.5 py-1 sm:px-5 sm:py-2 text-[0.6875rem] sm:text-[0.8125rem] font-medium text-amber-200 ring-1 ring-[var(--ln-accent)]/15"
               >
-                <span className="h-2 w-2 rounded-full bg-[#4B9AA5] shadow-[0_0_0_3px_rgba(75,154,165,0.3)]" />
+                <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#4B9AA5] shadow-[0_0_0_2px_rgba(75,154,165,0.3)] sm:shadow-[0_0_0_3px_rgba(75,154,165,0.3)]" />
                 SDE @ RateGain · Available for collaborations
               </span>
 
-              <h1 className="mt-6 sm:mt-7 md:mt-9 text-balance text-[2rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
-                <span className="block text-[1.25rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
-                <span className="ln-gradient-text">Shubham Saurabh</span>
+              <h1 className="mt-4 sm:mt-7 md:mt-9 text-balance text-[1.75rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
+                <span className="block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
+                <span className="ln-gradient-text whitespace-nowrap">Shubham&nbsp;Saurabh</span>
               </h1>
 
-              <RotatingIntro className="mt-2.5 sm:mt-3.5" />
+              <RotatingIntro className="mt-2 sm:mt-3.5" />
 
-              <p className="hero-body-text mt-5 sm:mt-6 md:mt-7 max-w-[34rem] text-[0.9375rem] sm:text-[1.0625rem] md:text-[1.0625rem] sm:leading-relaxed md:leading-relaxed text-zinc-300">
+              <p className="hero-body-text mt-3 sm:mt-6 md:mt-7 max-w-[34rem] text-[0.875rem] sm:text-[1rem] md:text-[1.0625rem] leading-relaxed text-zinc-300">
                 Frontend Engineer with 5+ years of experience designing and building scalable web
                 applications using React, Next.js, TypeScript, and JavaScript. Specializing in
                 enterprise SaaS platforms, large-scale booking engines, and motion-rich interfaces.
               </p>
 
-              <div className="mt-6 sm:mt-7 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left max-w-[34rem]">
+              <div className="mt-3.5 sm:mt-6 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left max-w-[34rem]">
                 <div>
-                  <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">5+</p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Building</p>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">5+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Building</p>
                 </div>
-                <div className="hidden h-10 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
+                <div className="hidden h-8 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
                 <div>
-                  <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">10+</p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Projects Delivered</p>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">10+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Projects Delivered</p>
                 </div>
-                <div className="hidden h-10 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
+                <div className="hidden h-8 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
                 <div>
-                  <p className="hero-stat-value text-[1.375rem] sm:text-[1.75rem] md:text-[2.25rem] font-semibold text-zinc-50">2+</p>
-                  <p className="hero-stat-label mt-1.5 sm:mt-2 text-[0.6875rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.12em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Open Source Impacts</p>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">2+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Open Source Impacts</p>
                 </div>
               </div>
 
               {/* CTA */}
-              <div className="mt-5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-3">
-                <Button asChild className="min-w-0 flex-1 sm:flex-initial">
+              <div className="mt-3.5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-2.5 sm:gap-3">
+                <Button asChild className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
                   <a href={site.resumePath} download>
                     <span>Download Resume</span>
                   </a>
                 </Button>
-                <Button asChild variant="outline" className="min-w-0 flex-1 sm:flex-initial">
+                <Button asChild variant="outline" className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
                   <a href="/projects">
                     <span>See my Work</span>
                   </a>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
 
         {/* Viewport Bottom Center Scroll Animation */}
-        <div className="relative z-10 pt-6 pb-2 sm:pb-4 flex justify-center w-full">
+        <div className="relative z-10 pt-2 sm:pt-6 pb-2 sm:pb-4 flex justify-center w-full">
           <ScrollIndicator targetId="featured" />
         </div>
       </section>

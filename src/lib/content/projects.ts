@@ -33,7 +33,7 @@ export const projects: ProjectRecord[] = [
     description:
       "High-performance, scalable hotel booking engine (IBE) engineered for multiple international hotel brands. Features end-to-end room selection, dynamic pricing, promotions, 10+ payment gateway integrations, multilingual booking across 20+ locales with currency-aware pricing and RTL support.",
     tech: ["Next.js", "React 19", "TypeScript", "Redux Toolkit", "React Query", "Tailwind CSS"],
-    thumbnail: "/projects/uno-booking.png",
+    thumbnail: "/projects/uno-booking-engine.png",
     liveUrl: "https://uno.rategain.com/hotel-booking-engine/",
     stats: [
       { label: "Gateways", value: "10+ Integrated" },
@@ -150,4 +150,73 @@ export const projects: ProjectRecord[] = [
       ],
     },
   },
+  {
+    id: "portfolio-v3",
+    slug: "portfolio-v3",
+    title: "Personal Portfolio",
+    group: "personal",
+    categories: ["Web"],
+    badge: "Personal Portfolio",
+    description:
+      "Modern, high-performance developer portfolio engineered with Next.js 16, React 19, and Tailwind CSS v4. Features an interactive orbital canvas hero, dynamic theme color switcher, fluid Framer Motion reveals, command palette (Cmd+K), and responsive layouts.",
+    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion"],
+    thumbnail: "/projects/portfolio.png",
+    liveUrl: "https://shubhamsaurabh.vercel.app",
+    githubUrl: "https://github.com/shubhsaur/portfolio_v3",
+    stats: [
+      { label: "Stack", value: "Next.js 16 & React 19" },
+      { label: "Styling", value: "Tailwind CSS v4" },
+      { label: "Motion", value: "Framer Motion & Canvas" },
+    ],
+    caseStudy: {
+      lede:
+        "An expressive, motion-driven personal portfolio engineered to showcase production-grade frontend engineering, accessible UI architecture, and fluid interactive experiences.",
+      highlights: [
+        "Interactive orbital hero visualization built with HTML5 Canvas and dynamic Framer Motion orbits that scale seamlessly across device viewports.",
+        "Dynamic theme accent switcher powered by OKLCH CSS variables and persistent state across sessions.",
+        "Full-featured Command Menu (Cmd+K) supporting quick route navigation, theme switching, resume download, and keyboard shortcuts.",
+        "Responsive project case study architecture with smooth layout transitions and directional scroll reveals.",
+      ],
+      architecture: [
+        "Next.js 16 App Router foundation leveraging React 19 features and strict TypeScript type-safety.",
+        "Tailwind CSS v4 styling architecture with custom theme design tokens and micro-interactions.",
+        "Directional scroll reveal system built on Framer Motion with reduced-motion accessibility accommodations.",
+      ],
+    },
+  },
+  {
+    id: "dealopoly",
+    slug: "dealopoly",
+    title: "Dealopoly Arcade",
+    group: "personal",
+    categories: ["Web", "AI"],
+    badge: "Real-Time Multiplayer",
+    description:
+      "Modern web-based card platform built for speed, strategy, and competitive fun. Play real-time multiplayer card games (Monodeal and Least Count) with friends via private room codes or challenge heuristic AI bots across multiple difficulty tiers.",
+    tech: ["Next.js 16", "React 19", "Fastify", "WebSockets", "Redis", "Drizzle ORM"],
+    thumbnail: "/projects/dealopoly.png",
+    liveUrl: "https://dealopoly.vercel.app",
+    githubUrl: "https://github.com/shubhsaur/dealopoly",
+    stats: [
+      { label: "Latency", value: "Sub-100ms Sync" },
+      { label: "Engine", value: "Deterministic State" },
+      { label: "AI Bots", value: "3 Difficulty Tiers" },
+    ],
+    caseStudy: {
+      lede:
+        "A modern web-based card platform designed for high-concurrency multiplayer battles, zero-lag move replication, and tactical play against deterministic heuristic AI bots.",
+      highlights: [
+        "Fastify WebSocket server with server-authoritative state validation, disconnect recovery timers, and optimistic client dispatch.",
+        "Custom deterministic game engines for Monodeal (property trading) and Least Count (bluff & hand deduction).",
+        "Three-tiered heuristic bot engine (Easy, Medium, Hard) featuring card counting, risk-calculated declarations, and strategic reaction plays.",
+        "Redis Pub/Sub architecture enabling distributed room state syncing and horizontal game server scaling.",
+      ],
+      architecture: [
+        "Turborepo monorepo with Next.js 16 App Router frontend and modular TypeScript packages (@dealopoly/game-engine, @dealopoly/db, @dealopoly/redis).",
+        "PostgreSQL with Drizzle ORM for match history, player profiles, and persistent leaderboard stats.",
+        "Framer Motion and custom CSS 3D transforms for physical card flipping, dealing animations, and haptic feedback.",
+      ],
+    },
+  },
 ];
+

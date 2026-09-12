@@ -102,10 +102,10 @@ export function OpenSourceSection() {
             return (
               <motion.div
                 key={contrib.id}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.1 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, x: index % 2 === 0 ? -28 : 28 }}
+                whileInView={prefersReducedMotion ? undefined : { opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, amount: "some" }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 }}
               >
                 <SpotlightCard
                   spotlightColor="rgba(93, 228, 199, 0.45)"

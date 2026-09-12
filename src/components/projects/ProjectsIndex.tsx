@@ -61,31 +61,33 @@ export function ProjectsIndex() {
       />
 
       {/* Apple-style Capsule Filter Bar */}
-      <div className="flex justify-start overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-        <div className="project-filter-capsule inline-flex items-center gap-1 sm:gap-1.5 rounded-full p-1.5">
-          {filterCategories.map((category) => {
-            const isActive = activeCategory === category;
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                className={cn(
-                  "project-filter-btn relative rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap cursor-pointer select-none",
-                  isActive && "!text-[var(--ln-accent-foreground)] font-semibold"
-                )}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="projectFilterActivePill"
-                    className="absolute inset-0 rounded-full bg-[var(--ln-accent)] shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
-                    transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                  />
-                )}
-                <span className="relative z-10">{category}</span>
-              </button>
-            );
-          })}
+      <div className="flex justify-start py-2">
+        <div className="project-filter-capsule relative w-full sm:w-fit max-w-full rounded-full p-1.5 overflow-hidden">
+          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-none px-1 sm:px-0 scroll-smooth">
+            {filterCategories.map((category) => {
+              const isActive = activeCategory === category;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
+                  className={cn(
+                    "project-filter-btn relative shrink-0 rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap cursor-pointer select-none",
+                    isActive && "!text-[var(--ln-accent-foreground)] font-semibold"
+                  )}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="projectFilterActivePill"
+                      className="absolute inset-0 rounded-full bg-[var(--ln-accent)] shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
+                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10">{category}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -102,7 +104,12 @@ export function ProjectsIndex() {
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {workProjects.map((project, index) => (
-                  <ProjectCard key={project.id} project={project} delay={index * 0.03} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    delay={index * 0.03}
+                    direction={index % 2 === 0 ? "left" : "right"}
+                  />
                 ))}
               </div>
             </section>
@@ -118,7 +125,12 @@ export function ProjectsIndex() {
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {personalProjects.map((project, index) => (
-                  <ProjectCard key={project.id} project={project} delay={index * 0.03} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    delay={index * 0.03}
+                    direction={index % 2 === 0 ? "left" : "right"}
+                  />
                 ))}
               </div>
             </section>
@@ -135,12 +147,14 @@ export function ProjectsIndex() {
 function ProjectCard({
   project,
   delay,
+  direction,
 }: {
   project: (typeof projects)[number];
   delay: number;
+  direction?: "left" | "right";
 }) {
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} direction={direction}>
       <article className="group flex h-full flex-col overflow-hidden rounded-[var(--ln-radius-card)] border border-border bg-card transition-colors hover:border-[var(--ln-accent)]/40">
         {/* ── Thumbnail area ── */}
         <Link
@@ -152,7 +166,7 @@ function ProjectCard({
               src={project.thumbnail}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (

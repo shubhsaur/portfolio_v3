@@ -96,6 +96,7 @@ export function ExperiencePage() {
               return (
                 <Reveal
                   key={exp.id}
+                  direction={index % 2 === 0 ? "left" : "right"}
                   delay={0.06 + index * 0.03}
                   className="relative pl-12 sm:pl-16 md:pl-20"
                   viewport={{ once: true, margin: "120px 0px" }}

@@ -353,6 +353,7 @@ html {
 html,
 body {
   max-width: 100vw;
+  overflow-x: clip;
 }
 
 body {
@@ -1322,12 +1323,3 @@ html[data-color-mode="light"] .ln-btn-outline:hover * {
   }
 }
 
-/* Mobile: shrink the hero orb so its orbiting cards and ambient glow
-   don't overflow the viewport horizontally. */
-@media (max-width: 768px) {
-  .fu-root {
-    overflow: hidden;
-    transform: scale(0.75);
-    transform-origin: top center;
-  }
-}

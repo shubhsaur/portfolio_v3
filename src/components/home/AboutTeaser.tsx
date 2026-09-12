@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, GraduationCap, Briefcase, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function AboutTeaser() {
   return (
@@ -10,7 +11,8 @@ export function AboutTeaser() {
       aria-labelledby="about-teaser-heading"
       className="relative mt-8 sm:mt-12 md:mt-16 mx-auto max-w-[87.5rem] px-4 sm:px-6 lg:px-8"
     >
-      <div className="group relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border/70 border-t-white/15 bg-card/60 backdrop-blur-2xl shadow-[var(--ln-shadow-surface)] transition-all duration-500 hover:border-border hover:shadow-2xl">
+      <Reveal direction="left">
+        <div className="group relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border/70 border-t-white/15 bg-card/60 backdrop-blur-2xl shadow-[var(--ln-shadow-surface)] transition-all duration-500 hover:border-border hover:shadow-2xl">
         {/* Theme-reactive ambient radial glows */}
         <div
           aria-hidden="true"
@@ -87,6 +89,7 @@ export function AboutTeaser() {
           </div>
         </div>
       </div>
-    </section>
+    </Reveal>
+  </section>
   );
 }
