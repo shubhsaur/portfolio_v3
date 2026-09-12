@@ -30,9 +30,9 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   return (
     <header className="pointer-events-none fixed inset-x-0 z-40 flex justify-center" style={{ top: "var(--nav-top)" }}>
       <div className="pointer-events-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between rounded-full border border-border bg-background/70 px-[var(--nav-px)] py-[var(--nav-py)] shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl backdrop-saturate-150">
+        <div className="flex items-center justify-between rounded-full border border-border bg-background/70 px-[var(--nav-px)] py-[var(--nav-py)] shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl backdrop-saturate-150 transform-gpu will-change-transform">
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-[0.5rem]">
+          <Link href="/" prefetch={true} className="group flex items-center gap-[0.5rem]">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -79,6 +79,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                   <Link
                     key={item.href}
                     href={item.href}
+                    prefetch={true}
                     className={cn(
                       "group relative rounded-full transition-colors duration-200",
                       "focus-visible:ln-ring-focus",
@@ -211,6 +212,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                   <Link
                     key={item.href}
                     href={item.href}
+                    prefetch={true}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "group relative flex items-center justify-between rounded-full px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium transition-colors",

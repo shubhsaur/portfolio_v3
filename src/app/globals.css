@@ -437,6 +437,8 @@ html[data-color-mode="light"] .ln-glass-card {
   border-color: var(--ln-glass-border);
   box-shadow: var(--ln-glass-shadow);
   backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  transform: translateZ(0);
 }
 
 html[data-color-mode="light"] .ln-glass-card:hover {
@@ -627,6 +629,8 @@ html[data-color-mode="light"] .hero-social-link:hover {
   border-radius: 999px;
   border: 1px solid var(--ln-border-strong);
   backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  transform: translateZ(0);
 }
 
 /* Project Filter Capsule — mixes seamlessly with hero backdrop */
@@ -818,7 +822,9 @@ html[data-color-mode="light"] .lg-card {
   background: rgba(255, 255, 255, 0.70) !important;
   border-color: rgba(42, 38, 52, 0.10) !important;
   border-top-color: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(40px) saturate(1.8) !important;
+  backdrop-filter: blur(20px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
+  transform: translateZ(0);
   box-shadow:
     0 8px 32px rgba(18, 17, 26, 0.05),
     0 1px 4px rgba(18, 17, 26, 0.02),
@@ -1350,5 +1356,33 @@ html[data-color-mode="light"] .ln-btn-outline:hover * {
   .nav-logo-spin {
     animation: none !important;
   }
+}
+
+/* =============================================
+   SAFARI & WEBKIT HARDWARE ACCELERATION
+   ============================================= */
+
+/* GPU layer promotion for continuous orbit travelers & spinners in WebKit */
+.fu-orbit-traveler {
+  will-change: offset-distance;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.nav-logo-spin,
+.animate-spin-slow {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Ensure Safari composites glass navigation without CPU stalls */
+header > div,
+.ln-glass,
+.project-filter-capsule {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
