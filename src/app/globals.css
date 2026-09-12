@@ -1,43 +1,341 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Core Liquid Noir surfaces */
+  --ln-gold: #e8c547;
+  --ln-success: #5de4c7;
+  --ln-accent-cyan: var(--ln-success);
+
+  --ln-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ln-duration-micro: 180ms;
+  --ln-duration-page: 320ms;
+  --ln-scroll-mt: 7rem;
+  --ln-radius-card: 1.25rem;
+  --ln-radius-hero: 1.75rem;
+  --ln-radius-pill: 9999px;
+  --ln-radius: var(--ln-radius-card);
+  --ln-btn-h: 2.5rem;
+  --ln-btn-h-desktop: 2.75rem;
+
+  /* Dark Liquid Noir (default SSR) */
   --ln-bg: #06060a;
   --ln-bg-elevated: #0b0b12;
   --ln-bg-card: rgba(17, 17, 25, 0.96);
   --ln-bg-soft: rgba(11, 11, 18, 0.9);
-
-  /* Text */
   --ln-text-primary: #f0f0f5;
+  --ln-text-secondary: #c8c8d4;
+  --ln-text-body: #a8a8b8;
   --ln-text-muted: #8e8ea0;
   --ln-text-soft: #55556a;
+  --ln-border-subtle: rgba(255, 255, 255, 0.08);
+  --ln-border-strong: rgba(255, 255, 255, 0.14);
+  --ln-shadow-surface: 0 18px 55px rgba(0, 0, 0, 0.7);
+  --ln-glass: rgba(6, 6, 12, 0.8);
+  --ln-glass-border: rgba(255, 255, 255, 0.08);
+  --ln-glass-border-strong: rgba(255, 255, 255, 0.14);
+  --ln-glass-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
+  --ln-mesh-gold: rgba(232, 197, 71, 0.12);
+  --ln-mesh-cyan: rgba(93, 228, 199, 0.16);
 
-  /* Accents */
-  --ln-accent-gold: #e8c547;
-  --ln-accent-cyan: #5de4c7;
+  /* Card tokens */
+  --ln-card-bg: var(--ln-bg-card);
+  --ln-card-border: var(--ln-border-subtle);
+  --ln-card-border-hover: var(--ln-border-strong);
+  --ln-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --ln-card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+  /* Accent state tokens */
+  --ln-accent-hover: color-mix(in srgb, var(--ln-accent) 85%, white);
+  --ln-accent-active: color-mix(in srgb, var(--ln-accent) 70%, white);
+
+  /* Navbar fluid sizing (375px → 1536px) */
+  --nav-top: clamp(0.5rem, 0.35rem + 0.4vw, 1rem);
+  --nav-px: clamp(0.75rem, 0.6rem + 0.4vw, 1.25rem);
+  --nav-py: clamp(0.45rem, 0.38rem + 0.2vw, 0.65rem);
+  --nav-logo-size: clamp(2.375rem, 2rem + 0.5vw, 2.875rem);
+  --nav-logo-text: clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);
+  --nav-logo-tracking: clamp(0.12em, 0.11em + 0.01em, 0.15em);
+  --nav-gap: clamp(0.375rem, 0.3rem + 0.2vw, 0.625rem);
+  --nav-mobile-gap: clamp(0.375rem, 0.2rem + 0.13vw, 0.5rem);
+  --nav-mobile-btn: clamp(2.375rem, 2.2rem + 0.6vw, 2.75rem);
+  --nav-item-px: clamp(0.75rem, 0.65rem + 0.1vw, 0.875rem);
+  --nav-item-py: clamp(0.3125rem, 0.28rem + 0.05vw, 0.375rem);
+  --nav-icon: clamp(0.9375rem, 0.7rem + 0.07vw, 1rem);
+  --nav-search-px: clamp(0.625rem, 0.5rem + 0.13vw, 0.75rem);
+  --nav-search-py: clamp(0.3125rem, 0.28rem + 0.05vw, 0.375rem);
+  --nav-dropdown-px: clamp(0.625rem, 0.5rem + 0.2vw, 0.75rem);
+  --nav-dropdown-py: clamp(0.875rem, 0.44rem + 0.16vw, 1rem);
+
+  /* Accents (overwritten by data-accent + JS dual-write) */
+  --ln-accent: #e8c547;
+  --ln-accent-gold: var(--ln-accent);
+  --ln-accent-foreground: #1c1917;
   --ln-accent-coral: #f87171;
   --ln-accent-lavender: #a78bfa;
-
-  /* Borders */
-  --ln-border-subtle: rgba(255, 255, 255, 0.04);
-  --ln-border-strong: rgba(255, 255, 255, 0.1);
-
-  /* Gradients */
   --ln-gradient-primary: linear-gradient(
     135deg,
     #e8c547 0%,
     #f87171 40%,
     #5de4c7 100%
   );
+  --ln-ring: rgba(232, 197, 71, 0.7);
+  --ln-accent-wash: color-mix(in srgb, var(--ln-accent) 12%, transparent);
 
+  /* shadcn tokens */
+  --background: var(--ln-bg);
+  --foreground: var(--ln-text-primary);
+  --card: var(--ln-bg-card);
+  --card-foreground: var(--ln-text-primary);
+  --popover: var(--ln-bg-elevated);
+  --popover-foreground: var(--ln-text-primary);
+  --primary: var(--ln-accent);
+  --primary-foreground: var(--ln-accent-foreground);
+  --secondary: var(--ln-bg-elevated);
+  --secondary-foreground: var(--ln-text-primary);
+  --muted: var(--ln-bg-soft);
+  --muted-foreground: var(--ln-text-muted);
+  --accent: var(--ln-accent-wash);
+  --accent-foreground: var(--ln-text-primary);
+  --destructive: #f87171;
+  --border: var(--ln-border-subtle);
+  --input: var(--ln-border-strong);
+  --ring: var(--ln-ring);
+  --radius: var(--ln-radius-card);
+}
+
+/* Light mode (Ivory/Slate) - Complete palette plan */
+html[data-color-mode="light"] {
+  color-scheme: light;
+
+  /* === BACKGROUNDS === */
+  --ln-bg: #F8F4ED;
+  --ln-bg-secondary: #EDE6DA;
+  --ln-bg-elevated: #FFFFFF;
+  --ln-bg-card: rgba(255, 255, 255, 0.94);
+  --ln-bg-soft: rgba(248, 244, 237, 0.85);
+
+  /* === TYPOGRAPHY (Warm obsidian-to-slate hierarchy) === */
+  --ln-text-primary: #12111A;     /* Obsidian Ink — 17.09:1 (AAA) */
+  --ln-text-secondary: #2A2634;   /* Smoked Slate — 13.44:1 (AAA) */
+  --ln-text-body: #4D4757;        /* Warm Graphite — 8.14:1 (AAA) */
+  --ln-text-muted: #6B6577;       /* Muted Steel — 5.10:1 (AA) */
+  --ln-text-soft: #8D8699;        /* Soft Slate — 3.19:1 */
+
+  /* === BORDERS === */
+  --ln-border-subtle: rgba(42, 38, 52, 0.10);
+  --ln-border-strong: rgba(42, 38, 52, 0.22);
+  --ln-shadow-surface: 0 8px 32px rgba(18, 17, 26, 0.08);
+
+  /* === GLASS === */
+  --ln-glass: rgba(255, 255, 255, 0.82);
+  --ln-glass-border: rgba(42, 38, 52, 0.10);
+  --ln-glass-border-strong: rgba(42, 38, 52, 0.20);
+  --ln-glass-shadow: 0 8px 32px rgba(18, 17, 26, 0.06);
+
+  /* === MESH (hero backdrop gradient hints) === */
+  --ln-mesh-gold: rgba(142, 85, 19, 0.10);
+  --ln-mesh-cyan: rgba(9, 115, 138, 0.08);
+
+  /* === ACCENTS (Default: Imperial Amber) === */
+  --ln-accent: #8E5513;
+  --ln-accent-hover: #75440C;
+  --ln-accent-active: #603608;
+  --ln-accent-gold: #8E5513;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #A85A1D;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #8E5513 0%,
+    #A83E28 50%,
+    #8C2F5E 100%
+  );
+  --ln-ring: rgba(142, 85, 19, 0.45);
+  --ln-accent-wash: color-mix(in srgb, var(--ln-accent) 12%, transparent);
+
+  /* === CARDS === */
+  --ln-card-bg: rgba(255, 255, 255, 0.94);
+  --ln-card-border: rgba(42, 38, 52, 0.10);
+  --ln-card-border-hover: rgba(42, 38, 52, 0.22);
+  --ln-card-shadow: 0 4px 20px rgba(18, 17, 26, 0.06);
+  --ln-card-shadow-hover: 0 10px 30px rgba(18, 17, 26, 0.12);
+
+  /* === FOG (decorative overlays) === */
+  --ln-fog-highlight: #FFFFFF;
+  --ln-fog-body: #F0E9DD;
+  --ln-fog-shadow: #DDD5C8;
+  --ln-fog-tint: #8E5513;
+
+  /* === DESTRUCTIVE === */
+  --destructive: #DC2626;
+}
+
+html[data-color-mode="dark"] {
+  color-scheme: dark;
+  /* Preserve original excellent dark mode typography */
+  --ln-text-primary: #f0f0f5;
+  --ln-text-muted: #8e8ea0;
+  --ln-text-soft: #55556a;
+}
+
+html[data-color-mode="dark"][data-accent="gold"] {
+  --ln-accent: #e8c547;
+  --ln-accent-foreground: #1c1917;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #e8c547 0%,
+    #f87171 40%,
+    #5de4c7 100%
+  );
   --ln-ring: rgba(232, 197, 71, 0.7);
 }
 
+html[data-color-mode="dark"][data-accent="emerald"] {
+  --ln-accent: #10b981;
+  --ln-accent-foreground: #04110c;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #10b981 0%,
+    #06b6d4 50%,
+    #3b82f6 100%
+  );
+  --ln-ring: rgba(16, 185, 129, 0.7);
+}
+
+html[data-color-mode="dark"][data-accent="violet"] {
+  --ln-accent: #a855f7;
+  --ln-accent-foreground: #fafafa;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #a855f7 0%,
+    #ec4899 50%,
+    #6366f1 100%
+  );
+  --ln-ring: rgba(168, 85, 247, 0.7);
+}
+
+html[data-color-mode="dark"][data-accent="cyan"] {
+  --ln-accent: #06b6d4;
+  --ln-accent-foreground: #041014;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #06b6d4 0%,
+    #3b82f6 50%,
+    #8b5cf6 100%
+  );
+  --ln-ring: rgba(6, 182, 212, 0.7);
+}
+
+html[data-color-mode="light"][data-accent="gold"] {
+  --ln-accent: #8E5513;
+  --ln-accent-hover: #75440C;
+  --ln-accent-active: #603608;
+  --ln-accent-gold: #8E5513;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #A85A1D;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #8E5513 0%,
+    #A83E28 50%,
+    #8C2F5E 100%
+  );
+  --ln-ring: rgba(142, 85, 19, 0.45);
+}
+
+html[data-color-mode="light"][data-accent="emerald"] {
+  --ln-accent: #0E7656;
+  --ln-accent-hover: #0B5C43;
+  --ln-accent-active: #084833;
+  --ln-accent-gold: #0E7656;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #158C68;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #0E7656 0%,
+    #0D6E7A 50%,
+    #6E38A8 100%
+  );
+  --ln-ring: rgba(14, 118, 86, 0.45);
+}
+
+html[data-color-mode="light"][data-accent="violet"] {
+  --ln-accent: #6E38A8;
+  --ln-accent-hover: #5A2D8B;
+  --ln-accent-active: #47236E;
+  --ln-accent-gold: #6E38A8;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #8547C8;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #6E38A8 0%,
+    #9B2C78 50%,
+    #B84332 100%
+  );
+  --ln-ring: rgba(110, 56, 168, 0.45);
+}
+
+html[data-color-mode="light"][data-accent="cyan"] {
+  --ln-accent: #09738A;
+  --ln-accent-hover: #075C6E;
+  --ln-accent-active: #054857;
+  --ln-accent-gold: #09738A;
+  --ln-accent-foreground: #FFFFFF;
+  --ln-accent-terracotta: #A83E28;
+  --ln-accent-rose: #8C2F5E;
+  --ln-accent-lavender: #6E38A8;
+  --ln-accent-sage: #0E7656;
+  --ln-accent-secondary: #0B89A4;
+  --ln-gradient-primary: linear-gradient(
+    135deg,
+    #09738A 0%,
+    #0E7656 50%,
+    #6E38A8 100%
+  );
+  --ln-ring: rgba(9, 115, 138, 0.45);
+}
+
 @theme inline {
-  --color-background: var(--ln-bg);
-  --color-foreground: var(--ln-text-primary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --font-sans: var(--font-outfit);
   --font-mono: var(--font-space-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 *,
@@ -46,24 +344,28 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
-  background-color: var(--ln-bg);
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(185, 130, 74, 0.06), transparent),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(128, 103, 161, 0.04), transparent),
+    linear-gradient(175deg, #F8F4ED 0%, #F0E9DD 50%, #F8F4ED 100%);
   color: var(--ln-text-primary);
   font-family: var(--font-outfit), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  overflow-x: hidden;
 }
 
 .scrollbar-none {
@@ -78,6 +380,10 @@ body {
   color-scheme: dark;
 }
 
+html[data-color-mode="light"].ln-root {
+  color-scheme: light;
+}
+
 .ln-body {
   min-height: 100vh;
   background:
@@ -85,26 +391,246 @@ body {
     radial-gradient(circle at 100% 0%, #111827 0, transparent 45%),
     radial-gradient(circle at 0% 100%, #0b1120 0, transparent 45%),
     radial-gradient(circle at 100% 100%, #1f2933 0, transparent 45%),
-    radial-gradient(circle at 50% 10%, rgba(232, 197, 71, 0.12), transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(93, 228, 199, 0.16), transparent 55%),
+    radial-gradient(circle at 50% 10%, var(--ln-mesh-gold), transparent 55%),
+    radial-gradient(circle at 80% 80%, var(--ln-mesh-cyan), transparent 55%),
     linear-gradient(145deg, #020617 0%, #02010a 40%, #020617 100%);
-  background-attachment: fixed;
+}
+
+html[data-color-mode="light"] .ln-body {
+  background:
+    radial-gradient(circle at 0% 0%, #F5EFE5 0, transparent 42%),
+    radial-gradient(circle at 100% 0%, #F2E9DC 0, transparent 42%),
+    radial-gradient(circle at 0% 100%, #EFE5D9 0, transparent 45%),
+    radial-gradient(circle at 100% 100%, #ECE1D6 0, transparent 45%),
+    radial-gradient(circle at 50% 10%, color-mix(in srgb, var(--ln-accent) 18%, transparent), transparent 55%),
+    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--ln-success) 12%, transparent), transparent 55%),
+    linear-gradient(145deg, var(--ln-bg) 0%, var(--ln-bg-secondary) 40%, var(--ln-bg) 100%);
+}
+
+/* === GLASS CARD VARIANT (light mode) === */
+html[data-color-mode="light"] .ln-glass-card {
+  background: var(--ln-glass);
+  border-color: var(--ln-glass-border);
+  box-shadow: var(--ln-glass-shadow);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+html[data-color-mode="light"] .ln-glass-card:hover {
+  border-color: var(--ln-glass-border-strong);
+}
+
+/* =============================================
+   HERO LIGHT MODE OVERRIDES
+   ============================================= */
+
+/* --- FrontendUniverse + InteractiveSOrb shared --- */
+
+/* Orbit rings: border-white/XX is invisible on light bg → refined slate borders */
+html[data-color-mode="light"] .hero-orbit-ring {
+  border-color: rgba(42, 38, 52, 0.12) !important;
+}
+html[data-color-mode="light"] .hero-orbit-ring[class*="border-dashed"] {
+  border-color: rgba(42, 38, 52, 0.09) !important;
+}
+
+/* Glass halo/frame: transparent white → translucent white with clean border */
+html[data-color-mode="light"] .hero-glass-halo {
+  background: rgba(255, 255, 255, 0.60) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 60px rgba(18, 17, 26, 0.06) !important;
+}
+
+/* Central core / orb: translucent warm white + refined glow */
+html[data-color-mode="light"] .hero-core,
+html[data-color-mode="light"] .hero-orb {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(42, 38, 52, 0.14) !important;
+  box-shadow:
+    0 0 60px 10px color-mix(in srgb, var(--ln-accent) 14%, transparent),
+    0 0 120px 30px color-mix(in srgb, var(--ln-accent-secondary) 8%, transparent),
+    0 20px 60px rgba(18, 17, 26, 0.08) !important;
+}
+
+/* Tech nodes: light glass cards with subtle elevation */
+html[data-color-mode="light"] .hero-tech-node {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(18, 17, 26, 0.06) !important;
+}
+html[data-color-mode="light"] .hero-tech-node:hover {
+  border-color: rgba(42, 38, 52, 0.22) !important;
+  box-shadow: 0 12px 32px rgba(18, 17, 26, 0.09) !important;
+}
+
+/* Status badges inside orbs */
+html[data-color-mode="light"] .hero-status-badge {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+}
+
+/* Orbit pill labels: light glass */
+html[data-color-mode="light"] .hero-orb-label {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+}
+html[data-color-mode="light"] .hero-orb-label:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Hover helper: light glass */
+html[data-color-mode="light"] .hero-helper {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(42, 38, 52, 0.12) !important;
+}
+
+/* --- Text label overrides (warm hierarchy) --- */
+html[data-color-mode="light"] .hero-label-bold {
+  color: var(--ln-text-primary) !important;
+}
+html[data-color-mode="light"] .hero-label-detail {
+  color: var(--ln-text-secondary) !important;
+}
+html[data-color-mode="light"] .hero-label-muted {
+  color: var(--ln-text-muted) !important;
+}
+html[data-color-mode="light"] .hero-label-faint {
+  color: var(--ln-text-soft) !important;
+}
+
+/* --- Dividers: subtle slate rule --- */
+html[data-color-mode="light"] .hero-divider {
+  background-color: rgba(42, 38, 52, 0.10) !important;
+}
+
+/* --- Stars / particles: stronger saturation + darker cores for light bg --- */
+html[data-color-mode="light"] .hero-star {
+  filter: saturate(1.3) brightness(0.88);
+}
+
+/* --- Ambient lighting: brighter, more saturated for light bg --- */
+html[data-color-mode="light"] .fu-ambient {
+  filter: saturate(1.4) brightness(1.3);
+}
+
+/* =============================================
+   CODE CARD LIGHT MODE OVERRIDES
+   Code editor stays dark, but outer chrome adapts
+   ============================================= */
+
+html[data-color-mode="light"] .code-card {
+  border-color: rgba(42, 38, 52, 0.15) !important;
+  box-shadow: 0 12px 40px rgba(18, 17, 26, 0.08) !important;
+}
+
+html[data-color-mode="light"] .code-editor-bar {
+  border-color: rgba(42, 38, 52, 0.10) !important;
+}
+
+html[data-color-mode="light"] .code-reset-btn {
+  border-color: rgba(42, 38, 52, 0.15) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+  color: var(--ln-text-primary) !important;
+}
+html[data-color-mode="light"] .code-reset-btn:hover {
+  color: var(--ln-accent) !important;
+}
+
+html[data-color-mode="light"] .code-console {
+  border-color: rgba(42, 38, 52, 0.10) !important;
+}
+
+/* =============================================
+   HERO PAGE TEXT LIGHT MODE OVERRIDES
+   ============================================= */
+
+/* Badge: text-amber-200 → accent-colored text */
+html[data-color-mode="light"] .hero-badge {
+  color: var(--ln-accent) !important;
+}
+
+/* Rotating Intro text: text-amber-200 → dark jewel amber/accent in light mode */
+html[data-color-mode="light"] .hero-rotating-intro,
+html[data-color-mode="light"] .hero-rotating-intro .ln-cursor {
+  color: var(--ln-accent) !important;
+}
+
+/* Body text: text-zinc-300 → dark warm body */
+html[data-color-mode="light"] .hero-body-text {
+  color: var(--ln-text-body) !important;
+}
+
+/* Stat values: text-zinc-50 → primary heading */
+html[data-color-mode="light"] .hero-stat-value {
+  color: var(--ln-text-primary) !important;
+}
+
+/* Stat labels: text-zinc-500 → muted */
+html[data-color-mode="light"] .hero-stat-label {
+  color: var(--ln-text-muted) !important;
+}
+
+/* Social icon buttons: dark glass → light glass */
+html[data-color-mode="light"] .hero-social-link {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
+  color: var(--ln-text-muted) !important;
+}
+html[data-color-mode="light"] .hero-social-link:hover {
+  border-color: var(--ln-accent) !important;
+  color: var(--ln-accent) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-color-mode="dark"] .ln-body {
+    background-attachment: fixed;
+  }
 }
 
 .ln-surface {
   background-color: var(--ln-bg-card);
-  border-radius: 1.5rem;
+  border-radius: var(--ln-radius-card);
   border: 1px solid var(--ln-border-subtle);
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(248, 250, 252, 0.01);
+  box-shadow: var(--ln-shadow-surface);
 }
 
 .ln-glass {
-  background-color: rgba(6, 6, 12, 0.8);
+  background-color: var(--ln-glass);
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid var(--ln-border-strong);
   backdrop-filter: blur(22px) saturate(140%);
+}
+
+/* Project Filter Capsule — mixes seamlessly with hero backdrop */
+.project-filter-capsule {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+html[data-color-mode="light"] .project-filter-capsule {
+  background: rgba(255, 255, 255, 0.40);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
+}
+
+.project-filter-btn {
+  color: var(--ln-text-muted);
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-filter-btn:hover {
+  color: var(--ln-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html[data-color-mode="light"] .project-filter-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .ln-gradient-text {
@@ -125,7 +651,7 @@ body {
 
 .ln-ring-focus {
   outline: none;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8), 0 0 0 2px var(--ln-ring);
+  box-shadow: 0 0 0 1px var(--ln-bg), 0 0 0 3px var(--ln-ring);
 }
 
 .ln-cursor {
@@ -143,13 +669,657 @@ body {
   }
 }
 
+/* =============================================
+   FRONTEND UNIVERSE ORBIT ANIMATIONS
+   ============================================= */
+
+@keyframes fu-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fu-orbit-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Motion-path travel for Frontend Universe cards (locked to each ring) */
+@keyframes fu-orbit-travel {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+/* Loader conic-gradient rim spin */
+@keyframes ln-loader-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Slow continuous logo rotation */
+@keyframes ln-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: ln-spin-slow 24s linear infinite;
+  will-change: transform;
+}
+
+/* Navbar logo hover spin */
+.nav-logo-spin {
+  animation: ln-spin-slow 10s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.group:hover .nav-logo-spin,
+.nav-logo-spin:hover {
+  animation-play-state: running;
+}
+
+/* ── Loader light mode ── */
+html[data-color-mode="light"] .ln-loader-root {
+  --loader-ring-1: rgba(139, 122, 107, 0.18);
+  --loader-ring-2: rgba(139, 122, 107, 0.14);
+  --loader-ring-3: rgba(139, 122, 107, 0.10);
+}
+html[data-color-mode="light"] .ln-loader-root [style*="border-color: rgba(185"] {
+  border-color: rgba(139, 122, 107, 0.18) !important;
+}
+html[data-color-mode="light"] .ln-loader-root [style*="border-color: rgba(128"] {
+  border-color: rgba(139, 122, 107, 0.14) !important;
+}
+html[data-color-mode="light"] .ln-loader-root [style*="border-color: rgba(75"] {
+  border-color: rgba(139, 122, 107, 0.10) !important;
+}
+
+/* Orbit path rings (light mode — warm brown) */
+html[data-color-mode="light"] .fu-orbit-path {
+  border-color: rgba(139, 122, 107, 0.22) !important;
+}
+
+/* =============================================
+   LIQUID GLASS CARDS (FeaturedWork)
+   ============================================= */
+
+/* Icon button inside glass cards */
+.lg-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(1.75rem, 2.2vw, 2rem);
+  height: clamp(1.75rem, 2.2vw, 2rem);
+  border-radius: 9999px;
+  border: 1px solid var(--ln-glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  transition: all 200ms ease;
+}
+.lg-icon-btn:hover {
+  border-color: var(--ln-glass-border-strong);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Tech pill */
+.lg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid var(--ln-glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.625rem;
+  font-size: clamp(0.5625rem, 0.55rem + 0.1vw, 0.6875rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
+  transition: all 200ms ease;
+}
+.lg-pill:hover {
+  border-color: var(--ln-glass-border-strong);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ── Liquid Glass light-mode overrides ── */
+html[data-color-mode="light"] .lg-card {
+  background: rgba(255, 255, 255, 0.70) !important;
+  border-color: rgba(42, 38, 52, 0.10) !important;
+  border-top-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(40px) saturate(1.8) !important;
+  box-shadow:
+    0 8px 32px rgba(18, 17, 26, 0.05),
+    0 1px 4px rgba(18, 17, 26, 0.02),
+    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.80),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.40) !important;
+}
+html[data-color-mode="light"] .lg-card:hover {
+  border-color: rgba(42, 38, 52, 0.20) !important;
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    0 16px 48px rgba(18, 17, 26, 0.09),
+    0 2px 8px rgba(18, 17, 26, 0.03),
+    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.90),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.50) !important;
+}
+
+html[data-color-mode="light"] .lg-icon-btn {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(42, 38, 52, 0.10);
+  color: var(--ln-text-muted);
+}
+html[data-color-mode="light"] .lg-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(42, 38, 52, 0.20);
+  color: var(--ln-accent);
+}
+
+html[data-color-mode="light"] .lg-pill {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(42, 38, 52, 0.10);
+  color: var(--ln-text-muted);
+}
+html[data-color-mode="light"] .lg-pill:hover {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(42, 38, 52, 0.20);
+  color: var(--ln-text-primary);
+}
+
+/* =============================================
+   LIGHT MODE TYPOGRAPHY & HIERARCHY
+   Warm obsidian headings, rich slate body, jewel accents
+   ============================================= */
+
+/* Headings & section titles — crisp Obsidian Ink */
+html[data-color-mode="light"] :is(h1, h2):not(.ln-gradient-text) {
+  color: var(--ln-text-primary);
+}
+
+/* Card titles use Smoked Slate by default; illuminate with theme accent on card hover */
+html[data-color-mode="light"] :is(h3, h4):not(.ln-gradient-text) {
+  color: var(--ln-text-secondary);
+}
+html[data-color-mode="light"] .group:hover :is(h3, h4):not(.ln-gradient-text) {
+  color: var(--ln-accent);
+}
+
+/* Featured Work glass cards — map text to warm typography tiers */
+html[data-color-mode="light"] .lg-card p {
+  color: var(--ln-text-body);
+}
+html[data-color-mode="light"] .lg-card .fw-thumb-icon {
+  color: var(--ln-text-soft);
+}
+
+/* Footer hierarchy */
+html[data-color-mode="light"] .ln-footer {
+  color: var(--ln-text-body);
+}
+html[data-color-mode="light"] .ln-footer p {
+  color: var(--ln-text-body);
+}
+html[data-color-mode="light"] .ln-footer a {
+  color: var(--ln-text-muted);
+}
+html[data-color-mode="light"] .ln-footer a:hover {
+  color: var(--ln-accent);
+}
+html[data-color-mode="light"] .ln-footer .footer-brand {
+  color: var(--ln-accent);
+}
+
+/* ── Thumbnail shine sweep (desktop hover & mobile auto-sweep) ── */
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shine-sweep-mobile {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  16% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.thumbnail-shine-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 65%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+  transform: translateX(-160%) skewX(-20deg);
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 15%,
+    rgba(255, 255, 255, 0.45) 38%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.45) 62%,
+    rgba(255, 255, 255, 0.08) 85%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+}
+
+/* Desktop: trigger on card hover or direct thumbnail hover */
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .thumbnail-shine-sweep,
+  .thumbnail-shine:hover .thumbnail-shine-sweep {
+    animation: shine-sweep 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Mobile & touch devices: periodic automatic sweep + tap active */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  .thumbnail-shine-sweep {
+    animation: shine-sweep-mobile 8s ease-in-out infinite;
+  }
+
+  /* Stagger across consecutive cards so they shine in sequence */
+  .grid > *:nth-child(1) .thumbnail-shine-sweep {
+    animation-delay: 1.2s;
+  }
+  .grid > *:nth-child(2) .thumbnail-shine-sweep {
+    animation-delay: 3.8s;
+  }
+  .grid > *:nth-child(3) .thumbnail-shine-sweep {
+    animation-delay: 6.4s;
+  }
+
+  .group:active .thumbnail-shine-sweep,
+  .thumbnail-shine:active .thumbnail-shine-sweep {
+    animation: shine-sweep 0.85s ease-out;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Option 2: The Liquid Inset Fill / Pill Flood (Stripe Style)
+   Theme-Reactive: floods with the active theme color / gradient
+   ───────────────────────────────────────────────────────────── */
+
+.ln-btn-base {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--ln-radius-pill);
+  will-change: transform, box-shadow;
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.ln-btn-base,
+.ln-btn-base *,
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Ensure ALL button text and icons stay safely on top of liquid fill */
+.ln-btn-base > *,
+.ln-btn-base span,
+.ln-btn-base svg {
+  position: relative;
+  z-index: 10;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
+}
+
+.ln-btn-base > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Micro icon nudges on button hover */
+.ln-btn-base svg,
+.ln-btn-base [data-icon] {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Diagonal arrow nudge */
+  .ln-btn-base:hover .lucide-arrow-up-right,
+  .ln-btn-base:hover .lucide-external-link {
+    transform: translate(2.5px, -2.5px);
+  }
+
+  /* Horizontal arrow / chevron nudge */
+  .ln-btn-base:hover .lucide-arrow-right,
+  .ln-btn-base:hover span[aria-hidden="true"] {
+    transform: translateX(3px);
+  }
+
+  /* General icon lift */
+  .ln-btn-base:hover .lucide-github,
+  .ln-btn-base:hover .lucide-mail {
+    transform: translateY(-1.5px);
+  }
+
+  /* Default fallback icon nudge */
+  .ln-btn-base:hover svg:not(.lucide-arrow-up-right):not(.lucide-external-link):not(.lucide-arrow-right):not(.lucide-github):not(.lucide-mail) {
+    transform: translate(1.5px, -1.5px);
+  }
+}
+
+/* ── Primary Button (Default): Theme Accent resting, Inverse Dark on Hover ── */
+.ln-btn-default {
+  background-color: transparent !important;
+  color: var(--ln-accent-foreground);
+  border: 1px solid var(--ln-accent);
+  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--ln-accent) 35%, transparent);
+}
+
+.ln-btn-default::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--ln-accent);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.ln-btn-default::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--secondary);
+  transform: translateY(102%);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ln-btn-default:hover {
+    transform: translateY(-2px);
+    border-color: var(--ln-accent);
+    color: var(--foreground) !important;
+    box-shadow:
+      0 0 0 1px var(--ln-accent),
+      0 12px 30px -4px color-mix(in srgb, var(--ln-accent) 45%, transparent),
+      0 0 20px 2px color-mix(in srgb, var(--ln-accent) 25%, transparent);
+  }
+
+  .ln-btn-default:hover * {
+    color: var(--foreground) !important;
+  }
+
+  .ln-btn-default:hover::before {
+    transform: translateY(0);
+  }
+
+  .ln-btn-default:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--ln-accent) 45%, transparent);
+  }
+}
+
+/* ── Outline Button: Liquid Pill Flood ── */
+.ln-btn-outline {
+  border: 1px solid var(--border);
+  background-color: transparent !important;
+  color: var(--foreground);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ln-btn-outline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--ln-bg-card) 75%, transparent);
+  z-index: -2;
+  pointer-events: none;
+  transition: background-color 220ms ease;
+}
+
+.ln-btn-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--ln-accent);
+  transform: translateY(102%);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ln-btn-outline:hover {
+    transform: translateY(-2px);
+    border-color: var(--ln-accent);
+    color: var(--ln-accent-foreground) !important;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--ln-accent) 60%, transparent),
+      0 10px 28px -4px color-mix(in srgb, var(--ln-accent) 45%, transparent),
+      0 0 22px 2px color-mix(in srgb, var(--ln-accent) 25%, transparent);
+  }
+
+  .ln-btn-outline:hover * {
+    color: var(--ln-accent-foreground) !important;
+  }
+
+  .ln-btn-outline:hover::before {
+    transform: translateY(0);
+  }
+
+  .ln-btn-outline:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--ln-accent) 25%, transparent);
+  }
+}
+
+/* ── Secondary Button: Theme Wash Liquid Flood ── */
+.ln-btn-secondary {
+  border: 1px solid var(--border);
+  background-color: transparent !important;
+  color: var(--secondary-foreground);
+}
+
+.ln-btn-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--secondary);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.ln-btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--ln-accent) 20%, var(--secondary));
+  transform: translateY(102%);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ln-btn-secondary:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--ln-accent) 50%, transparent);
+    color: var(--foreground);
+    box-shadow:
+      0 8px 22px -4px color-mix(in srgb, var(--ln-accent) 30%, transparent),
+      0 0 16px 1px color-mix(in srgb, var(--ln-accent) 18%, transparent);
+  }
+
+  .ln-btn-secondary:hover::before {
+    transform: translateY(0);
+  }
+
+  .ln-btn-secondary:active {
+    transform: translateY(0) scale(0.97);
+  }
+}
+
+/* ── Ghost Button ── */
+.ln-btn-ghost {
+  background-color: transparent !important;
+  color: var(--foreground);
+}
+
+.ln-btn-ghost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--ln-accent) 14%, transparent);
+  transform: translateY(102%);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ln-btn-ghost:hover {
+    transform: translateY(-1.5px);
+    color: var(--ln-text-primary);
+    box-shadow: 0 4px 18px -2px color-mix(in srgb, var(--ln-accent) 25%, transparent);
+  }
+
+  .ln-btn-ghost:hover::before {
+    transform: translateY(0);
+  }
+
+  .ln-btn-ghost:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* ── Light Mode Specific Adjustments ── */
+html[data-color-mode="light"] .ln-btn-default {
+  color: #FFFFFF !important;
+}
+
+html[data-color-mode="light"] .ln-btn-default * {
+  color: #FFFFFF !important;
+}
+
+html[data-color-mode="light"] .ln-btn-default::before {
+  background-color: #FFFFFF;
+}
+
+html[data-color-mode="light"] .ln-btn-default:hover {
+  border-color: var(--ln-accent) !important;
+  color: var(--ln-accent) !important;
+  box-shadow:
+    0 0 0 1px var(--ln-accent),
+    0 10px 26px -4px color-mix(in srgb, var(--ln-accent) 45%, transparent),
+    0 0 16px 2px color-mix(in srgb, var(--ln-accent) 25%, transparent) !important;
+}
+
+html[data-color-mode="light"] .ln-btn-default:hover * {
+  color: var(--ln-accent) !important;
+}
+
+html[data-color-mode="light"] .ln-btn-outline::after {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+html[data-color-mode="light"] .ln-btn-outline {
+  border-color: rgba(42, 38, 52, 0.16);
+}
+
+html[data-color-mode="light"] .ln-btn-outline:hover {
+  border-color: var(--ln-accent) !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    0 0 0 1px var(--ln-accent),
+    0 10px 24px -4px color-mix(in srgb, var(--ln-accent) 40%, transparent) !important;
+}
+
+html[data-color-mode="light"] .ln-btn-outline:hover * {
+  color: #FFFFFF !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ln-btn-base,
+  .ln-btn-default,
+  .ln-btn-outline,
+  .ln-btn-secondary,
+  .ln-btn-ghost {
+    transform: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .ln-btn-base::before,
+  .ln-btn-default::before,
+  .ln-btn-outline::before,
+  .ln-btn-secondary::before,
+  .ln-btn-ghost::before {
+    transition-duration: 0.01ms !important;
+  }
+
+  .ln-reveal,
+  .ln-backdrop,
+  .ln-cursor {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* Freeze orbit and logo spin animations */
+  [style*="fu-orbit"],
+  .fu-orbit-traveler,
+  .animate-spin-slow,
+  .nav-logo-spin {
+    animation: none !important;
+  }
 }
+

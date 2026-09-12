@@ -1,86 +1,66 @@
-"use client";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/cn";
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
-import { useCallback, type HTMLAttributes, type MouseEvent } from "react";
-
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  spotlight?: boolean;
-  spotlightColor?: string;
-  surfaceGlowColor?: string;
-  spotlightRadius?: number;
-}
-
-export function Card({
-  className,
-  children,
-  spotlight = true,
-  spotlightColor = "rgba(232, 197, 71, 0.35)",
-  surfaceGlowColor = "rgba(232, 197, 71, 0.05)",
-  spotlightRadius = 300,
-  onMouseMove,
-  ...props
-}: CardProps) {
-  const mouseX = useMotionValue(-1000);
-  const mouseY = useMotionValue(-1000);
-  const prefersReducedMotion = useReducedMotion();
-
-  const handleMouseMove = useCallback(
-    (e: MouseEvent<HTMLDivElement>) => {
-      if (!spotlight || prefersReducedMotion) return;
-      const { left, top } = e.currentTarget.getBoundingClientRect();
-      mouseX.set(e.clientX - left);
-      mouseY.set(e.clientY - top);
-      onMouseMove?.(e);
-    },
-    [spotlight, prefersReducedMotion, mouseX, mouseY, onMouseMove]
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    mouseX.set(-1000);
-    mouseY.set(-1000);
-  }, [mouseX, mouseY]);
-
-  const borderBackground = useMotionTemplate`radial-gradient(${spotlightRadius}px circle at ${mouseX}px ${mouseY}px, ${spotlightColor}, transparent 80%)`;
-  const surfaceBackground = useMotionTemplate`radial-gradient(${spotlightRadius * 1.4}px circle at ${mouseX}px ${mouseY}px, ${surfaceGlowColor}, transparent 75%)`;
-
-  return (
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       className={cn(
-        "group/card ln-surface relative overflow-hidden border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-5 sm:p-6 transition-all duration-300",
+        "rounded-[1.25rem] border border-border bg-card text-card-foreground shadow-sm",
         className
       )}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       {...props}
-    >
-      {spotlight && !prefersReducedMotion && (
-        <>
-          {/* Border Spotlight Glow */}
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
-            style={{
-              background: borderBackground,
-              maskImage: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              maskComposite: "exclude",
-              WebkitMaskComposite: "xor",
-              padding: "1px",
-            }}
-          />
+    />
+  ),
+);
+Card.displayName = "Card";
 
-          {/* Surface Ambient Glow */}
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
-            style={{
-              background: surfaceBackground,
-            }}
-          />
-        </>
-      )}
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex flex-col space-y-1.5 p-6", className)}
+      {...props}
+    />
+  ),
+);
+CardHeader.displayName = "CardHeader";
 
-      <div className="relative z-10">{children}</div>
-    </div>
-  );
-}
+const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h3
+      ref={ref}
+      className={cn("text-2xl font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  ),
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+));
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  ),
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex items-center p-6 pt-0", className)}
+      {...props}
+    />
+  ),
+);
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };

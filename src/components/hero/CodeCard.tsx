@@ -71,9 +71,9 @@ export function CodeCard() {
         }}
       />
 
-      <div className="relative rounded-2xl border border-white/6 bg-linear-to-b from-[#0b1020] via-[#050816] to-[#020617] p-3 shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
+      <div className="code-card relative rounded-2xl border border-white/6 bg-linear-to-b from-[#0b1020] via-[#050816] to-[#020617] p-3 shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
         {/* Editor Top Bar */}
-        <div className="flex items-center justify-between gap-3 rounded-xl bg-black/40 px-3 py-2 border border-white/6">
+        <div className="code-editor-bar flex items-center justify-between gap-3 rounded-xl bg-black/40 px-3 py-2 border border-white/6">
           <div className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
@@ -87,13 +87,13 @@ export function CodeCard() {
           {/* Interactive Run Button */}
           <div className="flex items-center gap-1.5">
             {!showConsole ? (
-              <button
-                type="button"
-                onClick={handleRunCode}
-                disabled={isRunning}
-                className="inline-flex items-center gap-1 rounded-md border border-[rgba(232,197,71,0.3)] bg-[rgba(232,197,71,0.12)] px-2 py-0.5 text-[10px] font-medium text-[var(--ln-accent-gold)] transition hover:bg-[rgba(232,197,71,0.22)] active:scale-95"
-                title="Run shubhamsaurabh.ts"
-              >
+<button
+                 type="button"
+                 onClick={handleRunCode}
+                 disabled={isRunning}
+                 className="inline-flex items-center gap-1 rounded-md border border-[var(--ln-accent)]/30 bg-[var(--ln-accent)]/12 px-2 py-0.5 text-[10px] font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/22 active:scale-95"
+                 title="Run shubhamsaurabh.ts"
+               >
                 <Play className="h-2.5 w-2.5 fill-current" />
                 <span>Run</span>
               </button>
@@ -101,7 +101,7 @@ export function CodeCard() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-zinc-400 transition hover:text-zinc-200 active:scale-95"
+                className="code-reset-btn inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-zinc-400 transition hover:text-zinc-200 active:scale-95"
                 title="Reset code editor"
               >
                 <RotateCcw className="h-2.5 w-2.5" />
@@ -170,7 +170,7 @@ export function CodeCard() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="mt-3 overflow-hidden rounded-xl border border-white/8 bg-[#04060d] p-3 text-[10px] font-mono text-zinc-300 shadow-inner"
+              className="code-console mt-3 overflow-hidden rounded-xl border border-white/8 bg-[#04060d] p-3 text-[10px] font-mono text-zinc-300 shadow-inner"
             >
               <div className="flex items-center justify-between border-b border-white/6 pb-1.5 text-zinc-500">
                 <span className="flex items-center gap-1 text-[9px] uppercase tracking-wider text-[var(--ln-accent-gold)]">

@@ -1,78 +1,51 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/cn";
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
+"use client";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-full text-xs font-medium transition focus-visible:ln-ring-focus disabled:cursor-not-allowed disabled:opacity-60",
-  {
-    variants: {
-      variant: {
-        primary:
-          "bg-zinc-50 text-zinc-950 shadow-[0_10px_35px_rgba(0,0,0,0.8)] hover:bg-zinc-200",
-        outline:
-          "border border-zinc-600/70 bg-zinc-900/40 text-zinc-200 hover:border-zinc-300 hover:text-zinc-50",
-        ghost:
-          "bg-transparent text-zinc-300 hover:bg-zinc-900/60 hover:text-zinc-50",
-      },
-      size: {
-        sm: "px-3 py-1.5",
-        md: "px-4 py-2.5",
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-    },
-  },
-);
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-type ButtonAsButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants> & {
-    href?: undefined;
-    asChild?: boolean;
-  };
-
-type ButtonAsAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> &
-  VariantProps<typeof buttonVariants> & {
-    href: string;
-    asChild?: boolean;
-  };
-
-export type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
-
-function isAnchorProps(props: ButtonProps): props is ButtonAsAnchorProps {
-  return "href" in props && typeof props.href === "string";
+interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+  asChild?: boolean;
+  href?: string;
+  variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "pill";
+  size?: "sm" | "md" | "lg";
 }
 
-export function Button(props: ButtonProps) {
-  if (isAnchorProps(props)) {
-    const {
-      href,
-      className,
-      variant,
-      size,
-      asChild,
-      children,
-      ...anchorProps
-    } = props;
-    const classes = cn(buttonVariants({ variant, size }), className);
-    void asChild;
+const sizeClasses = {
+  sm: "h-8 px-3 text-xs gap-1.5 sm:h-9 sm:px-3.5 sm:text-xs",
+  md: "h-10 px-4 text-xs gap-2 sm:h-11 sm:px-5 sm:text-sm",
+  lg: "h-11 px-5 text-sm gap-2.5 sm:h-12 sm:px-6 sm:text-base",
+};
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "default", asChild, href, size = "md", children, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
 
     return (
-      <a className={classes} href={href} {...anchorProps}>
-        {children}
-      </a>
+      <Comp
+        ref={ref}
+        className={cn(
+          "ln-btn-base inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium cursor-pointer select-none",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_35%,transparent)] focus-visible:ring-offset-2",
+          "disabled:pointer-events-none disabled:opacity-50",
+          variant === "default" && "ln-btn-default",
+          variant === "secondary" && "ln-btn-secondary",
+          variant === "outline" && "ln-btn-outline",
+          variant === "ghost" && "ln-btn-ghost",
+          variant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-lg hover:shadow-red-500/20",
+          variant === "pill" && "ln-btn-outline h-7 px-3 text-xs",
+          sizeClasses[size],
+          className
+        )}
+        {...(href && { href })}
+        {...props}
+      >
+        {asChild ? children : <span className="relative z-10 inline-flex items-center justify-center gap-[inherit] pointer-events-none">{children}</span>}
+      </Comp>
     );
-  }
+  },
+);
+Button.displayName = "Button";
 
-  const { className, variant, size, asChild, ...buttonProps } = props;
-  const classes = cn(buttonVariants({ variant, size }), className);
-  void asChild;
-
-  return (
-    <button
-      className={classes}
-      {...buttonProps}
-    />
-  );
-}
+export { Button };

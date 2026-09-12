@@ -1,379 +1,102 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Reveal } from "@/components/motion/Reveal";
-import { CodeCard } from "@/components/hero/CodeCard";
+import { ScrollIndicator } from "@/components/hero/ScrollIndicator";
 import { RotatingIntro } from "@/components/hero/RotatingIntro";
-import { ContactSection } from "@/components/contact/ContactSection";
-import { SkillsShowcase } from "@/components/skills/SkillsShowcase";
-import { ExperienceSection } from "@/components/experience/ExperienceSection";
-import { ProjectsSection } from "@/components/projects/ProjectsSection";
-import { OpenSourceSection } from "@/components/opensource/OpenSourceSection";
-import { getGithubMeta } from "@/lib/github";
-import { ArrowUpRight } from "lucide-react";
+import { FeaturedWork } from "@/components/home/FeaturedWork";
+import HeroDesign from "@/components/hero/HeroDesign";
+import { AboutTeaser } from "@/components/home/AboutTeaser";
+import { ConnectCallout } from "@/components/home/ConnectCallout";
+import { Button } from "@/components/ui/button";
 
-export default async function Home() {
-  const github = await getGithubMeta();
-  const getformEndpoint = "https://getform.io/f/f07994de-98f2-4f00-91b1-d2aec22d8ee8";
+import { buildPageMetadata, routeMeta } from "@/lib/seo";
+import { site } from "@/lib/content/site";
 
-  const aboutFacts = [
-    {
-      icon: "🎓",
-      label: "Education",
-      value: "B.Tech in Polymer Science & Chemical Tech (7.82 GPA), DTU (2020)",
-    },
-    {
-      icon: "🏢",
-      label: "Current Role",
-      value: "Software Development Engineer - I at RateGain",
-    },
-    {
-      icon: "📍",
-      label: "Location",
-      value: "Noida, India (Ex-Pune)",
-    },
-    {
-      icon: "🏆",
-      label: "Recognition",
-      value: "Pinnacle Performer of the Year (Q3 2024) & AWS Migration Award",
-    },
-  ];
+export const metadata = buildPageMetadata({
+  ...routeMeta.home,
+  absoluteTitle: true,
+});
 
+export default function Home() {
   return (
-    <div className="relative min-h-screen text-sm text-zinc-100 sm:text-base">
-      <Navbar />
-      <ScrollToTopButton />
-      <main className="mx-auto flex max-w-6xl flex-col gap-32 px-4 pb-24 pt-28 sm:px-6 lg:px-8 xl:px-10">
-        {/* HERO SECTION */}
-        <section
-          id="hero"
-          className="scroll-mt-28"
-          aria-labelledby="hero-heading"
-        >
-          <Reveal className="ln-surface relative overflow-hidden p-6 sm:p-10">
-            <div className="absolute inset-0 opacity-40">
-              <div className="pointer-events-none absolute inset-[-40%] bg-[radial-gradient(circle_at_top,rgba(248,250,252,0.06),transparent_55%),radial-gradient(circle_at_bottom,rgba(0,0,0,0.8),transparent_55%)]" />
-            </div>
-
-            <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-              <div className="max-w-xl space-y-4">
-                <span className="inline-flex items-center gap-2 rounded-full bg-zinc-900/60 px-3 py-1 text-[11px] font-medium text-zinc-400 ring-1 ring-zinc-700/60">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(16,185,129,0.5)]" />
-                  SDE - I @ RateGain · Available for collaborations
-                </span>
-
-                <h1
-                  id="hero-heading"
-                  className="text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl"
-                >
-                  Hi, I&apos;m{" "}
-                  <span className="ln-gradient-text">Shubham&nbsp;Saurabh</span>
-                </h1>
-
-                <RotatingIntro />
-
-                <p className="mt-4 max-w-xl text-sm text-zinc-300 sm:text-base">
-                  Frontend Engineer with 5+ years of experience designing and building scalable web applications using React, Next.js, TypeScript, and JavaScript. Specializing in enterprise SaaS platforms, large-scale booking engines, and motion-rich interfaces.
-                </p>
-
-                <div className="mt-6 flex flex-col gap-6 border-t border-white/10 pt-5 text-xs text-zinc-400 sm:text-sm">
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 text-center sm:text-left">
-                    <div>
-                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
-                        5+
-                      </p>
-                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
-                        Years Exp
-                      </p>
-                    </div>
-                    <div className="hidden h-10 w-px bg-white/10 sm:block" />
-                    <div>
-                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
-                        {github.publicRepos != null ? `${github.publicRepos}+` : "70+"}
-                      </p>
-                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
-                        GitHub Repos
-                      </p>
-                    </div>
-                    <div className="hidden h-10 w-px bg-white/10 sm:block" />
-                    <div>
-                      <p className="text-xl sm:text-2xl font-semibold text-zinc-50">
-                        2+
-                      </p>
-                      <p className="mt-1 text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.16em] text-zinc-500 uppercase">
-                        Major Awards
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                    <Button href="#projects" className="justify-center">
-                      View my work
-                      <span aria-hidden="true" className="ln-mono text-[10px]">
-                        ↳
-                      </span>
-                    </Button>
-                    <Button
-                      href="/Shubham_Saurabh_Resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download="Shubham_Saurabh_Resume.pdf"
-                      variant="outline"
-                      className="justify-center"
-                    >
-                      Download CV
-                    </Button>
-                    <Button
-                      href="mailto:shubhamsaurabh@outlook.com"
-                      variant="outline"
-                      className="justify-center"
-                    >
-                      Get in touch
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              <CodeCard />
-            </div>
-          </Reveal>
-        </section>
-
-        {/* ABOUT SECTION */}
-        <section
-          id="about"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="about-heading"
-        >
-          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.9fr)] lg:items-start">
-            <div>
-              <span className="ln-mono inline-flex rounded-full border border-[rgba(232,197,71,0.18)] bg-[rgba(232,197,71,0.08)] px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent-gold)]">
-                About Me
+    <div className="relative pt-20 pb-20 sm:pt-28 md:pt-35 sm:pb-32 md:pb-40">
+      {/* HERO SECTION */}
+      <section
+        id="hero"
+        className="relative scroll-mt-28 min-h-[calc(100svh-5rem)] sm:min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-8.75rem)] flex flex-col justify-between"
+      >
+        <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+          <div className="relative flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 md:items-start">
+            {/* IDENTITY CLUSTER */}
+            <div className="flex flex-col md:w-[60%]">
+              <span
+                className="hero-badge inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-[var(--ln-accent-wash)] w-fit px-2.5 py-1 sm:px-5 sm:py-2 text-[0.6875rem] sm:text-[0.8125rem] font-medium text-amber-200 ring-1 ring-[var(--ln-accent)]/15"
+              >
+                <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#4B9AA5] shadow-[0_0_0_2px_rgba(75,154,165,0.3)] sm:shadow-[0_0_0_3px_rgba(75,154,165,0.3)]" />
+                SDE @ RateGain · Available for collaborations
               </span>
-              <h2
-                id="about-heading"
-                className="mt-6 max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-zinc-50 sm:text-5xl"
-              >
-                Building thoughtful, scalable frontend systems with an engineer&apos;s eye.
-              </h2>
 
-              <div className="mt-10 max-w-3xl space-y-6 text-base leading-8 text-zinc-300">
-                <p>
-                  I&apos;m <span className="font-semibold text-zinc-50">Shubham Saurabh</span>,
-                  a Frontend Engineer with <span className="font-semibold text-[var(--ln-accent-gold)]">5+ years of experience</span> currently working as{" "}
-                  <span className="font-semibold text-[var(--ln-accent-gold)]">
-                    Software Development Engineer - I at RateGain
-                  </span>
-                  . Previously, I was a Senior System Engineer at Infosys.
-                </p>
-                <p>
-                  My engineering foundation began at <span className="text-zinc-100 font-medium">Delhi Technological University (DTU)</span>, where I graduated in June 2020 with a B.Tech in Polymer Science & Chemical Technology (7.82 GPA). That background in analytical modeling and systems thinking continues to shape my approach to building resilient frontend architectures.
-                </p>
-                <p>
-                  I specialize in enterprise SaaS platforms, large-scale hotel booking engines, payment gateway integrations, internationalization across 20+ locales, and cloud migrations on AWS. I was honored with the{" "}
-                  <span className="font-semibold text-zinc-50">
-                    Pinnacle Performer of the Year Award (Q3 2024)
-                  </span>{" "}
-                  and the <span className="font-semibold text-zinc-50">Certificate of Achievement for AWS Migration</span> at RateGain.
-                </p>
-              </div>
+              <h1 className="mt-4 sm:mt-7 md:mt-9 text-balance text-[1.75rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
+                <span className="block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
+                <span className="ln-gradient-text whitespace-nowrap">Shubham&nbsp;Saurabh</span>
+              </h1>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                {aboutFacts.map((fact) => (
-                  <Card
-                    key={fact.label}
-                    className="rounded-3xl border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-5"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 text-xl" aria-hidden="true">
-                        {fact.icon}
-                      </span>
-                      <div>
-                        <p className="ln-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">
-                          {fact.label}
-                        </p>
-                        <p className="mt-2 text-sm leading-6 text-zinc-100">
-                          {fact.value}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
+              <RotatingIntro className="mt-2 sm:mt-3.5" />
 
-            <Card className="relative min-h-[420px] overflow-visible rounded-[2rem] border-white/8 bg-[radial-gradient(circle_at_top_left,rgba(232,197,71,0.12),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-8">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(248,113,113,0.18),transparent_28%),radial-gradient(circle_at_20%_80%,rgba(93,228,199,0.14),transparent_28%)]" />
+              <p className="hero-body-text mt-3 sm:mt-6 md:mt-7 max-w-[34rem] text-[0.875rem] sm:text-[1rem] md:text-[1.0625rem] leading-relaxed text-zinc-300">
+                Frontend Engineer with 5+ years of experience designing and building scalable web
+                applications using React, Next.js, TypeScript, and JavaScript. Specializing in
+                enterprise SaaS platforms, large-scale booking engines, and motion-rich interfaces.
+              </p>
 
-              <div className="relative flex h-full flex-col justify-between">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="ln-mono text-[11px] uppercase tracking-[0.24em] text-zinc-500">
-                      Profile Snapshot
-                    </p>
-                    <p className="mt-2 text-lg font-medium text-zinc-50">
-                      SDE - I @ RateGain (Ex-Infosys)
-                    </p>
-                  </div>
-                  <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
-                    5+ Years Exp
-                  </span>
+              <div className="mt-3.5 sm:mt-6 md:mt-9 grid grid-cols-3 gap-2 sm:gap-3 md:gap-3 sm:flex sm:flex-row sm:items-end sm:justify-start sm:gap-10 md:gap-12 text-center sm:text-left max-w-[34rem]">
+                <div>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">5+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Years Building</p>
                 </div>
-
-                <div className="relative mx-auto mt-12 flex w-full max-w-[340px] items-center justify-center">
-                  <div className="relative flex aspect-square w-full items-center justify-center rounded-[2.75rem] bg-[linear-gradient(145deg,#f2c14e_0%,#f87171_48%,#8bd3c7_100%)] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-                    <div className="rounded-[2rem] bg-black/12 px-8 py-5 backdrop-blur-sm">
-                      <span className="text-6xl font-semibold tracking-tight text-black/85 sm:text-7xl">
-                        SS
-                      </span>
-                    </div>
-                  </div>
-
-                  <span className="absolute -left-5 bottom-12 rounded-2xl bg-fuchsia-500 px-4 py-3 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(0,0,0,0.45)]">
-                    Next.js
-                  </span>
-                  <span className="absolute -right-4 -top-4 rounded-2xl bg-yellow-300 px-4 py-3 text-sm font-semibold text-zinc-950 shadow-[0_18px_45px_rgba(0,0,0,0.45)]">
-                    React
-                  </span>
-                  <span className="absolute -bottom-5 right-8 rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(0,0,0,0.45)]">
-                    TypeScript
-                  </span>
+                <div className="hidden h-8 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
+                <div>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">10+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Projects Delivered</p>
                 </div>
-
-                <div className="relative mt-10 grid gap-3 text-sm text-zinc-300">
-                  <div className="flex items-center justify-between rounded-2xl border border-white/8 bg-black/20 px-4 py-3">
-                    <span className="text-zinc-500">Email</span>
-                    <span className="font-medium text-zinc-50 text-xs sm:text-sm">shubhamsaurabh@outlook.com</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/8 bg-black/20 px-4 py-3">
-                    <span className="text-zinc-500">Location</span>
-                    <span className="font-medium text-zinc-50">Noida, India</span>
-                  </div>
+                <div className="hidden h-8 sm:h-12 w-px bg-[var(--ln-border-subtle)] sm:block" />
+                <div>
+                  <p className="hero-stat-value text-[1.125rem] sm:text-[1.5rem] md:text-[2.25rem] font-semibold text-zinc-50">2+</p>
+                  <p className="hero-stat-label mt-1 sm:mt-2 text-[0.625rem] sm:text-[0.75rem] md:text-[0.8125rem] tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em] text-zinc-500 uppercase">Open Source Impacts</p>
                 </div>
               </div>
-            </Card>
-          </Reveal>
-        </section>
 
-        {/* WORK EXPERIENCE SECTION */}
-        <section
-          id="experience"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="experience-heading"
-        >
-          <Reveal delay={0.05}>
-            <ExperienceSection />
-          </Reveal>
-        </section>
+              {/* CTA */}
+              <div className="mt-3.5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-2.5 sm:gap-3">
+                <Button asChild className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
+                  <a href={site.resumePath} download>
+                    <span>Download Resume</span>
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
+                  <a href="/projects">
+                    <span>See my Work</span>
+                  </a>
+                </Button>
+              </div>
 
-        {/* SKILLS SECTION */}
-        <section
-          id="skills"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="skills-heading"
-        >
-          <Reveal delay={0.05}>
-            <SkillsShowcase />
-          </Reveal>
-        </section>
-
-        {/* FEATURED PROJECTS SECTION */}
-        <section
-          id="projects"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="projects-heading"
-        >
-          <Reveal delay={0.05}>
-            <ProjectsSection />
-            <div className="flex justify-center pt-8">
-              <a
-                href="https://github.com/shubhsaur"
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(232,197,71,0.2)] bg-[rgba(232,197,71,0.08)] px-7 py-3.5 text-sm font-medium text-[var(--ln-accent-gold)] shadow-[0_0_0_rgba(232,197,71,0)] transition duration-300 hover:border-[rgba(232,197,71,0.4)] hover:bg-[rgba(232,197,71,0.12)] hover:shadow-[0_0_30px_rgba(232,197,71,0.22)]"
-              >
-                <span>
-                  View all{" "}
-                  {github.publicRepos != null ? (
-                    <span className="font-semibold">
-                      {github.publicRepos}+
-                    </span>
-                  ) : (
-                    "70+"
-                  )}{" "}
-                  repositories on GitHub
-                </span>
-                <ArrowUpRight className="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
             </div>
-          </Reveal>
-        </section>
 
-        {/* OPEN SOURCE SECTION */}
-        <section
-          id="opensource"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="opensource-heading"
-        >
-          <Reveal delay={0.05}>
-            <OpenSourceSection />
-          </Reveal>
-        </section>
+            <HeroDesign />
+          </div>
+        </div>
 
-        {/* CONTENT & ARTICLES SECTION */}
-        <section
-          id="content"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="content-heading"
-        >
-          <Reveal className="space-y-6" delay={0.05}>
-            <h2
-              id="content-heading"
-              className="ln-mono text-xs uppercase tracking-[0.24em] text-zinc-500"
-            >
-              Content & Engineering Insights
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Card className="p-6">
-                <span className="ln-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ln-accent-gold)]">
-                  Architecture
-                </span>
-                <h3 className="mt-2 text-lg font-semibold text-zinc-100">
-                  Scaling Multi-Tenant Hotel Booking Engines
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                  Best practices for structuring Next.js, Redux Toolkit, and currency/tax-aware state across 20+ international locales.
-                </p>
-              </Card>
-              <Card className="p-6">
-                <span className="ln-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ln-accent-cyan)]">
-                  Performance & Cloud
-                </span>
-                <h3 className="mt-2 text-lg font-semibold text-zinc-100">
-                  Optimizing Web Vitals & Cloud Migrations on AWS
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                  Techniques for cutting load times by 60%, managing form performance with React Final Form, and deploying cloud-native frontend architectures.
-                </p>
-              </Card>
-            </div>
-          </Reveal>
-        </section>
+        {/* Viewport Bottom Center Scroll Animation */}
+        <div className="relative z-10 pt-2 sm:pt-6 pb-2 sm:pb-4 flex justify-center w-full">
+          <ScrollIndicator targetId="featured" />
+        </div>
+      </section>
 
-        {/* CONTACT SECTION */}
-        <section
-          id="contact"
-          className="scroll-mt-28 border-t border-white/5 pt-12"
-          aria-labelledby="contact-heading"
-        >
-          <Reveal delay={0.05}>
-            <ContactSection endpoint={getformEndpoint} />
-          </Reveal>
-        </section>
-        <Footer />
-      </main>
+      {/* FEATURED WORK */}
+      <FeaturedWork />
+
+      {/* ABOUT TEASER */}
+      <AboutTeaser />
+
+      {/* COLLABORATION & CONTACT CALLOUT */}
+      <ConnectCallout />
     </div>
   );
 }
