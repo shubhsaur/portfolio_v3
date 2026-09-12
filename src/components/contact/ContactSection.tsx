@@ -187,7 +187,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                         href={link.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-3 rounded-[1rem] border border-transparent px-3 py-2.5 text-sm font-medium text-foreground transition hover:border-border hover:bg-muted/30"
+                        className="flex items-center gap-3 rounded-full border border-transparent px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-border hover:bg-muted/30"
                       >
                         <Icon className="h-4 w-4 text-[var(--ln-accent)]" />
                         {link.label}

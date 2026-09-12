@@ -126,7 +126,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             >
               <Search className="text-muted-foreground group-hover:text-[var(--ln-accent)]" style={{ width: "var(--nav-icon)", height: "var(--nav-icon)" }} />
               <span className="hidden lg:inline text-xs">Search</span>
-              <kbd className="ln-mono hidden lg:flex items-center gap-[0.125rem] rounded border border-border bg-background/50 px-[0.375rem] py-[0.125rem] text-[9px] text-muted-foreground group-hover:border-[var(--ln-accent)] group-hover:text-foreground">
+              <kbd className="ln-mono hidden lg:flex items-center gap-[0.125rem] rounded-full border border-border bg-background/50 px-[0.5rem] py-[0.125rem] text-[9px] text-muted-foreground group-hover:border-[var(--ln-accent)] group-hover:text-foreground">
                 <Command className="h-[0.625rem] w-[0.625rem]" />K
               </kbd>
             </button>
@@ -197,7 +197,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                   return (
                     <span
                       key={item.label}
-                      className="flex cursor-default items-center justify-between rounded-xl px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium text-muted-foreground/50"
+                      className="flex cursor-default items-center justify-between rounded-full px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium text-muted-foreground/50"
                     >
                       <span>{item.label}</span>
                       <span className="ln-mono text-[9px] uppercase tracking-[0.18em] opacity-60">
@@ -212,7 +212,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "group relative flex items-center justify-between rounded-xl px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium transition-colors",
+                      "group relative flex items-center justify-between rounded-full px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium transition-colors",
                       "focus-visible:ln-ring-focus active:scale-[0.99]",
                       active
                         ? "text-background font-semibold"
@@ -222,7 +222,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                     {active && (
                       <motion.span
                         layoutId="active-mobile-nav-pill"
-                        className="absolute inset-0 rounded-xl bg-foreground shadow-sm"
+                        className="absolute inset-0 rounded-full bg-foreground shadow-sm"
                         transition={
                           prefersReducedMotion
                             ? { duration: 0 }
@@ -246,7 +246,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                 rel="noopener noreferrer"
                 download="Shubham_Saurabh_Resume.pdf"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-[0.375rem] rounded-xl border border-border bg-muted/40 py-[var(--nav-dropdown-py)] text-xs font-medium text-foreground transition hover:bg-muted"
+                className="flex items-center justify-center gap-[0.375rem] rounded-full border border-border bg-muted/40 py-[var(--nav-dropdown-py)] text-xs font-medium text-foreground transition hover:bg-muted"
               >
                 <Download className="h-[0.875rem] w-[0.875rem] text-[var(--ln-accent)]" />
                 <span>Resume</span>
@@ -255,7 +255,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
               <a
                 href="mailto:shubhamsaurabh@outlook.com"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-[0.375rem] rounded-xl border border-[var(--ln-accent)]/25 bg-[var(--ln-accent)]/10 py-[var(--nav-dropdown-py)] text-xs font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/18"
+                className="flex items-center justify-center gap-[0.375rem] rounded-full border border-[var(--ln-accent)]/25 bg-[var(--ln-accent)]/10 py-[var(--nav-dropdown-py)] text-xs font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/18"
               >
                 <Mail className="h-[0.875rem] w-[0.875rem]" />
                 <span>Contact</span>

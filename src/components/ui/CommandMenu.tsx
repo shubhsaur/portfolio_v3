@@ -446,12 +446,12 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               {query && (
                 <button
                   onClick={() => setQuery("")}
-                  className="rounded-md px-1.5 py-0.5 text-xs text-muted-foreground hover:text-foreground"
+                  className="rounded-full px-2.5 py-0.5 text-xs text-muted-foreground hover:text-foreground"
                 >
                   Clear
                 </button>
               )}
-              <span className="ln-mono ml-2 shrink-0 rounded-md border border-border bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">
+              <span className="ln-mono ml-2 shrink-0 rounded-full border border-border bg-muted px-2.5 py-0.5 text-[10px] text-muted-foreground">
                 ESC
               </span>
             </div>
@@ -485,7 +485,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                               onClick={item.perform}
                               onMouseEnter={() => setSelectedIndex(globalIndex)}
                               className={[
-                                "group relative flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition-all",
+                                "group relative flex w-full items-center justify-between rounded-full px-4 py-2.5 text-left text-sm transition-all",
                                 isSelected
                                   ? "bg-accent text-accent-foreground shadow-inner"
                                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -494,7 +494,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                               <div className="flex items-center gap-3">
                                 <div
                                   className={[
-                                    "flex h-8 w-8 items-center justify-center rounded-lg border transition-colors",
+                                    "flex h-8 w-8 items-center justify-center rounded-full border transition-colors",
                                     isSelected
                                       ? "border-[var(--ln-accent)]/40 bg-[var(--ln-accent)]/10 text-[var(--ln-accent)]"
                                       : "border-border bg-muted text-muted-foreground group-hover:text-foreground",
@@ -514,7 +514,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
 
                               <div className="flex items-center gap-2">
                                 {item.shortcut && (
-                                  <span className="ln-mono rounded border border-border bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                                  <span className="ln-mono rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">
                                     {item.shortcut}
                                   </span>
                                 )}
