@@ -60,7 +60,7 @@ export function ProjectsIndex() {
       </div>
 
       {/* Apple-style Capsule Filter Bar */}
-      <div className="flex justify-start sm:justify-center overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="flex justify-start overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
         <div className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/80 border-t-white/20 bg-card/75 dark:bg-white/[0.04] p-1.5 shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl">
           {filterCategories.map((category) => {
             const isActive = activeCategory === category;
