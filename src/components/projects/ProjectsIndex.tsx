@@ -61,7 +61,7 @@ export function ProjectsIndex() {
 
       {/* Apple-style Capsule Filter Bar */}
       <div className="flex justify-start overflow-x-auto scrollbar-none py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-        <div className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/80 border-t-white/20 bg-card/75 dark:bg-white/[0.04] p-1.5 shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl">
+        <div className="project-filter-capsule inline-flex items-center gap-1 sm:gap-1.5 rounded-full p-1.5">
           {filterCategories.map((category) => {
             const isActive = activeCategory === category;
             return (
@@ -70,16 +70,14 @@ export function ProjectsIndex() {
                 type="button"
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "relative rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap cursor-pointer select-none",
-                  isActive
-                    ? "text-[var(--ln-accent-foreground)] font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                  "project-filter-btn relative rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap cursor-pointer select-none",
+                  isActive && "!text-[var(--ln-accent-foreground)] font-semibold"
                 )}
               >
                 {isActive && (
                   <motion.span
                     layoutId="projectFilterActivePill"
-                    className="absolute inset-0 rounded-full bg-[var(--ln-accent)] shadow-sm"
+                    className="absolute inset-0 rounded-full bg-[var(--ln-accent)] shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
                     transition={{ type: "spring", stiffness: 420, damping: 32 }}
                   />
                 )}
