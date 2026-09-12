@@ -37,7 +37,7 @@ export function AboutTeaser() {
           <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/80 px-4 py-1.5 text-xs text-foreground/90 backdrop-blur-md shadow-sm">
             <Sparkles className="h-3.5 w-3.5 text-[var(--ln-accent)]" />
             <span className="ln-mono text-[11px] font-medium tracking-[0.18em] uppercase text-muted-foreground">
-              Background &amp; Philosophy
+              Background
             </span>
           </div>
 
