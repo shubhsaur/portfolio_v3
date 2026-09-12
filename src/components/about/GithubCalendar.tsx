@@ -5,21 +5,22 @@ import { motion, useReducedMotion } from "framer-motion";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { ContributionWeek } from "@/lib/content/github";
 
-// ─── Colour palette ────────────────────────────────────────────────────────────
+// ─── Colour palette — driven by CSS vars so they react to theme switches ──────
+// Defined in globals.css under :root (dark) and html[data-color-mode="light"]
 const LEVEL_COLOURS = [
-  "rgba(255,255,255,0.05)",
-  "rgba(185,130,74,0.28)",
-  "rgba(185,130,74,0.55)",
-  "rgba(232,197,71,0.78)",
-  "rgba(232,197,71,1.00)",
+  "var(--gc-empty)",
+  "var(--gc-l1)",
+  "var(--gc-l2)",
+  "var(--gc-l3)",
+  "var(--gc-l4)",
 ] as const;
 
 const LEVEL_BORDER = [
-  "rgba(255,255,255,0.07)",
-  "rgba(185,130,74,0.18)",
-  "rgba(185,130,74,0.35)",
-  "rgba(232,197,71,0.50)",
-  "rgba(232,197,71,0.70)",
+  "var(--gc-empty-border)",
+  "var(--gc-l1-border)",
+  "var(--gc-l2-border)",
+  "var(--gc-l3-border)",
+  "var(--gc-l4-border)",
 ] as const;
 
 const LEVEL_LABELS = ["No contributions", "1–4", "5–9", "10–19", "20+"] as const;

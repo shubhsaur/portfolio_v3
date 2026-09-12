@@ -103,6 +103,18 @@
   --input: var(--ln-border-strong);
   --ring: var(--ln-ring);
   --radius: var(--ln-radius-card);
+
+  /* GitHub Calendar cell colours — dark mode defaults */
+  --gc-empty:        rgba(255, 255, 255, 0.05);
+  --gc-empty-border: rgba(255, 255, 255, 0.08);
+  --gc-l1:           rgba(185, 130,  74, 0.28);
+  --gc-l1-border:    rgba(185, 130,  74, 0.22);
+  --gc-l2:           rgba(185, 130,  74, 0.55);
+  --gc-l2-border:    rgba(185, 130,  74, 0.38);
+  --gc-l3:           rgba(232, 197,  71, 0.78);
+  --gc-l3-border:    rgba(232, 197,  71, 0.52);
+  --gc-l4:           rgba(232, 197,  71, 1.00);
+  --gc-l4-border:    rgba(232, 197,  71, 0.72);
 }
 
 /* Light mode (Ivory/Slate) - Complete palette plan */
@@ -173,6 +185,18 @@ html[data-color-mode="light"] {
 
   /* === DESTRUCTIVE === */
   --destructive: #DC2626;
+
+  /* GitHub Calendar cell colours — light mode overrides */
+  --gc-empty:        rgba(42, 38, 52, 0.07);
+  --gc-empty-border: rgba(42, 38, 52, 0.12);
+  --gc-l1:           rgba(142,  85,  19, 0.22);
+  --gc-l1-border:    rgba(142,  85,  19, 0.30);
+  --gc-l2:           rgba(142,  85,  19, 0.48);
+  --gc-l2-border:    rgba(142,  85,  19, 0.42);
+  --gc-l3:           rgba(142,  85,  19, 0.76);
+  --gc-l3-border:    rgba(142,  85,  19, 0.58);
+  --gc-l4:           rgba(142,  85,  19, 1.00);
+  --gc-l4-border:    rgba(142,  85,  19, 0.80);
 }
 
 html[data-color-mode="dark"] {
