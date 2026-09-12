@@ -112,7 +112,7 @@ function ProjectCard({
           <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-border pt-4">
             <Link
               href={`/projects/${project.slug}`}
-              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--ln-accent)] px-3.5 py-1.5 text-xs font-medium text-background transition-all duration-200 hover:bg-[var(--ln-accent)]/90 active:scale-95"
+              className="ln-btn-base ln-btn-default inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
             >
               <span>Case Study</span>
               <span aria-hidden="true" className="text-[10px]">↳</span>
@@ -122,10 +122,10 @@ function ProjectCard({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-muted/40 px-3.5 py-1.5 text-xs font-medium text-foreground transition-all duration-200 hover:border-[var(--ln-accent)]/50 hover:bg-muted/70 active:scale-95"
+                className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
               >
                 <span>Live</span>
-                <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                <ExternalLink className="h-3 w-3" />
               </a>
             )}
             {project.githubUrl && (
@@ -133,7 +133,7 @@ function ProjectCard({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border/70 bg-muted/20 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-border hover:text-foreground hover:bg-muted/50 active:scale-95"
+                className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
               >
                 <Github className="h-3 w-3" />
                 <span>GitHub</span>

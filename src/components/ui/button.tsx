@@ -25,14 +25,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-all duration-200",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_25%,transparent)] focus-visible:ring-offset-2",
+          "ln-btn-base inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_35%,transparent)] focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
-          variant === "default" && "bg-[var(--ln-accent)] text-background hover:bg-[var(--ln-accent)]/90",
-          variant === "secondary" && "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-          variant === "outline" && "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
-          variant === "ghost" && "hover:bg-accent hover:text-accent-foreground",
-          variant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          variant === "default" && "ln-btn-default",
+          variant === "secondary" && "ln-btn-secondary",
+          variant === "outline" && "ln-btn-outline",
+          variant === "ghost" && "ln-btn-ghost",
+          variant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-lg hover:shadow-red-500/20",
+          variant === "pill" && "ln-btn-outline text-xs px-3 py-1",
           sizeClasses[size],
           className
         )}

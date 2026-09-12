@@ -40,7 +40,7 @@ export function ScrollToTopButton() {
         <motion.button
           type="button"
           aria-label="Scroll to top"
-          className="pointer-events-auto fixed bottom-6 right-4 z-50 flex items-center gap-2 rounded-full border border-[rgba(232,197,71,0.28)] bg-black/70 px-4 py-3 text-sm font-medium text-[var(--ln-accent-gold)] shadow-[0_0_0_1px_rgba(232,197,71,0.08),0_12px_40px_rgba(0,0,0,0.45),0_0_26px_rgba(232,197,71,0.2)] backdrop-blur-xl transition hover:border-[rgba(232,197,71,0.45)] hover:shadow-[0_0_0_1px_rgba(232,197,71,0.14),0_16px_45px_rgba(0,0,0,0.55),0_0_34px_rgba(232,197,71,0.28)] sm:bottom-8 sm:right-8"
+          className="pointer-events-auto fixed bottom-6 right-4 z-50 flex items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--ln-accent)_35%,transparent)] bg-black/75 px-4 py-3 text-sm font-medium text-[var(--ln-accent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--ln-accent)_15%,transparent),0_12px_40px_rgba(0,0,0,0.5),0_0_24px_color-mix(in_srgb,var(--ln-accent)_20%,transparent)] backdrop-blur-xl transition hover:border-[var(--ln-accent)] hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--ln-accent)_40%,transparent),0_16px_45px_rgba(0,0,0,0.6),0_0_36px_color-mix(in_srgb,var(--ln-accent)_35%,transparent)] sm:bottom-8 sm:right-8"
           onClick={() =>
             window.scrollTo({
               top: 0,

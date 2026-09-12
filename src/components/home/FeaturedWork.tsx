@@ -242,7 +242,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--ln-accent)] px-3.5 py-1.5 text-xs font-medium text-[var(--ln-accent-foreground)] transition-all duration-200 hover:opacity-90 active:scale-95"
+            className="ln-btn-base ln-btn-default inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
           >
             <span>Case Study</span>
             <span aria-hidden="true" className="text-[10px]">↳</span>
@@ -252,7 +252,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[var(--ln-border-subtle)] bg-[var(--ln-glass)] px-3.5 py-1.5 text-xs font-medium text-[var(--ln-text-primary)] transition-all duration-200 hover:border-[var(--ln-border-strong)] hover:text-[var(--ln-accent)] active:scale-95"
+              className="ln-btn-base ln-btn-outline inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium"
             >
               <span>Live</span>
               <ArrowUpRight className="h-3.5 w-3.5 text-current opacity-80" />
