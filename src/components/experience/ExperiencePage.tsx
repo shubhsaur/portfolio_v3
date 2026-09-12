@@ -19,7 +19,7 @@ export function ExperiencePage() {
     <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-14 sm:gap-y-16">
         {/* Header */}
-        <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
+        <div className="col-span-4 sm:col-span-8 lg:col-span-12">
           <div className="space-y-4 text-left">
             <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
               Experience shaped by{" "}
@@ -32,7 +32,7 @@ export function ExperiencePage() {
               Frontend engineering across products, platforms and teams — building scalable interfaces, solving complex problems, and turning ideas into experiences that work beautifully in the real world.
             </p>
           </div>
-        </Reveal>
+        </div>
 
         {/* Page-level KPIs */}
         <Reveal delay={0.03} className="col-span-4 sm:col-span-8 lg:col-span-12">

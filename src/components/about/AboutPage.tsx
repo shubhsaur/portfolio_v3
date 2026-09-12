@@ -14,7 +14,7 @@ export function AboutPage() {
     <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-16 sm:gap-y-20">
         {/* Header */}
-        <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
+        <div className="col-span-4 sm:col-span-8 lg:col-span-12">
           <div className="space-y-4 text-left">
             <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
               Curious by{" "}
@@ -27,7 +27,7 @@ export function AboutPage() {
               I&apos;m a frontend engineer who cares deeply about how things work, feel and look — blending engineering, design and a healthy obsession with details to create digital experiences that are both purposeful and enjoyable.
             </p>
           </div>
-        </Reveal>
+        </div>
 
         {/* Prose + facts */}
         <Reveal

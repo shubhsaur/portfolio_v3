@@ -82,7 +82,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
   return (
     <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-12 sm:gap-y-16">
-        <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
+        <div className="col-span-4 sm:col-span-8 lg:col-span-12">
           <div className="space-y-4 text-left">
             <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
               Have something worth{" "}
@@ -95,7 +95,7 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
               Whether it&apos;s a product idea, a challenging interface, or simply a conversation about the web — I&apos;m always open to interesting problems and meaningful collaborations.
             </p>
           </div>
-        </Reveal>
+        </div>
 
         {/* Form */}
         <Reveal
