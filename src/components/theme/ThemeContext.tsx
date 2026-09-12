@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { playThemeSound } from "@/lib/sound";
 
 export type AccentTheme = "gold" | "emerald" | "violet" | "cyan";
 export type ColorMode = "light" | "dark";
@@ -144,7 +145,7 @@ interface ThemeContextType {
   accent: AccentTheme;
   colorMode: ColorMode;
   setAccent: (accent: AccentTheme) => void;
-  setColorMode: (mode: ColorMode) => void;
+  setColorMode: (mode: ColorMode, playSound?: boolean) => void;
   toggleColorMode: () => void;
   /** @deprecated alias of setAccent */
   setTheme: (theme: AccentTheme) => void;
@@ -186,23 +187,31 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [colorMode]);
 
-  const setColorMode = useCallback((mode: ColorMode) => {
+  const setColorMode = useCallback((mode: ColorMode, playSound = false) => {
+    if (playSound) {
+      playThemeSound(mode);
+    }
+    // Always reset accent to "gold" (first colour) when switching modes
+    const resetAccent: AccentTheme = "gold";
+    setAccentState(resetAccent);
     setColorModeState(mode);
     const root = document.documentElement;
     root.dataset.colorMode = mode;
+    root.dataset.accent = resetAccent;
     applyColorModeClass(mode);
-    // Re-apply the accent so the palette swaps to the mode-specific variant
-    // (neon for dark, muted ivory-compatible tones for light).
-    applyAccentVars(accent, mode);
+    applyAccentVars(resetAccent, mode);
     try {
       localStorage.setItem("ln_color_mode", mode);
+      localStorage.setItem("ln_accent_theme", resetAccent);
     } catch {
       /* ignore */
     }
-  }, [accent]);
+  }, []);
 
   const toggleColorMode = useCallback(() => {
-    setColorMode(colorMode === "dark" ? "light" : "dark");
+    const nextMode = colorMode === "dark" ? "light" : "dark";
+    playThemeSound(nextMode);
+    setColorMode(nextMode);
   }, [colorMode, setColorMode]);
 
   const value = useMemo(
