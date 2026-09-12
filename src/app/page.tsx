@@ -20,7 +20,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section
         id="hero"
-        className="relative scroll-mt-28 min-h-[calc(100svh-5rem)] sm:min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-8.75rem)] flex flex-col justify-between"
+        className="relative scroll-mt-28 min-h-0 md:min-h-[calc(100svh-8.75rem)] flex flex-col justify-between"
       >
         <div className="relative z-10 max-w-[87.5rem] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
           <div className="relative flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 md:items-start">
@@ -66,7 +66,12 @@ export default function Home() {
               {/* CTA */}
               <div className="mt-3.5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-2.5 sm:gap-3">
                 <Button asChild className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
-                  <a href={site.resumePath} download>
+                  <a
+                    href={site.resumePath}
+                    download="Shubham_Saurabh_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span>Download Resume</span>
                   </a>
                 </Button>
@@ -83,8 +88,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Viewport Bottom Center Scroll Animation */}
-        <div className="relative z-10 pt-2 sm:pt-6 pb-2 sm:pb-4 flex justify-center w-full">
+        {/* Viewport Bottom Center Scroll Animation — hidden on mobile */}
+        <div className="relative z-10 pt-0 sm:pt-3 pb-1 sm:pb-2 hidden md:flex justify-center w-full">
           <ScrollIndicator targetId="featured" />
         </div>
       </section>
