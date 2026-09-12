@@ -71,12 +71,12 @@ export default async function Home() {
               <div className="mt-5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-3">
                 <Button asChild className="min-w-0 flex-1 sm:flex-initial">
                   <a href={site.resumePath} download>
-                    Download Resume
+                    <span>Download Resume</span>
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="min-w-0 flex-1 sm:flex-initial">
                   <a href="/projects">
-                    See my Work
+                    <span>See my Work</span>
                   </a>
                 </Button>
               </div>
@@ -107,7 +107,7 @@ export default async function Home() {
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-center">
           <Button asChild>
             <a href="/projects">
-              View my work
+              <span>View my work</span>
               <span aria-hidden="true" className="ln-mono text-[10px]">
                 ↳
               </span>
@@ -115,7 +115,9 @@ export default async function Home() {
           </Button>
 
           <Button asChild variant="outline">
-            <a href="mailto:shubhamsaurabh@outlook.com">Get in touch</a>
+            <a href="mailto:shubhamsaurabh@outlook.com">
+              <span>Get in touch</span>
+            </a>
           </Button>
         </div>
       </div>

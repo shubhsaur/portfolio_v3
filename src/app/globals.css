@@ -936,9 +936,12 @@ button,
   cursor: pointer;
 }
 
-.ln-btn-base > * {
+/* Ensure ALL button text and icons stay safely on top of liquid fill */
+.ln-btn-base > *,
+.ln-btn-base span,
+.ln-btn-base svg {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
 }
 
@@ -948,6 +951,8 @@ button,
   justify-content: center;
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 /* Micro icon nudges on button hover */
@@ -984,10 +989,20 @@ button,
 
 /* ── Primary Button (Default): Gradient Liquid Flood ── */
 .ln-btn-default {
-  background-color: var(--ln-accent);
+  background-color: transparent !important;
   color: var(--ln-accent-foreground);
   border: 1px solid transparent;
   box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--ln-accent) 35%, transparent);
+}
+
+.ln-btn-default::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--ln-accent);
+  z-index: -2;
+  pointer-events: none;
 }
 
 .ln-btn-default::before {
@@ -999,7 +1014,7 @@ button,
   transform: translateY(102%);
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1024,11 +1039,22 @@ button,
 /* ── Outline Button: Liquid Pill Flood ── */
 .ln-btn-outline {
   border: 1px solid var(--border);
-  background-color: color-mix(in srgb, var(--ln-bg-card) 75%, transparent);
+  background-color: transparent !important;
   color: var(--foreground);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ln-btn-outline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--ln-bg-card) 75%, transparent);
+  z-index: -2;
+  pointer-events: none;
+  transition: background-color 220ms ease;
 }
 
 .ln-btn-outline::before {
@@ -1040,7 +1066,7 @@ button,
   transform: translateY(102%);
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1071,8 +1097,18 @@ button,
 /* ── Secondary Button: Theme Wash Liquid Flood ── */
 .ln-btn-secondary {
   border: 1px solid var(--border);
-  background-color: var(--secondary);
+  background-color: transparent !important;
   color: var(--secondary-foreground);
+}
+
+.ln-btn-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--secondary);
+  z-index: -2;
+  pointer-events: none;
 }
 
 .ln-btn-secondary::before {
@@ -1084,7 +1120,7 @@ button,
   transform: translateY(102%);
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1108,7 +1144,7 @@ button,
 
 /* ── Ghost Button ── */
 .ln-btn-ghost {
-  background-color: transparent;
+  background-color: transparent !important;
   color: var(--foreground);
 }
 
@@ -1121,7 +1157,7 @@ button,
   transform: translateY(102%);
   transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1152,8 +1188,11 @@ html[data-color-mode="light"] .ln-btn-default:hover {
     0 0 16px 2px color-mix(in srgb, var(--ln-accent) 25%, transparent) !important;
 }
 
-html[data-color-mode="light"] .ln-btn-outline {
+html[data-color-mode="light"] .ln-btn-outline::after {
   background-color: rgba(255, 255, 255, 0.85);
+}
+
+html[data-color-mode="light"] .ln-btn-outline {
   border-color: rgba(42, 38, 52, 0.16);
 }
 

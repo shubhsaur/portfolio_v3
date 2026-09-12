@@ -19,7 +19,7 @@ const sizeClasses = {
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", asChild, href, size = "md", ...props }, ref) => {
+  ({ className, variant = "default", asChild, href, size = "md", children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
 
     return (
@@ -40,7 +40,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...(href && { href })}
         {...props}
-      />
+      >
+        {asChild ? children : <span className="relative z-10 inline-flex items-center justify-center gap-[inherit] pointer-events-none">{children}</span>}
+      </Comp>
     );
   },
 );
