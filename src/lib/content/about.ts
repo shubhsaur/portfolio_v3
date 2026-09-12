@@ -21,11 +21,10 @@ export const aboutFacts = [
   },
 ] as const;
 
-/** First-person long-form for `/about`. */
 export const aboutBio = [
-  "I'm Shubham Saurabh, a frontend engineer with 5+ years of experience building scalable SaaS platforms, large-scale hotel booking engines, and robust cloud workflows. I'm currently Software Development Engineer - I at RateGain, after shipping self-service dashboards and API reliability work as a Senior System Engineer at Infosys.",
-  "My engineering foundation began at Delhi Technological University (DTU), where I earned a B.Tech in Polymer Science & Chemical Technology with a 7.82 GPA (class of 2020). That background in analytical modeling and systems thinking still shapes how I design resilient frontend architectures.",
-  "I work from Noida (previously Pune). Recent recognition includes the Pinnacle Performer of the Year Award (Q3 2024) and a Certificate of Achievement for AWS Migration — milestones tied to platform delivery and moving critical infrastructure to the cloud.",
+  "I’m Shubham Saurabh, a Frontend Engineer with 5+ years of experience engineering high-scale SaaS products, mission-critical booking platforms, and resilient web applications. Currently an SDE-I at RateGain, I architect scalable, user-centric interfaces for global travel hospitality networks — having previously engineered self-service enterprise portals and API reliability workflows as a Senior System Engineer at Infosys.",
+  "My engineering roots trace back to Delhi Technological University (DTU), where rigorous training in analytical modeling and complex systems laid the groundwork for how I build software today. Rather than treating frontend as just presentation, I approach interfaces from first principles — designing maintainable component systems, robust state architectures, and high-performance rendering pipelines that hold up under heavy real-world load.",
+  "I bring a proven track record of taking complex product requirements from conception to high-impact production delivery. Recognized with the Pinnacle Performer of the Year Award (Q3 2024) and a Certificate of Achievement for AWS Migration, I combine technical rigor with deep ownership — building fast, accessible, and purposeful digital products that drive measurable business outcomes.",
 ] as const;
 
 export const aboutEducation = {

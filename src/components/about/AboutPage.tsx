@@ -34,11 +34,11 @@ export function AboutPage() {
           delay={0.03}
           className="col-span-4 space-y-8 sm:col-span-8 lg:col-span-7"
         >
-          <div className="space-y-5">
+          <div className="space-y-6">
             {aboutBio.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 32)}
-                className="text-base leading-8 text-muted-foreground sm:text-lg"
+                className="text-xl leading-relaxed text-muted-foreground"
               >
                 {paragraph}
               </p>
