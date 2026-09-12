@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -19,13 +20,13 @@ const sizeClasses = {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", asChild, href, size = "md", ...props }, ref) => {
-    const Comp = asChild ? "span" : "button";
+    const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
         ref={ref}
         className={cn(
-          "ln-btn-base inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium",
+          "ln-btn-base inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium cursor-pointer select-none",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--ln-accent)_35%,transparent)] focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           variant === "default" && "ln-btn-default",

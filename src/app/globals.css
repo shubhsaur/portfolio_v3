@@ -911,6 +911,9 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
    ───────────────────────────────────────────────────────────── */
 
 .ln-btn-base {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -920,6 +923,13 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
     box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 220ms ease,
     color 220ms ease;
+}
+
+.ln-btn-base,
+.ln-btn-base *,
+button,
+[role="button"] {
+  cursor: pointer;
 }
 
 .ln-btn-base > * {
