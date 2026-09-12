@@ -83,16 +83,16 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
     <div className="pt-28 pb-24 sm:pt-40 sm:pb-32">
       <PageGrid className="gap-y-12 sm:gap-y-16">
         <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="max-w-2xl space-y-4">
-            <span className="ln-mono inline-flex rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)]">
-              Contact
-            </span>
-            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              Let&apos;s connect
+          <div className="space-y-4 text-left">
+            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
+              Have something worth{" "}
+              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                building
+              </span>
+              ?
             </h1>
-            <p className="text-base leading-8 text-muted-foreground">
-              Whether you want to discuss a project, explore a frontend role, or
-              just say hello, I&apos;d love to hear from you.
+            <p className="max-w-3xl text-xl text-muted-foreground">
+              Whether it&apos;s a product idea, a challenging interface, or simply a conversation about the web — I&apos;m always open to interesting problems and meaningful collaborations.
             </p>
           </div>
         </Reveal>

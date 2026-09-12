@@ -20,17 +20,16 @@ export function ExperiencePage() {
       <PageGrid className="gap-y-14 sm:gap-y-16">
         {/* Header */}
         <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="mx-auto max-w-3xl space-y-5 text-center">
-            <span className="ln-mono inline-flex rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)]">
-              Career
-            </span>
-            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              Experience
+          <div className="space-y-4 text-left">
+            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
+              Experience shaped by{" "}
+              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                impact
+              </span>
+              .
             </h1>
-            <p className="text-base leading-8 text-muted-foreground">
-              Building enterprise hotel booking and content platforms as SDE-I at
-              RateGain, after shipping self-service dashboards and API reliability
-              work as a Senior System Engineer at Infosys.
+            <p className="max-w-3xl text-xl text-muted-foreground">
+              Frontend engineering across products, platforms and teams — building scalable interfaces, solving complex problems, and turning ideas into experiences that work beautifully in the real world.
             </p>
           </div>
         </Reveal>

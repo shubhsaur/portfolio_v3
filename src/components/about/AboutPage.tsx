@@ -15,13 +15,17 @@ export function AboutPage() {
       <PageGrid className="gap-y-16 sm:gap-y-20">
         {/* Header */}
         <Reveal className="col-span-4 sm:col-span-8 lg:col-span-12">
-          <div className="space-y-4">
-            <span className="ln-mono inline-flex rounded-full border border-[var(--ln-accent)]/20 bg-[var(--ln-accent)]/10 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-[var(--ln-accent)]">
-              About
-            </span>
-            <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              Building resilient frontends with systems thinking
+          <div className="space-y-4 text-left">
+            <h1 className="text-5xl font-bold text-foreground sm:text-6xl">
+              Curious by{" "}
+              <span className="font-[family-name:var(--font-pacifico)] text-[var(--ln-accent)]">
+                nature
+              </span>
+              .
             </h1>
+            <p className="max-w-3xl text-xl text-muted-foreground">
+              I&apos;m a frontend engineer who cares deeply about how things work, feel and look — blending engineering, design and a healthy obsession with details to create digital experiences that are both purposeful and enjoyable.
+            </p>
           </div>
         </Reveal>
 
