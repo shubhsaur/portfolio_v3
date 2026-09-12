@@ -906,27 +906,10 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Theme-Reactive Button Hover Animations
+   Theme-Reactive Button Hover System
    Adapts dynamically to the active accent theme (gold, emerald, violet, cyan)
    and color mode (dark/light).
    ───────────────────────────────────────────────────────────── */
-
-@keyframes ln-btn-sheen {
-  0% {
-    left: -130%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    left: 210%;
-    opacity: 0;
-  }
-}
 
 .ln-btn-base {
   position: relative;
@@ -943,6 +926,7 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
 .ln-btn-base > * {
   position: relative;
   z-index: 2;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ln-btn-base > a {
@@ -953,32 +937,11 @@ html[data-color-mode="light"] .ln-footer .footer-brand {
   height: 100%;
 }
 
-/* Diagonal luminous sheen sweep across the button surface */
-.ln-btn-base::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -130%;
-  width: 50%;
-  height: 200%;
-  pointer-events: none;
-  z-index: 1;
-  transform: skewX(-22deg);
-  opacity: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.15) 25%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.15) 75%,
-    transparent 100%
-  );
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
-}
-
+/* Micro icon nudge on hover */
 @media (hover: hover) and (pointer: fine) {
-  .ln-btn-base:hover::after {
-    animation: ln-btn-sheen 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  .ln-btn-base:hover svg,
+  .ln-btn-base:hover [data-icon] {
+    transform: translate(2px, -2px);
   }
 }
 
