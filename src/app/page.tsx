@@ -66,7 +66,12 @@ export default function Home() {
               {/* CTA */}
               <div className="mt-3.5 sm:mt-6 md:mt-8 flex w-full max-w-[34rem] gap-2.5 sm:gap-3">
                 <Button asChild className="min-w-0 flex-1 sm:flex-initial h-9 px-3.5 text-xs sm:h-11 sm:px-5 sm:text-sm">
-                  <a href={site.resumePath} download>
+                  <a
+                    href={site.resumePath}
+                    download="Shubham_Saurabh_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span>Download Resume</span>
                   </a>
                 </Button>

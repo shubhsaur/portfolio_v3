@@ -211,7 +211,12 @@ export function ContactSection({ endpoint }: { endpoint: string }) {
                 </p>
               </div>
               <Button asChild variant="outline" className="w-full">
-                <a href={site.resumePath} download>
+                <a
+                  href={site.resumePath}
+                  download="Shubham_Saurabh_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Download className="h-4 w-4" />
                   <span>Download resume</span>
                 </a>
