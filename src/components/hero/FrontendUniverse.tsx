@@ -101,8 +101,8 @@ export default function FrontendUniverse({ interactive = true, className = "", .
       onPointerMove={handlePointerMove}
       onPointerLeave={handleLeave}
     >
-      {/* Ambient lighting — softly contained on mobile to prevent document horizontal scroll */}
-      <div className="pointer-events-none absolute inset-0 md:-inset-20 overflow-hidden md:overflow-visible">
+      {/* Ambient lighting — diffused seamlessly across the hero backdrop without clipping */}
+      <div className="pointer-events-none absolute -inset-10 sm:-inset-16 md:-inset-20 overflow-visible">
         <div
           className="fu-ambient absolute left-[18%] top-[22%] h-48 w-48 sm:h-64 sm:w-64 rounded-full blur-[70px] sm:blur-[100px] transition-transform duration-500"
           style={{
