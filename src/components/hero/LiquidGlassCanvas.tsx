@@ -211,11 +211,19 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
     let accent = parseAccentRgb();
     let ripple: [number, number] = [0.5, 0.5];
     let rippleStart = -1;
+    let cachedWidth = 1;
+    let cachedHeight = 1;
+    let lastRenderTime = 0;
+    const targetInterval = 1000 / 60; // Frame pacing: 60 FPS max to protect Safari compositor
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = Math.max(1, Math.floor(canvas.clientWidth * dpr));
-      const height = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+      const w = window.innerWidth || canvas.clientWidth || 1;
+      const h = window.innerHeight || canvas.clientHeight || 1;
+      cachedWidth = w;
+      cachedHeight = h;
+      const width = Math.max(1, Math.floor(w * dpr));
+      const height = Math.max(1, Math.floor(h * dpr));
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
@@ -232,6 +240,12 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
         return;
       }
 
+      // Frame pacing: on 120Hz ProMotion screens, avoid saturating the GPU bus
+      if (now - lastRenderTime < targetInterval) {
+        return;
+      }
+      lastRenderTime = now;
+
       const delta = now - lastFrame;
       lastFrame = now;
       if (delta > 100) {
@@ -245,7 +259,6 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
         slowFrames = 0;
       }
 
-      resize();
       gl.useProgram(program);
       gl.bindVertexArray(vao);
       gl.enable(gl.BLEND);
@@ -268,20 +281,18 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
+      if (cachedWidth === 0 || cachedHeight === 0) return;
       pointer = [
-        (event.clientX - rect.left) / rect.width,
-        (event.clientY - rect.top) / rect.height,
+        event.clientX / cachedWidth,
+        event.clientY / cachedHeight,
       ];
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
+      if (cachedWidth === 0 || cachedHeight === 0) return;
       ripple = [
-        (event.clientX - rect.left) / rect.width,
-        (event.clientY - rect.top) / rect.height,
+        event.clientX / cachedWidth,
+        event.clientY / cachedHeight,
       ];
       rippleStart = performance.now();
     };
