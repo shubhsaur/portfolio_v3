@@ -583,6 +583,11 @@ html[data-color-mode="light"] .hero-body-text {
   color: var(--ln-text-body) !important;
 }
 
+/* Greeting text: "Hi, I'm" → black in light mode */
+html[data-color-mode="light"] .hero-greeting {
+  color: #000000 !important;
+}
+
 /* Stat values: text-zinc-50 → primary heading */
 html[data-color-mode="light"] .hero-stat-value {
   color: var(--ln-text-primary) !important;

@@ -35,7 +35,7 @@ export default function Home() {
               </span>
 
               <h1 className="mt-4 sm:mt-7 md:mt-9 text-balance text-[1.75rem] sm:text-[2.5rem] md:text-[3.125rem] lg:text-[3.75rem] xl:text-[4.375rem] font-bold leading-[1.1] tracking-tighter">
-                <span className="block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
+                <span className="hero-greeting block text-[1.125rem] sm:text-[1.5rem] md:text-[1.875rem] lg:text-[2.25rem] xl:text-[2.625rem] font-semibold text-black dark:text-zinc-400 tracking-tight mb-1">Hi, I'm</span>
                 <span className="ln-gradient-text whitespace-nowrap">Shubham&nbsp;Saurabh</span>
               </h1>
 
