@@ -290,6 +290,14 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
 
     const onPointerDown = (event: PointerEvent) => {
       if (cachedWidth === 0 || cachedHeight === 0) return;
+      // Disable ripple effect on touch devices and mobile viewports
+      if (
+        event.pointerType === "touch" ||
+        window.matchMedia("(max-width: 768px)").matches ||
+        window.matchMedia("(pointer: coarse)").matches
+      ) {
+        return;
+      }
       ripple = [
         event.clientX / cachedWidth,
         event.clientY / cachedHeight,
