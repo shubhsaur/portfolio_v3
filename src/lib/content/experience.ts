@@ -42,7 +42,7 @@ export const experienceKpis = [
 export const experiences: ExperienceRecord[] = [
   {
     id: "rategain",
-    role: "Software Development Engineer - I",
+    role: "Software Development Engineer",
     company: "RateGain",
     companyUrl: "https://rategain.com",
     period: "Jan 2023 — Present",

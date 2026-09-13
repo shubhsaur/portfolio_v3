@@ -7,7 +7,7 @@ export const aboutFacts = [
   {
     icon: "🏢",
     label: "Current Role",
-    value: "Software Development Engineer - I at RateGain",
+    value: "Software Development Engineer at RateGain",
   },
   {
     icon: "📍",
