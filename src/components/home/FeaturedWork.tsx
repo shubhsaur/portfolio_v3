@@ -275,7 +275,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
 
 export function FeaturedWork() {
   return (
-    <section id="featured" className="scroll-mt-24 md:scroll-mt-28 pt-0 pb-12 md:pb-20 lg:pb-32">
+    <section id="featured" className="scroll-mt-24 md:scroll-mt-28 pt-6 sm:pt-10 md:pt-14 pb-12 md:pb-20 lg:pb-32">
       <div className="mx-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
         <div className="space-y-4 text-left mb-12 md:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground">
