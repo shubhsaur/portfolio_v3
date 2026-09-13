@@ -50,7 +50,7 @@ export function AboutPage() {
             <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-zinc-900 dark:text-zinc-50">
               I’m <strong className="font-semibold text-foreground">Shubham Saurabh</strong>, a Frontend Engineer with{" "}
               <span className="font-semibold text-[var(--ln-accent)]">5+ years of experience</span> engineering{" "}
-              <span className="font-semibold text-[var(--ln-accent)]">high-scale SaaS products</span>, mission-critical booking platforms, and resilient web applications. Currently an SDE-I at{" "}
+              <span className="font-semibold text-[var(--ln-accent)]">high-scale SaaS products</span>, mission-critical booking platforms, and resilient web applications. Currently an SDE at{" "}
               <span className="font-semibold text-[var(--ln-accent)]">RateGain</span>, I architect scalable, user-centric interfaces for global travel hospitality networks — having previously engineered self-service enterprise portals and API reliability workflows as a Senior System Engineer at{" "}
               <span className="font-semibold text-[var(--ln-accent)]">Infosys</span>.
             </p>
@@ -98,8 +98,7 @@ export function AboutPage() {
               {aboutEducation.degree}
             </h2>
             <p className="mt-1 text-sm text-zinc-900 dark:text-zinc-50">
-              {aboutEducation.school} · {aboutEducation.gpa} ·{" "}
-              {aboutEducation.years}
+              {aboutEducation.school} · {aboutEducation.years}
             </p>
             <p className="mt-3 text-sm leading-7 text-zinc-900 dark:text-zinc-50">
               {aboutEducation.summary}
