@@ -739,6 +739,12 @@ html[data-color-mode="light"] .project-filter-btn:hover {
   will-change: transform;
 }
 
+/* Image loading shimmer */
+@keyframes shimmer {
+  100% { transform: translateX(200%); }
+}
+
+
 /* Navbar logo hover spin */
 .nav-logo-spin {
   animation: ln-spin-slow 10s linear infinite;
