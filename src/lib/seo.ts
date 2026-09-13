@@ -14,7 +14,7 @@ export const routeMeta = {
   home: {
     title: "Shubham Saurabh – Frontend Engineer",
     description:
-      "Frontend engineer, SDE-I @ RateGain. 5+ years on React, Next.js, and TypeScript. Hotel booking engines, B2B content platforms, and AI tooling.",
+      "Frontend engineer, SDE @ RateGain. 5+ years on React, Next.js, and TypeScript. Hotel booking engines, B2B content platforms, and AI tooling.",
     path: "/",
   },
   projects: {
@@ -26,7 +26,7 @@ export const routeMeta = {
   experience: {
     title: "Experience",
     description:
-      "RateGain SDE-I and Infosys SSE. 60% faster UIs, 10+ gateways, 10x deploy cycle.",
+      "RateGain SDE and Infosys SSE. 60% faster UIs, 10+ gateways, 10x deploy cycle.",
     path: "/experience",
   },
   about: {

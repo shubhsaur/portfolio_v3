@@ -55,10 +55,10 @@ export function AboutTeaser() {
           {/* Body Description */}
           <div className="mt-5 sm:mt-6 max-w-3xl space-y-4 text-balance text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
             <p>
-              I&apos;m <span className="font-semibold text-foreground">Shubham Saurabh</span>, a frontend engineer with <span className="font-semibold text-foreground">5+ years of experience</span> architecting scalable SaaS platforms, large-scale hotel booking engines, and robust cloud workflows. Currently <span className="font-semibold text-foreground">SDE - I at RateGain</span>, after delivering self-service dashboards and API reliability engineering as a Senior System Engineer at Infosys.
+              I&apos;m <span className="font-semibold text-foreground">Shubham Saurabh</span>, a frontend engineer with <span className="font-semibold text-foreground">5+ years of experience</span> architecting scalable SaaS platforms, large-scale hotel booking engines, and robust cloud workflows. Currently <span className="font-semibold text-foreground">SDE at RateGain</span>, after delivering self-service dashboards and API reliability engineering as a Senior System Engineer at Infosys.
             </p>
             <p>
-              My engineering foundation began at <span className="font-semibold text-foreground">Delhi Technological University (DTU)</span>, earning a B.Tech in Polymer Science &amp; Chemical Technology with a 7.82 GPA (class of 2020). That background in analytical modeling and systems thinking continues to shape how I design resilient, performant frontend architectures today.
+              My engineering foundation began at <span className="font-semibold text-foreground">Delhi Technological University (DTU)</span>, earning a B.Tech in Polymer Science &amp; Chemical Technology (class of 2020). That background in analytical modeling and systems thinking continues to shape how I design resilient, performant frontend architectures today.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export function AboutTeaser() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3.5 py-1 text-xs text-foreground/80 backdrop-blur-sm">
               <Briefcase className="h-3 w-3 text-[var(--ln-accent)]" />
-              <span>SDE - I @ RateGain</span>
+              <span>SDE @ RateGain</span>
             </div>
             <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3.5 py-1 text-xs text-foreground/80 backdrop-blur-sm">
               <GraduationCap className="h-3 w-3 text-[var(--ln-accent)]" />

@@ -128,7 +128,7 @@ export function CodeCard() {
               <span className="text-sky-400">role</span>
               <span className="text-zinc-400">:</span>{" "}
               <span className="text-amber-200">
-                &quot;SDE - I @ RateGain&quot;
+                &quot;SDE @ RateGain&quot;
               </span>
               {",\n  "}
               <span className="text-sky-400">experience</span>
@@ -187,7 +187,7 @@ export function CodeCard() {
                 <div className="space-y-1 pt-2">
                   <div className="text-zinc-500">$ bun run shubhamsaurabh.ts</div>
                   <div className="text-emerald-400 flex items-center gap-1">
-                    <Check className="h-3 w-3" /> Verified: SDE - I @ RateGain (Ex-Infosys)
+                    <Check className="h-3 w-3" /> Verified: SDE @ RateGain (Ex-Infosys)
                   </div>
                   <div className="text-sky-300 flex items-center gap-1">
                     <Check className="h-3 w-3" /> 5+ YOE · 70+ Repos · Q3 Pinnacle Performer
