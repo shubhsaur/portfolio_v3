@@ -21,6 +21,8 @@ import { projects, type ProjectRecord } from "@/lib/content/projects";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { buildPageMetadata, caseStudyMeta } from "@/lib/seo";
+import { ProjectImage } from "@/components/projects/ProjectImage";
+
 
 const SLUG_ORDER = [
   "uno-booking",
@@ -231,7 +233,7 @@ export default async function CaseStudyPage({
 
               {/* Showcase Image Canvas (unoptimized, pristine full-resolution) */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-muted/20 flex items-center justify-center p-2 sm:p-4">
-                <Image
+                <ProjectImage
                   src={project.thumbnail}
                   alt={`${project.title} interface preview`}
                   fill
@@ -240,10 +242,12 @@ export default async function CaseStudyPage({
                   className="object-contain [image-rendering:-webkit-optimize-contrast] transition-transform duration-700 ease-out group-hover:scale-[1.01]"
                   priority
                   sizes="(max-width: 1440px) 100vw, 1440px"
+                  wrapperClassName="absolute inset-0"
                 />
                 {/* Subtle shine sweep */}
                 <span aria-hidden="true" className="thumbnail-shine-sweep" />
               </div>
+
             </div>
           </section>
         )}
@@ -461,12 +465,13 @@ export default async function CaseStudyPage({
               >
                 {prevProject.thumbnail && (
                   <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-border bg-muted/30">
-                    <Image
+                    <ProjectImage
                       src={prevProject.thumbnail}
                       alt={prevProject.title}
                       fill
                       unoptimized
                       className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+                      wrapperClassName="absolute inset-0"
                     />
                   </div>
                 )}
@@ -505,12 +510,13 @@ export default async function CaseStudyPage({
                 </div>
                 {nextProject.thumbnail && (
                   <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-border bg-muted/30 order-first sm:order-last">
-                    <Image
+                    <ProjectImage
                       src={nextProject.thumbnail}
                       alt={nextProject.title}
                       fill
                       unoptimized
                       className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+                      wrapperClassName="absolute inset-0"
                     />
                   </div>
                 )}
