@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { site } from "@/lib/content/site";
+import { startRouteTransition } from "@/components/providers/NavigationProgress";
 import { toast } from "sonner";
 import { useTheme } from "@/components/theme/ThemeContext";
 
@@ -62,6 +63,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   const go = useCallback(
     (href: string) => {
       onClose();
+      startRouteTransition(href);
       router.push(href);
     },
     [onClose, router]

@@ -5,6 +5,7 @@ import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-boot";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Loader } from "@/components/ui/Loader";
+import { NavigationProgress } from "@/components/providers/NavigationProgress";
 import { SITE_URL, routeMeta } from "@/lib/seo";
 import "./globals.css";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
         <ThemeProvider>
           <SiteShell>{children}</SiteShell>
           <Toaster />
+          <NavigationProgress />
         </ThemeProvider>
       </body>
     </html>
