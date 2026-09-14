@@ -54,7 +54,7 @@ export const caseStudyMeta: Record<
   "uno-booking": {
     title: "Uno Booking Engine",
     description:
-      "Multi-tenant hotel IBE with 10+ payment gateways and 20+ locales.",
+      "Direct hotel booking engine with dual-checkout flows, 23 languages, and isolated full-funnel ad tracking.",
   },
   "content-ai": {
     title: "Content AI",
