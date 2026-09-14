@@ -56,6 +56,11 @@ export const caseStudyMeta: Record<
     description:
       "Direct hotel booking engine with dual-checkout flows, 23 languages, and isolated full-funnel ad tracking.",
   },
+  "guest-experience-platform": {
+    title: "Guest Experience Platform",
+    description:
+      "Hotel guest feedback and reporting platform migrated from Angular to Next.js across 24 dashboard tabs.",
+  },
   "content-ai": {
     title: "Content AI",
     description: "B2B content platform; UI rendering ~60% faster.",

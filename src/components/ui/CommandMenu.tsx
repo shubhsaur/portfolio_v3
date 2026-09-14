@@ -25,6 +25,7 @@ import {
   GitMerge,
   GitPullRequest,
   Gamepad2,
+  LayoutDashboard,
 } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { site } from "@/lib/content/site";
@@ -190,6 +191,15 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       icon: Hotel,
       perform: () => go("/projects/uno-booking"),
       keywords: ["uno", "booking", "hotel", "payments", "rategain"],
+    },
+    {
+      id: "case-guest-experience",
+      title: "Guest Experience Platform",
+      category: "Case Studies",
+      description: "Analytics & corporate reporting suite migrated from Angular to Next.js",
+      icon: LayoutDashboard,
+      perform: () => go("/projects/guest-experience-platform"),
+      keywords: ["guest", "experience", "connect", "analytics", "dashboards", "sojern", "angular", "nextjs"],
     },
     {
       id: "case-content-ai",

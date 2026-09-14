@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const caseStudies = [
     "/projects/uno-booking",
+    "/projects/guest-experience-platform",
     "/projects/content-ai",
     "/projects/cryptopedia",
     "/projects/codelens",

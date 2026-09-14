@@ -58,6 +58,40 @@ export const projects: ProjectRecord[] = [
     },
   },
   {
+    id: "guest-experience-platform",
+    slug: "guest-experience-platform",
+    title: "Guest Experience Platform",
+    group: "work",
+    categories: ["SaaS", "Admin Panel", "Web"],
+    badge: "Enterprise Modernization",
+    description:
+      "All-in-one guest management platform used by hotels to monitor reviews, send targeted messaging, and run a 24/7 AI concierge. I led the frontend modernization of the analytics and corporate reporting suites, migrating 10 core pages and 24 dashboard tabs from Angular 1.8 to Next.js and React 19 without disrupting live hotel operations.",
+    tech: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Recharts", "TanStack Table", "d3-cloud", "Framer Motion"],
+    thumbnail: "/projects/guest-experience-platform.png",
+    liveUrl: "https://www.sojern.com/guest-experience",
+    stats: [
+      { label: "Dashboards", value: "24 Tabbed Views" },
+      { label: "Migration", value: "Angular → Next.js" },
+      { label: "Reach", value: "8 Languages" },
+    ],
+    caseStudy: {
+      lede:
+        "The Guest Experience Platform helps hotel properties and global hotel chains track guest satisfaction, resolve complaints early, send automated campaigns, and provide instant answers through an AI concierge. My work focused on modernizing the platform's heavy reporting and analytics side—migrating the entire Dashboards and Corporate reports suite from a legacy Angular 1.8 codebase to Next.js and React 19 across 10 sidebar modules, 24 dashboard tabs, and 15+ drill-down screens while keeping the exact numbers, filters, and daily workflows intact.",
+      highlights: [
+        "Zero Workflow Disruption: Replicated every calculation rule, filter option, and export format with 100% fidelity, so front-desk and corporate staff transitioned smoothly with zero relearning.",
+        "URL-Persisted Filter Snapshots: Synced complex filter combinations (brand, region, property, date range, review score) to the URL query string, making it simple for corporate teams to share exact report views.",
+        "Multi-Language Continuity: Maintained full localized UI support across 8 languages (English, European & Mexican Spanish, French, German, Italian, Portuguese, Thai).",
+        "Automated Metric Verification: Guarded complex reporting formulas (NPS, OSAT scores, response times, campaign delivery rates) with automated unit tests to ensure mathematical accuracy against legacy baselines.",
+      ],
+      architecture: [
+        "Decomposed a 4,300-Line Monolith: Broke down a single ~4,300-line legacy Angular file into ~110 typed, modular React components across the Next.js App Router, drastically improving maintainability and component reusability.",
+        "24 Hotel & Corporate Dashboard Tabs: Rebuilt all 12 property-level views (reviews, in-stay surveys, concierge metrics, revenue, SLA monitors) and all 12 corporate rollup tabs for brand leadership with interactive Recharts and d3-cloud word clouds.",
+        "High-Performance Tables with TanStack: Implemented virtualized data tables for Corporate Online Reviews, Survey Responses (supporting 15+ filters), and Guest Relations Cases with fast 100-item paging, bulk status updates, and CSV exports.",
+        "Complex ~60-Field Case Management Form: Re-architected the guest incident creation and resolution workflow, transforming ~1,550 lines of legacy imperative script into structured, validated form sections.",
+      ],
+    },
+  },
+  {
     id: "content-ai",
     slug: "content-ai",
     title: "Content AI",

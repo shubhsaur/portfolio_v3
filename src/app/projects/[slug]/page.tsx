@@ -26,6 +26,7 @@ import { ProjectImage } from "@/components/projects/ProjectImage";
 
 const SLUG_ORDER = [
   "uno-booking",
+  "guest-experience-platform",
   "content-ai",
   "cryptopedia",
   "codelens",
