@@ -86,6 +86,12 @@ export default async function CaseStudyPage({
     }
   }
 
+  // Check if project has enterprise classification or tag
+  const isEnterprise =
+    project.group === "work" ||
+    project.categories?.some((c) => c.toLowerCase().includes("enterprise")) ||
+    project.badge?.toLowerCase().includes("enterprise");
+
   return (
     <article className="relative min-h-screen pt-24 pb-20 sm:pt-32 sm:pb-28">
       <div className="mx-auto w-full max-w-[84rem] px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
@@ -389,7 +395,7 @@ export default async function CaseStudyPage({
                 {project.liveUrl && (
                   <div className="border-t border-border/60 pt-4">
                     <span className="ln-mono text-[0.6875rem] uppercase tracking-wider text-muted-foreground">
-                      Deployment
+                      {isEnterprise ? "Company Website" : "Deployment"}
                     </span>
                     <a
                       href={project.liveUrl}
