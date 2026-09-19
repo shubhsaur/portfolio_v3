@@ -164,7 +164,10 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
 
             <button
               type="button"
-              onClick={onOpenCommandMenu}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onOpenCommandMenu();
+              }}
               className="flex items-center justify-center rounded-full border border-border bg-muted/60 text-foreground transition hover:border-[var(--ln-accent)] hover:text-[var(--ln-accent)] active:scale-95"
               style={{ width: "var(--nav-mobile-btn)", height: "var(--nav-mobile-btn)" }}
               aria-label="Open Command Menu"
