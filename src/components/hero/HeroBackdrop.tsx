@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
@@ -15,12 +16,17 @@ function isLiquidGlassEnabled() {
 }
 
 export function HeroBackdrop() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const prefersReducedMotion = useReducedMotion();
   const [mountCanvas, setMountCanvas] = useState(false);
 
   useEffect(() => {
-    if (!isLiquidGlassEnabled()) return;
-    if (prefersReducedMotion) return;
+    // Only mount the heavy WebGL shader canvas on the Home page where the hero is present
+    if (!isHome || !isLiquidGlassEnabled() || prefersReducedMotion) {
+      setMountCanvas(false);
+      return;
+    }
 
     let idleId: number | undefined;
     let timeoutId: number | undefined;
@@ -30,20 +36,29 @@ export function HeroBackdrop() {
       if (!cancelled) setMountCanvas(true);
     };
 
-    // Prefer idle time, but always fall back so mobile (busy main thread / loader)
-    // still gets the same liquid-glass backdrop as desktop.
+    // Defer WebGL initialization until after main thread settles to keep FCP/LCP instant
     const ric = window.requestIdleCallback;
     if (typeof ric === "function") {
-      idleId = ric(enable, { timeout: 1200 });
+      idleId = ric(enable, { timeout: 1500 });
     }
-    timeoutId = window.setTimeout(enable, 300);
+    timeoutId = window.setTimeout(enable, 500);
 
     return () => {
       cancelled = true;
       if (idleId != null) window.cancelIdleCallback?.(idleId);
       window.clearTimeout(timeoutId);
     };
-  }, [prefersReducedMotion]);
+  }, [isHome, prefersReducedMotion]);
+
+  useEffect(() => {
+    const onRouteStart = () => {
+      setMountCanvas(false);
+    };
+    window.addEventListener("portfolio:route-transition-start", onRouteStart);
+    return () => {
+      window.removeEventListener("portfolio:route-transition-start", onRouteStart);
+    };
+  }, []);
 
   return (
     <div className="ln-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden">

@@ -68,15 +68,36 @@ export default function FrontendUniverse({ interactive = true, className = "", .
     return () => ro.disconnect();
   }, []);
 
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
   const handlePointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
     if (!interactive) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    setPointer({ x: clamp(x * 30, -15, 15), y: clamp(y * 22, -11, 11) });
+    const nextX = clamp(x * 30, -15, 15);
+    const nextY = clamp(y * 22, -11, 11);
+
+    if (rafRef.current !== null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      setPointer({ x: nextX, y: nextY });
+    });
   }, [interactive]);
 
   const handleLeave = useCallback(() => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     setPointer({ x: 0, y: 0 });
     setActive(null);
   }, []);
@@ -146,10 +167,9 @@ export default function FrontendUniverse({ interactive = true, className = "", .
                 0 10px 40px rgba(0,0,0,.4)
               `
               : `
-                0 0 60px 10px rgba(185,130,74,.25),
-                0 0 120px 30px rgba(128,103,161,.18),
-                0 0 200px 60px rgba(75,154,165,.08),
-                0 20px 70px rgba(0,0,0,.5)
+                0 0 50px 8px rgba(185,130,74,.24),
+                0 0 90px 20px rgba(128,103,161,.16),
+                0 20px 60px rgba(0,0,0,.45)
               `,
           }}
         >
@@ -226,7 +246,7 @@ export default function FrontendUniverse({ interactive = true, className = "", .
                   aria-label={`${node.label}: ${node.detail}`}
                   onPointerEnter={() => setActive(node.id)}
                   onPointerLeave={() => setActive(null)}
-                  className={`hero-tech-node pointer-events-auto min-w-[74px] sm:min-w-[95px] md:min-w-[110px] max-w-[105px] sm:max-w-[134px] rounded-xl sm:rounded-2xl border bg-[#0D0F15]/84 px-1.5 py-1.5 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-[transform,box-shadow,border-color] duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
+                  className={`hero-tech-node pointer-events-auto min-w-[74px] sm:min-w-[95px] md:min-w-[110px] max-w-[105px] sm:max-w-[134px] rounded-xl sm:rounded-2xl border bg-[#0D0F15]/94 px-1.5 py-1.5 sm:px-2.5 sm:py-2.5 md:px-3 md:py-3 text-left shadow-[0_20px_50px_rgba(0,0,0,.32)] transition-[transform,box-shadow,border-color] duration-500 ease-out ${isActive ? "scale-[1.08]" : ""}`}
                   style={{
                     transform: "translate(-50%, -50%)",
                     width: "max(15%, 74px)",

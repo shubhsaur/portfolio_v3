@@ -30,7 +30,7 @@ This revamp turns that one-pager into a real App Router site: `/`, `/about`, `/p
 | Theme | Four accents (`gold` / `emerald` / `violet` / `cyan`) persisted as `ln_accent_theme`. `setTheme` writes `--ln-accent-gold`, `--ln-gradient-primary`, `--ln-ring`. No `color-scheme` toggle. `html.ln-root` is hardcoded `color-scheme: dark`. |
 | Projects | Data + UI live in `src/components/projects/ProjectsSection.tsx`. Groups `work` vs `personal` exist; category pills (`Enterprise SaaS` / `AI & Tooling` / `Fintech & Data`) still filter. Deep dives expand inline. Cards have no thumbnails. `public/codelens.png` exists unused. |
 | Experience | `src/components/experience/ExperienceSection.tsx` is a left-spine timeline that also includes DTU education. Per-role metric rows exist; RateGain currently shows 60% / 10+ gateways / 20+ locales. Infosys holds the 10x deploy cycle. |
-| Contact | Getform `https://getform.io/f/f07994de-98f2-4f00-91b1-d2aec22d8ee8` hardcoded in `page.tsx`. Email fallback `mailto:shubhamsaurabh@outlook.com`. Form + socials stacked, not a two-column page. |
+| Contact | Getform `https://getform.io/f/f07994de-98f2-4f00-91b1-d2aec22d8ee8` hardcoded in `page.tsx`. Email fallback `mailto:contact@shubhamsaurabh.dev`. Form + socials stacked, not a two-column page. |
 | Motion | `Reveal` / `useRevealOnView` uses geometry + IntersectionObserver + 100ms poll. Skills cards already honor that hook. Global `@media (prefers-reduced-motion: reduce)` in `globals.css` zeros **all** animation/transition durations. |
 | SEO | One `metadata` object in `layout.tsx`. No per-section titles, no OG images, no `not-found.tsx`. |
 | Command palette | Section jumper + copy email/phone + resume + theme + live project URLs. Skills / Open Source / Content are first-class nav commands. Links: GitHub and LinkedIn only — **no X**. X exists only in `ContactSection`. Footer is copyright-only (no socials, no theme toggle). |
@@ -61,7 +61,7 @@ This revamp turns that one-pager into a real App Router site: `/`, `/about`, `/p
 - Keep all **8** theme combinations (4 accents × light/dark). Gold is the default identity accent. Cyan is reserved for success / open-source chips.
 - Full-bleed atmosphere + wide content grid (`max-w-[1400px]`, 12 columns, page padding 24 / 40 / 64). Nav is full-bleed with inner alignment to the same grid.
 - Quiet-editorial motion: one easing, two durations; `useRevealOnView` / CSS reveal; WebGL liquid glass gated and lazy.
-- Contact: existing Getform endpoint + `mailto:shubhamsaurabh@outlook.com`. No Cal.com.
+- Contact: existing Getform endpoint + `mailto:contact@shubhamsaurabh.dev`. No Cal.com.
 - Unique metadata + OG per route and per case study. 404 in the shared shell.
 - Phased, shippable increments. Home does not wait on the portrait. Home does not wait on WebGL.
 - Replace the hand-rolled UI primitives with **shadcn/ui** (copy-into-repo, Tailwind v4, CSS variables mapped to `--ln-*`). Keep product chrome (Navbar, CommandMenu logic, BrandIcons, Reveal, ThemeContext).
@@ -414,7 +414,7 @@ sequenceDiagram
 
 Hero stats stay: **5+ years**, GitHub repos from `getGithubMeta()` (`src/lib/github.ts`, revalidate 3600s, fallback `70+`), **2+ major awards**. These are Home/About numbers, not Experience KPIs.
 
-CTAs that currently `href="#projects"` become `/projects`. Resume path stays `/Shubham_Saurabh_Resume.pdf`. Mailto stays `shubhamsaurabh@outlook.com`.
+CTAs that currently `href="#projects"` become `/projects`. Resume path stays `/Shubham_Saurabh_Resume.pdf`. Mailto stays `contact@shubhamsaurabh.dev`.
 
 **Projects (`/projects`)**
 
@@ -1204,7 +1204,7 @@ None. Portrait filename/timing is an implementation dependency (placeholder ship
 - Hand-rolled UI: `src/components/ui/{button,card,tag,Toast,CommandMenu,BrandIcons}.tsx`
 - Existing unused thumbnail: `public/codelens.png`
 - Getform: `https://getform.io/f/f07994de-98f2-4f00-91b1-d2aec22d8ee8` (from `page.tsx`)
-- Email: `shubhamsaurabh@outlook.com`
+- Email: `contact@shubhamsaurabh.dev`
 - Layout inspiration (structure only): https://shubhamsaurabh.com/about — **do not copy content**
 - X profile (palette + footer addition): https://x.com/shubhsaur
 
@@ -1394,7 +1394,7 @@ Parallelism: 0d may overlap 0a/0b. After 0d, PR-3 / PR-4 / PR-5a are independent
 - Two-column layout: form left, socials + resume right ✓
 - Getform endpoint via `NEXT_PUBLIC_GETFORM_ENDPOINT` env with fallback default ✓
 - shadcn `Label` / `Input` / `Textarea` / `Button`; success via `sonner` + `--ln-success` ✓
-- `mailto:shubhamsaurabh@outlook.com` fallback visible ✓
+- `mailto:contact@shubhamsaurabh.dev` fallback visible ✓
 
 **Commit:** `a797a1f`
 

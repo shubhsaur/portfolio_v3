@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useLayoutEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -71,10 +71,10 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   );
 
   const copyEmail = useCallback(async () => {
-    const email = "shubhamsaurabh@outlook.com";
+    const email = site.email;
     try {
       await navigator.clipboard.writeText(email);
-      showToast("Email copied: shubhamsaurabh@outlook.com");
+      showToast(`Email copied: ${site.email}`);
     } catch {
       showToast("Failed to copy email");
     }
@@ -144,10 +144,10 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       id: "act-email",
       title: "Copy Email Address",
       category: "Actions",
-      description: "shubhamsaurabh@outlook.com",
+      description: site.email,
       icon: Copy,
       perform: copyEmail,
-      keywords: ["copy", "email", "mail", "outlook"],
+      keywords: ["copy", "email", "mail", "contact"],
       shortcut: "⌘C",
     },
     {
@@ -401,11 +401,32 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
     setSelectedIndex(0);
   }, [query]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isOpen) {
       setQuery("");
       setSelectedIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 50);
+      inputRef.current?.focus({ preventScroll: true });
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus({ preventScroll: true });
+
+      const rafId = requestAnimationFrame(() => {
+        inputRef.current?.focus({ preventScroll: true });
+      });
+
+      const timerId = setTimeout(() => {
+        if (document.activeElement !== inputRef.current) {
+          inputRef.current?.focus({ preventScroll: true });
+        }
+      }, 50);
+
+      return () => {
+        cancelAnimationFrame(rafId);
+        clearTimeout(timerId);
+      };
     }
   }, [isOpen]);
 
@@ -449,7 +470,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-16 sm:pt-24">
+        <div className="fixed inset-0 z-50 flex items-start justify-center px-3 pt-3 sm:px-4 sm:pt-24">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -469,7 +490,21 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
             <div className="relative flex items-center border-b border-border px-4">
               <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
               <input
-                ref={inputRef}
+                ref={(el) => {
+                  inputRef.current = el;
+                  if (el) {
+                    el.focus({ preventScroll: true });
+                  }
+                }}
+                data-command-input="true"
+                autoFocus
+                type="search"
+                inputMode="search"
+                enterKeyHint="search"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command, project, or page name..."
@@ -490,7 +525,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
 
             <div
               ref={listRef}
-              className="max-h-[380px] overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-muted"
+              className="max-h-[min(380px,calc(100dvh-12rem))] sm:max-h-[380px] overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-muted"
             >
               {filteredItems.length === 0 ? (
                 <div className="p-8 text-center text-sm text-muted-foreground">

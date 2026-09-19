@@ -63,7 +63,7 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
         "lg-card group relative flex flex-col h-full overflow-hidden rounded-[1.5rem]",
         "border border-white/[0.08] border-t-white/[0.18]",
         "bg-white/[0.03]",
-        "backdrop-blur-[60px] saturate-[2]",
+        "backdrop-blur-xl backdrop-saturate-[1.4]",
         "shadow-[0_8px_32px_rgba(0,0,0,.12),0_1px_4px_rgba(0,0,0,.08),inset_1px_1px_0_rgba(255,255,255,.12),inset_-1px_-1px_0_rgba(255,255,255,.04)]",
         "hover:shadow-[0_16px_48px_rgba(0,0,0,.16),0_2px_8px_rgba(0,0,0,.10),inset_1px_1px_0_rgba(255,255,255,.18),inset_-1px_-1px_0_rgba(255,255,255,.06)]",
         "hover:border-white/[0.14] hover:border-t-white/[0.28]",
@@ -150,8 +150,6 @@ function LiquidGlassCard({ project }: { project: typeof featured[number] }) {
               src={project.thumbnail}
               alt={project.title}
               fill
-              unoptimized
-              quality={100}
               className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />

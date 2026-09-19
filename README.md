@@ -133,7 +133,7 @@ portfolio_v3/
 ## 📬 Contact & Connect
 
 - **Portfolio**: [shubhamsaurabh.vercel.app](https://shubhamsaurabh.vercel.app)
-- **Email**: [shubhamsaurabh@outlook.com](mailto:shubhamsaurabh@outlook.com)
+- **Email**: [contact@shubhamsaurabh.dev](mailto:contact@shubhamsaurabh.dev)
 - **LinkedIn**: [linkedin.com/in/shubhsaur](https://www.linkedin.com/in/shubhsaur)
 - **GitHub**: [github.com/shubhsaur](https://github.com/shubhsaur)
 - **X / Twitter**: [x.com/shubhsaur](https://x.com/shubhsaur)

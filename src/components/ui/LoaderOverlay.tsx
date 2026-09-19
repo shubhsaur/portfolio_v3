@@ -21,25 +21,25 @@ export function LoaderOverlay({
       key="route-loader-overlay"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.04 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      exit={{ opacity: 0, scale: 1.02 }}
+      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
       className="ln-loader-root fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden pointer-events-auto"
       style={{ background: "var(--ln-bg)" }}
     >
-      {/* Ambient glow blobs */}
+      {/* Ambient glow blobs — soft radial gradients without heavy 100px CSS blurs for silky Safari performance */}
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute left-1/2 top-1/2 h-[clamp(12rem,25vw,22rem)] w-[clamp(12rem,25vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] opacity-40"
+          className="absolute left-1/2 top-1/2 h-[clamp(14rem,30vw,26rem)] w-[clamp(14rem,30vw,26rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50"
           style={{
             background:
-              "radial-gradient(circle, rgba(185,130,74,.30), rgba(200,120,134,.08) 50%, transparent 72%)",
+              "radial-gradient(circle, rgba(185,130,74,.24) 0%, rgba(200,120,134,.06) 45%, transparent 70%)",
           }}
         />
         <div
-          className="absolute left-[55%] top-[55%] h-[clamp(10rem,20vw,18rem)] w-[clamp(10rem,20vw,18rem)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px] opacity-30"
+          className="absolute left-[55%] top-[55%] h-[clamp(12rem,25vw,22rem)] w-[clamp(12rem,25vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
           style={{
             background:
-              "radial-gradient(circle, rgba(128,103,161,.25), rgba(75,154,165,.06) 48%, transparent 70%)",
+              "radial-gradient(circle, rgba(128,103,161,.20) 0%, rgba(75,154,165,.05) 45%, transparent 70%)",
           }}
         />
       </div>

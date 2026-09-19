@@ -39,7 +39,7 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     v += a * noise(p);
     p *= 2.02;
     a *= 0.5;
@@ -217,7 +217,13 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
     const targetInterval = 1000 / 60; // Frame pacing: 60 FPS max to protect Safari compositor
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+      // Downscale internal resolution to 0.55x (0.45x on Safari):
+      // Liquid glass is a soft, ambient blurred fluid effect; rendering at ~0.5x
+      // reduces pixel count by ~75% and trigonometric operations by ~75%
+      // while GPU bilinear interpolation makes it look identically smooth!
+      const isSafari = typeof navigator !== "undefined" && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const scale = isSafari ? 0.45 : 0.55;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5) * scale;
       const w = window.innerWidth || canvas.clientWidth || 1;
       const h = window.innerHeight || canvas.clientHeight || 1;
       cachedWidth = w;
@@ -313,13 +319,33 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
       attributeFilter: ["data-accent", "data-color-mode", "class", "style"],
     });
 
+    const heroEl = document.getElementById("hero");
     const io = new IntersectionObserver(
       ([entry]) => {
-        visible = entry?.isIntersecting ?? true;
+        visible = entry ? entry.isIntersecting : true;
       },
-      { threshold: 0.01 },
+      { threshold: 0.05 },
     );
-    io.observe(canvas);
+    if (heroEl) {
+      io.observe(heroEl);
+    } else {
+      io.observe(canvas);
+    }
+
+    const onScroll = () => {
+      // Pause WebGL rendering if user has scrolled well past the hero section
+      if (window.scrollY > (window.innerHeight || 800) * 1.1) {
+        visible = false;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Stop WebGL render loop immediately upon any route transition to prevent frame contention
+    const onRouteStart = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+    window.addEventListener("portfolio:route-transition-start", onRouteStart);
 
     const onVisibility = () => {
       pageVisible = !document.hidden;
@@ -338,13 +364,12 @@ export function LiquidGlassCanvas({ className }: { className?: string }) {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("portfolio:route-transition-start", onRouteStart);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
       accentObserver.disconnect();
       io.disconnect();
-      gl.deleteBuffer(buffer);
-      gl.deleteVertexArray(vao);
-      gl.deleteProgram(program);
     };
   }, []);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import type { HTMLMotionProps } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -23,6 +24,8 @@ export function Reveal({
   ...rest
 }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const [isForcedVisible, setIsForcedVisible] = useState(false);
 
   // If direction is not explicitly set, auto-alternate if index is provided, otherwise default to "up"
   const resolvedDirection: RevealDirection =
@@ -46,7 +49,8 @@ export function Reveal({
 
   const defaultViewport = {
     once: true,
-    amount: "some" as const,
+    amount: 0 as const,
+    margin: "120px 0px 0px 0px",
   };
 
   const defaultTransition = {
@@ -55,9 +59,27 @@ export function Reveal({
     delay,
   };
 
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    // WebKit / Safari failsafe: if element is in the visible viewport on mount,
+    // ensure it becomes visible even if browser IntersectionObserver drops the initial event.
+    const checkInitialVisibility = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        if (rect.top < (window.innerHeight || 800) + 120 && rect.bottom > -100) {
+          setIsForcedVisible(true);
+        }
+      }
+    };
+    const timer = setTimeout(checkInitialVisibility, 150);
+    return () => clearTimeout(timer);
+  }, [prefersReducedMotion]);
+
   return (
     <motion.div
+      ref={ref}
       initial={prefersReducedMotion ? false : getInitialPosition(resolvedDirection)}
+      animate={isForcedVisible ? { opacity: 1, x: 0, y: 0 } : undefined}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, x: 0, y: 0 }}
       transition={
         prefersReducedMotion

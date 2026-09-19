@@ -1,7 +1,7 @@
 export const site = {
   name: "Shubham Saurabh",
   role: "Frontend Engineer",
-  email: "shubhamsaurabh@outlook.com",
+  email: "contact@shubhamsaurabh.dev",
   phone: "+91 8130755160",
   location: "Noida, India",
   resumePath: "/Shubham_Saurabh_Resume.pdf",
