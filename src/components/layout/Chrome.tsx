@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { flushSync } from "react-dom";
 import { Navbar } from "./Navbar";
 import { CommandMenu } from "@/components/ui/CommandMenu";
+import { MotivateWidget } from "@/components/motivate/MotivateWidget";
 
 export function Chrome() {
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
@@ -41,6 +42,7 @@ export function Chrome() {
         onClose={() => setIsCommandMenuOpen(false)}
       />
       <Navbar onOpenCommandMenu={handleOpenCommandMenu} />
+      <MotivateWidget />
     </>
   );
 }

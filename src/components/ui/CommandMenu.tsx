@@ -26,10 +26,12 @@ import {
   GitPullRequest,
   Gamepad2,
   LayoutDashboard,
+  Sparkles,
 } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { site } from "@/lib/content/site";
 import { startRouteTransition } from "@/components/providers/NavigationProgress";
+import { openMotivateModal } from "@/components/motivate/MotivateWidget";
 import { toast } from "sonner";
 import { useTheme } from "@/components/theme/ThemeContext";
 
@@ -180,6 +182,18 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
         onClose();
       },
       keywords: ["light", "dark", "mode", "theme", "toggle"],
+    },
+    {
+      id: "act-motivate",
+      title: "Motivate Me",
+      category: "Actions",
+      description: "A spark of inspiration & handwritten wisdom",
+      icon: Sparkles,
+      perform: () => {
+        onClose();
+        openMotivateModal();
+      },
+      keywords: ["motivate", "motivation", "quote", "inspiration", "inspire", "spark", "wisdom"],
     },
 
     // Case Studies
