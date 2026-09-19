@@ -71,10 +71,10 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
   );
 
   const copyEmail = useCallback(async () => {
-    const email = "shubhamsaurabh@outlook.com";
+    const email = site.email;
     try {
       await navigator.clipboard.writeText(email);
-      showToast("Email copied: shubhamsaurabh@outlook.com");
+      showToast(`Email copied: ${site.email}`);
     } catch {
       showToast("Failed to copy email");
     }
@@ -144,10 +144,10 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       id: "act-email",
       title: "Copy Email Address",
       category: "Actions",
-      description: "shubhamsaurabh@outlook.com",
+      description: site.email,
       icon: Copy,
       perform: copyEmail,
-      keywords: ["copy", "email", "mail", "outlook"],
+      keywords: ["copy", "email", "mail", "contact"],
       shortcut: "⌘C",
     },
     {

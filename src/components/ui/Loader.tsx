@@ -21,11 +21,24 @@ const PARTICLES = [
   { color: "#B9824A", size: 2.5, orbit: 50, duration: 4.6, delay: -3.2 },
 ];
 
-export function Loader({ minDisplay = 800 }: { minDisplay?: number }) {
+export function Loader({ minDisplay = 350 }: { minDisplay?: number }) {
   const [visible, setVisible] = useState(true);
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
+    // If the user has already visited in this browser tab session, dismiss immediately
+    const sessionSeen = typeof window !== "undefined" && window.sessionStorage?.getItem("portfolio_init_loaded");
+    if (sessionSeen) {
+      setVisible(false);
+      return;
+    }
+
+    try {
+      window.sessionStorage?.setItem("portfolio_init_loaded", "true");
+    } catch {
+      // Ignore private browsing storage errors
+    }
+
     const ready =
       document.readyState === "complete"
         ? Promise.resolve()
@@ -35,8 +48,8 @@ export function Loader({ minDisplay = 800 }: { minDisplay?: number }) {
 
     Promise.all([ready, timer]).then(() => {
       setExiting(true);
-      // let exit animation play, then unmount
-      setTimeout(() => setVisible(false), 700);
+      // snappy exit animation then unmount
+      setTimeout(() => setVisible(false), 260);
     });
   }, [minDisplay]);
 
@@ -46,25 +59,25 @@ export function Loader({ minDisplay = 800 }: { minDisplay?: number }) {
         <motion.div
           key="ln-loader"
           initial={{ opacity: 1 }}
-          animate={exiting ? { opacity: 0, scale: 1.08 } : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          animate={exiting ? { opacity: 0, scale: 1.04 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="ln-loader-root fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: "var(--ln-bg)" }}
         >
-          {/* Ambient glow blobs */}
+          {/* Ambient glow blobs — soft radial gradients without heavy 100px CSS blurs for silky Safari performance */}
           <div className="pointer-events-none absolute inset-0">
             <div
-              className="absolute left-1/2 top-1/2 h-[clamp(12rem,25vw,22rem)] w-[clamp(12rem,25vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] opacity-40"
+              className="absolute left-1/2 top-1/2 h-[clamp(14rem,30vw,26rem)] w-[clamp(14rem,30vw,26rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(185,130,74,.30), rgba(200,120,134,.08) 50%, transparent 72%)",
+                  "radial-gradient(circle, rgba(185,130,74,.24) 0%, rgba(200,120,134,.06) 45%, transparent 70%)",
               }}
             />
             <div
-              className="absolute left-[55%] top-[55%] h-[clamp(10rem,20vw,18rem)] w-[clamp(10rem,20vw,18rem)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px] opacity-30"
+              className="absolute left-[55%] top-[55%] h-[clamp(12rem,25vw,22rem)] w-[clamp(12rem,25vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(128,103,161,.25), rgba(75,154,165,.06) 48%, transparent 70%)",
+                  "radial-gradient(circle, rgba(128,103,161,.20) 0%, rgba(75,154,165,.05) 45%, transparent 70%)",
               }}
             />
           </div>

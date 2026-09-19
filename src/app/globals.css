@@ -371,13 +371,12 @@ html[data-color-mode="light"][data-accent="cyan"] {
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overflow-x: clip;
 }
 
 html,
 body {
   max-width: 100vw;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 body {
@@ -611,10 +610,10 @@ html[data-color-mode="light"] .hero-social-link:hover {
   color: var(--ln-accent) !important;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  html[data-color-mode="dark"] .ln-body {
-    background-attachment: fixed;
-  }
+/* Hardware acceleration & isolation for glass cards across both themes */
+.lg-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .ln-surface {

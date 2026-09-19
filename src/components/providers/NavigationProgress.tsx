@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { LoaderOverlay } from "@/components/ui/LoaderOverlay";
 
 export function startRouteTransition(targetHref: string) {
@@ -16,7 +16,8 @@ export function startRouteTransition(targetHref: string) {
 
 export function NavigationProgress() {
   const pathname = usePathname();
-  const [isNavigating, setIsNavigating] = useState(false);
+  const [isNavigatingBar, setIsNavigatingBar] = useState(false);
+  const [isNavigatingOverlay, setIsNavigatingOverlay] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const safetyTimerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -33,22 +34,27 @@ export function NavigationProgress() {
 
   const triggerLoading = useCallback(() => {
     clearTimers();
-    // 70ms threshold: avoids flash if transition is instantaneous,
-    // but responds immediately if there is any perceptible delay
-    timerRef.current = setTimeout(() => {
-      setIsNavigating(true);
-    }, 70);
+    // Instant (0ms) top progress bar gives immediate feedback on click
+    setIsNavigatingBar(true);
 
-    // Safety timeout: dismiss after 5s in case navigation is cancelled
+    // 80ms threshold: client-side route transitions that take more than
+    // a single frame (~80ms) smoothly fade in the signature rotating logo loader.
+    timerRef.current = setTimeout(() => {
+      setIsNavigatingOverlay(true);
+    }, 80);
+
+    // Safety timeout: dismiss after 4s in case navigation is cancelled
     safetyTimerRef.current = setTimeout(() => {
-      setIsNavigating(false);
-    }, 5000);
+      setIsNavigatingBar(false);
+      setIsNavigatingOverlay(false);
+    }, 4000);
   }, [clearTimers]);
 
   // When pathname changes, route transition has completed!
   useEffect(() => {
     clearTimers();
-    setIsNavigating(false);
+    setIsNavigatingBar(false);
+    setIsNavigatingOverlay(false);
   }, [pathname, clearTimers]);
 
   // Intercept internal link clicks and popstate
@@ -86,6 +92,7 @@ export function NavigationProgress() {
           targetUrl.origin === currentUrl.origin &&
           targetUrl.pathname !== currentUrl.pathname
         ) {
+          startRouteTransition(targetUrl.pathname);
           triggerLoading();
         }
       } catch {
@@ -124,8 +131,27 @@ export function NavigationProgress() {
   }, [triggerLoading, clearTimers]);
 
   return (
-    <AnimatePresence>
-      {isNavigating && <LoaderOverlay tagline="Loading Page · Shubham Saurabh" />}
-    </AnimatePresence>
+    <>
+      <AnimatePresence>
+        {isNavigatingBar && (
+          <motion.div
+            key="top-progress-bar"
+            className="fixed top-0 left-0 right-0 z-[10000] h-[2.5px] pointer-events-none"
+            style={{
+              background: "var(--ln-gradient-primary)",
+              boxShadow: "0 0 10px rgba(185,130,74,0.6)",
+            }}
+            initial={{ scaleX: 0, transformOrigin: "0% 50%" }}
+            animate={{ scaleX: 0.85 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ scaleX: 1, opacity: 0, transition: { duration: 0.2 } }}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isNavigatingOverlay && <LoaderOverlay tagline="Loading Page · Shubham Saurabh" />}
+      </AnimatePresence>
+    </>
   );
 }

@@ -9,7 +9,8 @@ import { navItems, type NavItem } from "@/lib/nav";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 import { cn } from "@/lib/utils";
 import { site } from "@/lib/content/site";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { startRouteTransition } from "@/components/providers/NavigationProgress";
 
 interface NavbarProps {
   onOpenCommandMenu: () => void;
@@ -19,20 +20,37 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [optimisticHref, setOptimisticHref] = useState<string | null>(null);
+
+  useEffect(() => {
+    setOptimisticHref(null);
+  }, [pathname]);
+
+  const activeHref = optimisticHref ?? pathname;
 
   const isActive = (item: NavItem) => {
     if (item.disabled) return false;
-    if (item.href === "/") return pathname === "/";
-    if (item.href.startsWith("/projects")) return pathname.startsWith("/projects");
-    return pathname === item.href;
+    if (item.href === "/") return activeHref === "/";
+    if (item.href.startsWith("/projects")) return activeHref.startsWith("/projects");
+    return activeHref === item.href;
   };
 
   return (
     <header className="pointer-events-none fixed inset-x-0 z-40 flex justify-center" style={{ top: "var(--nav-top)" }}>
       <div className="pointer-events-auto w-full max-w-[87.5rem] px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between rounded-full border border-border bg-background/70 px-[var(--nav-px)] py-[var(--nav-py)] shadow-[var(--ln-shadow-surface)] backdrop-blur-2xl backdrop-saturate-150 transform-gpu will-change-transform">
+        <div className="flex items-center justify-between rounded-full border border-border bg-background/80 px-[var(--nav-px)] py-[var(--nav-py)] shadow-[var(--ln-shadow-surface)] backdrop-blur-xl backdrop-saturate-150">
           {/* Logo */}
-          <Link href="/" prefetch={true} className="group flex items-center gap-[0.5rem]">
+          <Link
+            href="/"
+            prefetch={true}
+            onClick={() => {
+              if (pathname !== "/") {
+                setOptimisticHref("/");
+                startRouteTransition("/");
+              }
+            }}
+            className="group flex items-center gap-[0.5rem]"
+          >
             <Image
               src="/logo.png"
               alt="Logo"
@@ -80,6 +98,12 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                     key={item.href}
                     href={item.href}
                     prefetch={true}
+                    onClick={() => {
+                      if (item.href !== pathname) {
+                        setOptimisticHref(item.href);
+                        startRouteTransition(item.href);
+                      }
+                    }}
                     className={cn(
                       "group relative rounded-full transition-colors duration-200",
                       "focus-visible:ln-ring-focus",
@@ -213,7 +237,13 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
                     key={item.href}
                     href={item.href}
                     prefetch={true}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      if (item.href !== pathname) {
+                        setOptimisticHref(item.href);
+                        startRouteTransition(item.href);
+                      }
+                    }}
                     className={cn(
                       "group relative flex items-center justify-between rounded-full px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium transition-colors",
                       "focus-visible:ln-ring-focus active:scale-[0.99]",
@@ -256,7 +286,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
               </a>
 
               <a
-                href="mailto:shubhamsaurabh@outlook.com"
+                href={`mailto:${site.email}`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex h-10 items-center justify-center gap-[0.375rem] rounded-full border border-[var(--ln-accent)]/25 bg-[var(--ln-accent)]/10 px-4 text-xs font-medium text-[var(--ln-accent)] transition hover:bg-[var(--ln-accent)]/18"
               >
