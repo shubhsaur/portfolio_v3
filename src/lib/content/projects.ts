@@ -167,7 +167,7 @@ export const projects: ProjectRecord[] = [
       "Modern, high-performance developer portfolio engineered with Next.js 16, React 19, and Tailwind CSS v4. Features an interactive orbital canvas hero, dynamic theme color switcher, fluid Framer Motion reveals, command palette (Cmd+K), and responsive layouts.",
     tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion"],
     thumbnail: "/projects/portfolio.png",
-    liveUrl: "https://shubhamsaurabh.vercel.app",
+    liveUrl: "https://shubhamsaurabh.dev",
     githubUrl: "https://github.com/shubhsaur/portfolio_v3",
     stats: [
       { label: "Stack", value: "Next.js 16 & React 19" },

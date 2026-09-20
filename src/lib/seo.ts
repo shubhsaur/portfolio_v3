@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 
 /** Production origin. */
-export const SITE_URL = "https://shubhamsaurabh.vercel.app";
+export const SITE_URL = "https://shubhamsaurabh.dev";
 
 const DEFAULT_OG = {
   url: "/og/default.png",
   width: 1200,
   height: 630,
-  alt: "Shubham Saurabh — Frontend Engineer",
+  alt: "Shubham Saurabh — Full Stack Developer & UI Designer",
 } as const;
 
 export const routeMeta = {
   home: {
-    title: "Shubham Saurabh – Frontend Engineer",
+    title: "Shubham Saurabh | Full Stack Developer & UI Designer",
     description:
-      "Frontend engineer, SDE @ RateGain. 5+ years on React, Next.js, and TypeScript. Hotel booking engines, B2B content platforms, and AI tooling.",
+      "Portfolio of Shubham Saurabh, a Software Engineer specializing in React, Node.js, and high-performance web architecture. Explore my latest projects.",
     path: "/",
   },
   projects: {
@@ -37,7 +37,8 @@ export const routeMeta = {
   },
   contact: {
     title: "Contact",
-    description: "Getform message form, socials, resume.",
+    description:
+      "Get in touch with Shubham Saurabh for collaborations, frontend engineering, and full-stack projects.",
     path: "/contact",
   },
   notFound: {
