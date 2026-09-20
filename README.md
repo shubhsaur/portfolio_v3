@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Live Portfolio](https://img.shields.io/badge/Live%20Demo-shubhamsaurabh.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shubhamsaurabh.vercel.app)
+[![Live Portfolio](https://img.shields.io/badge/Live%20Demo-shubhamsaurabh.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shubhamsaurabh.dev)
 [![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
