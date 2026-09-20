@@ -10,7 +10,7 @@
 
 **A high-performance, motion-driven personal portfolio engineered to showcase enterprise frontend platforms, accessible component design systems, and real-time interactive web applications.**
 
-[Explore Live Site](https://shubhamsaurabh.vercel.app) · [View Projects](https://shubhamsaurabh.vercel.app/projects) · [Case Studies](https://shubhamsaurabh.vercel.app/projects/uno-booking) · [Contact](https://shubhamsaurabh.vercel.app/contact)
+[Explore Live Site](https://shubhamsaurabh.dev) · [View Projects](https://shubhamsaurabh.dev/projects) · [Case Studies](https://shubhamsaurabh.dev/projects/uno-booking) · [Contact](https://shubhamsaurabh.dev/contact)
 
 </div>
 
@@ -42,7 +42,7 @@
 | **Codelens** | AI Developer Tool | Next.js, Tailwind CSS, Supabase Vector, Google Gemini | AI codebase explorer indexing GitHub repos with semantic embeddings, grounded file citations, and code previews. | [Try App](https://shubhsaur-codelens.vercel.app) |
 | **Content AI** | B2B SaaS | React, Redux, React Final Form, Sass | Large-scale content management platform with optimized rendering pipelines boosting UI performance by 60%. | [Visit Site](https://rategain.com/hotel-content-management-system/) |
 | **Cryptopedia** | Web Application | React, Context API, Material UI, ChartJS | Real-time cryptocurrency benchmark tracker with interactive ChartJS trend charts and market cap analytics. | [Explore](https://cryptopedia-app.vercel.app) |
-| **Personal Portfolio** | Web / Design System | Next.js 16, React 19, Tailwind CSS v4, Framer Motion | Interactive developer showcase with orbital canvas hero, theme switcher tokens, and Bento case studies. | [View Site](https://shubhamsaurabh.vercel.app) |
+| **Personal Portfolio** | Web / Design System | Next.js 16, React 19, Tailwind CSS v4, Framer Motion | Interactive developer showcase with orbital canvas hero, theme switcher tokens, and Bento case studies. | [View Site](https://shubhamsaurabh.dev) |
 
 ---
 
@@ -132,7 +132,7 @@ portfolio_v3/
 
 ## 📬 Contact & Connect
 
-- **Portfolio**: [shubhamsaurabh.vercel.app](https://shubhamsaurabh.vercel.app)
+- **Portfolio**: [shubhamsaurabh.dev](https://shubhamsaurabh.dev)
 - **Email**: [contact@shubhamsaurabh.dev](mailto:contact@shubhamsaurabh.dev)
 - **LinkedIn**: [linkedin.com/in/shubhsaur](https://www.linkedin.com/in/shubhsaur)
 - **GitHub**: [github.com/shubhsaur](https://github.com/shubhsaur)
