@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { Loader } from "@/components/ui/Loader";
 import { NavigationProgress } from "@/components/providers/NavigationProgress";
 import { SITE_URL, routeMeta } from "@/lib/seo";
+import { personSchema } from "@/lib/schema";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -33,6 +34,18 @@ export const metadata: Metadata = {
     template: "%s · Shubham Saurabh",
   },
   description: routeMeta.home.description,
+  keywords: [
+    "Shubham Saurabh",
+    "Full Stack Developer",
+    "UI Designer",
+    "Software Engineer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "Frontend Engineer",
+    "Portfolio",
+  ],
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -72,6 +85,12 @@ export default function RootLayout({
     <html lang="en" className="ln-root dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema),
+          }}
+        />
       </head>
       <body
         className={`${outfit.variable} ${spaceMono.variable} ${pacifico.variable} ln-body bg-background text-foreground antialiased`}
