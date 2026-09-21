@@ -8,6 +8,8 @@ import { Loader } from "@/components/ui/Loader";
 import { NavigationProgress } from "@/components/providers/NavigationProgress";
 import { SITE_URL, routeMeta } from "@/lib/seo";
 import { personSchema } from "@/lib/schema";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -101,6 +103,8 @@ export default function RootLayout({
           <Toaster />
           <NavigationProgress />
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
