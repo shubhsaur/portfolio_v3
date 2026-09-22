@@ -35,6 +35,12 @@ export const routeMeta = {
       "Frontend engineer based in Noida, India. Component architecture, design systems, open source.",
     path: "/about",
   },
+  blog: {
+    title: "Blog",
+    description:
+      "Articles on frontend engineering, design systems, and building products at scale.",
+    path: "/blog",
+  },
   contact: {
     title: "Contact",
     description:

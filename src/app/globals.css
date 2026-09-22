@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -1390,4 +1391,38 @@ header > div,
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+/* ─── Article / Markdown content ─── */
+.article-content .hljs {
+  background: transparent;
+  color: #c9d1d9;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.article-content .hljs-comment,
+.article-content .hljs-quote { color: #8b949e; font-style: italic; }
+.article-content .hljs-keyword,
+.article-content .hljs-selector-tag { color: #ff7b72; }
+.article-content .hljs-string,
+.article-content .hljs-addition { color: #a5d6ff; }
+.article-content .hljs-number,
+.article-content .hljs-literal { color: #79c0ff; }
+.article-content .hljs-built_in { color: #ffa657; }
+.article-content .hljs-title,
+.article-content .hljs-section { color: #d2a8ff; }
+.article-content .hljs-attr,
+.article-content .hljs-attribute { color: #79c0ff; }
+.article-content .hljs-name,
+.article-content .hljs-tag { color: #7ee787; }
+.article-content .hljs-variable,
+.article-content .hljs-template-variable { color: #ffa198; }
+.article-content .hljs-type,
+.article-content .hljs-class .article-content .hljs-class-name { color: #ffa657; }
+.article-content .hljs-symbol,
+.article-content .hljs-bullet { color: #f2cc60; }
+.article-content .hljs-meta { color: #8b949e; }
+.article-content .hljs-deletion { color: #ffa198; background: rgba(255, 122, 114, 0.1); }
+.article-content .hljs-addition { color: #7ee787; background: rgba(126, 231, 135, 0.1); }
 

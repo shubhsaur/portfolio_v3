@@ -29,7 +29,6 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   const activeHref = optimisticHref ?? pathname;
 
   const isActive = (item: NavItem) => {
-    if (item.disabled) return false;
     if (item.href === "/") return activeHref === "/";
     if (item.href.startsWith("/projects")) return activeHref.startsWith("/projects");
     return activeHref === item.href;
@@ -81,18 +80,6 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             <nav className="flex items-center gap-[0.25rem] rounded-full bg-muted/60 px-[0.375rem] py-[0.25rem] text-xs font-medium text-muted-foreground">
               {navItems.map((item) => {
                 const active = isActive(item);
-                if (item.disabled) {
-                  return (
-                    <span
-                      key={item.label}
-                      title="Coming soon"
-                      className="cursor-default rounded-full text-muted-foreground/50"
-                      style={{ padding: "var(--nav-item-py) var(--nav-item-px)" }}
-                    >
-                      {item.label}
-                    </span>
-                  );
-                }
                 return (
                   <Link
                     key={item.href}
@@ -222,19 +209,6 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
             <nav className="grid gap-[0.25rem]">
               {navItems.map((item, index) => {
                 const active = isActive(item);
-                if (item.disabled) {
-                  return (
-                    <span
-                      key={item.label}
-                      className="flex cursor-default items-center justify-between rounded-full px-[1rem] py-[var(--nav-dropdown-py)] text-left text-xs font-medium text-muted-foreground/50"
-                    >
-                      <span>{item.label}</span>
-                      <span className="ln-mono text-[9px] uppercase tracking-[0.18em] opacity-60">
-                        0{index + 1}
-                      </span>
-                    </span>
-                  );
-                }
                 return (
                   <Link
                     key={item.href}
