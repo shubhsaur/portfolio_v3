@@ -17,9 +17,9 @@ export function BlogCard({ article }: BlogCardProps) {
         aria-label={article.title}
       />
 
-      {article.coverImage ? (
+      {article.coverImageUrl ? (
         <Image
-          src={article.coverImage}
+          src={article.coverImageUrl}
           alt={article.title}
           fill
           unoptimized

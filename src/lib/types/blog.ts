@@ -7,7 +7,7 @@ export interface Article {
   createdAt: string;
   updatedAt: string;
   category?: string;
-  coverImage?: string;
+  coverImageUrl?: string;
   readTime?: string;
 }
 

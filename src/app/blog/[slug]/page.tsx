@@ -106,10 +106,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </header>
 
-          {article.coverImage && (
+          {article.coverImageUrl && (
             <div className="relative aspect-[21/9] overflow-hidden rounded-[var(--ln-radius-hero)] border border-border">
               <Image
-                src={article.coverImage}
+                src={article.coverImageUrl}
                 alt={article.title}
                 fill
                 priority

@@ -13,9 +13,9 @@ export function FeaturedPost({ article }: FeaturedPostProps) {
     <article className="group relative overflow-hidden rounded-[var(--ln-radius-hero)] border border-border bg-card transition-all duration-300 hover:border-[var(--ln-accent)]/50">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:h-full min-h-[18rem]">
-          {article.coverImage ? (
+          {article.coverImageUrl ? (
             <Image
-              src={article.coverImage}
+              src={article.coverImageUrl}
               alt={article.title}
               fill
               priority
