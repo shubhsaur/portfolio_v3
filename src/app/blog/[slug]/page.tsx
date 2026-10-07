@@ -20,6 +20,13 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const articles = await getArticles();
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
@@ -30,11 +37,38 @@ export async function generateMetadata({
     return { title: "Article Not Found" };
   }
 
-  return buildPageMetadata({
+  const baseMeta = buildPageMetadata({
     title: article.title,
     description: article.excerpt,
     path: `/blog/${article.slug}`,
   });
+
+  return {
+    ...baseMeta,
+    openGraph: {
+      ...baseMeta.openGraph,
+      type: "article",
+      publishedTime: article.createdAt,
+      modifiedTime: article.updatedAt,
+      ...(article.coverImageUrl && {
+        images: [
+          {
+            url: article.coverImageUrl,
+            alt: article.title,
+          },
+        ],
+      }),
+    },
+    twitter: {
+      ...baseMeta.twitter,
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      ...(article.coverImageUrl && {
+        images: [article.coverImageUrl],
+      }),
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -60,10 +94,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const previous = sortedArticles[currentIndex - 1] ?? null;
   const next = sortedArticles[currentIndex + 1] ?? null;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.createdAt,
+    dateModified: article.updatedAt || article.createdAt,
+    ...(article.coverImageUrl && { image: article.coverImageUrl }),
+    author: author
+      ? {
+          "@type": "Person",
+          name: author.name,
+          url: author.canonicalUrl || "https://shubhamsaurabh.dev",
+        }
+      : {
+          "@type": "Person",
+          name: "Shubham Saurabh",
+          url: "https://shubhamsaurabh.dev",
+        },
+  };
+
   return (
     <div className="relative min-h-screen pt-28 pb-24 sm:pt-40 sm:pb-32">
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8">
         <article className="space-y-10 sm:space-y-14">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+
           <Button asChild variant="ghost" size="sm">
             <Link href="/blog">
               <ArrowLeft className="h-4 w-4" />

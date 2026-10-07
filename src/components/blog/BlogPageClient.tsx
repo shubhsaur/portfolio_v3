@@ -65,35 +65,46 @@ export function BlogPageClient({ articles }: BlogPageClientProps) {
 
       {featuredArticle && <FeaturedPost article={featuredArticle} />}
 
-      <section aria-label="Articles">
-        <div className="mb-6 flex flex-col gap-4 sm:mb-8 lg:flex-row lg:items-center lg:justify-between">
-          <CategoryFilter
-            categories={categories}
-            active={activeCategory}
-            onChange={setActiveCategory}
-          />
-          <div className="w-full lg:w-72">
-            <SearchBar value={search} onChange={setSearch} />
-          </div>
+      {sortedArticles.length === 0 ? (
+        <div className="rounded-[var(--ln-radius-card)] border border-border bg-card/60 py-16 text-center">
+          <p className="text-lg font-medium text-foreground">
+            No articles published yet
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Check back soon for new articles and deep-dives.
+          </p>
         </div>
+      ) : remainingArticles.length > 0 || search.trim() || activeCategory !== "All" ? (
+        <section aria-label="Articles">
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8 lg:flex-row lg:items-center lg:justify-between">
+            <CategoryFilter
+              categories={categories}
+              active={activeCategory}
+              onChange={setActiveCategory}
+            />
+            <div className="w-full lg:w-72">
+              <SearchBar value={search} onChange={setSearch} />
+            </div>
+          </div>
 
-        {filteredArticles.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredArticles.map((article) => (
-              <BlogCard key={article.id} article={article} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-[var(--ln-radius-card)] border border-border bg-card/60 py-16 text-center">
-            <p className="text-lg font-medium text-foreground">
-              No articles found
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Try a different search or category.
-            </p>
-          </div>
-        )}
-      </section>
+          {filteredArticles.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredArticles.map((article) => (
+                <BlogCard key={article.id} article={article} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-[var(--ln-radius-card)] border border-border bg-card/60 py-16 text-center">
+              <p className="text-lg font-medium text-foreground">
+                No articles found
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Try a different search or category.
+              </p>
+            </div>
+          )}
+        </section>
+      ) : null}
     </div>
   );
 }

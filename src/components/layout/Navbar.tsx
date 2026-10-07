@@ -31,6 +31,7 @@ export function Navbar({ onOpenCommandMenu }: NavbarProps) {
   const isActive = (item: NavItem) => {
     if (item.href === "/") return activeHref === "/";
     if (item.href.startsWith("/projects")) return activeHref.startsWith("/projects");
+    if (item.href.startsWith("/blog")) return activeHref.startsWith("/blog");
     return activeHref === item.href;
   };
 

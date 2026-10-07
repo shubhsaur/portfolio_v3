@@ -36,12 +36,13 @@ export async function getArticles(): Promise<Article[]> {
     return [];
   }
   try {
-    return await fetchJson<Article[]>(
+    const articles = await fetchJson<Article[]>(
       `${API_BASE}/api/v1/articles?status=published`,
       {
         next: { revalidate: 60 },
       }
     );
+    return Array.isArray(articles) ? articles : [];
   } catch (error) {
     console.error("[getArticles] Failed to fetch articles:", error);
     return [];

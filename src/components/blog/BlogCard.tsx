@@ -34,23 +34,23 @@ export function BlogCard({ article }: BlogCardProps) {
 
       <div className="relative mt-auto flex w-full flex-col justify-end p-5">
         {article.category && (
-          <span className="ln-mono w-fit rounded-full border border-border/60 bg-black/30 px-2.5 py-0.5 text-[0.65rem] uppercase tracking-wider text-[var(--ln-accent)] backdrop-blur-sm">
+          <span className="ln-mono w-fit rounded-full border border-white/20 bg-black/50 px-2.5 py-0.5 text-[0.65rem] uppercase tracking-wider text-[var(--ln-accent)] backdrop-blur-sm">
             {article.category}
           </span>
         )}
 
-        <h3 className="mt-2 text-xl font-semibold text-foreground line-clamp-2">
+        <h3 className="mt-2 text-xl font-semibold text-white group-hover:text-[var(--ln-accent)] transition-colors line-clamp-2">
           {article.title}
         </h3>
 
-        <p className="mt-1 text-sm text-[var(--ln-text-secondary)] line-clamp-2">
+        <p className="mt-1 text-sm text-zinc-300 line-clamp-2">
           {article.excerpt}
         </p>
 
         <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
           <time
             dateTime={article.createdAt}
-            className="text-xs text-muted-foreground"
+            className="text-xs text-zinc-400"
           >
             {new Date(article.createdAt).toLocaleDateString("en-US", {
               year: "numeric",
