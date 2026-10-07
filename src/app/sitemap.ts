@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import { getArticles } from "@/lib/api/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
   const staticRoutes = [
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/projects",
     "/experience",
+    "/blog",
     "/contact",
   ] as const;
 
@@ -22,8 +24,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects/dealopoly",
   ] as const;
 
-  return [...staticRoutes, ...caseStudies].map((path) => ({
+  const staticEntries: MetadataRoute.Sitemap = [
+    ...staticRoutes,
+    ...caseStudies,
+  ].map((path) => ({
     url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
     lastModified,
   }));
+
+  const articles = await getArticles();
+  const articleEntries: MetadataRoute.Sitemap = articles.map((article) => ({
+    url: `${SITE_URL}/blog/${article.slug}`,
+    lastModified: article.updatedAt
+      ? new Date(article.updatedAt)
+      : article.createdAt
+      ? new Date(article.createdAt)
+      : lastModified,
+  }));
+
+  return [...staticEntries, ...articleEntries];
 }

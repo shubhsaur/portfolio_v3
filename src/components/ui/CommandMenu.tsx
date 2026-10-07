@@ -27,6 +27,7 @@ import {
   Gamepad2,
   LayoutDashboard,
   Sparkles,
+  Newspaper,
 } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { site } from "@/lib/content/site";
@@ -116,14 +117,13 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
 
   const items: CommandItem[] = [
     // Navigation
-    ...navItems
-      .filter((item) => !item.disabled)
-      .map((item) => {
+    ...navItems.map((item) => {
         const icons: Record<string, React.ComponentType<{ className?: string }>> = {
           Home: Home,
           Projects: FolderGit2,
           Experience: Briefcase,
           About: User,
+          Blog: Newspaper,
           Contact: Mail,
         };
         return {
@@ -134,6 +134,7 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
                        item.label === "Projects" ? "Work and personal builds" :
                        item.label === "Experience" ? "RateGain & Infosys career" :
                        item.label === "About" ? "Bio and skills inventory" :
+                       item.label === "Blog" ? "Articles and thoughts" :
                        item.label === "Contact" ? "Send a message" : undefined,
           icon: icons[item.label] || Home,
           perform: () => go(item.href),
